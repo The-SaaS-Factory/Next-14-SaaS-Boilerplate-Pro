@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   ReactNode,
   createContext,
@@ -128,14 +128,18 @@ function ActivePageMarker({
   group: NavigationSection;
   pathname: string;
 }) {
+  const searchParams = useSearchParams();
+
   let seg = pathname.split("/");
   let pathNameWithoutLand = "/" + seg.slice(2).join("/");
+  const fullPath = `${pathNameWithoutLand}${
+    searchParams.toString() !== "" ? "?" : ""
+  }${searchParams.toString()}`;
 
   let itemHeight = remToPx(2);
   let offset = remToPx(0.25);
-  let activePageIndex = group.items.findIndex(
-    (link) => link.href === pathNameWithoutLand
-  );
+  let activePageIndex = group.items.findIndex((link) => link.href === fullPath);
+
   let top = offset + activePageIndex * itemHeight;
 
   return (
@@ -167,11 +171,17 @@ function NavigationGroup({
   );
 
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+
   let seg = pathName.split("/");
   let pathNameWithoutLand = "/" + seg.slice(2).join("/");
 
+  const fullPath = `${pathNameWithoutLand}${
+    searchParams.toString() !== "" ? "?" : ""
+  }${searchParams.toString()}`;
+
   let isActiveGroup =
-    group.items.findIndex((link) => link.href === pathNameWithoutLand) !== -1;
+    group.items.findIndex((link) => link.href === fullPath) !== -1;
 
   return (
     <li className={clsx("relative mt-6", className)}>
@@ -199,7 +209,7 @@ function NavigationGroup({
             <div className="relative mt-3 pl-2">
               <AnimatePresence initial={!isInsideMobileNavigation}>
                 {isActiveGroup && (
-                  <VisibleSectionHighlight group={group} pathname={pathname} />
+                  <VisibleSectionHighlight group={group} pathname={fullPath} />
                 )}
               </AnimatePresence>
               <motion.div
@@ -218,14 +228,14 @@ function NavigationGroup({
                     layout="position"
                     className="relative"
                   >
-                    <NavLink href={link.href} active={link.href === pathname}>
+                    <NavLink href={link.href} active={link.href === fullPath}>
                       <>
                         <link.icon className="h-5 w-5 shrink-0 text-primary-hover"></link.icon>
                         <span className="truncate"> {link.name}</span>
                       </>
                     </NavLink>
                     <AnimatePresence mode="popLayout" initial={false}>
-                      {link.href === pathname && sections.length > 0 && (
+                      {link.href === fullPath && sections.length > 0 && (
                         <motion.ul
                           role="list"
                           initial={{ opacity: 0 }}

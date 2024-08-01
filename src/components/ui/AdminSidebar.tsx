@@ -93,7 +93,11 @@ const AdminSidebar = () => {
                         height={145}
                         width={145}
                         className="w-1/2 h-auto  "
-                        src={isDarkTheme ? constants.logoUrl : constants.logoDarkUrl}
+                        src={
+                          isDarkTheme
+                            ? constants.logoUrl
+                            : constants.logoDarkUrl
+                        }
                         alt="Boilerplate"
                       />
                     </Link>
