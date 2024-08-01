@@ -38,7 +38,7 @@ const SuperAdminHeader = ({
           {/* Separator */}
           <div className="h-6 w-px bg-main lg:hidden" aria-hidden="true" />
 
-          <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+          <div className="flex flex-1 gap-x-4 ml-4 self-stretch lg:gap-x-6">
             <div className="hidden items-center lg:flex lg:w-[450px] lg:flex-auto">
               <button
                 onClick={() => setOpen(true)}

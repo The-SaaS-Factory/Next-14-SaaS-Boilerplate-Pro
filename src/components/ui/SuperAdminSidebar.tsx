@@ -149,7 +149,7 @@ const SuperAdminSidebar = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden mx-2 lg:fixed bg-main border-gray-200  border-r lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
+      <div className="hidden mx-2 lg:fixed bg-main border-gray-200  border-r lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex h-7 mt-6 mb-4 py-3 shrink-0 items-center">
           <Link href={"/"}>
