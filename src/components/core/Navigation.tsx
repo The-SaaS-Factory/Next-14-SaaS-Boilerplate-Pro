@@ -275,10 +275,7 @@ function NavigationGroup({
 
 const Navigation = ({ navigation }: { navigation: NavigationSection[] }) => {
   const pathName = usePathname();
-  let seg = pathName.split("/");
-  let pathNameWithoutLand = "/" + seg.slice(2).join("/");
   const [links, setLinks] = useState<NavigationSection[]>([]);
-  console.log(pathNameWithoutLand);
 
   useEffect(() => {
     const linksWithStatus = navigation.map((section) => {
