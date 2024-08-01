@@ -39,9 +39,14 @@ const AdminHeader = ({
 
   return (
     <div>
-      {" "}
       <div className="sticky top-0 z-40 lg:mx-auto ">
-        <div className="flex h-16 items-center gap-x-4 border-b text-primary border-gray-200 bg-main px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
+        <div
+          className="flex h-16 text-primary backdrop-blur-3xl bg-transparent
+           bg-opacity-25 transition-opacity 
+         items-center gap-x-4 border-b text-primary
+          border-gray-300  dark:border-gray-600 px-4 
+          shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
+        >
           <button
             type="button"
             className="-m-2.5 p-2.5   lg:hidden"
