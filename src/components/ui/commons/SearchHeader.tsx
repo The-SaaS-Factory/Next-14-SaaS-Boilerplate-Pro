@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import HighlightText from "../componenets/HightlightText";
+import useSuperAdmin from "@/app/hooks/useSuperAdmin";
 
 interface Item {
   name: string;
@@ -33,13 +34,27 @@ export default function SearchHeader({
   let inputRef = useRef<any>(null);
   const [query, setQuery] = useState("");
 
-  const { adminNavigation } = useNavigation();
-  const allItems: Item[] = adminNavigation.flatMap((group) =>
-    group.items.map((item) => ({
-      ...item,
-      groupName: group.sectionName,
-    }))
-  );
+  const { isSuperAdmin } = useSuperAdmin();
+
+  const { adminNavigation, superAdminNavigation } = useNavigation();
+
+  let allItems: Item[];
+
+  if (isSuperAdmin) {
+    allItems = superAdminNavigation.flatMap((group) =>
+      group.items.map((item) => ({
+        ...item,
+        groupName: group.sectionName,
+      }))
+    );
+  } else {
+    allItems = adminNavigation.flatMap((group) =>
+      group.items.map((item) => ({
+        ...item,
+        groupName: group.sectionName,
+      }))
+    );
+  }
 
   useEffect(() => {
     const handleKeyDown = (event) => {
