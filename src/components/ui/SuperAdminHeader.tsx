@@ -22,7 +22,7 @@ const SuperAdminHeader = ({
   const [open, setOpen] = useState(false);
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
   return (
-    <div>
+    <>
       {" "}
       <div className="sticky top-0 z-40 lg:mx-auto ">
         <div className="flex h-16 items-center bg-transparent backdrop-blur-3xl bg-opacity-25 transition-opacity gap-x-4 border-b text-primary border-gray-200 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
@@ -105,7 +105,7 @@ const SuperAdminHeader = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
