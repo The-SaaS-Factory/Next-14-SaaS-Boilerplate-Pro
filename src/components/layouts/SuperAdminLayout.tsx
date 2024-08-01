@@ -17,7 +17,7 @@ export default async function SuperAdminLayout({
         <SuperAdminHeader notificationsCount={notificationsCount} />
         <HeroPattern />
 
-        <div className="py-3 mt-8 relative lg:pt-[5%]  z-20 ">
+        <div className="py-3 relative lg:pt-[5%]  z-20 ">
           <div className="mx-auto bg-transparent  px-4 lg:px-8">{children}</div>
         </div>
       </div>{" "}
