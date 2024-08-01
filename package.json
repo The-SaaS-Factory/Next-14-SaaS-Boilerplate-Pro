@@ -12,7 +12,7 @@
     "seed": "ts-node  src/seed/seed.ts"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.29.6",
+    "@clerk/nextjs": "4.29.6",
     "@clerk/themes": "^1.7.9",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
@@ -22,6 +22,7 @@
     "@tremor/react": "3.15.1",
     "@vercel/analytics": "^1.1.2",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.19",
     "imagekit": "^4.1.4",
     "next": "14.1.0",
     "next-intl": "^3.11.1",
@@ -53,5 +54,6 @@
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.0.2+sha512.4e502bea682e7d8004561f916f1da2dfbe6f718024f6aa50bf8cd86f38ea3a94a7f1bf854a9ca666dd8eafcfb8d44baaa91bf5c7876e79a7aeac952c332f0e88"
 }
