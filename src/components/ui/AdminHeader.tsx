@@ -15,6 +15,8 @@ import useMembership from "@/app/hooks/useMembership";
 import UpgradeteButton from "../core/UpgradeteButton";
 import { constants } from "@/lib/constants";
 import { makeUserAsAdmin } from "@/actions/global/demoModule/make-user-as-admin";
+import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
+import { Suspense, useState } from "react";
 
 const AdminHeader = ({
   notificationsCount,
@@ -25,6 +27,7 @@ const AdminHeader = ({
     toggleSidebarMenu,
   }));
 
+  const [open, setOpen] = useState(false);
   const { isSuperAdmin } = useSuperAdmin();
   const { organization } = useOrganization();
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
@@ -47,6 +50,25 @@ const AdminHeader = ({
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6 " aria-hidden="true" />
           </button>
+
+          <button
+            onClick={() => setOpen(true)}
+            type="button"
+            className="hidden ml-4 h-8 w-full items-center  justify-between gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 ui-not-focus-visible:outline-none lg:flex dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
+          >
+            <div className="flex items-center space-x-2">
+              <SearchIcon className="h-5 w-5 stroke-current" />
+
+              <span className="font-normal">Search...</span>
+            </div>
+            <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
+              <kbd className="font-sans">Ctrl </kbd>
+              <kbd className="font-sans">K</kbd>
+            </kbd>
+          </button>
+          <Suspense fallback={null}>
+            <SearchHeader open={open} setOpen={setOpen} />
+          </Suspense>
 
           {/* Separator */}
           <div className="h-6 w-px bg-main lg:hidden" aria-hidden="true" />
@@ -72,7 +94,6 @@ const AdminHeader = ({
                   <UpgradeteButton />
                 </div>
               )}
-             
             </div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               {isSuperAdmin ? (
