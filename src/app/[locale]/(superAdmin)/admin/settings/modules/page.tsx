@@ -16,7 +16,7 @@ const SuperAdminSettingsModuleGeneralPage = async () => {
   const fields = [
     {
       name: "SUPPORT_MODULE_TICKETS_ENABLED",
-      label: "Activar Sistema de Ticket",
+      label: "Enable Ticket System",
       type: "toggle",
       required: false,
     },
