@@ -7,6 +7,8 @@ import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 
 import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
+import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
+import { Suspense, useState } from "react";
 
 const SuperAdminHeader = ({
   notificationsCount,
@@ -17,12 +19,13 @@ const SuperAdminHeader = ({
     toggleSidebarMenu,
   }));
 
+  const [open, setOpen] = useState(false);
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
   return (
-    <div>
+    <>
       {" "}
       <div className="sticky top-0 z-40 lg:mx-auto ">
-        <div className="flex h-16 items-center gap-x-4 border-b text-primary border-gray-200 bg-main px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
+        <div className="flex h-16 items-center bg-transparent backdrop-blur-3xl bg-opacity-25 transition-opacity gap-x-4 border-b text-primary border-gray-200 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
           <button
             type="button"
             className="-m-2.5 p-2.5   lg:hidden"
@@ -35,19 +38,40 @@ const SuperAdminHeader = ({
           {/* Separator */}
           <div className="h-6 w-px bg-main lg:hidden" aria-hidden="true" />
 
-          <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+          <div className="flex flex-1 gap-x-4 ml-4 self-stretch lg:gap-x-6">
+            <div className="hidden items-center lg:flex lg:w-[450px] lg:flex-auto">
+              <button
+                onClick={() => setOpen(true)}
+                type="button"
+                className="hidden h-8 w-full items-center  justify-between gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 ui-not-focus-visible:outline-none lg:flex dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
+              >
+                <div className="flex items-center space-x-2">
+                  <SearchIcon className="h-5 w-5 stroke-current" />
+
+                  <span className="font-normal">Encontre algo para si...</span>
+                </div>
+                <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
+                  <kbd className="font-sans">Ctrl </kbd>
+                  <kbd className="font-sans">K</kbd>
+                </kbd>
+              </button>
+              <Suspense fallback={null}>
+                <SearchHeader open={open} setOpen={setOpen} />
+              </Suspense>
+            </div>
+
             <div className="relative  p-4   flex-1">
-            <div className=" hidden lg:flex">
-              <OrganizationSwitcher
-                appearance={{
-                  baseTheme: isDarkTheme ? dark : undefined,
-                }}
-                afterSelectPersonalUrl={"/home"}
-                afterSelectOrganizationUrl={"/home"}
-                afterCreateOrganizationUrl={"/welcome"}
-                afterLeaveOrganizationUrl={"/home"}
-              />
-                  </div>
+              <div className=" hidden lg:flex">
+                <OrganizationSwitcher
+                  appearance={{
+                    baseTheme: isDarkTheme ? dark : undefined,
+                  }}
+                  afterSelectPersonalUrl={"/home"}
+                  afterSelectOrganizationUrl={"/home"}
+                  afterCreateOrganizationUrl={"/welcome"}
+                  afterLeaveOrganizationUrl={"/home"}
+                />
+              </div>
             </div>
 
             <div className="flex items-center gap-x-4 lg:gap-x-6">
@@ -81,7 +105,7 @@ const SuperAdminHeader = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

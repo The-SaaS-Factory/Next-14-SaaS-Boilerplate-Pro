@@ -149,9 +149,9 @@ const SuperAdminSidebar = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden mx-2 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+      <div className="hidden mx-2 lg:fixed bg-main border-gray-200  border-r lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex h-7 py-3 shrink-0 items-center">
+        <div className="flex h-7 mt-6 mb-4 py-3 shrink-0 items-center">
           <Link href={"/"}>
             {" "}
             <span className="text-xl font-bold text-primary">
@@ -160,8 +160,8 @@ const SuperAdminSidebar = () => {
           </Link>
         </div>
         <div
-          className="flex grow flex-col bg-main rounded-2xl  gap-y-5 
-        overflow-y-auto border-r border-gray-200   text-primary px-6 pb-4"
+          className="flex grow flex-col rounded-2xl  gap-y-5 
+        overflow-y-auto text-primary px-6 pb-4"
         >
           <nav className="flex -mx-2 flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">

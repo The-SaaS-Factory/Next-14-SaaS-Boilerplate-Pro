@@ -8,12 +8,15 @@ import DeleteModel from "@/components/core/DeleteModel";
 import { deletePlan } from "@/actions/superAdmin/superAdminBillingModule/delete-plan";
 import { getPriceRange } from "@/utils/facades/modulesFacades/billingFacade";
 import { traslateData } from "@/utils/facades/frontendFacades/parseValuesFacade";
-import { useLocale } from "next-intl";
-import { getBadgeClass, getStatusName } from "@/utils/facades/frontendFacades/visualFacade";
+import {
+  getBadgeClass,
+  getStatusName,
+} from "@/utils/facades/frontendFacades/visualFacade";
+import { getLocale } from "next-intl/server";
 
 const BillingPlansList = async () => {
   const { data } = await getAllPlans();
-  const locale = useLocale();
+  const locale = await getLocale();
 
   return (
     <div>
@@ -49,7 +52,7 @@ const BillingPlansList = async () => {
                         >
                           Pricing
                         </th>
-                        
+
                         <th
                           scope="col"
                           className="px-3 py-3.5 text-left text-sm font-semibold "
@@ -74,7 +77,9 @@ const BillingPlansList = async () => {
                           </td>
 
                           <td className="whitespace-nowrap px-3 py-5 text-sm  ">
-                            <div className={getBadgeClass(plan.status)}>{getStatusName(plan.status)}</div>
+                            <div className={getBadgeClass(plan.status)}>
+                              {getStatusName(plan.status)}
+                            </div>
                           </td>
                           <td className="whitespace-nowrap px-3 py-5 text-sm  ">
                             {plan.pricing && plan.pricing.length > 0

@@ -48,7 +48,7 @@ export const getUser = async (userAuthData: any) => {
 
   let user = await prisma.user.findFirst({
     where: {
-      externalId: userAuthData.orgId || userAuthData.userId,
+      externalId: userAuthData.userId || userAuthData.orgId,
     },
     include,
   });
