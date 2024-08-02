@@ -40,7 +40,7 @@ const AdminHeader = ({
   };
 
   return (
-    <div>
+    <>
       <div className="sticky top-0 z-40 lg:mx-auto ">
         <div
           className="flex h-16 text-primary backdrop-blur-3xl bg-transparent
@@ -152,7 +152,7 @@ const AdminHeader = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
