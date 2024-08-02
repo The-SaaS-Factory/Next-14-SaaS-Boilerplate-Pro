@@ -30,6 +30,10 @@
   @apply px-3 py-2 font-medium text-sm text-gray-800 rounded-md border shadow-sm shadow-gray-600 border-gray-100 bg-gradient-to-bl from-slate-100 via-gray-200 to-gray-200 hover:via-gray-200 active:from-gray-800   dark:bg-gradient-to-bl dark:from-gray-600 dark:via-gray-600 dark:to-black dark:text-gray-200 hover:dark:from-gray-700 hover:dark:via-gray-600 hover:dark:to-gray-700;
 }
 
+.btn-primary {
+  @apply transition-all px-3 py-2 font-medium rounded-md shadow-sm text-sm bg-[#111827] text-white dark:bg-white dark:text-black hover:bg-[#1a253b] dark:hover:bg-gray-200;
+}
+
 .btn-icon {
   @apply flex  space-x-2 btn-main;
 }
@@ -135,7 +139,5 @@
   padding-left: var(--slide-spacing);
   position: relative;
 }
- 
-
 
 @tailwind utilities;

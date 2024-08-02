@@ -1,7 +1,6 @@
 import { getAllSuperAdminSettings } from "@/actions/superAdmin/superAdminSettingsModule/get-superadmin-settings";
-import NewForm from "@/components/core/NewForm";
-import React from "react";
 import { saveSuperAdminSettings } from "@/actions/superAdmin/superAdminSettingsModule/save-superadmin-settings";
+import NewForm from "@/components/core/NewForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,12 +10,12 @@ const SuperAdminSettingsModuleGeneralPage = async () => {
   const { data: getSettings } = await getAllSuperAdminSettings();
   const formInfo = {
     name: "Support Module",
-    description: "General Settings Configuration",
+    description: "Support module configurations",
   };
 
   const fields = [
     {
-      name: "SUPPORT_MODULE_ENABLED",
+      name: "SUPPORT_MODULE_TICKETS_ENABLED",
       label: "Activar Sistema de Ticket",
       type: "toggle",
       required: false,
@@ -28,7 +27,7 @@ const SuperAdminSettingsModuleGeneralPage = async () => {
       required: false,
     },
     {
-      name: "SUPPORT_MODULE__EMAIL",
+      name: "SUPPORT_MODULE_EMAIL",
       label: "Email Contact",
       type: "text",
       required: false,
