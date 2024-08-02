@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import HighlightText from "../componenets/HightlightText";
 import useSuperAdmin from "@/app/hooks/useSuperAdmin";
+import { useTranslations } from "next-intl";
 
 interface Item {
   name: string;
@@ -35,8 +36,8 @@ export default function SearchHeader({
   const [query, setQuery] = useState("");
 
   const { isSuperAdmin } = useSuperAdmin();
-
   const { adminNavigation, superAdminNavigation } = useNavigation();
+  const t = useTranslations("Placeholders");
 
   let allItems: Item[];
 
@@ -110,7 +111,7 @@ export default function SearchHeader({
                   )}
                   value={query}
                   onChange={(ev) => setQuery(ev.currentTarget.value)}
-                  placeholder="Encontre algo para si"
+                  placeholder={t("search")}
                   onKeyDown={(event) => {
                     if (event.key === "Escape") {
                       setOpen(false);

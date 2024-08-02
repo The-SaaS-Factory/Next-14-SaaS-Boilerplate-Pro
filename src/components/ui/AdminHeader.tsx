@@ -17,6 +17,7 @@ import { constants } from "@/lib/constants";
 import { makeUserAsAdmin } from "@/actions/global/demoModule/make-user-as-admin";
 import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
 import { Suspense, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const AdminHeader = ({
   notificationsCount,
@@ -32,6 +33,7 @@ const AdminHeader = ({
   const { organization } = useOrganization();
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
   const { membershipPlanName } = useMembership();
+  const t = useTranslations("Placeholders");
 
   const handleAccessAsSuperAdminInDemoMode = async () => {
     if (constants.demoMode) await makeUserAsAdmin();
@@ -64,7 +66,7 @@ const AdminHeader = ({
             <div className="flex items-center space-x-2">
               <SearchIcon className="h-5 w-5 stroke-current" />
 
-              <span className="font-normal">Search...</span>
+              <span className="font-normal">{t("search")}</span>
             </div>
             <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
               <kbd className="font-sans">Ctrl </kbd>

@@ -12,6 +12,9 @@
     "label": "Trocar idioma",
     "locale": "{locale, select, de {🇩🇪 Alemão} en {🇺🇸 Inglês} es {es Espanhol} pt {pt Português} other {Desconhecido}}"
   },
+  "Placeholders": {
+    "search": "Procurar..."
+  },
   "AdminLayout": {
     "navigation": {
       "general": "Geral",

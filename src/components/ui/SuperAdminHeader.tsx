@@ -9,6 +9,7 @@ import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
 import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
 import { Suspense, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const SuperAdminHeader = ({
   notificationsCount,
@@ -18,6 +19,7 @@ const SuperAdminHeader = ({
   const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
     toggleSidebarMenu,
   }));
+  const t = useTranslations("Placeholders");
 
   const [open, setOpen] = useState(false);
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
@@ -48,7 +50,7 @@ const SuperAdminHeader = ({
                 <div className="flex items-center space-x-2">
                   <SearchIcon className="h-5 w-5 stroke-current" />
 
-                  <span className="font-normal">Encontre algo para si...</span>
+                  <span className="font-normal">{t("search")}</span>
                 </div>
                 <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
                   <kbd className="font-sans">Ctrl </kbd>

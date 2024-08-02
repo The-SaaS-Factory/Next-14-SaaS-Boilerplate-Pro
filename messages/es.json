@@ -12,6 +12,9 @@
     "label": "Cambiar idioma",
     "locale": "{locale, select, de {🇩🇪 Alemán} en {🇺🇸 Inglés} es {es Español} pt {pt Português} other {Desconocido}}"
   },
+  "Placeholders": {
+    "search": "Buscar..."
+  },
   "AdminLayout": {
     "navigation": {
       "general": "General",
@@ -99,7 +102,7 @@
         "affiliatePanel": "Panel de afiliados",
         "referralLinkDescription": "Gana dinero recomendando nuestros servicios"
       },
-      "memberships" : {
+      "memberships": {
         "stripePortal": "Accede a tu portal de Stripe"
       },
       "support": {
