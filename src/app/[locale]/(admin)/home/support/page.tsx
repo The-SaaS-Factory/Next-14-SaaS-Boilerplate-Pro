@@ -103,7 +103,10 @@ export default async function AdminSupportPage() {
             <span className="whitespace-nowrap font-bold">Email</span>
           </div>
           <p className="text-sm ">Send an email to our shared inbox</p>
-          <Link className="btn-main mt-4 w-fit mr-auto" href={email || ""}>
+          <Link
+            className="btn-main mt-4 w-fit mr-auto"
+            href={email ? `mailto:${email}` : ""}
+          >
             Send Email
           </Link>
         </div>
