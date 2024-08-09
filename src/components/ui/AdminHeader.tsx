@@ -1,7 +1,6 @@
 "use client";
 import { useSidebarState } from "@/states/ui/sidebarState";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
-import useSuperAdmin from "@/app/hooks/useSuperAdmin";
 import {
   OrganizationSwitcher,
   UserButton,
@@ -13,8 +12,6 @@ import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
 import useMembership from "@/app/hooks/useMembership";
 import UpgradeteButton from "../core/UpgradeteButton";
-import { constants } from "@/lib/constants";
-import { makeUserAsAdmin } from "@/actions/global/demoModule/make-user-as-admin";
 import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
 import { Suspense, useState } from "react";
 
@@ -28,14 +25,11 @@ const AdminHeader = ({
   }));
 
   const [open, setOpen] = useState(false);
-  const { isSuperAdmin } = useSuperAdmin();
   const { organization } = useOrganization();
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
   const { membershipPlanName } = useMembership();
-
-  const handleAccessAsSuperAdminInDemoMode = async () => {
-    if (constants.demoMode) await makeUserAsAdmin();
-  };
+  
+  
 
   return (
     <div>
@@ -100,25 +94,8 @@ const AdminHeader = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-x-4 lg:gap-x-6">
-              {isSuperAdmin ? (
-                <Link href="/admin" className="btn-main">
-                  <span>Admin Panel</span>
-                </Link>
-              ) : (
-                <div>
-                  {constants.demoMode && (
-                    <button
-                      onClick={() => {
-                        handleAccessAsSuperAdminInDemoMode();
-                      }}
-                      className="btn-main"
-                    >
-                      <span>Access as Super Admin</span>
-                    </button>
-                  )}
-                </div>
-              )}
+            <div className="flex   items-center gap-x-4 lg:gap-x-6">
+           
 
               {daktThemeSelector}
 

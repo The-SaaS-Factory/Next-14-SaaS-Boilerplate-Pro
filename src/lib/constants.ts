@@ -1,8 +1,8 @@
 export const constants = {
   appUrl: "https://next14pro.thesaasfactory.dev",
   appName: "The SaaS Factory",
-  logoUrl: "/assets/img/logo-next-14-white.png",
-  logoDarkUrl: "/assets/img/logo-next-14-dark.png",
+  logoUrl: "/assets/img/logo-next-14.jpg",
+  logoDarkUrl: "/assets/img/logo-next-14.jpg",
   appResume: "The best boilerplate in Next 14.",
   demoMode: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
   portalStripe: process.env.NEXT_PUBLIC_STRIPE_PORTAL

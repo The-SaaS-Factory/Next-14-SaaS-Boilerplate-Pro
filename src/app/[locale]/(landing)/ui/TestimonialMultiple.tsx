@@ -21,7 +21,7 @@ export const testimonials: any[] = [
         },
         icon: (
           <Image
-            src={"/assets/img/cuban-flag.jpg"}
+            src={"/assets/img/avatar.png"}
             alt="Cuban Flag"
             width={20}
             height={20}
@@ -39,7 +39,7 @@ export const testimonials: any[] = [
         },
         icon: (
           <Image
-            src={"/assets/img/cuban-flag.jpg"}
+            src={"/assets/img/avatar.png"}
             alt="Cuban Flag"
             width={20}
             height={20}
@@ -59,7 +59,7 @@ export const testimonials: any[] = [
         },
         icon: (
           <Image
-            src={"/assets/img/cuban-flag.jpg"}
+            src={"/assets/img/avatar.png"}
             alt="Cuban Flag"
             width={20}
             height={20}
@@ -77,7 +77,7 @@ export const testimonials: any[] = [
         },
         icon: (
           <Image
-            src={"/assets/img/cuban-flag.jpg"}
+            src={"/assets/img/avatar.png"}
             alt="Cuban Flag"
             width={20}
             height={20}

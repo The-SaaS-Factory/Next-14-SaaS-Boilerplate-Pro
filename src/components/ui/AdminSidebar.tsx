@@ -18,6 +18,8 @@ import useDarkTheme from "@/app/hooks/useDarkTheme";
 import { constants } from "@/lib/constants";
 import { useNavigation } from "../layouts/useNavigation";
 import { useTranslations } from "next-intl";
+import useSuperAdmin from "@/app/hooks/useSuperAdmin";
+import { makeUserAsAdmin } from "@/actions/global/demoModule/make-user-as-admin";
 
 const AdminSidebar = () => {
   const { isDarkTheme } = useDarkTheme();
@@ -28,6 +30,10 @@ const AdminSidebar = () => {
     })
   );
 
+  const { isSuperAdmin } = useSuperAdmin();
+  const handleAccessAsSuperAdminInDemoMode = async () => {
+    if (constants.demoMode) await makeUserAsAdmin();
+  };
   const { adminNavigation } = useNavigation();
   const t = useTranslations("AdminLayout.navigation");
 
@@ -158,6 +164,24 @@ const AdminSidebar = () => {
                         </Link>
                       </li>
                     </ul>
+                    {isSuperAdmin ? (
+                      <Link href="/admin" className="btn-main">
+                        <span>Admin Panel</span>
+                      </Link>
+                    ) : (
+                      <div className="flex w-full min-w-48">
+                        {constants.demoMode && (
+                          <button
+                            onClick={() => {
+                              handleAccessAsSuperAdminInDemoMode();
+                            }}
+                            className="btn-main"
+                          >
+                            <span>Access as Super Admin</span>
+                          </button>
+                        )}
+                      </div>
+                    )}
                   </nav>
                 </div>
               </Dialog.Panel>
@@ -227,6 +251,25 @@ const AdminSidebar = () => {
                 </Link>
               </li>
             </ul>
+
+            {isSuperAdmin ? (
+              <Link href="/admin" className="btn-main">
+                <span>Admin Panel</span>
+              </Link>
+            ) : (
+              <div className="flex w-full min-w-48">
+                {constants.demoMode && (
+                  <button
+                    onClick={() => {
+                      handleAccessAsSuperAdminInDemoMode();
+                    }}
+                    className="btn-main"
+                  >
+                    <span>Access as Super Admin</span>
+                  </button>
+                )}
+              </div>
+            )}
           </nav>
         </div>
       </div>

@@ -184,7 +184,7 @@ function NavigationGroup({
     group.items.findIndex((link) => link.href === fullPath) !== -1;
 
   return (
-    <li className={clsx("relative mt-6", className)}>
+    <li className={clsx("relative mt-3", className)}>
       <Link
         href={group.items[0].href}
         className="flex gap-2 items-center cursor-pointer"
