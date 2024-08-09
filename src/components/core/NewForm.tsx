@@ -45,6 +45,7 @@ type FormProps = {
   isSettingForm?: boolean;
   // eslint-disable-next-line no-unused-vars
   onAddNewField?: (data: Field) => void;
+  callback?: () => void;
   newFieldsFunction?: boolean;
   autoSave?: boolean;
   modelToUpdate?: number;
@@ -60,6 +61,7 @@ const NewForm = ({
   info,
   fields,
   onSubmit,
+  callback,
   onAddNewField,
   newFieldsFunction = false,
   autoSave = false,
@@ -103,6 +105,7 @@ const NewForm = ({
       .then(() => {
         toast.success(isSettingForm ? "Settings saved" : "Data saved");
         reset();
+        callback && callback();
       })
       .catch((err: any) => {
         toast.error(err.message ?? "Error saving settings");
