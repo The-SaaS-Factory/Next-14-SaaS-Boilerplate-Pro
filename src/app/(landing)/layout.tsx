@@ -16,7 +16,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="relative max-w-7xl mx-auto">
+    <main className="relative ">
       <Suspense fallback={null}>
         <SessionWrapper>
           <HeaderLanding />
