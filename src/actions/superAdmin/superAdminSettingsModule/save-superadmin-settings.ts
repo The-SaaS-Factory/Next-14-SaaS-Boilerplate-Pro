@@ -12,8 +12,6 @@ export const saveSuperAdminSettings = async (settings: any) => {
               settingName: setting.settingName,
             },
           });
-
-         
           if (existingSetting) {
             await prisma.superAdminSetting.update({
               where: { id: existingSetting.id },

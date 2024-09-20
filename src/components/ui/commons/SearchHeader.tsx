@@ -1,10 +1,14 @@
 import { useNavigation } from "@/components/layouts/useNavigation";
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import HighlightText from "../componenets/HightlightText";
-import useSuperAdmin from "@/app/hooks/useSuperAdmin";
+import HighlightText from "./HightlightText";
 
 interface Item {
   name: string;
@@ -26,35 +30,25 @@ export function SearchIcon(props: React.ComponentPropsWithoutRef<"svg">) {
 export default function SearchHeader({
   open,
   setOpen,
+  // agencyPermissions,
+  // membershipPermissions,
 }: {
   open: boolean;
+  // agencyPermissions: string[];
+  // membershipPermissions: string[];
   // eslint-disable-next-line no-unused-vars
   setOpen: (open: boolean) => void;
 }) {
   let inputRef = useRef<any>(null);
   const [query, setQuery] = useState("");
 
-  const { isSuperAdmin } = useSuperAdmin();
-
-  const { adminNavigation, superAdminNavigation } = useNavigation();
-
-  let allItems: Item[];
-
-  if (isSuperAdmin) {
-    allItems = superAdminNavigation.flatMap((group) =>
-      group.items.map((item) => ({
-        ...item,
-        groupName: group.sectionName,
-      }))
-    );
-  } else {
-    allItems = adminNavigation.flatMap((group) =>
-      group.items.map((item) => ({
-        ...item,
-        groupName: group.sectionName,
-      }))
-    );
-  }
+  const { tenantNavigation } = useNavigation();
+  const allItems: Item[] = tenantNavigation.flatMap((group) =>
+    group.items.map((item) => ({
+      ...item,
+      groupName: group.sectionName,
+    }))
+  );
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -75,7 +69,7 @@ export default function SearchHeader({
   return (
     <Transition show={open} appear>
       <Dialog className="relative z-50" onClose={setOpen}>
-        <Transition
+        <TransitionChild
           enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -84,10 +78,10 @@ export default function SearchHeader({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 backdrop-blur-sm bg-white/30 bg-opacity-25 transition-opacity" />
-        </Transition>
+        </TransitionChild>
 
         <div className="fixed inset-0 z-10 w-screen overflow-hidden p-4 sm:p-6 md:p-20">
-          <Transition
+          <TransitionChild
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
@@ -95,7 +89,7 @@ export default function SearchHeader({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="mx-auto bg-main max-w-xl transform divide-y divide-gray-100 dark:divide-gray-700/40 overflow-hidden rounded-xl  shadow-2xl transition-all">
+            <DialogPanel className="mx-auto bg-main max-w-xl transform divide-y divide-gray-100 dark:divide-gray-700/40 overflow-hidden rounded-xl  shadow-2xl transition-all">
               <div className="group relative flex h-12">
                 <SearchIcon
                   className="pointer-events-none
@@ -105,12 +99,12 @@ export default function SearchHeader({
                   ref={inputRef}
                   data-autofocus
                   className={clsx(
-                    "flex-auto appearance-none bg-main pl-10 text-zinc-900 border-hidden outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
+                    "flex-auto appearance-none bg-main pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
                     "pr-4"
                   )}
                   value={query}
                   onChange={(ev) => setQuery(ev.currentTarget.value)}
-                  placeholder="Encontre algo para si"
+                  placeholder="Buscar página o funcionalidad"
                   onKeyDown={(event) => {
                     if (event.key === "Escape") {
                       setOpen(false);
@@ -132,7 +126,7 @@ export default function SearchHeader({
                           setOpen(false);
                           setQuery("");
                         }}
-                        className="flex  bg-main flex-col gap-0.5 dark:text-white p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50/10 dark:bg-gray-100/10 hover:text-blue-600 dark:bg-gray-700 first:text-blue-600 dark:first:text-blue-500"
+                        className="flex  bg-main flex-col gap-0.5 dark:text-white p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50/10 dark:bg-gray-100/10  "
                         key={`search-${item.href}`}
                         href={item.href}
                       >
@@ -147,8 +141,8 @@ export default function SearchHeader({
                       </Link>
                     ))}
               </div>
-            </Dialog.Panel>
-          </Transition>
+            </DialogPanel>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>

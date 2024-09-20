@@ -1,64 +1,34 @@
-"use client";
-import { traslateData } from "@/utils/facades/frontendFacades/parseValuesFacade";
-//import { useOrganization, useUser } from "@clerk/nextjs";
-import { useOrganization, useUser } from "@clerk/nextjs";
-import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+import { useState, useEffect } from "react";
 
-const useMembership = () => {
-  const [membershipPlanName, setMembershipPlanName] = useState<string | null>(
-    null
-  );
-  const [membershipEndDate, setMembershipEndDate] = useState<string | null>(
-    null
-  );
-  const { organization } = useOrganization();
-  const { user } = useUser();
-  const locale = useLocale();
+interface MembershipData {
+  profile: any;
+  permissions: any[];
+  profileMembership: any;
+}
+
+export const useMembership = () => {
+  const [data, setData] = useState<MembershipData | null>(null);
 
   useEffect(() => {
-    if (organization && organization.publicMetadata) {
-      if (organization.publicMetadata.membershipPlan) {
-        setMembershipPlanName(
-          traslateData(
-            organization.publicMetadata.membershipPlan as string,
-            locale
-          )
-        );
+    const fetchMembershipData = async () => {
+      try {
+        const membershipData = await getMembership();
+        if (!membershipData) {
+          throw new Error("Failed to fetch membership data");
+        }
+        setData(membershipData);
+      } catch (err) {
+        console.log(err);
       }
+    };
 
-      if (organization.publicMetadata.membershipEndDate) {
-        setMembershipEndDate(
-          new Date(
-            organization.publicMetadata.membershipEndDate as string
-          ).toDateString()
-        );
-      }
-    }
-  }, [organization]);
-
-  useEffect(() => {
-    if (!organization && user && user.publicMetadata) {
-      if (user.publicMetadata.membershipPlan) {
-        setMembershipPlanName(
-          traslateData(user.publicMetadata.membershipPlan as string, locale)
-        );
-      }
-
-      if (user.publicMetadata.membershipEndDate) {
-        setMembershipEndDate(
-          new Date(
-            user.publicMetadata.membershipEndDate as string
-          ).toDateString()
-        );
-      }
-    }
-  }, [user]);
+    fetchMembershipData();
+  }, []);
 
   return {
-    membershipPlanName,
-    membershipEndDate,
+    permissions: data?.permissions,
+    profile: data?.profile,
+    profileMembership: data?.profileMembership,
   };
 };
-
-export default useMembership;

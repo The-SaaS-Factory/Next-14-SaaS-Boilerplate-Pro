@@ -1,6 +1,5 @@
 "use server";
 import prisma from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -17,9 +16,7 @@ export const createInvoiceItemToInvoice = async ({
 }: {
   payload: CreateInvoiceItem;
 }) => {
-  const userClerk = auth();
 
-  if (!userClerk) throw new Error("client clerk not found");
 
   //Create Invoice Item
   const payloadInvoiceItem: Prisma.InvoiceItemCreateInput = {

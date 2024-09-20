@@ -1,7 +1,7 @@
 "use server";
-import prisma  from "@/lib/db";
+import prisma from "@/lib/db";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { AdminCurrencies, MovementAmountType } from "@prisma/client";
-
 
 /**
  *
@@ -12,29 +12,30 @@ import { AdminCurrencies, MovementAmountType } from "@prisma/client";
 export const createMovementAmountForUser = async ({
   amount,
   currencyId,
-  userId,
+  profileId,
   details,
   type,
 }: {
   amount: number;
   currencyId: number;
-  userId: number;
+  profileId: number;
   details: string;
   type: MovementAmountType;
 }) => {
   return prisma.$transaction(async (tx: any) => {
     let userAmount: any = null;
 
+    const { id } = await getMembership();
     userAmount = await tx.userAmounts.findFirst({
       where: {
-        userId: userId,
+        profileId: id,
         currencyId: currencyId,
       },
     });
 
     if (!userAmount) {
-      userAmount = await createAmountByDefaultForUser({
-        userId,
+      userAmount = await createAmountByDefaultForAgencies({
+        id,
         currencyId,
       });
     }
@@ -45,7 +46,7 @@ export const createMovementAmountForUser = async ({
         data: {
           amount,
           currencyId,
-          userId,
+          profileId,
           details: details,
           type: type,
         },
@@ -65,7 +66,7 @@ export const createMovementAmountForUser = async ({
         });
 
         if (balance.amount < 0) {
-          throw new Error(`${userId} doesn't have enough to send ${amount}`);
+          throw new Error(`${profileId} doesn't have enough to send ${amount}`);
         }
       } else if (type === MovementAmountType.CREDIT) {
         await tx.userAmounts.update({
@@ -83,11 +84,11 @@ export const createMovementAmountForUser = async ({
   });
 };
 
-export const createAmountByDefaultForUser = async ({
-  userId,
+export const createAmountByDefaultForAgencies = async ({
+  id,
   currencyId,
 }: {
-  userId: number;
+  id: number;
   currencyId?: number;
 }) => {
   const currencies = await prisma.adminCurrencies.findMany({});
@@ -96,14 +97,14 @@ export const createAmountByDefaultForUser = async ({
   //Use Promise.all to create all in parallel
   await Promise.all(
     currencies.map(async (currency: AdminCurrencies) => {
-      const amount = await prisma.userAmounts.findFirst({
+      const amount = await prisma.profileAmounts.findFirst({
         where: {
-          userId: userId,
+          profileId: id,
           currencyId: currency.id,
         },
       });
 
-      await prisma.userAmounts.upsert({
+      await prisma.profileAmounts.upsert({
         where: {
           id: amount?.id || 0,
         },
@@ -111,7 +112,7 @@ export const createAmountByDefaultForUser = async ({
         create: {
           amount: 0,
           currencyId: currency.id,
-          userId: userId,
+          profileId: id,
         },
       });
     })
@@ -119,9 +120,9 @@ export const createAmountByDefaultForUser = async ({
 
   if (!currencyId) return;
 
-  return await prisma.userAmounts.findFirst({
+  return await prisma.profileAmounts.findFirst({
     where: {
-      userId: userId,
+      profileId: id,
       currencyId: currencyId,
     },
   });

@@ -1,4 +1,8 @@
-import { createStripeCustomer, stripeCreateProduct } from "./stripeFacade";
+import {
+  createStripeCustomer,
+  getStripeCustomer,
+  stripeCreateProduct,
+} from "./stripeFacade";
 import { getAdminSettingValue, getSuperAdminSetting } from "./adminFacade";
 import { updateMembership } from "./membershipFacade";
 import {
@@ -17,7 +21,7 @@ import {
   InvoiceItem,
 } from "@prisma/client";
 import { parsePriceInLocalCurrency } from "../frontendFacades/parseValuesFacade";
- 
+
 import { getMonthCountByFrecuency } from "../modulesFacades/billingFacade";
 import { payToAffiliate } from "./affiliatesSystemFacade";
 
@@ -38,40 +42,55 @@ export const createStripeServiceByDefault = async (serviceName: string) => {
   }
 };
 
-export const saveStripeCustomerId = async (
-  userId: number,
-  customerId: string
-) => {
+export const saveStripeCustomerId = async (id: number, customerId: string) => {
   return await prisma.stripeCustomer.create({
     data: {
-      userId: userId,
+      profileId: id,
       customerId: customerId,
     },
   });
 };
 
-export const getClientCustomer = async (userId: number) => {
+export const getClientCustomer = async (id: number) => {
   let client: StripeCustomer | null = null;
 
-  const user = await prisma.user.findFirst({
+  const profile = await prisma.profile.findFirst({
     where: {
-      id: userId,
+      id,
     },
   });
 
-  if (!user) throw new Error("User not found");
+  if (!profile) throw new Error("User not found");
 
   client = await prisma.stripeCustomer.findFirst({
     where: {
-      userId,
+      profileId: id,
     },
   });
 
-  if (!client && user.email && user.name) {
+  if (client) {
+    //check if customer exists in stripe
+    
+    const stripeCustomer = await getStripeCustomer(client.customerId);
+
+    
+
+    if (!stripeCustomer) {
+      //delete client
+      await prisma.stripeCustomer.delete({
+        where: {
+          id: client.id,
+        },
+      });
+      client = null;
+    }
+  }
+
+  if (!client && profile.email && profile.name) {
     client = await createStripeCustomer({
-      email: user.email,
-      name: user.name,
-      userId,
+      email: profile.email,
+      name: profile.name,
+      profileId: id,
     });
   }
 
@@ -82,7 +101,9 @@ export const createInvoice = async (
   invoicePayload: Prisma.InvoiceCreateInput
 ) => {
   return await prisma.invoice.create({
-    data: invoicePayload,
+    data: {
+      ...invoicePayload,
+    },
   });
 };
 
@@ -128,12 +149,12 @@ export const planPaid = async (
 ) => {
   let months = getMonthCountByFrecuency(pricing.frequency);
 
-  if (!invoice.userId) throw new Error("User not found");
+  if (!invoice.profileId) throw new Error("Profile not found");
 
   const membership = await updateMembership({
     pricingId: pricing ? pricing.id : null,
     currencyId: invoice.currencyId,
-    userId: invoice.userId,
+    profileId: invoice.profileId,
     months,
     planId: plan.id,
   });
@@ -176,7 +197,7 @@ export const invoiceItemPaid = async ({
           },
           {
             Invoice: {
-              userId: stripeCustomer.userId,
+              profileId: stripeCustomer.profileId,
             },
           },
         ],
@@ -222,7 +243,7 @@ export const processInvoiceItemInPayment = async (
   pricing?: Pricing
 ) => {
   /////////////////////userId - currency ///price/
-  
+
   payToAffiliate(invoice, invoiceItem);
 
   if (invoiceItem.modelType === "PLAN") {
@@ -238,7 +259,7 @@ export const processInvoiceItemInPayment = async (
 
     ////////////////////////////////////////////////////// CASHBACK
     return await planPaid(plan, invoice, pricing);
-  } 
+  }
 };
 
 export const calculateInvoiceTotal = (
@@ -281,20 +302,21 @@ export const calculateInvoiceTotal = (
 export const getInvoiceTotal = (
   items: InvoiceItemType[],
   currencyCode = "USD",
-  coupons: ICoupon[]
+  coupons: ICoupon[],
+  type?: string
 ) => {
-  const { total, totalDiscount } = calculateInvoiceTotal(items, coupons);
-
-  if (totalDiscount > 0) {
-    return `${parsePriceInLocalCurrency(total, currencyCode)}  
-     ${currencyCode.toUpperCase()} ${
-      totalDiscount &&
-      `- ${parsePriceInLocalCurrency(totalDiscount, currencyCode)} descontado`
-    } `;
-  } else {
-    return `${parsePriceInLocalCurrency(total, currencyCode)}  
-     ${currencyCode.toUpperCase()} `;
+  const { total } = calculateInvoiceTotal(items, coupons);
+  let finalTotal = total;
+  if (type === "subtotal") {
+    finalTotal = total - getInvoiceTaxTotal(items);
   }
+
+  const result = `${parsePriceInLocalCurrency(finalTotal, currencyCode)}  `;
+  return result;
+};
+
+export const getInvoiceTaxTotal = (items) => {
+  return items.reduce((total, item) => total + item.tax, 0);
 };
 
 export const getPricingByStripePricingId = async (pricingId: string) => {

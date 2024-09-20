@@ -7,18 +7,16 @@ import {
 import prisma from "@/lib/db";
 import { InvoiceItem } from "@prisma/client";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+ 
 import { revalidatePath } from "next/cache";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 const scope = "superAdmin:billing:upsert";
 
 export const makeInvoicePaid = async (
   invoiceId: number,
   gateway = "manualAdmin"
 ) => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { permissions } = await getUser(userClerk);
+const { permissions } = await getMembership();
 
   if (gateway === "manualAdmin") {
     //Is from Admin

@@ -48,7 +48,7 @@ if (typeof findId === "string" && findId !== "") {
       ...whereSearch,
     },
     include: {
-      user: {
+      profile: {
         select: {
           id: true,
           email: true,

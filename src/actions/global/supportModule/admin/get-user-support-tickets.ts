@@ -1,8 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
-import { Prisma } from "@prisma/client";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getUserSupportTickets = async ({
   args,
@@ -15,11 +13,9 @@ export const getUserSupportTickets = async ({
 }) => {
   const { offset, limit } = args;
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
+  const { id } = await getMembership();
 
-  let whereSearch: Prisma.SupportTicketWhereInput;
+  let whereSearch: any;
 
   whereSearch = {};
 
@@ -31,10 +27,10 @@ export const getUserSupportTickets = async ({
     };
   }
 
-  let whereOwner: Prisma.SupportTicketWhereInput;
+  let whereOwner: any;
 
   whereOwner = {
-    userId: userId,
+    profileId: id,
   };
 
   const data = await prisma.supportTicket.findMany({
@@ -43,7 +39,7 @@ export const getUserSupportTickets = async ({
       ...whereSearch,
     },
     include: {
-      user: {
+      profile: {
         select: {
           id: true,
           email: true,
@@ -69,14 +65,12 @@ export const getUserSupportTickets = async ({
 };
 
 export const getSupportTicketsActivesCount = async () => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
+  const { id } = await getMembership();
 
-  let whereOwner: Prisma.SupportTicketWhereInput;
+  let whereOwner: any;
 
   whereOwner = {
-    userId: userId,
+    profileId: id,
   };
 
   const data = await prisma.supportTicket.count({

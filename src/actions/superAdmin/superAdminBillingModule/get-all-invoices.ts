@@ -54,7 +54,7 @@ export const getAllInvoices = async ({
       ...whereSearch,
     },
     include: {
-       user: {
+       profile: {
         select: {
           id: true,
           name: true,

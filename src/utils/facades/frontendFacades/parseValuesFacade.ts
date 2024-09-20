@@ -2,6 +2,10 @@ export const parsePriceInLocalCurrency = (
   price: number,
   currencyCode: string
 ) => {
+  let PESOUYU = new Intl.NumberFormat("es-UY", {
+    style: "currency",
+    currency: "UYU",
+  });
   let USDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -22,8 +26,10 @@ export const parsePriceInLocalCurrency = (
   });
 
   switch (currencyCode) {
+    case "uyu":
+      return ` ${PESOUYU.format(price)}`;
     case "usd":
-      return `  ${USDollar.format(price)}`;
+      return `${USDollar.format(price)}`;
     case "eur":
       return `  ${Euro.format(price)}`;
     case "brl":
@@ -51,7 +57,10 @@ export const parseNameFrequency = (frequency: string) => {
   }
 };
 
-export const traslateData = (string: string | object | null, locale: string) => {
+export const traslateData = (
+  string: string | object | null,
+  locale: string
+) => {
   let traduction: string | object | null = string;
 
   if (typeof string === "string") {
@@ -59,7 +68,7 @@ export const traslateData = (string: string | object | null, locale: string) => 
       traduction = JSON.parse(string);
       return (traduction as Record<string, string>)[locale];
     } catch (error) {
-      return  string;
+      return string;
     }
   }
 };

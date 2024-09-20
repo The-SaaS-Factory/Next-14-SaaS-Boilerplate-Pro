@@ -23,10 +23,13 @@ export default function SlideOver({
   return (
     <>
       <button
-        className={`${button.icon ? "btn-icon" : "btn-main"}`}
+        className={`${
+          button.icon ? "btn-icon" : "btn-main"
+        } items-center space-x-1`}
         onClick={toggleSideOver}
       >
-        {button.icon} {button.name ?? "Open Slide Over"}
+        {button.icon}
+        <span>{button.name ?? "Open Slide Over"}</span>
       </button>
 
       <Transition.Root show={isSideOverOpen} as={Fragment}>

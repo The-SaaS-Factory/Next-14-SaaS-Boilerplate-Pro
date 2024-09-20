@@ -37,12 +37,12 @@ export const settings = [
   {
     settingName: "STRIPE_CLIENT_SECRET_SANDBOX",
     settingValue:
-      "sk_test_51Np7olCONKACWiCbUZgSl9aSSuWSc8k4avWzjouHoPub0vxQkakJCefxeuutyT5ZO6p4w64wFLma2yKHB38UPwPl00SrOYLVOc",
+      "sk_test_51PgRoXALNi0LodQT8l0DR3IUtDcpXltHIqHXOvJReC8Jz0AiKhkvTPSJ2zsBYmYqbSsfaN8wpcBBnoS3fZV2zsdH00xFHOybxz",
   },
   {
     settingName: "STRIPE_CLIENT_PK_SANDBOX",
     settingValue:
-      "pk_test_51Np7olCONKACWiCbI5hTBrN70eQmTMoc9XXEGBNUKI6DfsoM99qzqMbPZIHaJxfkJoG8dbpOucgOtnnCOGhhg4V800w44A882w",
+      "pk_test_51PgRoXALNi0LodQTA9J4unpGSldzZFQMbc6m4hbJcNwnymtYlP7gFQpfevj90gaixLBHoup5rntbpfPXHMIcQXNI00lo65Mh10",
   },
   {
     settingName: "STRIPE_ENDPOINT_SECRET",

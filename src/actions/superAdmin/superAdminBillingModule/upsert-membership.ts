@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+ 
 import { revalidatePath } from "next/cache";
 
 const scope = "superAdmin:billing:upsert";
@@ -14,9 +14,7 @@ export const upsertMembership = async ({
   modelId?: number;
   payload: any;
 }) => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { permissions } = await getUser(userClerk);
+const { permissions } = await getMembership();
 
   checkPermission(permissions, scope);
   
@@ -26,7 +24,7 @@ export const upsertMembership = async ({
         id: modelId ? modelId : 0,
       },
       update: {
-        user: {
+        profile: {
           connect: {
             id: payload.userId as number,
           },
@@ -51,7 +49,7 @@ export const upsertMembership = async ({
         endDate: payload.endDate as Date,
       },
       create: {
-        user: {
+        profile: {
           connect: {
             id: payload.userId as number,
           },

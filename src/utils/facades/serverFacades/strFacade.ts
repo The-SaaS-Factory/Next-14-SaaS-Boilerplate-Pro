@@ -14,6 +14,8 @@ export function generateRandomString(length: number) {
   return result;
 }
 
+
+
 export function convertToSlug(text: string) {
   return text
     .toLowerCase()

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 "use client";
 
+import { remToPx } from "@/utils/facades/frontendFacades/remToPx";
 import React, {
   createContext,
   useContext,
@@ -10,7 +11,6 @@ import React, {
 } from "react";
 import { type StoreApi, createStore, useStore } from "zustand";
 
-import { remToPx } from "@/lib/remToPx";
 
 export interface Section {
   id: string;

@@ -1,6 +1,5 @@
 import prisma from "@/lib/db";
 import { getSuperAdminAdmins } from "./scurityFacade";
-import { User } from "@prisma/client";
 import { sendMessageToTelegram } from "./telegramFacade";
 import { sendLoopsTransactionalEventToUser } from "./loopsEmailMarketingFacade";
 import { constants } from "@/lib/constants";
@@ -8,20 +7,20 @@ import { constants } from "@/lib/constants";
 const notificationLoopsId = process.env.NOTIFICATION_LOOPS_ID;
 
 export const sendInternalNotificatoin = async (
-  userId: number,
+  id: number,
   content: string,
   image?: string
 ): Promise<void> => {
   try {
     const payload = {
-      userId: userId,
+      profileId: id,
       image: image,
       content: content,
     };
 
     await prisma.notification.create({
       data: {
-        userId: payload.userId,
+        profileId: payload.profileId,
         image: payload.image ?? "",
         type: "ALERT",
         content: payload.content,
@@ -29,9 +28,9 @@ export const sendInternalNotificatoin = async (
     });
 
     if (notificationLoopsId) {
-      const user = await prisma.user.findUnique({
+      const user = await prisma.profile.findUnique({
         where: {
-          id: userId,
+          id,
         },
       });
 
@@ -59,7 +58,7 @@ export const notifyToSuperAdmin = async (message: string) => {
   const admins = await getSuperAdminAdmins();
 
   await Promise.all(
-    admins?.map((admin: User) => {
+    admins?.map((admin: any) => {
       sendInternalNotificatoin(admin.id, message);
       if (admin.email)
         sendNotificationViaEmail(

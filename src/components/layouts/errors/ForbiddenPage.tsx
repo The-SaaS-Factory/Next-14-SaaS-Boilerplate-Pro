@@ -25,7 +25,7 @@ export default function ForbiddenPage() {
               href="/home"
               className="text-sm font-semibold leading-7 text-primary"
             >
-              <span aria-hidden="true">&larr;</span> Back to home
+              <span aria-hidden="true">&larr;</span> Atrás to home
             </Link>
           </div>
         </div>

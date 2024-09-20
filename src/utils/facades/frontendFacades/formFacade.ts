@@ -25,31 +25,30 @@ export const parseSettingDataOnSubmit = async (data: any, fields: any) => {
             fieldValue.length > 0 &&
             typeof fieldValue[0] === "object"
           ) {
-            const response = await saveImage(fieldValue[0].data_url);
-
-            if (response) {
-              const responseF = await response.json();
-              valueFinal = responseF.url;
-            }
+            await fetch(url, {
+              method: "POST",
+              body: JSON.stringify(fieldValue[0].data_url),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then((response) => {
+                if (response) {
+                  valueFinal = response.url;
+                } else {
+                  valueFinal = null;
+                }
+                return response;
+              })
+              .catch(() => {
+                valueFinal = null;
+              });
           }
         } else if (field.type === "textarea") {
-          //count all images base64
-          const images = fieldValue.match(/data:image\/[^;]+;base64[^"]*/g);
-          const imagesCount = images ? images.length : 0;
-          //Save each image on server and replace base64 with url
-          for (let i = 0; i < imagesCount; i++) {
-            //image with base64 structure
-            const image = images[i];
-
-            const response = await saveImage(image);
-
-            if (response) {
-              const responseF = await response.json();
-              valueFinal = fieldValue.replace(image, responseF.url);
-            } else {
-              valueFinal = fieldValue.replace(image, "");
-            }
-          }
+          valueFinal = fieldValue.toString();
         } else if (field.type === "text") {
           valueFinal = fieldValue.toString();
         } else if (field.type === "select" && field.forceInteger) {
@@ -199,6 +198,8 @@ export const getGalleryImagesUrls = async (dataRaw) => {
     .filter((f: any) => f.data_url)
     .map((image: any) => image.data_url);
 
+  console.log(url);
+
   if (imagesInBase64.length > 0) {
     await fetch(url, {
       method: "POST",
@@ -220,7 +221,8 @@ export const getGalleryImagesUrls = async (dataRaw) => {
           data = JSON.stringify(imagesWithOutInBase64);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         data = null;
       });
   } else {

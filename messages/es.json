@@ -1,10 +1,10 @@
 {
   "Index": {
-    "title": "¡Hola mundo!"
+    "title": "La plataforma todo en uno para los que están enfocados en Jesús"
   },
   "Onboarding": {
     "welcome": "Bienvenido a ",
-    "completeOnboarding": "Completa el Onboarding",
+    "completeOnboarding": "Completa el onboarding",
     "redirecting": "Redireccionando",
     "organizationName": "Nombre del proyecto"
   },
@@ -15,6 +15,7 @@
   "AdminLayout": {
     "navigation": {
       "general": "General",
+      "products": "Productos",
       "dashboard": "Tablero",
       "examples": "Ejemplos",
       "exampleTitle": "Título de la página de ejemplo",
@@ -28,6 +29,10 @@
       "support": "Soporte"
     },
     "pages": {
+      "products": {
+          "products": "Productos",
+          "addProduct": "Adicionar producto"
+      },
       "dashboard": {
         "title": "Tablero",
         "subtitle": "Bienvenido a tu tablero",
@@ -63,8 +68,8 @@
         "plans": "Planes",
         "addPlan": "Agregar plan",
         "pricing": "Precios",
-        "plansOfFidelity": "Planes de membresía en",
-        "plansOfFidelityDescription": "Descripción de planes de membresía",
+        "plansOfFidelity": "Planes de fidelidad en",
+        "plansOfFidelityDescription": "Descripción de planes de fidelidad",
         "paymentFrequency": "Frecuencia de pago",
         "buyPlan": "Comprar plan",
         "activateTrialPlan": "Prueba este plan por {days} días",
@@ -99,7 +104,7 @@
         "affiliatePanel": "Panel de afiliados",
         "referralLinkDescription": "Gana dinero recomendando nuestros servicios"
       },
-      "memberships" : {
+      "memberships": {
         "stripePortal": "Accede a tu portal de Stripe"
       },
       "support": {

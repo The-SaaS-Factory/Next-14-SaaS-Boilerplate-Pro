@@ -1,8 +1,7 @@
 "use server";
 
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getUserNotifications = async ({
   args,
@@ -17,13 +16,10 @@ export const getUserNotifications = async ({
   const limit = args.limit;
   const offset = args.offset;
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
-
+  const { id } = await getMembership();
   const data = await prisma.notification.findMany({
     where: {
-      userId: userId,
+      profileId: id,
     },
     skip: offset,
     take: limit,
@@ -35,7 +31,7 @@ export const getUserNotifications = async ({
   //Update all notifications to viewed
   await prisma.notification.updateMany({
     where: {
-      userId:  userId,
+      profileId: id,
       viewed: false,
     },
     data: {
@@ -45,7 +41,7 @@ export const getUserNotifications = async ({
 
   const totalCount = await prisma.notification.count({
     where: {
-      userId:   userId,
+      profileId: id,
     },
   });
 
@@ -55,13 +51,10 @@ export const getUserNotifications = async ({
 };
 
 export const getUserNotificationsUnreadCount = async () => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
-
+  const { id } = await getMembership();
   return await prisma.notification.count({
     where: {
-      userId: userId,
+      profileId: id,
       viewed: false,
     },
     orderBy: {

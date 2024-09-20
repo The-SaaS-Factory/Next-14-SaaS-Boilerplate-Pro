@@ -10,8 +10,8 @@ import AddMessageToSupportTicket from "./AddMessageToSupportTicket";
 import CloseTicket from "./CloseTicket";
 import Image from "next/image";
 import Link from "next/link";
-import { showTicketStatus } from "@/app/[locale]/(admin)/home/support/ui/SupportTicketsList";
-import { useTranslations } from "next-intl";
+import { showTicketStatus } from "@/app/(superAdmin)/admin/support/ui/SuperAdminTicketsList";
+ 
 
 const ViewSupportTicketDetailsPage = ({
   ticket,
@@ -20,24 +20,23 @@ const ViewSupportTicketDetailsPage = ({
   ticket: ISupportTicket;
   user: any;
 }) => {
-  const t = useTranslations("AdminLayout.pages.support");
   if (!ticket) return null;
   return (
     <div>
       <Card className="mr-3">
         <div className="flex flex-col justify-between space-y-3 lg:space-y-0 lg:flex-row">
           <div className="flex justify-between">
-            <span className="subtitle">{t("subject")}: {ticket.subject}</span>
-            <span className="subtitle ml-3">{t("ticket")} ID: {ticket.id}</span>
+            <span className="subtitle">{"Asunto"}: {ticket.subject}</span>
+            <span className="subtitle ml-3">{"Ticket"} ID: {ticket.id}</span>
           </div>
           <div className="flex justify-between items-center space-x-3">
             <span className="subtitle">
-            {t("status")}: {showTicketStatus(ticket.status)}
+      Estado: {showTicketStatus(ticket.status)}
             </span>
             {ticket.status !== "CLOSED" && <CloseTicket ticketId={ticket.id} />}
           </div>
           <span className="subtitle">
-          {t("date")}: {formatTimestampToDateString(ticket.createdAt)}
+       Fecha: {formatTimestampToDateString(ticket.createdAt)}
           </span>
         </div>
         <div className="mt-3">

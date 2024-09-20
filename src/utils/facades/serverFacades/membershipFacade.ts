@@ -1,13 +1,9 @@
 "use server";
 import prisma from "@/lib/db";
-
-import { handleUpdateDataForUser } from "./clerkFacade";
-import { Membership } from "@prisma/client";
-
-const getCurrentMembership = async (userId: number) => {
+const getCurrentMembership = async (profileId: number) => {
   return await prisma.membership.findFirst({
     where: {
-      userId,
+      profileId,
     },
     include: {
       plan: true,
@@ -16,22 +12,22 @@ const getCurrentMembership = async (userId: number) => {
 };
 
 export const updateMembership = async ({
-  userId,
+  profileId,
   months,
   planId,
   pricingId,
   currencyId,
 }: {
-  userId: number;
+  profileId: number;
   months: number;
   planId: number;
   pricingId: number | null;
   currencyId: number | null;
 }) => {
-  let currentMemberShip = await getCurrentMembership(userId);
+  let currentMemberShip = await getCurrentMembership(profileId);
 
   const membership = await createMembership({
-    userId,
+    profileId,
     planId,
     currentMemberShip,
     months,
@@ -39,30 +35,20 @@ export const updateMembership = async ({
     currencyId,
   });
 
-  propagateCapabilitiesFromPlanToUser(planId, userId);
-  handleUpdateDataForUser({
-    scope: "publicMetadata",
-    data: {
-      membershipActive: true,
-      membershipPlan: membership.plan.name,
-      membershipStartDate: membership.startDate,
-      membershipEndDate: membership.endDate,
-    },
-    userBdId: userId,
-  });
+  propagateCapabilitiesFromPlanToUser(planId, profileId);
 
   return membership;
 };
 
 const createMembership = async ({
-  userId,
+  profileId,
   planId,
   currentMemberShip,
   months,
   pricingId,
   currencyId,
 }: {
-  userId: number;
+  profileId: number;
   planId: number;
   currentMemberShip: any;
   months: number;
@@ -72,7 +58,7 @@ const createMembership = async ({
   const createPayload = {
     pricingId: pricingId,
     currencyId: currencyId,
-    userId: userId,
+    profileId: profileId,
     planId: planId,
     startDate: new Date(),
     endDate: new Date(),
@@ -106,17 +92,17 @@ export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
     where: {
       planId: planId,
     },
-    distinct: ["userId"],
+    distinct: ["profileId"],
   });
 
-  users.map((membership: Membership) => {
+  users.map((membership: any) => {
     propagateCapabilitiesFromPlanToUser(planId, membership.id as number);
   });
 };
 
 export const propagateCapabilitiesFromPlanToUser = async (
   planId: number,
-  userId: number
+  profileId: number
 ) => {
   const capabilities = await prisma.planCapabilities.findMany({
     where: {
@@ -129,23 +115,23 @@ export const propagateCapabilitiesFromPlanToUser = async (
 
   Promise.all(
     capabilities.map(async (c: any) => {
-      const userCapabilicitie = await prisma.userCapabilities.findFirst({
+      const userCapabilicitie = await prisma.profileCapabilities.findFirst({
         where: {
-          userId: userId,
+          profileId: profileId,
           capabilitieId: c.capabilitie.id,
         },
       });
 
       if (!userCapabilicitie) {
-        await prisma.userCapabilities.create({
+        await prisma.profileCapabilities.create({
           data: {
-            userId: userId,
+            profileId: profileId,
             capabilitieId: c.capabilitie.id,
             count: c.capabilitie.type === "LIMIT" ? 0 : c.count,
           },
         });
       } else {
-        await prisma.userCapabilities.update({
+        await prisma.profileCapabilities.update({
           where: {
             id: userCapabilicitie.id,
           },
@@ -158,10 +144,10 @@ export const propagateCapabilitiesFromPlanToUser = async (
   );
 };
 
-export const getUserCapabilitiesNames = async (userId: number) => {
+export const getUserCapabilitiesNames = async (profileId: number) => {
   const membership = await prisma.membership.findFirst({
     where: {
-      userId,
+      profileId,
     },
     include: {
       plan: {
@@ -176,11 +162,96 @@ export const getUserCapabilitiesNames = async (userId: number) => {
     },
   });
 
- 
   //35% cashback for affiliates
   const capabilitieNames = membership?.plan?.PlanCapabilities.map(
     (planCapability) => planCapability.capabilitie.name
   );
 
   return capabilitieNames;
+};
+
+export const getUserCapabilitieLimitAvailable = async (
+  profileId: number,
+  capabilityName: string
+) => {
+  const userCapabilities = await prisma.profileCapabilities.findFirst({
+    where: {
+      profileId,
+      capabilitie: {
+        name: capabilityName,
+      },
+    },
+    include: {
+      capabilitie: true,
+    },
+  });
+
+
+  if (!userCapabilities) return false;
+
+  const userMembership = await prisma.membership.findFirst({
+    where: {
+      profileId,
+    },
+  });
+
+  if (!userMembership) return false;
+
+  const planCapability = await prisma.planCapabilities.findFirst({
+    where: {
+      planId: userMembership?.planId,
+      capabilitieId: userCapabilities?.capabilitie.id,
+    },
+  });
+
+  if (!planCapability) return false;
+
+  return planCapability?.count > userCapabilities.count;
+};
+
+export const registerCapabilitieUsage = async (
+  profileId: number,
+  capabilityName: string
+) => {
+  const userCapabilities = await prisma.profileCapabilities.findFirst({
+    where: {
+      profileId,
+      capabilitie: {
+        name: capabilityName,
+      },
+    },
+    include: {
+      capabilitie: true,
+    },
+  });
+
+  if (!userCapabilities) return false;
+
+  const userMembership = await prisma.membership.findFirst({
+    where: {
+      profileId,
+    },
+  });
+
+  if (!userMembership) return false;
+
+  const planCapability = await prisma.planCapabilities.findFirst({
+    where: {
+      planId: userMembership?.planId,
+      capabilitieId: userCapabilities?.capabilitie.id,
+    },
+  });
+
+  if (!planCapability) return false;
+
+  await prisma.profileCapabilities.update({
+    where: {
+      id: userCapabilities.id,
+    },
+    data: {
+      count: userCapabilities.count + 1,
+    },
+  });
+
+  return true;
 };

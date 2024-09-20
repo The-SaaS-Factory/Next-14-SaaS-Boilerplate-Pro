@@ -2,8 +2,8 @@
 
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
+ 
 const  scope = "superAdmin:support:read";
 
 export const getAllSupportTicket = async ({
@@ -17,9 +17,7 @@ export const getAllSupportTicket = async ({
 }) => {
   const { offset, limit } = args;
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { permissions } = await getUser(userClerk);
+const { permissions } = await getMembership();
 
   checkPermission(permissions, scope);
 
@@ -67,7 +65,7 @@ export const getAllSupportTicket = async ({
       ...whereSearch,
     },
     include: {
-      user: {
+      profile: {
         select: {
           id: true,
           email: true,

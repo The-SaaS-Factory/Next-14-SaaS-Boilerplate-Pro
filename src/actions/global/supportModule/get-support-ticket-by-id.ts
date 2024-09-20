@@ -1,21 +1,19 @@
 "use server";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+ 
 import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 
 export const getSupportTicketById = async (ticketId: number): Promise<any> => {
   if (!ticketId) throw new Error("Ticket id is required");
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-
-  const { userId } = await getUser(userClerk);
+    
+   const {id} = await getMembership();
 
   let whereOwner: Prisma.SupportTicketWhereInput;
 
   whereOwner = {
-    userId: userId,
+      profileId: id,
   };
 
   const ticket = await prisma.supportTicket.findFirst({
@@ -24,14 +22,14 @@ export const getSupportTicketById = async (ticketId: number): Promise<any> => {
       ...whereOwner,
     },
     include: {
-      user: {
+      profile: {
         select: {
           name: true,
         },
       },
       SupportTicketMessage: {
         include: {
-          user: {
+          profile: {
             select: {
               name: true,
               avatar: true,

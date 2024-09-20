@@ -1,8 +1,8 @@
 "use server";
+import { createAmountByDefaultForAgencies } from "@/actions/admin/walletModule/create-amount-movement";
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -18,31 +18,38 @@ export const upsertCurrency = async ({
     | Prisma.AdminCurrenciesUpdateInput;
 }) => {
   try {
+    const { permissions } = await getMembership();
 
-    const userClerk = auth();
-    if (!userClerk) throw new Error("client clerk not found");
-    const { permissions } = await getUser(userClerk);
-  
     checkPermission(permissions, scope);
 
-
-    await prisma.adminCurrencies.upsert({
+    const currency = await prisma.adminCurrencies.upsert({
       where: {
         id: modelId ? modelId : 0,
       },
       update: {
         name: payload.name,
-        main: parseInt(payload.main as string),
+        main: 0,
         code: payload.code as string,
         rate: payload.rate as number,
       },
       create: {
         name: payload.name as string,
-        main: parseInt(payload.main as string),
+        main: 0,
         rate: payload.rate as number,
         code: payload.code as string,
       },
     });
+
+    const agencies = await prisma.profile.findMany({});
+
+    await Promise.all(
+      agencies.map(async (agency) => {
+        await createAmountByDefaultForAgencies({
+          id: agency.id,
+          currencyId: currency.id,
+        });
+      })
+    );
 
     revalidatePath("/admin/settings/billing");
   } catch (error: any) {

@@ -7,15 +7,15 @@ import {
   storeContactInLoopsAudience,
 } from "./loopsEmailMarketingFacade";
 
-export const checkMarketingActionsOnRegister = async (userId: number) => {
-  activateFreeTrial(userId);
-  sendWelcomeEmail(userId);
-  storeContactInEmailProvider(userId);
+export const checkMarketingActionsOnRegister = async (profileId: number) => {
+  activateFreeTrial(profileId);
+  sendWelcomeEmail(profileId);
+  storeContactInEmailProvider(profileId);
 };
 
-const storeContactInEmailProvider = async (userId: number) => {
+const storeContactInEmailProvider = async (id: number) => {
   const user = await prisma.user.findUnique({
-    where: { id: userId },
+    where: { id },
   });
 
   if (user) {
@@ -27,32 +27,26 @@ const storeContactInEmailProvider = async (userId: number) => {
   }
 };
 
-const activateFreeTrial = async (userId: number) => {
+const activateFreeTrial = async (profileId: number) => {
   const freeTrial: string | null = await getSuperAdminSetting(
     "MARKETING_FREE_TRIAL"
   );
-
-  console.log(freeTrial);
-  
 
   if (freeTrial && freeTrial == "true") {
     const planTrial = await getSuperAdminSetting("MARKETING_FREE_TRIAL_PLAN");
     const days = await getSuperAdminSetting("MARKETING_FREE_DAYS");
 
-    console.log(planTrial);
-    
     if (planTrial) {
       const plan = await prisma.plan.findUnique({
         where: {
           id: parseInt(planTrial),
         },
       });
- 
 
       if (plan) {
         const months = calculateMonthsFromDays(days ? parseInt(days) : 14);
         updateMembership({
-          userId,
+          profileId,
           months,
           pricingId: null,
           currencyId: null,
@@ -66,7 +60,7 @@ const activateFreeTrial = async (userId: number) => {
   }
 };
 
-export const sendWelcomeEmail = async (userId: number) => {
+export const sendWelcomeEmail = async (id: number) => {
   const loopActived: string | null = await getSuperAdminSetting(
     "LOOPS_ENABLED"
   );
@@ -76,7 +70,7 @@ export const sendWelcomeEmail = async (userId: number) => {
 
     if (loopId) {
       const user = await prisma.user.findUnique({
-        where: { id: userId },
+        where: { id },
       });
       //Check email for user
       const welcomeEmailForUserEnabled = await getSuperAdminSetting(

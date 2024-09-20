@@ -25,6 +25,8 @@ export const getStatusName = (status: string) => {
   switch (status) {
     case "ACTIVE":
       return "Activo";
+    case "PAID":
+      return "Pagada";
     case "INACTIVE":
       return "Inactivo";
     case "PENDING":
@@ -35,8 +37,7 @@ export const getStatusName = (status: string) => {
       return "En proceso";
     case "SENT":
       return "Enviado";
-    case "PAID":
-      return "Pagado";
+
     case "COMPLETED":
       return "Completado";
     default:

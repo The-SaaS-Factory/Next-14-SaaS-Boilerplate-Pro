@@ -3,10 +3,9 @@
 import Stripe from "stripe";
 import { stripeCreateCheckoutSession } from "@/utils/facades/serverFacades/stripeFacade";
 import { getClientCustomer } from "@/utils/facades/serverFacades/paymentFacade";
-import { auth } from "@clerk/nextjs";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
 import prisma from "@/lib/db";
 import { InvoiceItem } from "@prisma/client";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 
 export const createCheckoutSession = async (
   invoiceId: number,
@@ -18,6 +17,7 @@ export const createCheckoutSession = async (
     where: { id: invoiceId },
     include: {
       Items: true,
+      order: true,
       Currency: true,
       coupons: {
         include: {
@@ -47,7 +47,8 @@ export const createCheckoutSession = async (
             product_data: {
               name: item.name,
             },
-            unit_amount: item.price * 100,
+            unit_amount:  Math.round(item.price * 100),
+            tax_behavior: "inclusive",
           },
           quantity: item.quantity,
         });
@@ -72,18 +73,20 @@ export const createCheckoutSession = async (
     });
   }
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
+  const { id } = await getMembership();
+  console.log("id", id);
+  
+  const client = await getClientCustomer(id);
 
-  const client = await getClientCustomer(userId);
+  console.log(client);
+  
 
   if (!client || (client && !client.customerId))
     throw new Error("Customer not found");
 
   const clientPayload = {
     customerId: client.customerId,
-    userId,
+    userId: id,
   };
 
   return await stripeCreateCheckoutSession({
@@ -93,5 +96,6 @@ export const createCheckoutSession = async (
     referenceId: invoiceId.toString(),
     modelName: modelName,
     mode: stripeModeSuscription ? "subscription" : "payment",
+    shippingPrice: invoice.order.shippingPrice,
   });
 };

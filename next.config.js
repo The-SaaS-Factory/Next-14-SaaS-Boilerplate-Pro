@@ -1,24 +1,26 @@
 /** @type {import('next').NextConfig} */
-const createNextIntlPlugin = require("next-intl/plugin");
-
-const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: '4mb',
+      bodySizeLimit: "8mb",
     },
   },
   reactStrictMode: true,
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '4mb',
-    },
-  },
   images: {
     remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "tailwindui.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "tailwindui.com",
+        port: "",
+      },
       {
         protocol: "https",
         hostname: "images.clerk.dev",
@@ -48,4 +50,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+module.exports = nextConfig;

@@ -9,12 +9,12 @@ import {
 } from "./paymentFacade";
 import prisma from "@/lib/db";
 import { getPricingByStripePricingId } from "./paymentFacade";
-import { StripeCustomer } from "@prisma/client";
-
-type ClientSessionPayloadType = {
-  customerId: string;
-  userId: number | null;
-};
+import { InvoiceStatus, OrderStatus, StripeCustomer } from "@prisma/client";
+import { updateOrderStatus } from "@/actions/global/ecommerceSystem/ordersModule/update-order-status";
+import {
+  notifyToSuperAdmin,
+  sendInternalNotificatoin,
+} from "./notificationFacade";
 
 const makeStripeClient = async () => {
   const stripeMode = await getSuperAdminSetting("STRIPE_MODE");
@@ -35,7 +35,6 @@ const makeStripeClient = async () => {
   return new Stripe(stripeSectret, { apiVersion: "2023-10-16" });
 };
 
-// eslint-disable-next-line no-unused-vars
 export const stripeWebhook = async (requestBody: any) => {
   const stripe = await makeStripeClient();
   const payload = requestBody;
@@ -74,6 +73,20 @@ export const stripeWebhook = async (requestBody: any) => {
     return `Webhook Error: ${err.message}`;
   }
 };
+
+export function capitalizarPalabras(str) {
+  // Dividir el string en palabras individuales
+  let palabras = str.split(" ");
+
+  // Iterar sobre cada palabra y capitalizar la primera letra
+  for (let i = 0; i < palabras.length; i++) {
+    palabras[i] =
+      palabras[i].charAt(0).toUpperCase() + palabras[i].slice(1).toLowerCase();
+  }
+
+  // Unir las palabras nuevamente en un solo string
+  return palabras.join(" ");
+}
 
 export const stripeGetClientByCustomerId = async (customerId: string) => {
   const client = await prisma.stripeCustomer.findFirst({
@@ -126,24 +139,42 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
       const payload = {
         gateway: "stripe",
         invoicePdfUrl: eventData.invoice_pdf,
-        gatewayId: eventData.id,
+        gatewayId: eventData.invoice,
         invoiceUrl: eventData.hosted_invoice_url,
         subscriptionExternalId: eventData.subscription,
+        status: InvoiceStatus.PAID,
       };
+
+      //Notifica al usaurio
+      sendInternalNotificatoin(
+        invoice.userId,
+        `Tu factura #${invoice.id} ha sido pagada con éxito`,
+        null
+      );
+
+      //Notifica al admin
+      notifyToSuperAdmin("Nueva factura pagada, #" + invoice.id);
 
       await updateInvoice(invoice.id, payload);
 
       //**************************************************************MAIN************************************************** */
-      Promise.all(
-        invoice.Items.map(async (item: any) => {
-          if (item.pricingId) {
-            const pricing = await getPricingByStripePricingId(item.pricingId);
-            await processInvoiceItemInPayment(item, invoice, pricing);
-          } else {
-            await processInvoiceItemInPayment(item, invoice);
-          }
-        })
-      );
+      if (invoice.type !== "ORDER") {
+        Promise.all(
+          invoice.Items.map(async (item: any) => {
+            if (item.pricingId) {
+              const pricing = await getPricingByStripePricingId(item.pricingId);
+              await processInvoiceItemInPayment(item, invoice, pricing);
+            } else {
+              await processInvoiceItemInPayment(item, invoice);
+            }
+          })
+        );
+      } else {
+        await updateOrderStatus({
+          orderId: invoice.orderId,
+          status: OrderStatus.IN_PROCESS,
+        });
+      }
     }
   } catch (error) {
     console.log(error);
@@ -219,6 +250,16 @@ export const stripCreatePaymentMethod = async () => {
   }
 };
 
+export const getStripeCustomer = async (customerId: string) => {
+  try {
+    const stripe = await makeStripeClient();
+    const result = await stripe.customers.retrieve(customerId);
+    return result;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const stripeCreateCheckoutSession = async ({
   items,
   coupons,
@@ -226,29 +267,47 @@ export const stripeCreateCheckoutSession = async ({
   referenceId,
   modelName,
   mode = "subscription",
+  shippingPrice,
 }: {
   items: Stripe.Checkout.SessionCreateParams.LineItem[];
   coupons: Stripe.Checkout.SessionCreateParams.Discount[];
-  clientPayload: ClientSessionPayloadType;
+  clientPayload: any;
   referenceId: string;
   modelName: string;
   mode?: "subscription" | "payment";
+  shippingPrice: number;
 }) => {
   try {
     const stripe = await makeStripeClient();
-    const urls = await getUrlsForRedirect(modelName);
-    console.log("urls", urls);
-    
-    
+    const urls = await getUrlsForRedirect(modelName, referenceId);
+
+    //parse Int shippingPrice
+    const newshippingPrice = parseInt(shippingPrice.toString());
+
     let sessionPayload: Stripe.Checkout.SessionCreateParams = {
       line_items: items,
       client_reference_id: referenceId,
       mode: mode,
       discounts: coupons,
       metadata: {
-        modelId: clientPayload.userId,
+        modelId: clientPayload.profileId,
       },
       ...urls,
+      invoice_creation: {
+        enabled: true,
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: newshippingPrice * 100,
+              currency: items[0] ? items[0].price_data.currency : "usd",
+            },
+            display_name: "Envío",
+          },
+        },
+      ],
       customer: clientPayload.customerId,
     };
 
@@ -260,7 +319,10 @@ export const stripeCreateCheckoutSession = async ({
   }
 };
 
-const getUrlsForRedirect = async (modelName: string = 'PLAN') => {
+const getUrlsForRedirect = async (
+  modelName: string = "PLAN",
+  invoiceId: number | string
+) => {
   const domain = await getSuperAdminSetting("PLATFORM_FRONTEND_URL");
 
   if (modelName === "PLAN") {
@@ -273,12 +335,17 @@ const getUrlsForRedirect = async (modelName: string = 'PLAN') => {
       success_url: `${domain}/home/services?paymentStatus=success`,
       cancel_url: `${domain}/home/services?paymentStatus=error`,
     };
+  } else if (modelName === "ORDER") {
+    return {
+      success_url: `${domain}/invoice/${invoiceId}?paymentStatus=success`,
+      cancel_url: `${domain}/invoice/${invoiceId}?paymentStatus=error`,
+    };
   }
 };
 export const createStripeCustomer = async (customerPayload: {
   name: string;
   email: string;
-  userId: number;
+  profileId: number;
 }): Promise<StripeCustomer> => {
   const customer = await stripeCreateCustomer({
     name: customerPayload.name,
@@ -287,7 +354,7 @@ export const createStripeCustomer = async (customerPayload: {
 
   if (!customer) throw new Error("Error creating customer");
   const customerInBd = saveStripeCustomerId(
-    customerPayload.userId,
+    customerPayload.profileId,
     customer.id
   );
   return customerInBd;

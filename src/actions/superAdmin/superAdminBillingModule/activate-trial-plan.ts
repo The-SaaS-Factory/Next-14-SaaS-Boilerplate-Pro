@@ -1,9 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { updateMembership } from "@/utils/facades/serverFacades/membershipFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
- 
+import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
+
 export type PlanInvoiceType = {
   currencyId: number;
   priceId: number;
@@ -19,11 +18,7 @@ export const activateTrialPlan = async ({
   pricingId: number;
   currencyId: number;
 }) => {
-  const userClerk = auth();
-
-  if (!userClerk) throw new Error("client clerk not found");
-
-  const { userId } = await getUser(userClerk);
+  const {  id } = await getMembership();
   const plan = await prisma.plan.findFirst({
     where: {
       id: planId,
@@ -37,7 +32,7 @@ export const activateTrialPlan = async ({
   const membership = await updateMembership({
     pricingId: pricingId,
     currencyId: currencyId,
-    userId: userId,
+    profileId: id,
     months: plan.freeTrialDays / 30,
     planId: plan.id,
   });

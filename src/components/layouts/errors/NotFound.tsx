@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+export const dynamic = 'force-dynamic'
 const NotFound = ({ message }: { message: string }) => {
   return (
     <div className="flex h-96">

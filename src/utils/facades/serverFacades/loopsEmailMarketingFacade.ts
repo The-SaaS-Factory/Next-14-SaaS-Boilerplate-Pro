@@ -1,16 +1,14 @@
-import { getSuperAdminSetting } from "./adminFacade";
 import fetch from "node-fetch";
-
+const loopsEnabled = process.env.LOOPS_ENABLED;
+const loopsApiKey = process.env.LOOPS_API_KEY;
 export async function storeContactInLoopsAudience(
   email: string,
   name: string,
   userGroup: string
 ) {
-  const loopsEnabled = await getSuperAdminSetting("LOOPS_ENABLED");
-
   if (loopsEnabled === "true") {
     try {
-      const apiKey = await getSuperAdminSetting("LOOPS_API_KEY");
+      const apiKey = loopsApiKey;
       const url = "https://app.loops.so/api/v1/contacts/create";
 
       const data = {
@@ -19,7 +17,6 @@ export async function storeContactInLoopsAudience(
         firstName: name,
         userGroup: userGroup,
       };
-
 
       await fetch(url, {
         method: "POST",
@@ -36,11 +33,9 @@ export async function storeContactInLoopsAudience(
 }
 
 export async function sendLoopsEventToUser(email: string, eventName: string) {
-  const loopsEnabled = await getSuperAdminSetting("LOOPS_ENABLED");
-
   if (loopsEnabled === "true") {
     try {
-      const apiKey = await getSuperAdminSetting("LOOPS_API_KEY");
+      const apiKey = loopsApiKey;
       const url = "https://app.loops.so/api/v1/events/send";
 
       const data = {
@@ -67,11 +62,10 @@ type loopPayload = {
   dataVariables: Object;
 };
 export async function sendLoopsTransactionalEventToUser(payload: loopPayload) {
-  const loopsEnabled = await getSuperAdminSetting("LOOPS_ENABLED");
 
   if (loopsEnabled === "true") {
     try {
-      const apiKey = await getSuperAdminSetting("LOOPS_API_KEY");
+      const apiKey =  loopsApiKey;
       const url = "https://app.loops.so/api/v1/transactional";
 
       const options = {

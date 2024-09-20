@@ -22,20 +22,20 @@ const FloatingWhatsAppButton = () => {
   }, []);
 
   const getPhoneNumber = () => {
-    // if (typeof window !== "undefined") {
-    //   const country = localStorage.getItem("country");
+    if (typeof window !== "undefined") {
+      const country = localStorage.getItem("country");
 
-    //   switch (country) {
-    //     case "CU":
-    //       return "+57777777777";
-    //     case "BR":
-    //       return "+7777777";
-    //     default:
-    //       return "+777777";
-    //   }
-    // } else {
-      return "+5541999568376";
-   // }
+      switch (country) {
+        case "CU":
+          return "+5541999568376";
+        case "BR":
+          return "+5541999568376";
+        default:
+          return "+5541999568376";
+      }
+    } else {
+      return constants.supportTel;
+    }
   };
 
   return (
@@ -44,7 +44,9 @@ const FloatingWhatsAppButton = () => {
         phoneNumber={
           typeof window !== "undefined" ? getPhoneNumber() : "5541999568376"
         }
-        accountName="The Boilerplate Support"
+        chatMessage={"Hola, en qué podemos ayudarte?"}
+        statusMessage={"Suele responder en menos de 1 minuto"}
+        accountName={constants.appName}
         avatar={constants.logoUrl}
         darkMode={false}
         allowEsc

@@ -1,21 +1,19 @@
 "use server";
 import prisma from "@/lib/db";
 import { sendInternalNotificatoin } from "@/utils/facades/serverFacades/notificationFacade";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+
 import { PublicationContentType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 export const addMessageSupportTicket = async (args: any) => {
   return await prisma.$transaction(async (tx: any) => {
     try {
-      const userClerk = auth();
-      if (!userClerk) throw new Error("client clerk not found");
-      const { userId } = await getUser(userClerk);
+      const { id } = await getMembership();
 
       let dataForMessage = {};
 
       dataForMessage = {
-        userId: userId,
+        profileId: id,
       };
 
       const message = await tx.supportTicketMessage.create({
@@ -67,9 +65,9 @@ export const addMessageSupportTicket = async (args: any) => {
         throw new Error("Ticket not found");
       }
 
-      if (ticket.userId !== userId) {
+      if (ticket.userId !== id) {
         sendInternalNotificatoin(
-          userId,
+          id,
           `You have a new message in your ticket #${ticket.id}`
         );
 

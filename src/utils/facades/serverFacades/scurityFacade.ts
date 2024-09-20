@@ -53,7 +53,7 @@ export const syncPermissionsIncomesWithBD = async (permissions: string[]) => {
 };
 
 export const syncUserPermissions = async (
-  userId: number,
+  id: number,
   permissionsNames: string[]
 ) => {
   //This is the way for add permissions to BD, from clerk
@@ -61,9 +61,9 @@ export const syncUserPermissions = async (
 
   const oldPermissions = await prisma.permission.findMany({
     where: {
-      users: {
+      profiles: {
         some: {
-          id: userId,
+           id
         },
       },
     },
@@ -79,9 +79,9 @@ export const syncUserPermissions = async (
       })
     : [];
 
-  await prisma.user.update({
+  await prisma.profile.update({
     where: {
-      id: userId,
+       id
     },
     data: {
       permissions: {
@@ -95,7 +95,7 @@ export const syncUserPermissions = async (
 };
 
 export const getSuperAdminAdmins = async () => {
-  const organizations = await prisma.user.findMany({
+  const organizations = await prisma.profile.findMany({
     where: {
       permissions: {
         some: {

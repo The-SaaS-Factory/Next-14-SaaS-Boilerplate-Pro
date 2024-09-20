@@ -31,18 +31,7 @@ export const getAllUser = async ({
     },
     skip: offset,
     take: limit,
-    include: {
-      Membership: {
-        select: {
-          endDate: true,
-          plan: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-    },
+    include: { profilesMemberships: true },
     orderBy: {
       createdAt: "desc",
     },

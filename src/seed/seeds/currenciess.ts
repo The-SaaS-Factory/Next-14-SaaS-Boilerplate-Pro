@@ -6,13 +6,8 @@ export const currencies = [
     main: 1,
   },
   {
-    name: "BRL",
-    code: "brl",
-    rate: 5,
-  },
-  {
-    name: "CUP",
-    code: "cup",
-    rate: 275,
+    name: "UYU",
+    code: "uyu",
+    rate: 34,
   },
 ];

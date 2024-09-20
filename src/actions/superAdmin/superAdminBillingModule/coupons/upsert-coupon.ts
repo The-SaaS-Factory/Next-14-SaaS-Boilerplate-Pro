@@ -1,10 +1,9 @@
 "use server";
-import { auth } from "@clerk/nextjs";
 import { CouponDuration } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
 import prisma from "@/lib/db";
 import { checkPermission } from "../../../../utils/facades/serverFacades/scurityFacade";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 const scope = "superAdmin:billing:upsert";
 export const upsertCoupon = async ({
   modelId,
@@ -13,9 +12,7 @@ export const upsertCoupon = async ({
   modelId?: number;
   payload: any;
 }) => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { permissions } = await getUser(userClerk);
+  const { permissions } = await getMembership();
   checkPermission(permissions, scope);
 
   try {
@@ -50,7 +47,7 @@ export const upsertCoupon = async ({
         durationInMonths: payload.durationInMonths,
         maxRedemptions: payload.maxRedemptions,
         percentOff: payload.percentOff,
-        userId: payload.userId,
+        profileId: payload.userId,
         status: payload.status,
         code: codeGenerated,
       },
@@ -62,7 +59,7 @@ export const upsertCoupon = async ({
         maxRedemptions: payload.maxRedemptions as number,
         percentOff: payload.percentOff as number,
         status: payload.status as string,
-        userId: payload.userId,
+        profileId: payload.userId,
         code: codeGenerated,
       },
     });

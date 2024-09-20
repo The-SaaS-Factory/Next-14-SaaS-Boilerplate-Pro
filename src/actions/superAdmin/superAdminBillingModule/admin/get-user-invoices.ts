@@ -1,8 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
-import { Prisma } from "@prisma/client";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 
 export const getUserInvoices = async ({
   args,
@@ -16,11 +14,9 @@ export const getUserInvoices = async ({
   const limit = args.limit;
   const offset = args.offset;
 
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
+  const { id } = await getMembership();
 
-  let whereSearch: Prisma.InvoiceWhereInput;
+  let whereSearch: any;
 
   whereSearch = {};
 
@@ -41,13 +37,13 @@ export const getUserInvoices = async ({
 
   const data = await prisma.invoice.findMany({
     where: {
-      userId: userId,
+      profileId: id,
       ...whereSearch,
     },
     skip: offset,
     take: limit,
     include: {
-      user: {
+      profile: {
         select: {
           id: true,
           name: true,
@@ -72,13 +68,10 @@ export const getUserInvoices = async ({
 //
 
 export const getUserInvoicesPendingCount = async () => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
-
+  const { id } = await getMembership();
   const data = await prisma.invoice.count({
     where: {
-      userId,
+      profileId: id,
       status: "PENDING",
     },
   });

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
 
 interface IPagination {
   totalPages: number;
@@ -21,20 +20,18 @@ export default function Pagination({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
-  const t = useTranslations("AdminLayout.commons.pagination");
 
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams as any);
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
   return (
     <div className="flex flex-col">
       <div className="text-primary">
-        {t("showing")} <span className="font-medium">{offset + 1}</span>{" "}
-        {t("to")} <span className="font-medium">{offset + dataLength}</span>{" "}
-        {t("of")}{" "}
-        <span className="font-medium">{totalCount}</span> {t("results")}
+        Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
+        <span className="font-medium">{offset + dataLength}</span> de{" "}
+        <span className="font-medium">{totalCount}</span> resultados
       </div>
       <div className="flex items-center justify-between space-x-3">
         <Link

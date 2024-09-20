@@ -10,9 +10,8 @@ function AffiliateHandler({
   currentUser: any;
 }) {
   const storeAffiliate = async (aff: string) => {
-   await storeAffiliateForUser(Number(currentUser?.id), Number(aff))
-      .then((data) => {
-        console.log(data);
+    await storeAffiliateForUser(Number(currentUser?.id), Number(aff))
+      .then(() => {
         localStorage.removeItem("aff");
       })
       .catch((error) => {
@@ -33,7 +32,7 @@ function AffiliateHandler({
       storeAffiliate(aff);
       //Store in DB
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aff]);
 
   return <div></div>;

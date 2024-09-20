@@ -87,7 +87,7 @@ export const connectPricingWithStripe = async ({
         const pricingSetting = await prisma.pricingSetting.findFirst({
           where: {
             pricingId: pricingId,
-            settingName: "stripePriceId_" + currencyCode.toLowerCase() ?? "usd",
+            settingName: "stripePriceId_" + currencyCode.toLowerCase(),
           },
         });
 
@@ -100,7 +100,7 @@ export const connectPricingWithStripe = async ({
           },
           create: {
             pricingId: pricingId,
-            settingName: "stripePriceId_" + currencyCode.toLowerCase() ?? "usd",
+            settingName: "stripePriceId_" + currencyCode.toLowerCase(),
             settingValue: stripePrice.id,
           },
         });

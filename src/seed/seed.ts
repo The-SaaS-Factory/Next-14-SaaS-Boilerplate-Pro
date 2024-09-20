@@ -1,46 +1,49 @@
-import { capabilities, planCapabilities, plans } from "./seeds/plans";
-import { settings } from "./seeds/platform";
-import { currencies } from "./seeds/currenciess";
-import { permissions } from "./seeds/permissions";
-import { modules } from "./seeds/modules";
+ 
+// import { paymentsMethods } from "./seeds/pricing";
 import { PrismaClient } from "@prisma/client";
-import { paymentsMethods, pricings } from "./seeds/pricing";
+import { agencyPermissions, permissions } from "./seeds/permissions";
 
 const prisma = new PrismaClient();
 
 async function main() {
   prisma.$transaction(async (tx: any) => {
+    await tx.permission.deleteMany();
+
     await tx.permission.createMany({
       data: permissions,
     });
-    await tx.module.createMany({
-      data: modules,
-    });
-
-    await tx.adminCurrencies.createMany({
-      data: currencies,
-    });
-
-    await tx.capabilitie.createMany({
-      data: capabilities,
-    });
-    await tx.plan.createMany({
-      data: plans,
-    });
-    await tx.planCapabilities.createMany({
-      data: planCapabilities,
-    });
-    await tx.superAdminSetting.createMany({
-      data: settings,
-    });
-    await tx.pricing.createMany({
-      data: pricings,
-    });
-
-    await tx.paymentMethod.createMany({
-      data: paymentsMethods,
+    await tx.permission.createMany({
+      data: agencyPermissions,
     });
   });
+  prisma.$transaction(async ( ) => {
+    // await tx.permission.createMany({
+    //   data: permissions,
+    // });
+    // await tx.superAdminSetting.createMany({
+    //   data: settings,
+    // });
+    // await tx.adminCurrencies.createMany({
+    //   data: currencies,
+    // });
+    // await tx.module.createMany({
+    //   data: modules,
+    // });
+  });
+  // await tx.adminCurrencies.createMany({
+  //   data: currencies,
+  // });
+  // await tx.capabilitie.createMany({
+  //   data: capabilities,
+  // });
+  // await tx.superAdminSetting.createMany({
+  //   data: settings,
+  // });
+  // await tx.paymentMethod.createMany({
+  //   data: paymentsMethods,
+  // });
+  // });
+  // console.log("Seeds disableds");
 }
 
 main()

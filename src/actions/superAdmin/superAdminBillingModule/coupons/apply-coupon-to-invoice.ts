@@ -1,7 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+ import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
 
 export const applyCouponToInvoice = async ({
@@ -12,11 +11,7 @@ export const applyCouponToInvoice = async ({
   invoiceId: number;
 }) => {
   try {
-    const userClerk = auth();
-
-    if (!userClerk) throw new Error("client clerk not found");
-
-    const { userId } = await getUser(userClerk);
+    const { id } = await getMembership();
 
     const invoice = await prisma.invoice.findFirst({
       where: {
@@ -37,11 +32,14 @@ export const applyCouponToInvoice = async ({
         status: "ACTIVE",
       },
       include: {
-        user: true,
+        profile: true,
         settings: true,
       },
     });
 
+  
+    console.log(coupon);
+    
     if (!coupon) {
       throw new Error("Coupon not found, or not active");
     }
@@ -59,11 +57,11 @@ export const applyCouponToInvoice = async ({
       }
     }
 
-    const organizationsFromUser = await prisma.user.findMany({
+    const organizationsFromUser = await prisma.profile.findMany({
       where: {
         referredBy: {
           some: {
-            id: userId,
+            id,
           },
         },
       },
@@ -71,9 +69,9 @@ export const applyCouponToInvoice = async ({
 
     //Check if coupon is valid for this user
     if (
-      coupon.user &&
-      coupon.user.id !== userId &&
-      organizationsFromUser.map((organization) => organization.id).includes(userId)
+      coupon.profile &&
+      coupon.profile.id !== id &&
+      organizationsFromUser.map((organization) => organization.id).includes(id)
     ) {
       throw new Error("Coupon not valid for this user");
     }

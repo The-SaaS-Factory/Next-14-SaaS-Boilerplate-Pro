@@ -1,18 +1,11 @@
 import imageKit from "imagekit";
-import { getSuperAdminSetting } from "./adminFacade";
+
+const IMAGEKIT_PUBLIC_KEY = process.env.IMAGEKIT_PUBLIC_KEY;
+const IMAGEKIT_PRIVATE_KEY = process.env.IMAGEKIT_PRIVATE_KEY;
+const IMAGEKIT_URL_ENDPOINT = process.env.IMAGEKIT_URL_ENDPOINT;
 
 export const imageKitFacade = async (base64Img: string, imageName: string) => {
   try {
-    const IMAGEKIT_PUBLIC_KEY = await getSuperAdminSetting(
-      "IMAGEKIT_PUBLIC_KEY"
-    );
-    const IMAGEKIT_PRIVATE_KEY = await getSuperAdminSetting(
-      "IMAGEKIT_PRIVATE_KEY"
-    );
-    const IMAGEKIT_URL_ENDPOINT = await getSuperAdminSetting(
-      "IMAGEKIT_URL_ENDPOINT"
-    );
-
     if (
       !IMAGEKIT_PUBLIC_KEY ||
       !IMAGEKIT_PRIVATE_KEY ||
@@ -21,11 +14,13 @@ export const imageKitFacade = async (base64Img: string, imageName: string) => {
       return { error: "Settings not found" };
     }
 
-    const resolver = new imageKit({
+    const resolverPayload = {
       publicKey: IMAGEKIT_PUBLIC_KEY,
       privateKey: IMAGEKIT_PRIVATE_KEY,
       urlEndpoint: IMAGEKIT_URL_ENDPOINT,
-    });
+    };
+
+    const resolver = new imageKit(resolverPayload);
 
     return new Promise((resolve, reject) => {
       resolver.upload(
@@ -54,5 +49,3 @@ export const isBase64String = (str: string) => {
   const regex = /^data:image\/([a-zA-Z]*);base64,([^\s]*)$/;
   return regex.test(str);
 };
-
-

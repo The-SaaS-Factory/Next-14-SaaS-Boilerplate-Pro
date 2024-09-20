@@ -16,7 +16,7 @@ export const createStripeInvoice = async (invoiceId: number) => {
         id: invoiceId,
       },
       include: {
-        user: true,
+        profile: true,
         Currency: true,
         Items: true,
       },
@@ -24,9 +24,9 @@ export const createStripeInvoice = async (invoiceId: number) => {
 
     if (!invoice) throw new Error("Invoice not found");
 
-    if (!invoice.user?.id) throw new Error("Client Reference Id not found");
+    if (!invoice.profile?.id) throw new Error("Client Reference Id not found");
 
-    const client = await getClientCustomer(invoice.user.id);
+    const client = await getClientCustomer(invoice.profile.id);
 
     if (!client?.customerId) throw new Error("Stripe Customer not found");
     const dueDate = invoice.dueAt

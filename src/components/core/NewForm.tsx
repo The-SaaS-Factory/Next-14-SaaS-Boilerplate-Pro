@@ -1,12 +1,12 @@
 "use client";
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Switch, Tab } from "@headlessui/react";
+import { Switch } from "@headlessui/react";
 import { toast } from "sonner";
+import { countries } from "@/lib/countries";
 import {
   ArchiveBoxArrowDownIcon,
-  PaperClipIcon,
   PhotoIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -43,9 +43,9 @@ type FormProps = {
   fields: Field[];
   onSubmit: any;
   isSettingForm?: boolean;
+  callback?;
   // eslint-disable-next-line no-unused-vars
   onAddNewField?: (data: Field) => void;
-  callback?: () => void;
   newFieldsFunction?: boolean;
   autoSave?: boolean;
   modelToUpdate?: number;
@@ -60,8 +60,8 @@ const NewForm = ({
   values,
   info,
   fields,
-  onSubmit,
   callback,
+  onSubmit,
   onAddNewField,
   newFieldsFunction = false,
   autoSave = false,
@@ -70,8 +70,6 @@ const NewForm = ({
   customSaveButtonText,
 }: FormProps) => {
   //States
-
-  const [langSelected, setLangSelected] = useState(locales[0]);
 
   const [loading, setLoading] = useState(false);
   const {
@@ -103,7 +101,7 @@ const NewForm = ({
 
     await onSubmit(payload)
       .then(() => {
-        toast.success(isSettingForm ? "Settings saved" : "Data saved");
+        toast.success(isSettingForm ? "Settings saved" : "Guardado con éxito");
         reset();
         callback && callback();
       })
@@ -183,14 +181,27 @@ const NewForm = ({
       for (const fieldName in values) {
         const field = fields.find((f: any) => f.name === fieldName);
 
+        console.log(field);
+
         if (field) {
           if (typeof values[fieldName] === "object") {
             if (Array.isArray(values[fieldName])) {
-              const images = values[fieldName].map((i: any) => i.image);
-              setValue(field.name, images);
+              //if have column image, vy image else by name column
+
+              if (values[fieldName].length > 0) {
+                const images = values[fieldName].map((i: any) => {
+                  return i.image ? i.image : i.id.toString();
+                });
+                setValue(field.name, images);
+              }
+
+              // const images = values[fieldName].map((i: any) => i.image);
+              // setValue(field.name, images);
             } else {
               if (field.type === "date") {
                 setValue(field.name, formatDate(values[fieldName]));
+              } else {
+                setValue(field.name, values[fieldName]);
               }
             }
           } else {
@@ -206,14 +217,9 @@ const NewForm = ({
                 typeof values[fieldName] === "string"
                   ? parsedValue
                   : values[fieldName];
-
-              locales.map((lang: string) => {
-                setValue(
-                  field.name + "_" + lang,
-                  newValues[lang] !== undefined ? newValues[lang] : newValues
-                );
-              });
             } else {
+              console.log(values[fieldName]);
+
               setValue(fieldName, values[fieldName]);
             }
           }
@@ -259,7 +265,7 @@ const NewForm = ({
         {Object.keys(errors).length > 0 && (
           <div className="bg-red-300 rounded-md p-3">
             <div className="flex flex-col">
-              <p className="text-red-700 text-lg font-medium">Errors:</p>
+              <p className="text-red-700 text-lg  ">Errors:</p>
               <ul>
                 {Object.keys(errors).map((key, index) => (
                   <li key={index} className="text-red-500">
@@ -286,12 +292,12 @@ const NewForm = ({
             {info && (
               <div className="lg:col-span-1 py-7 lg:p-7">
                 <h2 className="text-subtitle">{info.name}</h2>
-                <p className="mt-3 text-sm leading-6 text-primary">
+                <p className="mt-3 text-sm leading-6 text-secundary">
                   {info.description}
                 </p>
               </div>
             )}
-            <div className="lg:col-span-2 flex flex-col text-primary">
+            <div className="lg:col-span-2 grid grid-cols-1 gap-x-4   text-secundary">
               {fields.map((field, index) => (
                 <div
                   className={`  my-3 flex max-w-md  ${
@@ -301,78 +307,35 @@ const NewForm = ({
                   } `}
                   key={index}
                 >
-                  <label
-                    htmlFor={field.name}
-                    className="text-primary font-medium"
-                  >
+                  <label htmlFor={field.name} className="text-secundary  ">
                     {field.label}
                   </label>
                   {field.type === "text" && (
                     <div className="mt-2  ">
-                      <div className="flex flex-col rounded-md shadow-sm ">
-                        {field.hasLanguageSupport ? (
-                          <TabGroup>
-                            <TabList
-                              variant="line"
-                              defaultValue={locales[0]}
-                              className={`  divide-x-2 divide-gray-300 
-                            space-x-3 uppercase p-3
-                            `}
-                            >
-                              {locales.map((langT) => (
-                                <Tab
-                                  onClick={() =>
-                                    setLangSelected(field.name + "_" + langT)
-                                  }
-                                  className={`px-3
-                              ${
-                                langSelected === field.name + "_" + langT
-                                  ? "bg-sky-100 rounded-md"
-                                  : ""
-                              }
-                              `}
-                                  key={langT}
-                                >
-                                  {langT}
-                                </Tab>
-                              ))}
-                            </TabList>
-                            <TabPanels>
-                              {locales.map((lang) => (
-                                <TabPanel key={field.name + lang}>
-                                  <TextInput
-                                    id={field.name + lang}
-                                    {...register(field.name + "_" + lang, {
-                                      required: field.required,
-                                    })}
-                                    error={errors[`${field.name}`] && true}
-                                  />
-                                </TabPanel>
-                              ))}
-                            </TabPanels>
-                          </TabGroup>
-                        ) : (
-                          <TextInput
-                            id={field.name}
-                            {...register(field.name, {
-                              required: field.required,
-                            })}
-                            error={errors[`${field.name}`] && true}
-                          />
-                        )}
+                      <div className="flex flex-col   ">
+                        <TextInput
+                          id={field.name}
+                          placeholder=""
+                          {...register(field.name, {
+                            required: field.required,
+                          })}
+                          error={errors[`${field.name}`] && true}
+                        />
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </div>
                   )}
+
                   {field.type === "password" && (
                     <div className="mt-2  ">
                       <div className="flex flex-col rounded-md shadow-sm ">
                         <TextInput
                           type="password"
+                          placeholder=""
                           id={field.name}
                           {...register(field.name, {
                             required: field.required,
@@ -382,7 +345,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -391,6 +354,7 @@ const NewForm = ({
                     <div className="mt-2  ">
                       <div className="flex flex-col rounded-md shadow-sm  ">
                         <NumberInput
+                          placeholder=""
                           {...register(field.name, {
                             required: field.required,
                           })}
@@ -401,7 +365,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -421,7 +385,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -430,6 +394,7 @@ const NewForm = ({
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm">
                         <TextInput
+                          placeholder=""
                           {...register(field.name, {
                             required: field.required,
                           })}
@@ -442,60 +407,15 @@ const NewForm = ({
                   {field.type === "textarea" && (
                     <div className="mt-2  ">
                       <div>
-                        {field.hasLanguageSupport}
-                        {field.hasLanguageSupport ? (
-                          <TabGroup>
-                            <TabList
-                              variant="line"
-                              defaultValue={locales[0]}
-                              className={`  divide-x-2 divide-gray-300 
-                            space-x-3 uppercase p-3
-                            `}
-                            >
-                              {locales.map((langT) => (
-                                <Tab
-                                  onClick={() =>
-                                    setLangSelected(field.name + "_" + langT)
-                                  }
-                                  className={`px-3
-                              ${
-                                langSelected === field.name + "_" + langT
-                                  ? "bg-sky-100 rounded-md"
-                                  : ""
-                              }
-                              `}
-                                  key={field.name + langT}
-                                >
-                                  {langT}
-                                </Tab>
-                              ))}
-                            </TabList>
-                            <TabPanels>
-                              {locales.map((lang) => (
-                                <TabPanel key={field + lang}>
-                                  <Textarea
-                                    value={watch(field.name + "_" + lang)}
-                                    id={field.name + lang}
-                                    {...register(field.name + "_" + lang, {
-                                      required: field.required,
-                                    })}
-                                    className="min-h-32"
-                                    error={errors[`${field.name}`] && true}
-                                  />
-                                </TabPanel>
-                              ))}
-                            </TabPanels>
-                          </TabGroup>
-                        ) : (
-                          <Textarea
-                            {...register(field.name, {
-                              required: field.required,
-                            })}
-                            value={watch(field.name)}
-                            error={errors[`${field.name}`] && true}
-                            id={field.name}
-                          />
-                        )}
+                        <Textarea
+                          {...register(field.name, {
+                            required: field.required,
+                          })}
+                          placeholder=""
+                          value={watch(field.name)}
+                          error={errors[`${field.name}`] && true}
+                          id={field.name}
+                        />
                       </div>
                     </div>
                   )}
@@ -503,7 +423,7 @@ const NewForm = ({
                   {field.type === "toggle" && (
                     <Switch.Group as="div" className="flex   ">
                       <Switch
-                        checked={watch(field.name) === "true" ? true : false}
+                        checked={watch(field.name) === "true"}
                         onChange={(isChecked) => {
                           setValue(field.name, isChecked.toString());
                         }}
@@ -528,26 +448,98 @@ const NewForm = ({
                   )}
                   {field.type === "select" && (
                     <div className="mt-2">
-                      <div className="flex rounded-md shadow-sm">
-                        <select
-                          className="input-text"
+                      <div className="flex shadow-none ">
+                        <Select
                           id={field.name}
-                          {...register(field.name, {
-                            required: field.required,
-                          })}
+                          onValueChange={(value) => setValue(field.name, value)}
                           value={watch(field.name)}
                         >
                           {field.options?.map(
                             (option: FieldSelectOption, index: number) => (
-                              <option
-                                value={option.optionValue}
+                              <SelectItem
+                                value={option.optionValue.toString()}
                                 key={`option-${index}`}
                               >
                                 {option.optionName}
-                              </option>
+                              </SelectItem>
                             )
                           )}
-                        </select>
+                        </Select>
+                      </div>
+                    </div>
+                  )}
+                  {field.type === "ubication-country-special" && (
+                    <div className="mt-2">
+                      <div className="flex rounded-md shadow-sm">
+                        <SearchSelect
+                          onValueChange={(value) => setValue(field.name, value)}
+                          id={field.name}
+                          value={watch(field.name)?.toString()}
+                        >
+                          {countries?.map((option: any, index: number) => (
+                            <SearchSelectItem
+                              value={option.name}
+                              key={`option-${index}`}
+                            >
+                              {option.name}
+                            </SearchSelectItem>
+                          ))}
+                        </SearchSelect>
+                      </div>
+                    </div>
+                  )}
+                  {field.type === "ubication-state" && (
+                    <div className="mt-2">
+                      <div className="flex rounded-md shadow-sm">
+                        <SearchSelect
+                          onValueChange={(value) => setValue(field.name, value)}
+                          id={field.name}
+                          value={watch(field.name)?.toString()}
+                        >
+                          {countries
+                            ?.find((c) => c.name === "Cuba")
+                            ?.provinces?.map((option: any, index: number) => (
+                              <SearchSelectItem
+                                value={option.name}
+                                key={`option-${index}`}
+                              >
+                                {option.name}
+                              </SearchSelectItem>
+                            ))}
+                        </SearchSelect>
+                      </div>
+                    </div>
+                  )}
+                  {field.type === "ubication-city" && (
+                    <div className="mt-2">
+                      <div className="flex rounded-md shadow-sm">
+                        <SearchSelect
+                          onValueChange={(value) => setValue(field.name, value)}
+                          id={field.name}
+                          value={watch(field.name)?.toString()}
+                        >
+                          {countries
+                            ?.find((c) => c.name === "Cuba")
+                            ?.provinces?.find(
+                              (c) =>
+                                c.name ===
+                                watch(
+                                  fields.find(
+                                    (f) => f.type === "ubication-state"
+                                  )?.name
+                                )
+                            )
+                            ?.municipalities?.map(
+                              (option: any, index: number) => (
+                                <SearchSelectItem
+                                  value={option.name}
+                                  key={`option-${index}`}
+                                >
+                                  {option.name}
+                                </SearchSelectItem>
+                              )
+                            )}
+                        </SearchSelect>
                       </div>
                     </div>
                   )}
@@ -557,7 +549,7 @@ const NewForm = ({
                         <SearchSelect
                           onValueChange={(value) => setValue(field.name, value)}
                           id={field.name}
-                          value={watch(field.name)}
+                          value={watch(field.name)?.toString()}
                         >
                           {field.options?.map(
                             (option: FieldSelectOption, index: number) => (
@@ -573,10 +565,33 @@ const NewForm = ({
                       </div>
                     </div>
                   )}
+
                   {field.type === "multiselect" && (
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm">
-                        <select
+                        <MultiSelect
+                          onValueChange={(value) => setValue(field.name, value)}
+                          id={field.name}
+                          value={watch(field.name)}
+                        >
+                          {field.options?.map(
+                            (option: FieldSelectOption, index: number) => {
+                              if (field.name === "days") {
+                                console.log(option.optionValue?.toString());
+                              }
+
+                              return (
+                                <MultiSelectItem
+                                  value={option.optionValue?.toString() ?? ""}
+                                  key={`option-${index}`}
+                                >
+                                  {option.optionName}
+                                </MultiSelectItem>
+                              );
+                            }
+                          )}
+                        </MultiSelect>
+                        {/* <select
                           className="input-text"
                           multiple
                           {...register(field.name, {
@@ -593,7 +608,7 @@ const NewForm = ({
                               </option>
                             )
                           )}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                   )}
@@ -648,7 +663,7 @@ const NewForm = ({
 
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -724,7 +739,7 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -754,7 +769,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
 
@@ -912,7 +927,7 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-gray-500">{field.note}</p>
+                          <p className="text-sm text-secundary">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -978,7 +993,7 @@ const NewForm = ({
               </button>
             ) : (
               <button type="submit" className="btn-main">
-                {customSaveButtonText ? customSaveButtonText : "Save"}
+                {customSaveButtonText ? customSaveButtonText : "Guardar"}
               </button>
             )}
           </div>
@@ -1142,37 +1157,29 @@ const ListFeatureField: React.FC<ListFeatureFieldProps> = ({
   );
 };
 
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { LoadScript, GoogleMap, MarkerF } from "@react-google-maps/api";
 import { MapPinIcon } from "@heroicons/react/24/outline";
 
 import {
-  DatePicker,
-  DateRangePicker,
   MultiSelect,
   MultiSelectItem,
   NumberInput,
   SearchSelect,
   SearchSelectItem,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
+  Select,
+  SelectItem,
   TextInput,
   Textarea,
 } from "@tremor/react";
 import Image from "next/image";
-import { slugify } from "@/utils/facades/serverFacades/strFacade";
-import { useFormState } from "react-dom";
 import {
   parseDataOnSubmit,
   parseSettingDataOnSubmit,
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
-import { locales } from "@/i18n";
-import Link from "next/link";
-
+import { stringArray } from "@/actions/utils/strings";
 export function MapSelector({
   openModal,
   address,
@@ -1312,7 +1319,7 @@ export function MapSelector({
                       Select Address
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-secundary">
                         {latLng && (
                           <input
                             type="text"
@@ -1351,7 +1358,7 @@ export function MapSelector({
 
                                   <div className="  absolute top-1 left-1 w-full  ">
                                     <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                      <MapPinIcon className="h-5 w-5 text-gray-500" />
+                                      <MapPinIcon className="h-5 w-5 text-secundary" />
                                       <p>{address}</p>
                                     </div>
                                   </div>
@@ -1375,7 +1382,7 @@ export function MapSelector({
 
                               <div className="  absolute top-1 left-1 w-full  ">
                                 <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                  <MapPinIcon className="h-5 w-5 text-gray-500" />
+                                  <MapPinIcon className="h-5 w-5 text-secundary" />
                                   <p>{address}</p>
                                 </div>
                               </div>

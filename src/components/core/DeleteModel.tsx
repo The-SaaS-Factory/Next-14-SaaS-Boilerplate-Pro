@@ -13,26 +13,26 @@ const DeleteModel = ({
   deleteAction: (modelId: number, primaryModelId?: number | undefined) => void;
 }) => {
   const handleDeleteModel = () => {
-    toast("Sure?", {
+    toast("Estás seguro?", {
       action: {
-        label: "Delete",
+        label: "Eliminar",
         onClick: () => {
           if (primaryModelId) {
             deleteAction(primaryModelId, modelId);
-            toast.success("Model deleted successfully");
+            toast.success("Eliminado correctamente");
           } else {
             deleteAction(modelId);
           }
         },
       },
     });
-
   };
 
   return (
     <div>
-      <button className="btn-icon" onClick={handleDeleteModel}>
+      <button className="flex space-x-1 items-center " onClick={handleDeleteModel}>
         <TrashIcon className="w-6 h-6" />
+        <span>Eliminar</span>
       </button>
     </div>
   );

@@ -1,13 +1,10 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getAmountMovements = async (currencyCode: string) => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-  const { userId } = await getUser(userClerk);
+  const {id} = await getMembership();
 
   const currency = await prisma.adminCurrencies.findFirst({
     where: {
@@ -17,10 +14,10 @@ export const getAmountMovements = async (currencyCode: string) => {
 
   if (!currency) return [];
 
-  if (userId)
+  if (id)
     return await prisma.adminMovementsAmounts.findMany({
       where: {
-        userId,
+        profileId: id,
         currencyId: currency.id,
       },
       include: {

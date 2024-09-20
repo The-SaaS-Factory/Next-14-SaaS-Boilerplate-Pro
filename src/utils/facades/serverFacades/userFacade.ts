@@ -1,273 +1,143 @@
-import { User } from "@prisma/client";
+"use server";
 
-import { checkMarketingActionsOnRegister } from "./marketingFacade";
-
-import { syncUserPermissions } from "./scurityFacade";
+import { authOptions } from "@/actions/nextauth";
 import prisma from "@/lib/db";
-import {
-  getClerkUserByExternalId,
-  handleUpdateDataForUser,
-} from "./clerkFacade";
-import { createAmountByDefaultForUser } from "@/actions/admin/walletModule/create-amount-movement";
-///import { getUserCapabilitiesNames } from "./membershipFacade";
-import { notifyToSuperAdmin } from "./notificationFacade";
-import { getUserCapabilitiesNames } from "./membershipFacade";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export async function createDefaultSettingForuser(user: User) {
-  await prisma.userSetting.create({
-    data: {
-      userId: user.id,
-      settingName: "newPlatformNotification",
-      settingValue: "1",
-    },
-  });
-}
+export const getMembership = async () => {
+  const session: any = await getServerSession(authOptions);
 
-export const getUser = async (userAuthData: any) => {
   const include = {
     permissions: true,
-    Membership: {
+    profile: {
       include: {
-        plan: {
+        Amounts: {
           include: {
-            PlanCapabilities: {
-              include: {
-                capabilitie: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
-            },
+            Currency: true,
           },
         },
+        permissions: true,
       },
     },
+    user: true,
   };
 
-  let user = await prisma.user.findFirst({
+  if (!session) redirect("/login");
+
+  //fix typing
+  let membership: any = await prisma.profileMembership.findFirst({
     where: {
-      externalId: userAuthData.userId || userAuthData.orgId,
+      user: {
+        id: Number(session?.user.id),
+      },
+      isActive: true,
     },
-    include,
+    include: {
+      ...include,
+    },
   });
 
-  if (!user) {
-    user = await prisma.user.findFirst({
+  if (!membership) {
+    //Get other profile
+    membership = await prisma.profileMembership.findFirst({
       where: {
-        externalId: userAuthData.orgId || userAuthData.userId,
+        user: {
+          id: Number(session?.user.id),
+        },
       },
       include,
     });
-
-    const maxRetryAttempts = 5;
-    const retryDelay = 500;
-
-    let retryCount = 0;
-    while (!user && retryCount < maxRetryAttempts) {
-      await new Promise((resolve) => setTimeout(resolve, retryDelay));
-      user = await prisma.user.findFirst({
-        where: {
-          externalId: userAuthData.orgId || userAuthData.userId,
-        },
-        include,
-      });
-      retryCount++;
-    }
-
-    if (!user) {
-      redirect("/user-not-found");
-    }
   }
 
-  const permissions = user.permissions.map(
+  if (!membership) {
+    const user = await prisma.user.findFirst({
+      where: {
+        id: Number(session.user?.id),
+      },
+      include: {
+        permissions: true,
+      },
+    });
+
+    console.log("user fdsfd");
+    console.log(user);
+
+    if (
+      user &&
+      user.permissions.some((permission: any) =>
+        permission.name.includes("superAdmin")
+      )
+    ) {
+      redirect("/admin");
+    } else {
+      redirect("/user");
+    }
+
+    if (!user) redirect("/login");
+  }
+
+  const permissions = membership?.permissions.map(
     (permission: any) => permission.name
   );
 
-  let capabilities = [];
-
-  if (user.Membership.length > 0) {
-    capabilities = user.Membership[0].plan.PlanCapabilities.map(
-      (planCapability: any) => planCapability.capabilitie.name
-    );
-  }
+  const profile = await prisma.profile.findUnique({ where: { id: Number(session?.user.id) } })
 
   const authData = {
-    userId: user.id,
-    permissions,
-    capabilities,
+    id: membership.id,
+    permissions, //Deprecated
+    profileMembership: {
+      id: membership.id,
+      type: membership.type,
+      name: membership.user.name,
+      settings: membership.settings,
+      Amounts: membership.Amounts,
+      permissions: permissions,
+    },
+    user: {
+      id: membership.user.id,
+      email: membership.user.email,
+    },
+    profile: {
+      id: membership.profile.id,
+      name: membership.profile.name,
+      avatar: membership.profile.avatar,
+      type: profile.type,
+      status: membership.profile.status,
+      Amounts: membership.profile.Amounts,
+      permissions: membership.profile.permissions.map(
+        (permission: any) => permission.name
+      ),
+    },
   };
 
   return authData;
 };
 
-export const handleUserCreated = async (
-  userData: any,
-  source = "webhook"
-): Promise<any> => {
-  let newUser: any = null;
+export const getUser = async () => {
+  const session: any = await getServerSession(authOptions);
+  console.log(session);
+
+  if (!session) redirect("/login");
 
   const user = await prisma.user.findFirst({
     where: {
-      externalId: userData.id,
+      id: Number(session.user?.id),
+    },
+    include: {
+      permissions: true,
     },
   });
 
-  if (!user) {
-    //Is possible that user can not be created by clerk, so we need to create it
-    if (source === "request") {
-      newUser = await prisma.user.create({
-        data: {
-          externalId: userData.id,
-          email: userData.emailAddresses?.[0]?.emailAddress,
-          name: userData.fullName || userData.firstName,
-          avatar: userData.imageUrl,
-        },
-      });
-    } else if (source === "webhook") {
-      let payloadReferredBy: any = null;
-      let payload = {
-        externalId: userData.id,
-        email: userData.email_addresses?.[0]?.email_address,
-        name: userData.fullName || userData.first_name || userData.name,
-        avatar: userData.profile_image_url || userData.image_url,
-      };
+  if (!user) redirect("/login");
 
-      const userClerkId = userData.created_by;
-
-      if (userClerkId) {
-        const userRoot = await prisma.user.findFirst({
-          where: {
-            externalId: userClerkId,
-          },
-        });
-
-        if (userRoot) {
-          payload["email"] = userRoot.email;
-          const capabilitiesNames = await getUserCapabilitiesNames(userRoot.id);
-          if (capabilitiesNames?.includes("35% cashback for affiliates")) {
-            payloadReferredBy = userRoot.id;
-          }
-        }
-      }
-
-      newUser = await prisma.user
-        .create({
-          data: {
-            ...payload,
-          },
-        })
-        .catch((error: Error) => {
-          console.log("error", error);
-        });
-
-      if (newUser && payloadReferredBy) {
-        await prisma.referral.create({
-          data: {
-            referredId: payloadReferredBy,
-            referId: newUser.id,
-          },
-        });
-      }
-    }
-  }
-
-  if (!newUser) throw new Error("Error creating user");
-
-  checkMarketingActionsOnRegister(newUser.id);
-
-  createDefaultSettingForuser(newUser);
-
-  createAmountByDefaultForUser({
-    userId: newUser.id,
-  });
-
-  await handleUpdateDataForUser({
-    scope: "privateMetadata",
-    data: {
-      userId: newUser.id,
-    },
-    userBdId: newUser.id,
-  });
-
-  notifyToSuperAdmin(
-    `El usuario ${newUser.name} se ha registrado en la plataforma`
+  const permissions = user?.permissions.map(
+    (permission: any) => permission.name
   );
 
-  return newUser;
-  // } else {
-  //     onsole.log('hay user, repito, hay user', user);
-  //   return handleUserUpdated(userData, "request");
-  // }
-};
-
-export const handleUserDeleted = async (userData: any) => {
-  const user = await prisma.user.findFirst({
-    where: {
-      externalId: userData.id,
-    },
-  });
-
-  if (user) {
-    return await prisma.user.delete({
-      where: {
-        id: user.id,
-      },
-    });
-  }
-};
-export const handleUserUpdated = async (userData: any, source = "webhook") => {
-  const user = await prisma.user.findFirst({
-    where: {
-      externalId: userData.id,
-    },
-  });
-
-  if (user) {
-    let dataUpdated = {};
-    if (source === "request") {
-      dataUpdated = {
-        externalId: userData.id,
-        email: userData.emailAddresses?.[0]?.emailAddress,
-        name: userData.fullName || userData.firstName,
-        phone: userData.primaryPhoneNumber,
-        avatar: userData.imageUrl,
-      };
-    } else {
-      dataUpdated = {
-        externalId: userData.id,
-        email: userData.email_addresses?.[0]?.email_address,
-        name: userData.fullName || userData.first_name,
-        avatar: userData.profile_image_url,
-      };
-
-      //Sync permissions by publicMetadata permisisons
-      syncUserPermissions(user.id, userData.public_metadata.permissions);
-    }
-
-    return await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: dataUpdated,
-    });
-  } else {
-    return handleUserCreated(userData);
-  }
-};
-
-export const getUserByExternalId = async (externalId: string) => {
-  let user = await prisma.user.findFirst({
-    where: {
-      externalId: externalId,
-    },
-  });
-
-  if (!user) {
-    const clerkUser = await getClerkUserByExternalId(externalId);
-    return await handleUserCreated(clerkUser, "request");
-  }
-
-  return user;
+  return {
+    id: user.id,
+    email: user.email,
+    permissions,
+  };
 };

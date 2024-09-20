@@ -1,16 +1,12 @@
 "use server";
 
-import { getUser } from "@/utils/facades/serverFacades/userFacade";
-import { auth } from "@clerk/nextjs";
 import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
 import { hasPermission } from "@/utils/facades/serverFacades/scurityFacade";
+import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
 
 export const getInvoiceDetails = async (invoiceId: number) => {
-  const userClerk = auth();
-  if (!userClerk) throw new Error("client clerk not found");
-
-  const { userId, permissions } = await getUser(userClerk);
+  const { id, permissions } = await getMembership();
 
   let ANDQUERY: Prisma.InvoiceWhereInput[] = [];
 
@@ -24,7 +20,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
     ANDQUERY = [
       {
         id: invoiceId,
-        userId,
+        profileId: id,
       },
     ];
   }
@@ -34,7 +30,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
       AND: ANDQUERY,
     },
     include: {
-      user: {
+      profile: {
         select: {
           id: true,
           name: true,
@@ -42,6 +38,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
           email: true,
         },
       },
+      user: true,
       Currency: true,
       coupons: true,
       Items: true,

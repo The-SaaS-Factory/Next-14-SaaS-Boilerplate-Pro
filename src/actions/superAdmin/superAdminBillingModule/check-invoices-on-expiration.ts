@@ -20,7 +20,7 @@ export const checkInvoicesOnExpiration = async () => {
         paidAt: null,
       },
       include: {
-        user: true,
+        profile: true,
         Items: true,
         Currency: true,
         coupons: true,
@@ -62,18 +62,18 @@ export const checkInvoicesOnExpiration = async () => {
           },
         });
 
-        if (!invoice.user?.id) return;
+        if (!invoice.profile?.id) return;
 
         sendInternalNotificatoin(
-          invoice.user.id,
-          `Hola ${invoice.user.name}, tienes una factura pendiente por pagar.`
+          invoice.profile.id,
+          `Hola ${invoice.profile.name}, tienes una factura pendiente por pagar.`
         );
 
         notifyToSuperAdmin(
-          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.user.name} para notificarle?. A trabajar!!!`
+          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.profile.name} para notificarle?. A trabajar!!!`
         );
 
-        if (!invoice.user?.email) return;
+        if (!invoice.profile?.email) return;
 
         const transactionaId = await getSuperAdminSetting(
           "LOOPS_INVOICE_NOTIFIED_TRANSACTIONAL_ID"
@@ -82,10 +82,10 @@ export const checkInvoicesOnExpiration = async () => {
         if (!transactionaId) return;
 
         sendLoopsTransactionalEventToUser({
-          email: invoice.user.email,
+          email: invoice.profile.email,
           transactionalId: transactionaId,
           dataVariables: {
-            userName: invoice.user.name,
+            userName: invoice.profile.name,
             invoiceId: invoice.id,
           },
         });

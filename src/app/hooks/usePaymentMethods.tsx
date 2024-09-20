@@ -38,7 +38,7 @@ const usePaymentMethods = (
 
   const payWithStripe = async (model = "INVOICE", modelId: number) => {
     if (model === "INVOICE") {
-      await createCheckoutSession(modelId, "SERVICE")
+      await createCheckoutSession(modelId, "ORDER")
         .then((res: any) => {
           window.location.href = res.url;
         })

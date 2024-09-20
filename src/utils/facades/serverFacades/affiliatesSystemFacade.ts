@@ -10,7 +10,7 @@ export const payToAffiliate = async (
   invoice: Invoice,
   invoiceItem: InvoiceItem
 ) => {
-  if (!invoice.userId) return;
+  if (!invoice.profileId) return;
 
   const invoiceFull = await prisma.invoice.findFirst({
     where: {
@@ -25,7 +25,7 @@ export const payToAffiliate = async (
  
   const userToPay = await prisma.referral.findFirst({
     where: {
-      referId: invoice.userId,
+      referId: invoice.profileId,
     },
     select: {
       referred: {
@@ -38,11 +38,11 @@ export const payToAffiliate = async (
 
   if (!userToPay) return;
 
-  const userId = userToPay.referred?.id ?? null;
+  const profileId = userToPay.referred?.id ?? null;
 
-  if (!userId) return;
+  if (!profileId) return;
 
-  const capabilitiesNames = await getUserCapabilitiesNames(userId);
+  const capabilitiesNames = await getUserCapabilitiesNames(profileId);
 
   if (capabilitiesNames?.includes("35% cashback for affiliates")) {
     const amount = invoiceItem.price * 0.35;
@@ -51,8 +51,8 @@ export const payToAffiliate = async (
     await createMovementAmountForUser({
       amount,
       currencyId: currency,
-      userId,
-      details: `Cashback for affiliate ${invoice.userId}`,
+      profileId,
+      details: `Cashback for affiliate ${invoice.profileId}`,
       type: "CREDIT",
     });
   } else if (
@@ -64,8 +64,8 @@ export const payToAffiliate = async (
     await createMovementAmountForUser({
       amount,
       currencyId: currency,
-      userId,
-      details: `Cashback for affiliate ${invoice.userId}`,
+      profileId,
+      details: `Cashback for affiliate ${invoice.profileId}`,
       type: "CREDIT",
     });
   } else {
@@ -82,8 +82,8 @@ export const payToAffiliate = async (
       await createMovementAmountForUser({
         amount,
         currencyId: currency,
-        userId,
-        details: `Cashback for affiliate ${invoice.userId}`,
+        profileId,
+        details: `Cashback for affiliate ${invoice.profileId}`,
         type: "CREDIT",
       });
     }

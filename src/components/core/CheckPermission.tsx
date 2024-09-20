@@ -5,8 +5,7 @@ import ForbiddenPage from "../layouts/errors/ForbiddenPage";
 
 const CheckPermission = ({ permissionName }: { permissionName: string }) => {
   const { hasModulePermission } = useSuperAdmin(permissionName);
-
-   
+  
   
   if (!hasModulePermission) {
     return (
