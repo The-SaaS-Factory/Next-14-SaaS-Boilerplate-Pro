@@ -7,7 +7,7 @@ import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
 import CompleteOnBoarding from "@/app/(admin)/home/(tenant)/admin/configuraciones/components/CompleteOnBoarding";
 import { redirect } from "next/navigation";
-export default async function BusinessAdminLayout({
+export default async function TenantAdminLayout({
   children,
 }: {
   children: ReactNode;

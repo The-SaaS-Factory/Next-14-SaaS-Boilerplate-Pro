@@ -1,15 +1,14 @@
 export const constants = {
   multiTenant: true,
-  appUrl: "https://monkeycasting.vercel.app",
-  appName: "Monkey Casting",
+  appUrl: "https://localhost:3000",
+  appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",
   logoUrl: "/assets/img/logo.webp",
   supportTel: "5541999568376",
   logoHUrl: "/assets/img/logoh.webp",
   logoDarkUrl: "/assets/img/logo-next-14-dark.png",
   hotjarId: 5098219,
-  appResume:
-    " Agencia de viajes especializada en la venta de boletos aéreos y paquetes turísticos personalizados. Ofrecemos servicios exclusivos para Cuba, además de la venta y envío de productos y mercancías hacia la isla",
+  appResume: "The Best Next 14 SaaS Boilerplate",
   demoMode: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
   portalStripe: process.env.NEXT_PUBLIC_STRIPE_PORTAL,
   weightExtraByPackage: 1,

@@ -9,17 +9,18 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { constants } from "@/lib/constants";
 
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const MenuItemsPC = () => (
     <>
-      <Link href="/castings" className="hover:text-gray-300 text-gray-50">
-        Castings
+      <Link href="/link1" className="hover:text-gray-300 text-gray-50">
+        Link 1
       </Link>
-      <Link href="/models" className="hover:text-gray-300 text-gray-50">
-        Modelos
+      <Link href="/prices" className="hover:text-gray-300 text-gray-50">
+        Prices
       </Link>
       <Link href={"/login"}>
         <Button variant="outline">Iniciar Sesión</Button>
@@ -31,19 +32,10 @@ export const HeaderLanding = () => {
   );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="fixed   top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="">
-          <img
-            src="/assets/img/Nvar-logo-black.png"
-            alt="Logo oscuro"
-            className="hidden dark:block h-12"
-          />
-          <img
-            src="/assets/img/Nvar-logo-white.png"
-            alt="Logo claro"
-            className="block dark:hidden h-12"
-          />
+          <span>{constants.appName}</span>
         </Link>
         <nav className=" hidden md:flex space-x-4 items-center">
           <MenuItemsPC />
