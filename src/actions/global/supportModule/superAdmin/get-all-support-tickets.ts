@@ -17,9 +17,9 @@ export const getAllSupportTicket = async ({
 }) => {
   const { offset, limit } = args;
 
-const { permissions } = await getMembership();
+const { userMembership } = await getMembership();
 
-  checkPermission(permissions, scope);
+  checkPermission(userMembership.permissions.map((p) => p.name), scope);
 
   let whereSearch: any = {};
 
@@ -65,7 +65,7 @@ const { permissions } = await getMembership();
       ...whereSearch,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           email: true,

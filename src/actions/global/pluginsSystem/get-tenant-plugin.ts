@@ -1,11 +1,11 @@
 "use server";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getTenantPluginDetails = async (pluginSlug: string) => {
-  const { id } = await getMembership();
-
-  return await prisma.profilePlugin.findFirst({
+  const { organization } = await getMembership();
+  const id = organization.id;
+  return await prisma.organizationPlugin.findFirst({
     where: {
       organizationId: id,
       plugin: {
@@ -18,7 +18,6 @@ export const getTenantPluginDetails = async (pluginSlug: string) => {
           configurations: true,
         },
       },
-      
     },
   });
 };

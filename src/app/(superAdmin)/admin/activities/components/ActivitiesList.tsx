@@ -20,7 +20,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Dropdown from "@/components/ui/componenets/Dropdown";
 import { MenuItem } from "@headlessui/react";
-import { LogAction, Profile } from "@prisma/client";
+import { LogAction, Organization } from "@prisma/client";
 import { getAllTenants } from "@/actions/global/tenantSystem/get-all-tenants";
 import { CleanFilters } from "@/components/ui/CleanFilters";
 
@@ -38,7 +38,7 @@ const getActionColor = (action: string) => {
 };
 
 const ActivitiesList = ({ data }: { data: any }) => {
-  const [agencies, setAgencies] = useState<Profile[] | null>(null);
+  const [agencies, setAgencies] = useState<Organization[] | null>(null);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
   const searchParams = useSearchParams();
@@ -55,7 +55,6 @@ const ActivitiesList = ({ data }: { data: any }) => {
 
   const pathName = usePathname();
   const router = useRouter();
-
 
   useEffect(() => {
     const fetchData = async () => {

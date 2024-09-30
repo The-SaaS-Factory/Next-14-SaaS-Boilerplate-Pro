@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useState } from "react";
 import { LandingProfileButton } from "./commons/LandingProfileButton";
-import { createProfile } from "@/utils/facades/serverFacades/profileFacade";
+import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 
 const ClientAdminHeader = ({
   notificationsCount,
@@ -103,8 +103,8 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
       email: session?.user?.email,
     };
 
-    await createProfile(payload).then(() => {
-      toast.success("Negocio creado correctamente!");
+    await createOrganization(payload).then(() => {
+      toast.success("Organization created!");
       window.location.reload();
     });
   };

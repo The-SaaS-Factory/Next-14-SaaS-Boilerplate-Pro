@@ -12,7 +12,7 @@ export const upsertCoupon = async ({
   modelId?: number;
   payload: any;
 }) => {
-  const { permissions } = await getMembership();
+ const { userMembership } = await getMembership(); const permissions  = userMembership.permissions.map((p) => p.name);
   checkPermission(permissions, scope);
 
   try {

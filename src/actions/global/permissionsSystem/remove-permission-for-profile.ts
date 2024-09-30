@@ -5,7 +5,7 @@ import prisma from "@/lib/db";
 export async function removePermissionForProfile(organizationId: number, permissionName: string) {
     try {
         const permission = await prisma.permission.findFirst({ where: { name: permissionName } })
-        await prisma.profile.update({
+        await prisma.organization.update({
             where: { id: organizationId },
             data: {
                 permissions: {

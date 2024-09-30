@@ -47,7 +47,7 @@ const PaymentStatusAlert = ({ status }: { status: string | undefined }) => {
     setTimeout(() => {
       replace(pathName);
     }, 5000);
-  }, [status]);
+  }, [status, pathName, replace]);
 
   return (
     <div>

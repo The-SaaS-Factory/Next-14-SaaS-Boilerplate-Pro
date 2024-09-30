@@ -7,6 +7,7 @@ import { useSidebarState } from "@/states/ui/sidebarState";
 import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
+import Image from "next/image";
 
 const TenantAdminSidebar = ({ org }: { org: any }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
@@ -17,7 +18,6 @@ const TenantAdminSidebar = ({ org }: { org: any }) => {
   );
 
   const { tenantNavigation } = useNavigation();
-
 
   return (
     <div>
@@ -134,12 +134,16 @@ const TenantAdminSidebar = ({ org }: { org: any }) => {
           {" "}
           <div className="flex h-16 shrink-0 items-center">
             <Link href="/" className="">
-              <img
+              <Image
+                width={80}
+                height={80}
                 src="/assets/img/Nvar-logo-black.png"
                 alt="Logo oscuro"
                 className="hidden dark:block"
               />
-              <img
+              <Image
+                width={80}
+                height={80}
                 src="/assets/img/Nvar-logo-white.png"
                 alt="Logo claro"
                 className="block dark:hidden"

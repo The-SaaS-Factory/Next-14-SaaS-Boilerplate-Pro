@@ -14,7 +14,7 @@ export const upsertMembership = async ({
   modelId?: number;
   payload: any;
 }) => {
-const { permissions } = await getMembership();
+const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
 
   checkPermission(permissions, scope);
   
@@ -24,7 +24,7 @@ const { permissions } = await getMembership();
         id: modelId ? modelId : 0,
       },
       update: {
-        profile: {
+        organization: {
           connect: {
             id: payload.userId as number,
           },
@@ -49,7 +49,7 @@ const { permissions } = await getMembership();
         endDate: payload.endDate as Date,
       },
       create: {
-        profile: {
+        organization: {
           connect: {
             id: payload.userId as number,
           },

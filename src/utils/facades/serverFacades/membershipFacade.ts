@@ -115,15 +115,17 @@ export const propagateCapabilitiesFromPlanToUser = async (
 
   Promise.all(
     capabilities.map(async (c: any) => {
-      const userCapabilicitie = await prisma.profileCapabilities.findFirst({
-        where: {
-          organizationId: organizationId,
-          capabilitieId: c.capabilitie.id,
-        },
-      });
+      const userCapabilicitie = await prisma.organizationCapabilities.findFirst(
+        {
+          where: {
+            organizationId: organizationId,
+            capabilitieId: c.capabilitie.id,
+          },
+        }
+      );
 
       if (!userCapabilicitie) {
-        await prisma.profileCapabilities.create({
+        await prisma.organizationCapabilities.create({
           data: {
             organizationId: organizationId,
             capabilitieId: c.capabilitie.id,
@@ -131,7 +133,7 @@ export const propagateCapabilitiesFromPlanToUser = async (
           },
         });
       } else {
-        await prisma.profileCapabilities.update({
+        await prisma.organizationCapabilities.update({
           where: {
             id: userCapabilicitie.id,
           },
@@ -174,7 +176,7 @@ export const getUserCapabilitieLimitAvailable = async (
   organizationId: number,
   capabilityName: string
 ) => {
-  const userCapabilities = await prisma.profileCapabilities.findFirst({
+  const userCapabilities = await prisma.organizationCapabilities.findFirst({
     where: {
       organizationId,
       capabilitie: {
@@ -185,7 +187,6 @@ export const getUserCapabilitieLimitAvailable = async (
       capabilitie: true,
     },
   });
-
 
   if (!userCapabilities) return false;
 
@@ -213,7 +214,7 @@ export const registerCapabilitieUsage = async (
   organizationId: number,
   capabilityName: string
 ) => {
-  const userCapabilities = await prisma.profileCapabilities.findFirst({
+  const userCapabilities = await prisma.organizationCapabilities.findFirst({
     where: {
       organizationId,
       capabilitie: {
@@ -244,7 +245,7 @@ export const registerCapabilitieUsage = async (
 
   if (!planCapability) return false;
 
-  await prisma.profileCapabilities.update({
+  await prisma.organizationCapabilities.update({
     where: {
       id: userCapabilities.id,
     },

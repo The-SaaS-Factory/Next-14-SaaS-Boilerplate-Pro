@@ -8,12 +8,12 @@ export const getSupportTicketById = async (ticketId: number): Promise<any> => {
   if (!ticketId) throw new Error("Ticket id is required");
 
     
-   const {id} = await getMembership();
+   const {organization} = await getMembership();
 
   let whereOwner: Prisma.SupportTicketWhereInput;
 
   whereOwner = {
-      organizationId: id,
+      organizationId: organization.id,
   };
 
   const ticket = await prisma.supportTicket.findFirst({
@@ -22,14 +22,14 @@ export const getSupportTicketById = async (ticketId: number): Promise<any> => {
       ...whereOwner,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           name: true,
         },
       },
       SupportTicketMessage: {
         include: {
-          profile: {
+          organization: {
             select: {
               name: true,
               avatar: true,

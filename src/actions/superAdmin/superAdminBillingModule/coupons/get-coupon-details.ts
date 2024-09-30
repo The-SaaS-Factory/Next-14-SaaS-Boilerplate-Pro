@@ -6,7 +6,7 @@ export const getCouponDetails = async (couponId: number) => {
       id: couponId,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           email: true,

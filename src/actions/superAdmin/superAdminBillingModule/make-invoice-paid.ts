@@ -16,7 +16,7 @@ export const makeInvoicePaid = async (
   invoiceId: number,
   gateway = "manualAdmin"
 ) => {
-const { permissions } = await getMembership();
+const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
 
   if (gateway === "manualAdmin") {
     //Is from Admin

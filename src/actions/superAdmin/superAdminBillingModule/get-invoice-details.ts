@@ -3,10 +3,11 @@
 import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
 import { hasPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getInvoiceDetails = async (invoiceId: number) => {
-  const { id, permissions } = await getMembership();
+  const { userMembership, organization } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   let ANDQUERY: Prisma.InvoiceWhereInput[] = [];
 
@@ -20,7 +21,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
     ANDQUERY = [
       {
         id: invoiceId,
-        organizationId: id,
+        organizationId: organization.id,
       },
     ];
   }
@@ -30,7 +31,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
       AND: ANDQUERY,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           name: true,

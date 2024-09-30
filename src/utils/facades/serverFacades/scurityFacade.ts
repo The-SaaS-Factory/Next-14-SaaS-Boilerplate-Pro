@@ -79,7 +79,7 @@ export const syncUserPermissions = async (
       })
     : [];
 
-  await prisma.profile.update({
+  await prisma.organization.update({
     where: {
        id
     },
@@ -95,7 +95,7 @@ export const syncUserPermissions = async (
 };
 
 export const getSuperAdminAdmins = async () => {
-  const organizations = await prisma.profile.findMany({
+  const organizations = await prisma.organization.findMany({
     where: {
       permissions: {
         some: {

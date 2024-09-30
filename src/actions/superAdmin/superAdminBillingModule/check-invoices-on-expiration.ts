@@ -20,7 +20,7 @@ export const checkInvoicesOnExpiration = async () => {
         paidAt: null,
       },
       include: {
-        profile: true,
+        organization: true,
         Items: true,
         Currency: true,
         coupons: true,
@@ -62,18 +62,18 @@ export const checkInvoicesOnExpiration = async () => {
           },
         });
 
-        if (!invoice.profile?.id) return;
+        if (!invoice.organization?.id) return;
 
         sendInternalNotificatoin(
-          invoice.profile.id,
-          `Hola ${invoice.profile.name}, tienes una factura pendiente por pagar.`
+          invoice.organization.id,
+          `Hola ${invoice.organization.name}, tienes una factura pendiente por pagar.`
         );
 
         notifyToSuperAdmin(
-          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.profile.name} para notificarle?. A trabajar!!!`
+          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.organization.name} para notificarle?. A trabajar!!!`
         );
 
-        if (!invoice.profile?.email) return;
+        if (!invoice.organization?.email) return;
 
         const transactionaId = await getSuperAdminSetting(
           "LOOPS_INVOICE_NOTIFIED_TRANSACTIONAL_ID"
@@ -82,10 +82,10 @@ export const checkInvoicesOnExpiration = async () => {
         if (!transactionaId) return;
 
         sendLoopsTransactionalEventToUser({
-          email: invoice.profile.email,
+          email: invoice.organization.email,
           transactionalId: transactionaId,
           dataVariables: {
-            userName: invoice.profile.name,
+            userName: invoice.organization.name,
             invoiceId: invoice.id,
           },
         });
@@ -99,7 +99,6 @@ export const checkInvoicesOnExpiration = async () => {
       },
     });
   } catch (error: any) {
-   
     await prisma.cronJobs.create({
       data: {
         name: "checkInvoicesOnExpiration",
@@ -107,6 +106,5 @@ export const checkInvoicesOnExpiration = async () => {
         error: error.message,
       },
     });
-
   }
 };

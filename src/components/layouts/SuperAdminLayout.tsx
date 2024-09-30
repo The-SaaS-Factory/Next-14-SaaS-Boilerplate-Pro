@@ -11,12 +11,17 @@ export default async function SuperAdminLayout({
 }: {
   children: ReactNode;
 }) {
-  const { profile, permissions } = await getMembership();
+  const { organization, userMembership } = await getMembership();
 
-  if (
-    !permissions.includes("superAdmin:totalAccess") ||
-    !permissions.includes("superAdmin:administration:read")
-  ) {
+  const isAdmin =
+    organization.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:totalAccess") ||
+    userMembership.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:administration:read");
+
+  if (!isAdmin) {
     return <ForbiddenPage />;
   }
 
@@ -27,7 +32,7 @@ export default async function SuperAdminLayout({
         <SuperAdminSidebar />
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <SuperAdminHeader
-            profile={profile}
+            organization={organization}
             notificationsCount={0} //Fix This
           />
           <div className="py-3 relative lg:pt-[5%]  z-20">

@@ -9,14 +9,14 @@ export const getSupportTicketDetails = async (
       id: ticketId,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           name: true,
         },
       },
       SupportTicketMessage: {
         include: {
-          profile: {
+          organization: {
             select: {
               name: true,
               avatar: true,

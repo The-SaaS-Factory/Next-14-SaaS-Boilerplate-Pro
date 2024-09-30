@@ -27,15 +27,15 @@ model User {
 }
 
 model UserMembership {
-  id                    Int                     @id @default(autoincrement())
-  userId                Int
-  organizationId        Int
-  role                  UserMembershipRole      @default(ADMIN)
-  permissions           Permission[]
-  isActive              Boolean                 @default(true)
-  user                  User                    @relation(fields: [userId], references: [id])
-  organization          Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  settings UserMembershipSetting[]
+  id             Int                     @id @default(autoincrement())
+  userId         Int
+  organizationId Int
+  role           UserMembershipRole      @default(ADMIN)
+  permissions    Permission[]
+  isActive       Boolean                 @default(true)
+  user           User                    @relation(fields: [userId], references: [id])
+  organization   Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  settings       UserMembershipSetting[]
 
   @@index([organizationId])
 }
@@ -391,8 +391,7 @@ model Permission {
   planId           Int?
   User             User?           @relation(fields: [userId], references: [id])
   userId           Int?
-  Organization     Organization?   @relation(fields: [organizationId], references: [id])
-  organizationId   Int?
+  organizations    Organization[]
 }
 
 //------- Module Affiliates

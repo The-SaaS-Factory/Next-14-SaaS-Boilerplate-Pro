@@ -7,12 +7,12 @@ export const updateTenantPluginConfiguration = async (
   profilePluginId: number,
   configuration: string
 ) => {
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
 
-  const configurationProfile = await prisma.profilePlugin.findFirst({
+  const configurationProfile = await prisma.organizationPlugin.findFirst({
     where: {
       id: profilePluginId,
-      organizationId: id,
+      organizationId: organization.id,
     },
     include: {
       plugin: true,
@@ -23,7 +23,7 @@ export const updateTenantPluginConfiguration = async (
     throw new Error("No se pudo guardar la configuración");
   }
 
-  const newPorfilePlugin = await prisma.profilePlugin.update({
+  const newPorfilePlugin = await prisma.organizationPlugin.update({
     where: {
       id: profilePluginId,
     },

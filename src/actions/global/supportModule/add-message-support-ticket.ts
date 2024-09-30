@@ -8,8 +8,8 @@ import { revalidatePath } from "next/cache";
 export const addMessageSupportTicket = async (args: any) => {
   return await prisma.$transaction(async (tx: any) => {
     try {
-      const { id } = await getMembership();
-
+      const { organization } = await getMembership();
+      const id = organization.id;
       let dataForMessage = {};
 
       dataForMessage = {

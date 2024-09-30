@@ -14,7 +14,7 @@ export const upsertPaymentMethod = async ({
   payload: Prisma.PaymentMethodCreateInput | Prisma.PaymentMethodUpdateInput;
 }) => {
   try {
-    const { permissions } = await getMembership();
+   const { userMembership } = await getMembership(); const permissions  = userMembership.permissions.map((p) => p.name);
 
     checkPermission(permissions, scope);
 

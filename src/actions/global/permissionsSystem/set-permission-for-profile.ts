@@ -6,7 +6,7 @@ export async function setPermissionForProfile(organizationId: number, permission
     try {
         const permission = await prisma.permission.findFirst({ where: { name: permissionName } })
         
-        await prisma.profile.update({
+        await prisma.organization.update({
             where: { id: organizationId },
             data: {
                 permissions: {

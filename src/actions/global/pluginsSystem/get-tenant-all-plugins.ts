@@ -13,7 +13,7 @@ export const getTenantAllPlugins = async ({
     status: Status;
   };
 }) => {
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
 
   const limit = args.limit;
   const offset = args.offset;
@@ -66,9 +66,9 @@ export const getTenantAllPlugins = async ({
     },
   });
 
-  const pluginsInstalleds = await prisma.profilePlugin.findMany({
+  const pluginsInstalleds = await prisma.organizationPlugin.findMany({
     where: {
-      organizationId: id,
+      organizationId: organization.id,
     },
   });
 
@@ -96,10 +96,10 @@ export const getTenantAllPlugins = async ({
 //
 
 export const getUserInvoicesPendingCount = async () => {
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
   const data = await prisma.invoice.count({
     where: {
-      organizationId: id,
+      organizationId: organization.id,
       status: "PENDING",
     },
   });

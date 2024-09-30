@@ -5,23 +5,19 @@ import { tenantModuleScope } from "./tenantFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getAllTenants = async () => {
-  const { permissions } = await getMembership();
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   checkPermission(permissions, tenantModuleScope);
 
-  return await prisma.profile.findMany({
+  return await prisma.organization.findMany({
     orderBy: {
       createdAt: "desc",
     },
     include: {
-      profileMemberships: {
+      userMemberships: {
         include: {
           user: true,
-        },
-      },
-      Amounts: {
-        include: {
-          Currency: true,
         },
       },
     },

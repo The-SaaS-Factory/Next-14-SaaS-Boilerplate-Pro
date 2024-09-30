@@ -11,7 +11,7 @@ export const applyCouponToInvoice = async ({
   invoiceId: number;
 }) => {
   try {
-    const { id } = await getMembership();
+    const { organization } = await getMembership();
 
     const invoice = await prisma.invoice.findFirst({
       where: {
@@ -32,7 +32,7 @@ export const applyCouponToInvoice = async ({
         status: "ACTIVE",
       },
       include: {
-        profile: true,
+        organization: true,
         settings: true,
       },
     });
@@ -57,11 +57,11 @@ export const applyCouponToInvoice = async ({
       }
     }
 
-    const organizationsFromUser = await prisma.profile.findMany({
+    const organizationsFromUser = await prisma.organization.findMany({
       where: {
         referredBy: {
           some: {
-            id,
+            id: organization.id
           },
         },
       },
@@ -69,9 +69,9 @@ export const applyCouponToInvoice = async ({
 
     //Check if coupon is valid for this user
     if (
-      coupon.profile &&
-      coupon.profile.id !== id &&
-      organizationsFromUser.map((organization) => organization.id).includes(id)
+      coupon.organization &&
+      coupon.organization.id !== organization.id &&
+      organizationsFromUser.map((organization) => organization.id).includes(organization.id)
     ) {
       throw new Error("Coupon not valid for this user");
     }

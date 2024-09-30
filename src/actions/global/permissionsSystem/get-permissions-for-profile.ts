@@ -1,10 +1,10 @@
-"use server"
+"use server";
 
 import prisma from "@/lib/db";
 
 export async function getPermissionsForProfile(organizationId: number) {
   try {
-    const profile = await prisma.profile.findUnique({
+    const profile = await prisma.organization.findUnique({
       where: { id: organizationId },
       include: { permissions: true },
     });

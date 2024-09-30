@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { Status } from "@prisma/client";
 
 export const getTenantInstalledPlugins = async ({
@@ -13,7 +13,9 @@ export const getTenantInstalledPlugins = async ({
     status: Status;
   };
 }) => {
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
+  
+  const id = organization.id;
 
   const limit = args.limit;
   const offset = args.offset;
@@ -50,7 +52,7 @@ export const getTenantInstalledPlugins = async ({
     };
   }
 
-  const data = await prisma.profilePlugin.findMany({
+  const data = await prisma.organizationPlugin.findMany({
     where: {
       ...whereSearch,
       organizationId: id,
@@ -65,7 +67,7 @@ export const getTenantInstalledPlugins = async ({
     },
   });
 
-  const totalCount = await prisma.profilePlugin.count({
+  const totalCount = await prisma.organizationPlugin.count({
     where: {
       ...whereSearch,
       organizationId: id,

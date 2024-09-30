@@ -10,7 +10,7 @@ const SuperAdminHeader = ({
   notificationsCount,
 }: {
   notificationsCount: number;
-  profile: any;
+  organization: any;
 }) => {
   const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
     toggleSidebarMenu,

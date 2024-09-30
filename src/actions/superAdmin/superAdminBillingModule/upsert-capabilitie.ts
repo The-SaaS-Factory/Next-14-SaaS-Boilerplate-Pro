@@ -13,7 +13,7 @@ export const upsertCapabilitie = async ({
   modelId?: number;
   payload: Prisma.CapabilitieCreateInput | Prisma.CapabilitieUpdateInput;
 }) => {
-const { permissions } = await getMembership();
+const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
 
   checkPermission(permissions, scope);
 

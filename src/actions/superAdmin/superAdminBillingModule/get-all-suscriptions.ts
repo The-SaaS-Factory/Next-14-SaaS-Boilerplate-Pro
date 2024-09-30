@@ -19,7 +19,7 @@ export const getAllSuscriptions = async ({
 
   if (args.search) {
     whereSearch = {
-      profile: {
+      organization: {
         name: {
           contains: args.search,
         },
@@ -33,7 +33,7 @@ export const getAllSuscriptions = async ({
     skip: offset,
     take: limit,
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           name: true,

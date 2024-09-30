@@ -1,13 +1,13 @@
 "use server";
 
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
 
 export const uninstallPlugin = async (pluginId: number) => {
-  const { id } = await getMembership();
-
-  const installed = await prisma.profilePlugin.findFirst({
+  const { organization } = await getMembership();
+  const id = organization.id;
+  const installed = await prisma.organizationPlugin.findFirst({
     where: {
       organizationId: id,
       pluginId: pluginId,
@@ -18,7 +18,7 @@ export const uninstallPlugin = async (pluginId: number) => {
     throw new Error("El plugin no se encuentra instalado.");
   }
 
-  await prisma.profilePlugin.delete({
+  await prisma.organizationPlugin.delete({
     where: {
       id: installed.id,
     },

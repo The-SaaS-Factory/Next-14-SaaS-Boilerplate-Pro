@@ -18,7 +18,7 @@ export const activateTrialPlan = async ({
   pricingId: number;
   currencyId: number;
 }) => {
-  const {  id } = await getMembership();
+  const {  organization } = await getMembership();
   const plan = await prisma.plan.findFirst({
     where: {
       id: planId,
@@ -32,7 +32,7 @@ export const activateTrialPlan = async ({
   const membership = await updateMembership({
     pricingId: pricingId,
     currencyId: currencyId,
-    organizationId: id,
+    organizationId: organization.id,
     months: plan.freeTrialDays / 30,
     planId: plan.id,
   });

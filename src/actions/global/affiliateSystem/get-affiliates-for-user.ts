@@ -5,12 +5,12 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getAffiliatesForUser = async (): Promise<any> => {
   try {
-    const { id } = await getMembership();
+    const { userMembership } = await getMembership();
 
     //Check if user already has an affiliate
     const userAffiliate = await prisma.referral.findMany({
       where: {
-        referredId: id,
+        referredId: userMembership.id,
       },
       include: {
         refer: {

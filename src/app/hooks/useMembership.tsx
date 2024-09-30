@@ -1,23 +1,17 @@
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { useState, useEffect } from "react";
 
-interface MembershipData {
-  profile: any;
-  permissions: any[];
-  userMembership: any;
-}
-
 export const useMembership = () => {
-  const [data, setData] = useState<MembershipData | null>(null);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     const fetchMembershipData = async () => {
       try {
-        const membershipData = await getMembership();
-        if (!membershipData) {
+        const { organization } = await getMembership();
+        if (!organization) {
           throw new Error("Failed to fetch membership data");
         }
-        setData(membershipData);
+        setData(organization);
       } catch (err) {
         console.log(err);
       }

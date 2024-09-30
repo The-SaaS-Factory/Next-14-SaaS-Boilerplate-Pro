@@ -17,7 +17,6 @@ export const createCheckoutSession = async (
     where: { id: invoiceId },
     include: {
       Items: true,
-      order: true,
       Currency: true,
       coupons: {
         include: {
@@ -73,12 +72,10 @@ export const createCheckoutSession = async (
     });
   }
 
-  const { id } = await getMembership();
-  console.log("id", id);
+  const { organization } = await getMembership();
   
-  const client = await getClientCustomer(id);
+  const client = await getClientCustomer(organization.id);
 
-  console.log(client);
   
 
   if (!client || (client && !client.customerId))
@@ -86,7 +83,7 @@ export const createCheckoutSession = async (
 
   const clientPayload = {
     customerId: client.customerId,
-    userId: id,
+    userId: organization.id,
   };
 
   return await stripeCreateCheckoutSession({
@@ -96,6 +93,6 @@ export const createCheckoutSession = async (
     referenceId: invoiceId.toString(),
     modelName: modelName,
     mode: stripeModeSuscription ? "subscription" : "payment",
-    shippingPrice: invoice.order.shippingPrice,
+    shippingPrice: 0
   });
 };

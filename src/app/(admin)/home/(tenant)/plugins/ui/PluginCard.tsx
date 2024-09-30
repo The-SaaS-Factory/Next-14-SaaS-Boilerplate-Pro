@@ -2,6 +2,7 @@
 import { installPlugin } from "@/actions/global/pluginsSystem/install-plugin";
 import { uninstallPlugin } from "@/actions/global/pluginsSystem/unistall-plugin";
 import { Button } from "@tremor/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -33,7 +34,9 @@ export const PluginCard = ({ plugin }: { plugin: any }) => {
       className="overflow-hidden rounded-xl border border-gray-200"
     >
       <div className="flex items-center flex-wrap gap-x-4 border-b border-gray-900/5 bg-main p-6">
-        <img
+        <Image
+         width={100}
+         height={100}
           src={plugin.logo ?? "/assets/img/avatar.png"}
           alt={plugin.name}
           className="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10"

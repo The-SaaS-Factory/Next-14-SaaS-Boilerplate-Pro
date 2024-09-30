@@ -1,37 +1,6 @@
 "use server";
-import {  InvoiceItemType } from "@/interfaces/billingModule";
+import { InvoiceItemType } from "@/interfaces/billingModule";
 import prisma from "@/lib/db";
-
-export const generateKpi = async () => {
-  await prisma.adminKpi.create({
-    data: {
-      name: "user_count_total",
-      type: "counts",
-      value: await prisma.user.count(),
-    },
-  });
-
- 
-
-  await prisma.adminKpi.create({
-    data: {
-      name: "memberships_revenue",
-      type: "counts",
-      value: await getTotalInvoiceAmount(),
-    },
-  });
-
-  await prisma.adminKpi.create({
-    data: {
-      name: "memberships_actived_count_total",
-      type: "counts",
-      value: await prisma.membership.count(),
-    },
-  });
-
-  return true;
-};
-
 
 export async function getTotalInvoiceAmount() {
   const invoices = await prisma.invoice.findMany({
@@ -57,7 +26,6 @@ export async function getTotalInvoiceAmount() {
 
   return total;
 }
-
 
 export const getCurrencyIdByCode = async (code: string) => {
   const currency = await prisma.adminCurrencies.findFirst({
@@ -92,4 +60,3 @@ export const getAdminSettingValue = async (
 
   return setting ? setting : null;
 };
-

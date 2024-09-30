@@ -53,7 +53,7 @@ export async function GET(request: Request) {
 
     if (userMemberships.length === 0) {
       //Find the main profile
-      const mainProfile = await prisma.profile.findFirst({
+      const mainProfile = await prisma.organization.findFirst({
         where: {
           isMainTenant: true,
         },

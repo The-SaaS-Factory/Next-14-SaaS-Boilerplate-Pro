@@ -10,7 +10,7 @@ export const getMembershipDetails = async (membershipId: number) => {
       id: membershipId,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           name: true,

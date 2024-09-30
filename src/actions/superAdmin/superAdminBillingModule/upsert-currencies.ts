@@ -19,7 +19,10 @@ export const upsertCurrency = async ({
   try {
     const { userMembership } = await getMembership();
 
-    checkPermission(userMembership.permissions, scope);
+    checkPermission(
+      userMembership.permissions.map((p) => p.name),
+      scope
+    );
 
     const currency = await prisma.adminCurrencies.upsert({
       where: {

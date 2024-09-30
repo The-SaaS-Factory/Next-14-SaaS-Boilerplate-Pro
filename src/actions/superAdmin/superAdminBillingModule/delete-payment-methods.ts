@@ -2,17 +2,18 @@
 
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
-import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
- 
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+
 import { revalidatePath } from "next/cache";
 const scope = "superAdmin:billing:upsert";
 
 export const deletePaymentMethod = async (paymentMethodId: number) => {
+  const { userMembership } = await getMembership();
 
-const { permissions } = await getMembership();
-
-  checkPermission(permissions, scope);
-
+  checkPermission(
+    userMembership.permissions.map((p) => p.name),
+    scope
+  );
 
   await prisma.paymentMethod.delete({
     where: {

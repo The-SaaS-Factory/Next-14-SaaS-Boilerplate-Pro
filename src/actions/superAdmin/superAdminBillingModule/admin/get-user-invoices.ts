@@ -14,7 +14,7 @@ export const getUserInvoices = async ({
   const limit = args.limit;
   const offset = args.offset;
 
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
 
   let whereSearch: any;
 
@@ -37,13 +37,13 @@ export const getUserInvoices = async ({
 
   const data = await prisma.invoice.findMany({
     where: {
-      organizationId: id,
+      organizationId: organization.id,
       ...whereSearch,
     },
     skip: offset,
     take: limit,
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           name: true,
@@ -68,10 +68,10 @@ export const getUserInvoices = async ({
 //
 
 export const getUserInvoicesPendingCount = async () => {
-  const { id } = await getMembership();
+  const { organization } = await getMembership();
   const data = await prisma.invoice.count({
     where: {
-      organizationId: id,
+      organizationId: organization.id,
       status: "PENDING",
     },
   });

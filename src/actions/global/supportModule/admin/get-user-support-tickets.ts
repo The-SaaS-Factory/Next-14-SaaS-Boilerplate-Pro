@@ -13,8 +13,8 @@ export const getUserSupportTickets = async ({
 }) => {
   const { offset, limit } = args;
 
-  const { id } = await getMembership();
-
+  const { organization } = await getMembership();
+  const id = organization.id;
   let whereSearch: any;
 
   whereSearch = {};
@@ -39,7 +39,7 @@ export const getUserSupportTickets = async ({
       ...whereSearch,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           email: true,
@@ -65,8 +65,8 @@ export const getUserSupportTickets = async ({
 };
 
 export const getSupportTicketsActivesCount = async () => {
-  const { id } = await getMembership();
-
+  const { organization } = await getMembership();
+  const id = organization.id;
   let whereOwner: any;
 
   whereOwner = {

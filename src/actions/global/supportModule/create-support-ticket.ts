@@ -4,14 +4,15 @@ import { notifyToSuperAdmin } from "@/utils/facades/serverFacades/notificationFa
 import { PublicationContentType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const createSupportTickets = async (args: any) => {
   await prisma.$transaction(
     async (tx: any) => {
       try {
-        const { id } = await getMembership();
-
+        const { organization } = await getMembership();
+        const id = organization.id;
+        
         let dataForTicket = {};
         let dataForFirstMessage = {};
         const payload = args.payload;

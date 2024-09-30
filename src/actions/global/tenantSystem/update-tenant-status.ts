@@ -2,8 +2,9 @@
 import prisma from "@/lib/db";
 import { sendLoopsTransactionalEventToUser } from "@/utils/facades/serverFacades/loopsEmailMarketingFacade";
 import { notifyToSuperAdmin } from "@/utils/facades/serverFacades/notificationFacade";
-import { ProfileStatus } from "@prisma/client";
+import { OrganizationStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+
 const AGENCY_UPDATE_STATUS = process.env.AGENCY_UPDATE_STATUS;
 
 export const updateTenantStatus = async ({
@@ -11,9 +12,9 @@ export const updateTenantStatus = async ({
   status,
 }: {
   modelId: number;
-  status: ProfileStatus;
+  status: OrganizationStatus;
 }) => {
-  const profile = await prisma.profile.update({
+  const profile = await prisma.organization.update({
     where: {
       id: modelId,
     },

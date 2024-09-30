@@ -26,6 +26,7 @@ export const getMembership = async () => {
       organization: {
         include: {
           permissions: true,
+          membership: true,
         },
       },
       user: true,
@@ -55,6 +56,7 @@ export const getMembership = async () => {
       avatar: membership.organization.avatar,
       status: membership.organization.status,
       permissions: membership.organization.permissions,
+      membership: membership.organization.membership,
     },
   };
 

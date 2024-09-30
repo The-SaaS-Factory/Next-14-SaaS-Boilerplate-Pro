@@ -13,7 +13,7 @@ export const upsertPlan = async ({
   modelId?: number;
   payload: Prisma.PlanCreateInput | Prisma.PlanUpdateInput;
 }) => {
-const { permissions } = await getMembership();
+const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
   
   
 

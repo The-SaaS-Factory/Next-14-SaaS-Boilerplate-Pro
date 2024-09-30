@@ -7,7 +7,7 @@ export const getPublicInvoice = async (invoiceId) => {
       id: invoiceId,
     },
     include: {
-      profile: {
+      organization: {
         select: {
           id: true,
           name: true,
@@ -16,11 +16,6 @@ export const getPublicInvoice = async (invoiceId) => {
         },
       },
       Items: true,
-      order: {
-        include: {
-          contact: true,
-        },
-      },
       user: true,
       coupons: true,
       Currency: true,

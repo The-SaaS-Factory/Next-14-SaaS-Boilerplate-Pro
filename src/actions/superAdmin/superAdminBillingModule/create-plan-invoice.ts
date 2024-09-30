@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import {
   InvoiceModelType,
   InvoiceStatus,
@@ -19,9 +19,6 @@ export const createPlanInvoice = async ({
 }: {
   payload: PlanInvoiceType;
 }) => {
-
-
-
   let stripePriceId = null;
 
   const price = await prisma.pricing.findUnique({
@@ -64,13 +61,13 @@ export const createPlanInvoice = async ({
     }
   }
 
-  const {  id } = await getMembership();
+  const { organization } = await getMembership();
 
   //Create Invoice
   const payloadInvoice: Prisma.InvoiceCreateInput = {
-    profile: {
+    organization: {
       connect: {
-         id
+        id: organization.id,
       },
     },
     type: InvoiceModelType.MEMBERSHIP,

@@ -28,7 +28,7 @@ export const sendInternalNotificatoin = async (
     });
 
     if (notificationLoopsId) {
-      const user = await prisma.profile.findUnique({
+      const user = await prisma.organization.findUnique({
         where: {
           id,
         },

@@ -31,7 +31,7 @@ export const getAllUser = async ({
     },
     skip: offset,
     take: limit,
-    include: { profilesMemberships: true },
+    include: { userMemberships: true },
     orderBy: {
       createdAt: "desc",
     },

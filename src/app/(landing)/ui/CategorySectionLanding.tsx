@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export const CategorySectionLandingPage = () => {
@@ -22,7 +23,9 @@ export const CategorySectionLandingPage = () => {
 
         <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
           <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
-            <img
+            <Image
+             width={350}
+             height={350}
               src="https://tailwindui.com/img/ecommerce-images/home-page-03-featured-category.jpg"
               alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee."
               className="object-cover object-center group-hover:opacity-75"
@@ -46,7 +49,9 @@ export const CategorySectionLandingPage = () => {
             </div>
           </div>
           <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-            <img
+            <Image
+            width={350}
+            height={350}
               src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
               alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters."
               className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
@@ -70,7 +75,9 @@ export const CategorySectionLandingPage = () => {
             </div>
           </div>
           <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-            <img
+            <Image
+              width={350}
+              height={350}
               src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
               alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk."
               className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
