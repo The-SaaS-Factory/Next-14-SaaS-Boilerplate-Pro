@@ -1,9 +1,9 @@
 "use server";
 import prisma from "@/lib/db";
 
-export const getTenantStatus = async (profileId: number) => {
+export const getTenantStatus = async (organizationId: number) => {
     const profile = await prisma.profile.findUnique({
-        where: { id: profileId },
+        where: { id: organizationId },
         select: {
             status: true,
         },

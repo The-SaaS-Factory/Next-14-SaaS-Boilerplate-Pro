@@ -7,7 +7,7 @@ export const getTenantPluginDetails = async (pluginSlug: string) => {
 
   return await prisma.profilePlugin.findFirst({
     where: {
-      profileId: id,
+      organizationId: id,
       plugin: {
         slug: pluginSlug,
       },

@@ -16,7 +16,7 @@ export const getProductDetailsInLanding = async (productSlug: string) => {
     const relatedProducts = await prisma.product.findMany({
       where: {
         status: "ACTIVE",
-        profileId: product.profileId,
+        organizationId: product.organizationId,
         categories: {
           some: {
             id: {

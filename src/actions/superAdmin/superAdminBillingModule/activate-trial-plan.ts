@@ -32,7 +32,7 @@ export const activateTrialPlan = async ({
   const membership = await updateMembership({
     pricingId: pricingId,
     currencyId: currencyId,
-    profileId: id,
+    organizationId: id,
     months: plan.freeTrialDays / 30,
     planId: plan.id,
   });

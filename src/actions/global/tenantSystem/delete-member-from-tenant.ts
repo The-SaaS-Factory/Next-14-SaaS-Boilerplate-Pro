@@ -5,11 +5,11 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
 
 export const deleteTenantMember = async (modelId: number) => {
-  const { profile } = await getMembership();
+  const { organization } = await getMembership();
 
-  await prisma.profileMembership.delete({
+  await prisma.userMembership.delete({
     where: {
-      profileId: profile.id,
+      organizationId: organization.id,
       id: modelId,
     },
   });

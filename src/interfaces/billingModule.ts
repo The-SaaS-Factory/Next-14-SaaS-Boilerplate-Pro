@@ -109,7 +109,7 @@ export type MembershipType = {
   id: number;
   user?: UserType | null;
   endDate: Date;
-  plan: PlanType;
+  plan?: PlanType;
   invoice?: IInvoice | null;
   startDate: Date;
   organization?: OrganizationType | null;

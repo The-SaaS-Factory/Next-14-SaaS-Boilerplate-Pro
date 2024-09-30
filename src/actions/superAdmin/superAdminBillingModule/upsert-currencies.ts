@@ -1,5 +1,4 @@
 "use server";
-import { createAmountByDefaultForAgencies } from "@/actions/admin/walletModule/create-amount-movement";
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
@@ -18,9 +17,9 @@ export const upsertCurrency = async ({
     | Prisma.AdminCurrenciesUpdateInput;
 }) => {
   try {
-    const { permissions } = await getMembership();
+    const { userMembership } = await getMembership();
 
-    checkPermission(permissions, scope);
+    checkPermission(userMembership.permissions, scope);
 
     const currency = await prisma.adminCurrencies.upsert({
       where: {
@@ -40,18 +39,9 @@ export const upsertCurrency = async ({
       },
     });
 
-    const agencies = await prisma.profile.findMany({});
-
-    await Promise.all(
-      agencies.map(async (agency) => {
-        await createAmountByDefaultForAgencies({
-          id: agency.id,
-          currencyId: currency.id,
-        });
-      })
-    );
-
     revalidatePath("/admin/settings/billing");
+
+    return currency;
   } catch (error: any) {
     console.log(error);
 

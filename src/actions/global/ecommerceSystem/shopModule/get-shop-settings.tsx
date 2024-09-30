@@ -6,7 +6,7 @@ import prisma from "@/lib/db";
 export const getShopSettings = async () => {
   const { id } = await getMembership();
   try {
-    const shopSettings = await prisma.profileSetting.findMany({
+    const shopSettings = await prisma.organizationSetting.findMany({
       where: {
         userId: id,
       },

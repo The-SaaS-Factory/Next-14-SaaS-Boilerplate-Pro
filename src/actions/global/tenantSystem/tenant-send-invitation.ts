@@ -14,7 +14,7 @@ export interface PayloadIntiteMember {
 }
 
 export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
-  const { profile } = await getMembership();
+  const { organization } = await getMembership();
 
   let user;
   user = await prisma.user.findFirst({
@@ -30,11 +30,11 @@ export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
         email: payload.email,
         name: payload.name,
         password: hashedPassword,
-        profilesMemberships: {
+        userMemberships: {
           create: {
-            profile: {
+            organization: {
               connect: {
-                id: profile.id,
+                id: organization.id,
               },
             },
           },
@@ -47,16 +47,16 @@ export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
       transactionalId: sendInvitationEmailId,
       dataVariables: {
         userName: user.name,
-        agencyName: profile.name,
+        agencyName: organization.name,
         url: constants.appUrl,
         email: user.email,
         password: payload.password,
       },
     });
   } else {
-    const haveMembership = await prisma.profileMembership.findFirst({
+    const haveMembership = await prisma.userMembership.findFirst({
       where: {
-        profileId: profile.id,
+        organizationId: organization.id,
         userId: user.id,
       },
     });
@@ -65,9 +65,9 @@ export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
       throw Error("Este usuario ya es miembro de la agencia");
     }
 
-    await prisma.profileMembership.create({
+    await prisma.userMembership.create({
       data: {
-        profileId: profile.id,
+        organizationId: organization.id,
         userId: user.id,
       },
     });
@@ -77,7 +77,7 @@ export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
       transactionalId: sendInvitationEmailId,
       dataVariables: {
         userName: user.name,
-        agencyName: profile.name,
+        agencyName: organization.name,
         url: constants.appUrl,
         email: user.email,
         password: payload.password,

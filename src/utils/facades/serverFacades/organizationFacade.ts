@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
-import { createAmountByDefaultForAgencies } from "@/actions/admin/walletModule/create-amount-movement";
-export const createProfile = async (
+import { UserMembershipRole } from "@prisma/client";
+export const createOrganization = async (
   user: {
     id: number;
     name?: string;
@@ -16,19 +16,19 @@ export const createProfile = async (
   const permissions = await prisma.permission.findMany({
     where: {
       name: {
-        startsWith: "agency",
+        startsWith: "organization",
       },
     },
   });
 
   //Desactive all other profiles
-  const userMemberships = await prisma.profileMembership.findMany({
+  const userMemberships = await prisma.userMembership.findMany({
     where: {
       userId: user.id,
     },
   });
 
-  await prisma.profileMembership.updateMany({
+  await prisma.userMembership.updateMany({
     where: {
       id: {
         in: userMemberships.map((m) => m.id),
@@ -39,7 +39,7 @@ export const createProfile = async (
     },
   });
 
-  const profile = await prisma.profile.create({
+  const org = await prisma.organization.create({
     data: {
       name: user.profileName,
       email: user.email,
@@ -50,30 +50,30 @@ export const createProfile = async (
     },
   });
 
-  const newProfileMembership = await prisma.profileMembership.create({
+  const newProfileMembership = await prisma.userMembership.create({
     data: {
       user: {
         connect: {
           id: user.id,
         },
       },
-      profile: {
+      organization: {
         connect: {
-          id: profile.id,
+          id: org.id,
         },
       },
+      role: UserMembershipRole.ADMIN,
       isActive: true,
       permissions: {
         connect: permissions,
       },
     },
     include: {
-      profile: true,
+      organization: true,
     },
   });
 
-  checkMarketingActionsOnRegister(newProfileMembership.profile.id);
-  createAmountByDefaultForAgencies({ id: newProfileMembership.profile.id });
+  checkMarketingActionsOnRegister(newProfileMembership.organization.id);
 
   return newProfileMembership;
 };

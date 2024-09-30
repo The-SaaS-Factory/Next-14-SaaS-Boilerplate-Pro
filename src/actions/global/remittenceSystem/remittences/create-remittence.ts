@@ -45,7 +45,7 @@ export const createRemittence = async (payload: any) => {
             id: profile.id,
           },
         },
-        profileMembership: {
+        userMembership: {
           connect: {
             id: id,
           },

@@ -30,7 +30,7 @@ export const getUserSupportTickets = async ({
   let whereOwner: any;
 
   whereOwner = {
-    profileId: id,
+    organizationId: id,
   };
 
   const data = await prisma.supportTicket.findMany({
@@ -70,7 +70,7 @@ export const getSupportTicketsActivesCount = async () => {
   let whereOwner: any;
 
   whereOwner = {
-    profileId: id,
+    organizationId: id,
   };
 
   const data = await prisma.supportTicket.count({

@@ -4,11 +4,11 @@ import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getTenantMembers = async () => {
-  const { profile } = await getMembership();
+  const { organization } = await getMembership();
 
-  return await prisma.profileMembership.findMany({
+  return await prisma.userMembership.findMany({
     where: {
-      profileId: profile.id,
+      organizationId: organization.id,
     },
     include: {
       user: {

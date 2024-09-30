@@ -20,7 +20,7 @@ export const createCar = async (
       data: {
         priceTotal: subtotal,
         profile: {
-          connect: { id: items[0].profileId },
+          connect: { id: items[0].organizationId },
         },
         user: {
           connect: { id: userId },

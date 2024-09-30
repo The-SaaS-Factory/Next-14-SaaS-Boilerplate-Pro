@@ -9,7 +9,7 @@ export const uninstallPlugin = async (pluginId: number) => {
 
   const installed = await prisma.profilePlugin.findFirst({
     where: {
-      profileId: id,
+      organizationId: id,
       pluginId: pluginId,
     },
   });

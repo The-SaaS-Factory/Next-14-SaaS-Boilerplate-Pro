@@ -1,12 +1,14 @@
 "use server";
 import prisma from "@/lib/db";
-import { getMembership,   } from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getUserCapabilities = async () => {
-  const { id } = await getMembership();
-  return await prisma.profileCapabilities.findMany({
+  
+  const { organization } = await getMembership();
+
+  return await prisma.organizationCapabilities.findMany({
     where: {
-      profileId: id,
+      organizationId: organization.id,
     },
   });
 };

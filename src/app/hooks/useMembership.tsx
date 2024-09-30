@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 interface MembershipData {
   profile: any;
   permissions: any[];
-  profileMembership: any;
+  userMembership: any;
 }
 
 export const useMembership = () => {
@@ -29,6 +29,6 @@ export const useMembership = () => {
   return {
     permissions: data?.permissions,
     profile: data?.profile,
-    profileMembership: data?.profileMembership,
+    userMembership: data?.userMembership,
   };
 };

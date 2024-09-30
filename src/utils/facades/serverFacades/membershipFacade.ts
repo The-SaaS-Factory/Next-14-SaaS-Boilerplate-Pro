@@ -1,9 +1,9 @@
 "use server";
 import prisma from "@/lib/db";
-const getCurrentMembership = async (profileId: number) => {
+const getCurrentMembership = async (organizationId: number) => {
   return await prisma.membership.findFirst({
     where: {
-      profileId,
+      organizationId,
     },
     include: {
       plan: true,
@@ -12,22 +12,22 @@ const getCurrentMembership = async (profileId: number) => {
 };
 
 export const updateMembership = async ({
-  profileId,
+  organizationId,
   months,
   planId,
   pricingId,
   currencyId,
 }: {
-  profileId: number;
+  organizationId: number;
   months: number;
   planId: number;
   pricingId: number | null;
   currencyId: number | null;
 }) => {
-  let currentMemberShip = await getCurrentMembership(profileId);
+  let currentMemberShip = await getCurrentMembership(organizationId);
 
   const membership = await createMembership({
-    profileId,
+    organizationId,
     planId,
     currentMemberShip,
     months,
@@ -35,20 +35,20 @@ export const updateMembership = async ({
     currencyId,
   });
 
-  propagateCapabilitiesFromPlanToUser(planId, profileId);
+  propagateCapabilitiesFromPlanToUser(planId, organizationId);
 
   return membership;
 };
 
 const createMembership = async ({
-  profileId,
+  organizationId,
   planId,
   currentMemberShip,
   months,
   pricingId,
   currencyId,
 }: {
-  profileId: number;
+  organizationId: number;
   planId: number;
   currentMemberShip: any;
   months: number;
@@ -58,7 +58,7 @@ const createMembership = async ({
   const createPayload = {
     pricingId: pricingId,
     currencyId: currencyId,
-    profileId: profileId,
+    organizationId: organizationId,
     planId: planId,
     startDate: new Date(),
     endDate: new Date(),
@@ -92,7 +92,7 @@ export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
     where: {
       planId: planId,
     },
-    distinct: ["profileId"],
+    distinct: ["organizationId"],
   });
 
   users.map((membership: any) => {
@@ -102,7 +102,7 @@ export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
 
 export const propagateCapabilitiesFromPlanToUser = async (
   planId: number,
-  profileId: number
+  organizationId: number
 ) => {
   const capabilities = await prisma.planCapabilities.findMany({
     where: {
@@ -117,7 +117,7 @@ export const propagateCapabilitiesFromPlanToUser = async (
     capabilities.map(async (c: any) => {
       const userCapabilicitie = await prisma.profileCapabilities.findFirst({
         where: {
-          profileId: profileId,
+          organizationId: organizationId,
           capabilitieId: c.capabilitie.id,
         },
       });
@@ -125,7 +125,7 @@ export const propagateCapabilitiesFromPlanToUser = async (
       if (!userCapabilicitie) {
         await prisma.profileCapabilities.create({
           data: {
-            profileId: profileId,
+            organizationId: organizationId,
             capabilitieId: c.capabilitie.id,
             count: c.capabilitie.type === "LIMIT" ? 0 : c.count,
           },
@@ -144,10 +144,10 @@ export const propagateCapabilitiesFromPlanToUser = async (
   );
 };
 
-export const getUserCapabilitiesNames = async (profileId: number) => {
+export const getUserCapabilitiesNames = async (organizationId: number) => {
   const membership = await prisma.membership.findFirst({
     where: {
-      profileId,
+      organizationId,
     },
     include: {
       plan: {
@@ -171,12 +171,12 @@ export const getUserCapabilitiesNames = async (profileId: number) => {
 };
 
 export const getUserCapabilitieLimitAvailable = async (
-  profileId: number,
+  organizationId: number,
   capabilityName: string
 ) => {
   const userCapabilities = await prisma.profileCapabilities.findFirst({
     where: {
-      profileId,
+      organizationId,
       capabilitie: {
         name: capabilityName,
       },
@@ -191,7 +191,7 @@ export const getUserCapabilitieLimitAvailable = async (
 
   const userMembership = await prisma.membership.findFirst({
     where: {
-      profileId,
+      organizationId,
     },
   });
 
@@ -210,12 +210,12 @@ export const getUserCapabilitieLimitAvailable = async (
 };
 
 export const registerCapabilitieUsage = async (
-  profileId: number,
+  organizationId: number,
   capabilityName: string
 ) => {
   const userCapabilities = await prisma.profileCapabilities.findFirst({
     where: {
-      profileId,
+      organizationId,
       capabilitie: {
         name: capabilityName,
       },
@@ -229,7 +229,7 @@ export const registerCapabilitieUsage = async (
 
   const userMembership = await prisma.membership.findFirst({
     where: {
-      profileId,
+      organizationId,
     },
   });
 

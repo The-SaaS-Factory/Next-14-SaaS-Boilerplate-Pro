@@ -32,7 +32,7 @@ export const upsertProductCategory = async ({
     await prisma.productCategory.upsert({
       where: {
         id: modelId ? modelId : 0,
-        profileId: id,
+        organizationId: id,
       },
       update: {
         name: payload.name as string,
@@ -44,7 +44,7 @@ export const upsertProductCategory = async ({
         slug: slug,
         name: payload.name as string,
         description: payload.description as string,
-        profileId: id,
+        organizationId: id,
         categoryId: payload.categoryId,
       },
     });

@@ -92,7 +92,7 @@ export const getTenantOrders = async ({
 
   const data = await prisma.order.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       status: args.status,
       ...whereSearch,
     },
@@ -119,7 +119,7 @@ export const getTenantOrders = async ({
   });
 
   const totalCount = await prisma.order.count({
-    where: { profileId: id },
+    where: { organizationId: id },
   });
 
   const totalPages = Math.ceil(totalCount / limit);

@@ -6,17 +6,17 @@ import { setPermissionForProfile } from "@/actions/global/permissionsSystem/set-
 import { removePermissionForProfile } from "@/actions/global/permissionsSystem/remove-permission-for-profile";
 
 interface Props {
-  profileId: number;
+  organizationId: number;
 }
 
-export const PermissionsTable: React.FC<Props> = ({ profileId }) => {
+export const PermissionsTable: React.FC<Props> = ({ organizationId }) => {
   const [permissions, setPermissions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const _permissions = await getPermissionsForProfile(profileId);
+        const _permissions = await getPermissionsForProfile(organizationId);
         setPermissions(_permissions);
       } catch (error) {
         console.error("Failed to fetch permissions:", error);
@@ -26,7 +26,7 @@ export const PermissionsTable: React.FC<Props> = ({ profileId }) => {
     };
 
     fetchData();
-  }, [profileId]);
+  }, [organizationId]);
 
   console.log(permissions);
   
@@ -38,13 +38,13 @@ export const PermissionsTable: React.FC<Props> = ({ profileId }) => {
       );
 
       if (hasPermission) {
-        await removePermissionForProfile(profileId, permissionName);
+        await removePermissionForProfile(organizationId, permissionName);
         setPermissions(
           permissions.filter((item) => item.name !== permissionName)
         );
       } else {
-        await setPermissionForProfile(profileId, permissionName);
-        const updatedPermissions = await getPermissionsForProfile(profileId);
+        await setPermissionForProfile(organizationId, permissionName);
+        const updatedPermissions = await getPermissionsForProfile(organizationId);
         setPermissions(updatedPermissions);
       }
     } catch (error) {

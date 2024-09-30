@@ -16,7 +16,7 @@ export const upsertEcommerceCollection = async ({
     await prisma.collection.upsert({
       where: {
         id: modelId ? modelId : 0,
-        profileId: id,
+        organizationId: id,
       },
       update: {
         name: payload.name as string,
@@ -31,7 +31,7 @@ export const upsertEcommerceCollection = async ({
         },
       },
       create: {
-        profileId: id,
+        organizationId: id,
         name: payload.name as string,
         status: payload.status,
         position: payload.position,

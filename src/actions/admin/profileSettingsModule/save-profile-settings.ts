@@ -10,17 +10,16 @@ export const saveProfileSettings = async (settings: any) => {
     await Promise.all(
       settings.map(async (setting: any) => {
         try {
-          const { profile } = await getMembership();
-          const existingSetting = await prisma.profileSetting.findFirst({
+          const { organization } = await getMembership();
+          const existingSetting = await prisma.organizationSetting.findFirst({
             where: {
               settingName: setting.settingName,
-              userId: profile.id,
+              organizationId: organization.id,
             },
           });
 
-
           if (existingSetting) {
-            await prisma.profileSetting.update({
+            await prisma.organizationSetting.update({
               where: { id: existingSetting.id },
               data: {
                 settingValue:
@@ -30,9 +29,9 @@ export const saveProfileSettings = async (settings: any) => {
               },
             });
           } else {
-            await prisma.profileSetting.create({
+            await prisma.organizationSetting.create({
               data: {
-                userId: profile.id,
+                organizationId: organization.id,
                 settingName: setting.settingName,
                 settingValue:
                   typeof setting.settingValue === "number"
@@ -45,10 +44,9 @@ export const saveProfileSettings = async (settings: any) => {
           console.log(error);
         }
       })
-    )
-      .catch((err) => {
-        console.log(err);
-      });
+    ).catch((err) => {
+      console.log(err);
+    });
 
     revalidatePath("/home/admin/configuraciones");
 

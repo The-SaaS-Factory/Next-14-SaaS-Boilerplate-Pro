@@ -38,7 +38,7 @@ export const getAllShippingZones = async ({
 
   const data = await prisma.profileShippingZone.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
     include: {

@@ -141,7 +141,7 @@ const getSlug = async (tx: PrismaClient, name: string, id: number) => {
     await tx.product.findFirst({
       where: {
         slug: slug,
-        profileId: {
+        organizationId: {
           not: id,
         },
       },

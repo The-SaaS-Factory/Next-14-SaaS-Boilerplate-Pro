@@ -8,7 +8,7 @@ export const getClientFavorites = async () => {
 
   return await prisma.productFavorite.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
     },
     include: {
       product: {

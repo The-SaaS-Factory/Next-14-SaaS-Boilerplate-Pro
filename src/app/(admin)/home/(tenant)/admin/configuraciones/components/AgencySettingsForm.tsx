@@ -65,8 +65,8 @@ export const AgencySettingsForm = async () => {
     description: "",
   };
 
-  const { profile } = await getMembership();
-  const settings = await getProfileSettings(profile.id);
+  const { organization } = await getMembership();
+  const settings = await getProfileSettings(organization.id);
 
   return (
     <>

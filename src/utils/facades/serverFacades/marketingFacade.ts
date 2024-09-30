@@ -7,10 +7,10 @@ import {
   storeContactInLoopsAudience,
 } from "./loopsEmailMarketingFacade";
 
-export const checkMarketingActionsOnRegister = async (profileId: number) => {
-  activateFreeTrial(profileId);
-  sendWelcomeEmail(profileId);
-  storeContactInEmailProvider(profileId);
+export const checkMarketingActionsOnRegister = async (organizationId: number) => {
+  activateFreeTrial(organizationId);
+  sendWelcomeEmail(organizationId);
+  storeContactInEmailProvider(organizationId);
 };
 
 const storeContactInEmailProvider = async (id: number) => {
@@ -27,7 +27,7 @@ const storeContactInEmailProvider = async (id: number) => {
   }
 };
 
-const activateFreeTrial = async (profileId: number) => {
+const activateFreeTrial = async (organizationId: number) => {
   const freeTrial: string | null = await getSuperAdminSetting(
     "MARKETING_FREE_TRIAL"
   );
@@ -46,7 +46,7 @@ const activateFreeTrial = async (profileId: number) => {
       if (plan) {
         const months = calculateMonthsFromDays(days ? parseInt(days) : 14);
         updateMembership({
-          profileId,
+          organizationId,
           months,
           pricingId: null,
           currencyId: null,

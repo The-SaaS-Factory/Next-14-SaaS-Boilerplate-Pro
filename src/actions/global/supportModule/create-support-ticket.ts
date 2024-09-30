@@ -24,7 +24,7 @@ export const createSupportTickets = async (args: any) => {
           },
         };
         dataForFirstMessage = {
-          profileId: id,
+          organizationId: id,
         };
 
         const ticket = await tx.supportTicket.create({

@@ -38,7 +38,7 @@ export const getAllEcommerceCollections = async ({
 
   const data = await prisma.collection.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
   });

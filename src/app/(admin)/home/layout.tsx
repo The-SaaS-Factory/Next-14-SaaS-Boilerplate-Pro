@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 import AuthSessionHandler from "@/components/core/AuthSessionHandler";
 import SessionWrapper from "@/components/core/SessionWrapper";
-import BusinessAdminLayout from "@/components/layouts/BusinessAdminLayout";
 import { SectionProvider } from "@/components/ui/SectionProvider";
- 
+import TenantAdminLayout from "@/components/layouts/TenantAdminLayout";
 
 const AdminRoot = async ({ children }: { children: ReactNode }) => {
   return (
@@ -12,7 +11,7 @@ const AdminRoot = async ({ children }: { children: ReactNode }) => {
         <SessionWrapper>
           <AuthSessionHandler>
             <div>
-              <BusinessAdminLayout>{children}</BusinessAdminLayout>
+              <TenantAdminLayout>{children}</TenantAdminLayout>
             </div>
           </AuthSessionHandler>
         </SessionWrapper>

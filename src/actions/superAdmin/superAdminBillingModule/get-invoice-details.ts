@@ -20,7 +20,7 @@ export const getInvoiceDetails = async (invoiceId: number) => {
     ANDQUERY = [
       {
         id: invoiceId,
-        profileId: id,
+        organizationId: id,
       },
     ];
   }

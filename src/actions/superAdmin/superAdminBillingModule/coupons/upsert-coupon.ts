@@ -47,7 +47,7 @@ export const upsertCoupon = async ({
         durationInMonths: payload.durationInMonths,
         maxRedemptions: payload.maxRedemptions,
         percentOff: payload.percentOff,
-        profileId: payload.userId,
+        organizationId: payload.userId,
         status: payload.status,
         code: codeGenerated,
       },
@@ -59,7 +59,7 @@ export const upsertCoupon = async ({
         maxRedemptions: payload.maxRedemptions as number,
         percentOff: payload.percentOff as number,
         status: payload.status as string,
-        profileId: payload.userId,
+        organizationId: payload.userId,
         code: codeGenerated,
       },
     });

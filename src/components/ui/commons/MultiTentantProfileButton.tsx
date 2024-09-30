@@ -9,28 +9,31 @@ import {
 import { classNames } from "@/utils/facades/serverFacades/strFacade";
 import { useCallback, useEffect, useState } from "react";
 import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
-import { getUserAllProfiles } from "@/actions/admin/userModule/get-user-all-profiles";
+import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { NewProfileModal } from "../TenantAdminHeader";
 import Image from "next/image";
 import Link from "next/link";
 
-export const MultiTentantProfileButton = ({ profile, profileMembership }: any) => {
-  const [profiles, setProfiles] = useState<any[]>([]);
+export const MultiTentantProfileButton = ({
+  organization,
+  userMembership,
+}: any) => {
+  const [organizations, setOrganizations] = useState<any[]>([]);
   const [openNewPorfile, setOpenNewProfile] = useState(false);
 
-  const getAllUserProfiles = useCallback(async () => {
-    const profiles = await getUserAllProfiles();
-    setProfiles(profiles);
+  const getAllUserOrganizations = useCallback(async () => {
+    const profiles = await getUserAllOrganizations();
+    setOrganizations(profiles);
   }, []);
 
   useEffect(() => {
-    getAllUserProfiles();
+    getAllUserOrganizations();
   }, []);
 
-  const handleChangeProfile = async (profileId: number) => {
-    await updateUserProfileActive(profileId).then(() => {
+  const handleChangeProfile = async (organizationId: number) => {
+    await updateUserProfileActive(organizationId).then(() => {
       window.location.reload();
     });
   };
@@ -44,7 +47,7 @@ export const MultiTentantProfileButton = ({ profile, profileMembership }: any) =
             width={32}
             height={32}
             className="h-8 w-8 rounded-full bg-gray-50"
-            src={profile?.avatar ?? "/assets/img/avatar.png"}
+            src={organization?.avatar ?? "/assets/img/avatar.png"}
             alt=""
           />
           <span className="hidden lg:flex lg:items-center">
@@ -52,7 +55,7 @@ export const MultiTentantProfileButton = ({ profile, profileMembership }: any) =
               className="ml-4 text-sm font-semibold leading-6 text-gray-900"
               aria-hidden="true"
             >
-              {profileMembership?.name || profile?.name}
+              {userMembership?.name || organization?.name}
             </span>
             <ChevronDownIcon
               className="ml-2 h-5 w-5 text-gray-400"
@@ -110,21 +113,21 @@ export const MultiTentantProfileButton = ({ profile, profileMembership }: any) =
                 <span>Cambiar de agencia</span>
               </div>
               <div className="px-3">
-                {profiles.map((profile) => (
-                  <MenuItem key={profile.id}>
+                {organizations.map((org) => (
+                  <MenuItem key={org.id}>
                     <button
-                      onClick={() => handleChangeProfile(profile.id)}
+                      onClick={() => handleChangeProfile(org.id)}
                       className="flex hover:bg-main-hover hover:scale-100 p-3 items-center space-x-3"
                     >
                       <Image
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full bg-gray-50"
-                        src={profile?.avatar ?? "/assets/img/avatar.png"}
+                        src={org?.avatar ?? "/assets/img/avatar.png"}
                         alt=""
                       />
 
-                      <span className="truncate">{profile?.name}</span>
+                      <span className="truncate">{org?.name}</span>
                     </button>
                   </MenuItem>
                 ))}

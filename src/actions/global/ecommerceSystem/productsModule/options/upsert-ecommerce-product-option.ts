@@ -16,7 +16,7 @@ export const upsertEcommerceProductOptions = async ({
     await prisma.option.upsert({
       where: {
         id: modelId ? modelId : 0,
-        profileId: id,
+        organizationId: id,
       },
       update: {
         name: payload.name as string,
@@ -27,7 +27,7 @@ export const upsertEcommerceProductOptions = async ({
         name: payload.name as string,
         status: payload.status,
         position: payload.position,
-        profileId: id,
+        organizationId: id,
       },
     });
 

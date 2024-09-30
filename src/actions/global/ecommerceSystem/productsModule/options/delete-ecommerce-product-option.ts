@@ -11,7 +11,7 @@ export const deleteEcommerceProductOption = async (modelId: number) => {
     await prisma.option.delete({
       where: {
         id: modelId,
-        profileId: id,
+        organizationId: id,
       },
     });
 

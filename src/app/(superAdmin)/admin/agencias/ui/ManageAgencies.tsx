@@ -207,7 +207,7 @@ export const ManageAgencies = ({ agencies }: { agencies: any }) => {
                                         </div>
 
                                         <UpdateProfileStatus
-                                          profileId={agency.id}
+                                          organizationId={agency.id}
                                         ></UpdateProfileStatus>
                                       </div>{" "}
                                       <div className="flex  divide-x-2 my-7">
@@ -285,7 +285,7 @@ export const ManageAgencies = ({ agencies }: { agencies: any }) => {
 
                         {/* Permisos */}
                         <PermissionsTable
-                          profileId={agency.id}
+                          organizationId={agency.id}
                         ></PermissionsTable>
                       </div>
                     </AnimatePresence>

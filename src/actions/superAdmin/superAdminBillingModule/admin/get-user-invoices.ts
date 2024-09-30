@@ -37,7 +37,7 @@ export const getUserInvoices = async ({
 
   const data = await prisma.invoice.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
     skip: offset,
@@ -71,7 +71,7 @@ export const getUserInvoicesPendingCount = async () => {
   const { id } = await getMembership();
   const data = await prisma.invoice.count({
     where: {
-      profileId: id,
+      organizationId: id,
       status: "PENDING",
     },
   });

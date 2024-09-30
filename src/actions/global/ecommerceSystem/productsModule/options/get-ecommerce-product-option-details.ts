@@ -6,7 +6,7 @@ export const getEcommerceProductOptionDetails = async (optionId: number) => {
   return await prisma.option.findUnique({
     where: {
       id: optionId,
-      profileId: id,
+      organizationId: id,
     },
     include: {
       values: {

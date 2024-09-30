@@ -11,7 +11,7 @@ export const deleteProduct = async (modelId: number) => {
     await prisma.product.delete({
       where: {
         id: modelId,
-        profileId: id,
+        organizationId: id,
       },
     });
 

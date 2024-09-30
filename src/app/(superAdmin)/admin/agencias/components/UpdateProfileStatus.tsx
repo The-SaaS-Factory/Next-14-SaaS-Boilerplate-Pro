@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 
 const statusOptions = ["ACTIVE", "INACTIVE", "PENDING"];
 
-export const UpdateProfileStatus = ({ profileId }: { profileId: number }) => {
+export const UpdateProfileStatus = ({ organizationId }: { organizationId: number }) => {
   const [status, setStatus] = useState<string>("");
 
   const handleChange = async (newStatus: string) => {
     if (newStatus !== status) {
       setStatus(newStatus);
       await updateTenantStatus({
-        modelId: profileId,
+        modelId: organizationId,
         status: newStatus as any,
       });
     }
@@ -19,12 +19,12 @@ export const UpdateProfileStatus = ({ profileId }: { profileId: number }) => {
 
   useEffect(() => {
     const fetchStatus = async () => {
-      const currentStatus = await getTenantStatus(profileId);
+      const currentStatus = await getTenantStatus(organizationId);
       setStatus(currentStatus);
     };
 
     fetchStatus();
-  }, [profileId]);
+  }, [organizationId]);
 
   return (
     <div className="flex gap-2">

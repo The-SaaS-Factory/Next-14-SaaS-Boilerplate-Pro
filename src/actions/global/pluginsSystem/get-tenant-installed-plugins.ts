@@ -53,7 +53,7 @@ export const getTenantInstalledPlugins = async ({
   const data = await prisma.profilePlugin.findMany({
     where: {
       ...whereSearch,
-      profileId: id,
+      organizationId: id,
     },
     skip: offset,
     include: {
@@ -68,7 +68,7 @@ export const getTenantInstalledPlugins = async ({
   const totalCount = await prisma.profilePlugin.count({
     where: {
       ...whereSearch,
-      profileId: id,
+      organizationId: id,
     },
   });
 

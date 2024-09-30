@@ -38,7 +38,7 @@ export const getAllEcommerceProductsOptions = async ({
 
   const data = await prisma.option.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
     include: {

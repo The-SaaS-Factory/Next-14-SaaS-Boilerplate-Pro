@@ -14,11 +14,15 @@ export default async function TenantAdminLayout({
 }) {
   const notificationsCount = await getUserNotificationsUnreadCount();
 
-  const { profile, permissions, profileMembership } = await getMembership();
+  const { organization, userMembership } = await getMembership();
 
   const isAdmin =
-    permissions.includes("superAdmin:totalAccess") ||
-    permissions.includes("superAdmin:administration:read");
+    organization.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:totalAccess") ||
+    userMembership.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:administration:read");
 
   if (isAdmin) {
     redirect("/admin");
@@ -28,15 +32,13 @@ export default async function TenantAdminLayout({
     <Suspense fallback={<FullLoader />}>
       <main className="relative text-primary">
         <HeroPattern />
-        <TenantAdminSidebar profile={profile} />{" "}
+        <TenantAdminSidebar org={organization} />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader
-              profileMembership={profileMembership}
-              notificationsCount={notificationsCount}
-              agencyPermissions={profile.permissions}
-              membershipPermissions={permissions}
-              profile={profile}
+              userMembership={userMembership}
+              notificationsCount={notificationsCount ?? 0}
+              organization={organization}
             />
           </Suspense>
           <div className="py-3 relative lg:pt-[5%]  z-20">

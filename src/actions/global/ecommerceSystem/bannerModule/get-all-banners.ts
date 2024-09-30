@@ -38,7 +38,7 @@ export const getAllEcommerceBanners = async ({
 
   const data = await prisma.banner.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
   });

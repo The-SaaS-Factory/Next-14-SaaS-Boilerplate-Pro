@@ -43,7 +43,7 @@ export const getUserAllProducts = async ({
     skip: offset,
     take: limit,
     where: {
-      profileId: id,
+      organizationId: id,
       ...whereSearch,
     },
     include: {

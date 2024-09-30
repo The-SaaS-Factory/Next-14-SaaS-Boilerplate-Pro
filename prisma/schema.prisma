@@ -9,159 +9,109 @@ generator client {
 //}
 
 datasource db {
-   provider = "mysql"
-   url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
-// datasource db {
-//   provider  = "postgresql"
-//   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-// }
-
+// ------------------------------------SaaS Core--------------------------------------------
 model User {
-  id                  Int                 @id @default(autoincrement())
-  name                String
-  password            String?
-  phone               String?
-  email               String?             @unique @db.VarChar(255)
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
-  permissions         Permission[]
-  profilesMemberships ProfileMembership[]
-  UserContent         UserContent[]
-  Casting             Casting[]
+  id              Int              @id @default(autoincrement())
+  name            String
+  password        String?
+  phone           String?
+  email           String?          @unique @db.VarChar(255)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  userMemberships UserMembership[]
+  Permission      Permission[]
 }
 
-model Municipio {
-  id          Int    @id @default(autoincrement())
-  provinciaId Int
-  municipio   String
-  codigo      String
+model UserMembership {
+  id                    Int                     @id @default(autoincrement())
+  userId                Int
+  organizationId        Int
+  role                  UserMembershipRole      @default(ADMIN)
+  permissions           Permission[]
+  isActive              Boolean                 @default(true)
+  user                  User                    @relation(fields: [userId], references: [id])
+  organization          Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  settings UserMembershipSetting[]
 
-  Provincia Provincia @relation(fields: [provinciaId], references: [id], onDelete: Cascade)
-
-  @@map("municipios")
+  @@index([organizationId])
 }
 
-model Provincia {
-  id         Int         @id @default(autoincrement())
-  provincia  String
-  municipios Municipio[]
+model UserMembershipSetting {
+  id               Int            @id @default(autoincrement())
+  userMembershipId Int
+  settingName      String
+  settingValue     String
+  userMembership   UserMembership @relation(fields: [userMembershipId], references: [id], onDelete: Cascade)
 
-  @@map("provincias")
+  @@index([userMembershipId])
 }
 
-model Remittance {
-  id                  Int               @id @default(autoincrement())
-  remittanceType      RemittanceType
-  profileId           Int
-  profile             Profile           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileMembershipId Int
-  profileMembership   ProfileMembership @relation(fields: [profileMembershipId], references: [id], onDelete: Cascade)
-  senderId            Int
-  sender              Sender            @relation(fields: [senderId], references: [id], onDelete: Cascade)
-  recipientId         Int
-  recipient           Recipient         @relation(fields: [recipientId], references: [id], onDelete: Cascade)
-  providerId          Int
-  provider            Provider          @relation(fields: [providerId], references: [id], onDelete: Cascade)
-  amount              Float
-  providerFee         Float
-  superAdminFee       Float
-  status              RemittanceStatus  @default(PENDING)
-  agencyFee           Float
-  destinationAmount   Float
-  amountToCharge      Float
-  amountToPay         Float
-  paymentMethods      String            @db.Text
-  generalDescription  String?
-  createdAt           DateTime          @default(now())
-  currency            String
-  updatedAt           DateTime          @updatedAt
-
-  @@map("remittances")
-}
-
-enum RemittanceStatus {
-  PENDING
-  IN_PROCESS
-  COMPLETED
-  CANCELED
-  DELETED
-}
-
-enum RemittanceType {
-  Transferencia
-  Cash
-}
-
-model ProfileMembership {
-  id                       Int                        @id @default(autoincrement())
-  userId                   Int
-  type                     ProfileMembershipType      @default(ADMIN)
-  permissions              Permission[]
-  profileId                Int
-  isActive                 Boolean                    @default(true)
-  user                     User                       @relation(fields: [userId], references: [id])
-  profile                  Profile                    @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  Sender                   Sender[]                   @relation("ProfileSenders")
-  remittences              Remittance[]
-  ProfileMembershipSetting ProfileMembershipSetting[]
-}
-
-enum ProfileMembershipType {
+enum UserMembershipRole {
   ADMIN
   MEMBER
 }
 
-model Profile {
-  id                   Int                     @id @default(autoincrement())
-  email                String?                 @db.VarChar(255)
-  name                 String?                 @db.VarChar(255)
-  isMainTenant         Boolean                 @default(false)
-  status               ProfileStatus           @default(ACTIVE)
-  address              String?                 @db.VarChar(512)
-  type                 ProfileType             @default(TALENT)
-  phone                String?                 @db.VarChar(32)
-  avatar               String?                 @db.VarChar(255)
-  createdAt            DateTime                @default(now())
-  updatedAt            DateTime                @updatedAt
-  Amounts              ProfileAmounts[]
-  Settings             ProfileSetting[]
-  refer                Referral[]              @relation("refer")
-  referredBy           Referral[]              @relation("referred")
-  Notification         Notification[]
-  Membership           Membership[]
-  Capabbilities        ProfileCapabilities[]
-  SupportTicket        SupportTicket[]
-  SupportTicketMessage SupportTicketMessage[]
-  StripeCustomer       StripeCustomer[]
-  permissions          Permission[]
-  AmountsMovements     AdminMovementsAmounts[]
-  coupons              Coupon[]
-  products             Product[]
-  ProductCategory      ProductCategory[]
-  contacts             Contacts[]
-  ProductFavorite      ProductFavorite[]
-  productsOptions      Option[]
-  plugins              ProfilePlugin[]
-  Banner               Banner[]
-  collections          Collection[]
-  ProductRating        ProductRating[]
-  shippingZones        ProfileShippingZone[]
-  userOrders           Order[]                 @relation("OrderProfileUser")
-  orders               Order[]                 @relation("OrderProfileProfile")
-  ShoppingCart         ShoppingCart[]          @relation("ShoppingCartProfile")
-  ShoppingCartUser     ShoppingCart[]          @relation("ShoppingCartUser")
-  invoices             Invoice[]               @relation("InvoiceProfile")
-  invoicesUser         Invoice[]               @relation("InvoiceProfileUser")
-  profileMemberships   ProfileMembership[]
-  remittences          Remittance[]
-  castings             Casting[]
-  CastingAplication    CastingAplication[]
-  CastingInformations  CastingInformations[]
-  CastingRoles         CastingRoles[]
-  logs                 Log[]
+model Organization {
+  id                       Int                        @id @default(autoincrement())
+  email                    String?                    @db.VarChar(255)
+  name                     String?                    @db.VarChar(255)
+  isMainTenant             Boolean                    @default(false)
+  status                   OrganizationStatus         @default(ACTIVE)
+  address                  String?                    @db.VarChar(512)
+  phone                    String?                    @db.VarChar(32)
+  avatar                   String?                    @db.VarChar(255)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  refer                    Referral[]                 @relation("refer")
+  referredBy               Referral[]                 @relation("referred")
+  notification             Notification[]
+  membership               Membership[]
+  supportTicket            SupportTicket[]
+  supportTicketMessage     SupportTicketMessage[]
+  stripeCustomer           StripeCustomer[]
+  coupons                  Coupon[]
+  invoices                 Invoice[]                  @relation("InvoiceProfile")
+  invoicesUser             Invoice[]                  @relation("InvoiceProfileUser")
+  logs                     Log[]
+  userMemberships          UserMembership[]
+  organizationCapabilities OrganizationCapabilities[]
+  settings                 OrganizationSetting[]
+  organizationPlugin       OrganizationPlugin[]
+  permissions              Permission[]
+}
+
+model OrganizationSetting {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  settingName    String       @db.VarChar(128)
+  settingValue   String       @db.Text
+
+  @@index([organizationId])
+}
+
+enum OrganizationStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  DELETED
+}
+
+// ---------------------------------------End SaaS Core-------------------------------------------
+
+// -------------------------------------- Modules ------------------------------------------------
+// -------- Module Log
+model Log {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  action         LogAction
+  changes        Json
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id])
 }
 
 enum LogAction {
@@ -170,349 +120,7 @@ enum LogAction {
   DELETE
 }
 
-model Log {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  castingId     Int?
-  action        LogAction  
-  changes       Json     // JSON object that stores the changes made (before and after)
-  createdAt     DateTime @default(now())
-  
-  // Relaciones
-  profile       Profile     @relation(fields: [userId], references: [id])
-  casting       Casting?  @relation(fields: [castingId], references: [id])
-}
-
-model Provider {
-  id          Int               @id @default(autoincrement())
-  name        String
-  description String?
-  category    ProviderCategory  @default(REMITTANCE)
-  status      Status            @default(ACTIVE)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  settings    ProviderSetting[]
-  remittences Remittance[]
-}
-
-model ProviderSetting {
-  id           Int      @id @default(autoincrement())
-  providerId   Int
-  settingName  String
-  settingValue String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  provider     Provider @relation(fields: [providerId], references: [id])
-}
-
-enum ProviderCategory {
-  REMITTANCE
-}
-
-model Sender {
-  id          Int               @id @default(autoincrement())
-  firstName   String            @db.VarChar(255)
-  lastName    String            @db.VarChar(255)
-  address     String            @db.VarChar(512)
-  country     String?           @db.VarChar(100)
-  state       String?           @db.VarChar(100)
-  phoneNumber String            @db.VarChar(32)
-  email       String            @db.VarChar(255)
-  userId      Int
-  User        ProfileMembership @relation("ProfileSenders", fields: [userId], references: [id], onDelete: Cascade)
-  Recipients  Recipient[]       @relation("SenderRecipients")
-  remittences Remittance[]
-}
-
-model Recipient {
-  id           Int          @id @default(autoincrement())
-  firstName    String       @db.VarChar(255)
-  lastName     String       @db.VarChar(255)
-  phoneNumber  String       @db.VarChar(32)
-  address      String?      @db.VarChar(512)
-  cardNumber   String?      @db.VarChar(32)
-  province     String       @db.VarChar(100)
-  municipality String       @db.VarChar(100)
-  senderId     Int
-  Sender       Sender       @relation("SenderRecipients", fields: [senderId], references: [id], onDelete: Cascade)
-  remittences  Remittance[]
-}
-
-enum ProfileStatus {
-  ACTIVE
-  INACTIVE
-  PENDING
-  DELETED
-}
-
-model ProfileShippingZone {
-  id         Int             @id @default(autoincrement())
-  country    String
-  state      String?
-  price      Float
-  currencyId Int
-  priceByLb  Boolean?
-  type       String?
-  currency   AdminCurrencies @relation(fields: [currencyId], references: [id])
-  city       String?
-  status     Status          @default(ACTIVE)
-  profileId  Int
-  profile    Profile         @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  createdAt  DateTime        @default(now())
-  updatedAt  DateTime        @updatedAt
-}
-
-model Order {
-  id            Int             @id @default(autoincrement())
-  userId        Int
-  profileId     Int
-  contactId     Int
-  shippingPrice Float?
-  weight        Float?
-  subtotal      Float
-  taxTotal      Float?
-  discont       Float?
-  total         Float
-  currencyId    Int
-  currency      AdminCurrencies @relation(fields: [currencyId], references: [id])
-  carId         Int
-  cart          ShoppingCart    @relation(fields: [carId], references: [id])
-  contact       Contacts        @relation(fields: [contactId], references: [id])
-  user          Profile         @relation("OrderProfileUser", fields: [userId], references: [id])
-  profile       Profile         @relation("OrderProfileProfile", fields: [profileId], references: [id])
-  status        OrderStatus     @default(PENDING)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  invoices      Invoice[]
-
-  @@index([userId, contactId, profileId])
-}
-
-model ShoppingCart {
-  id         Int               @id @default(autoincrement())
-  userId     Int
-  profileId  Int
-  profile    Profile           @relation("ShoppingCartProfile", fields: [profileId], references: [id])
-  user       Profile           @relation("ShoppingCartUser", fields: [userId], references: [id])
-  priceTotal Float
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @updatedAt
-  order      Order[]
-  items      ShoppingCarItem[]
-}
-
-model ShoppingCarItem {
-  id            Int          @id @default(autoincrement())
-  shoppingCarId Int
-  shoppingCar   ShoppingCart @relation(fields: [shoppingCarId], references: [id], onDelete: Cascade)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  quantity      Int
-  weight        Float
-  tax           Float?
-  price         Float
-  priceTotal    Float
-  productId     Int?
-  product       Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
-}
-
-enum OrderStatus {
-  PENDING
-  PAID
-  IN_PROCESS
-  IN_DELIVERY
-  COMPLETED
-  CANCELED
-  DELETED
-}
-
-model ProductCategory {
-  id          Int               @id @default(autoincrement())
-  slug        String            @unique
-  name        String
-  categoryId  Int?
-  parent      ProductCategory?  @relation("CategoryParent", fields: [categoryId], references: [id])
-  children    ProductCategory[] @relation("CategoryParent")
-  profileId   Int
-  profile     Profile           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  description String?
-  image       String?
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  products    Product[]
-}
-
-//*************************** Ecommerce ***************************// 
-model Product {
-  id              Int                @id @default(autoincrement())
-  name            String
-  sku             String?
-  slug            String             @unique
-  profileId       Int
-  profile         Profile            @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  costPrice       Float?
-  regularPrice    Float
-  salesPrice      Float?
-  earningPorcent  Float?
-  paymentPorcent  Float?
-  currencyId      Int
-  currency        AdminCurrencies    @relation(fields: [currencyId], references: [id])
-  earningsPorcent Float?
-  status          Status             @default(ACTIVE)
-  stock           Int                @default(0)
-  taxActive       Boolean            @default(false)
-  barcode         String?
-  salesTotal      Int?
-  weight          Float?
-  weightUnit      String?            @default("lb")
-  width           Float?
-  height          Float?
-  length          Float?
-  tax             Float?
-  description     String?            @db.Text
-  image           String?
-  medias          String?            @db.Text
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  categories      ProductCategory[]
-  ProductFavorite ProductFavorite[]
-  options         Option[]
-  variations      ProductVariation[]
-  collections     Collection[]
-  ProductRating   ProductRating[]
-  productsInCar   ShoppingCarItem[]
-}
-
-model Option {
-  id                Int                       @id @default(autoincrement())
-  profileId         Int
-  profile           Profile                   @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name              String
-  status            Status                    @default(ACTIVE)
-  position          Int                       @default(0)
-  createdAt         DateTime                  @default(now())
-  updatedAt         DateTime                  @updatedAt
-  values            OptionValue[]
-  products          Product[]
-  productVariations ProductVariationOptions[]
-}
-
-model OptionValue {
-  id                Int                       @id @default(autoincrement())
-  optionId          Int
-  option            Option                    @relation(fields: [optionId], references: [id], onDelete: Cascade)
-  value             String
-  createdAt         DateTime                  @default(now())
-  updatedAt         DateTime                  @updatedAt
-  productVariations ProductVariationOptions[]
-}
-
-model ProductVariation {
-  id           Int                       @id @default(autoincrement())
-  productId    Int
-  product      Product                   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  sku          String?
-  stock        Int                       @default(1)
-  regularPrice Float
-  salesPrice   Float?
-  description  String?
-  weight       Decimal?
-  weight_unit  String?                   @default("lb")
-  width        Decimal?
-  height       Decimal?
-  length       Decimal?
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
-  options      ProductVariationOptions[]
-}
-
-model ProductVariationOptions {
-  id            Int              @id @default(autoincrement())
-  variationId   Int
-  variation     ProductVariation @relation(fields: [variationId], references: [id], onDelete: Cascade)
-  optionId      Int
-  option        Option           @relation(fields: [optionId], references: [id], onDelete: Cascade)
-  optionValueId Int
-  optionValue   OptionValue      @relation(fields: [optionValueId], references: [id], onDelete: Cascade)
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-}
-
-model ProductFavorite {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  profileId Int
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([productId, profileId])
-}
-
-model ProductRating {
-  id         Int      @id @default(autoincrement())
-  profileId  Int?
-  profile    Profile? @relation(fields: [profileId], references: [id])
-  productId  Int
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  valoration Int
-  details    String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-}
-
-model Contacts {
-  id             Int       @id @default(autoincrement())
-  profileId      Int?
-  profile        Profile?  @relation(fields: [profileId], references: [id])
-  name           String?
-  lastName       String?
-  email          String?
-  phone          String?
-  ageType        String?   @default("ADULT")
-  country        String?   @default("Cuba")
-  documentId     String?
-  address        String?
-  city           String?
-  state          String?
-  zip            String?
-  account        String?
-  passportNumber String?
-  notes          String?
-  birthday       DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  Order          Order[]
-}
-
-model Banner {
-  id        Int      @id @default(autoincrement())
-  profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId Int?
-  name      String?
-  image     String
-  link      String?
-  status    Status   @default(ACTIVE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Collection {
-  id        Int       @id @default(autoincrement())
-  profile   Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId Int?
-  name      String?
-  position  String?
-  products  Product[]
-  status    Status    @default(ACTIVE)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
-//***************************END Ecommerce ***************************// 
-
-//************************** Plugins *********************************//
+// -------- Module Plugin           
 model Plugin {
   id              Int                   @id @default(autoincrement())
   name            String
@@ -526,18 +134,18 @@ model Plugin {
   createdAt       DateTime              @default(now())
   updatedAt       DateTime              @updatedAt
   configurations  PluginConfiguration[]
-  installations   ProfilePlugin[]
+  installations   OrganizationPlugin[]
 }
 
-model ProfilePlugin {
-  id            Int      @id @default(autoincrement())
-  profileId     Int
-  pluginId      Int
-  configuration Json? // Almacena la configuración específica del plugin para este vendedor
-  installedAt   DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  profile       Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  plugin        Plugin   @relation(fields: [pluginId], references: [id], onDelete: Cascade)
+model OrganizationPlugin {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  pluginId       Int
+  configuration  Json?
+  installedAt    DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plugin         Plugin       @relation(fields: [pluginId], references: [id], onDelete: Cascade)
 }
 
 model PluginConfiguration {
@@ -546,7 +154,7 @@ model PluginConfiguration {
   key          String   @unique
   name         String
   required     Boolean  @default(false)
-  valueType    String // Tipo de dato (e.g., String, Integer, Boolean, etc.)
+  valueType    String
   defaultValue String?
   note         String?
   createdAt    DateTime @default(now())
@@ -555,26 +163,23 @@ model PluginConfiguration {
   plugin Plugin @relation(fields: [pluginId], references: [id])
 }
 
-//************************** Plugins *********************************//
-enum ProfileType {
-  AGENCY
-  TALENT
-}
+// -------- Module Stripe    
 
 model StripeCustomer {
-  id         Int      @id @default(autoincrement())
-  customerId String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user       Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId  Int
+  id             Int          @id @default(autoincrement())
+  customerId     String       @unique
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  @@index([profileId])
+  @@index([organizationId])
 }
 
-//Super Admin
+// -------- Module Invoice    
 model Invoice {
   id                     Int              @id @default(autoincrement())
+  organizationId         Int?
   type                   InvoiceModelType @default(MEMBERSHIP)
   membershipId           Int?
   orderId                Int?
@@ -586,7 +191,6 @@ model Invoice {
   userId                 Int?
   serviceId              Int?
   status                 InvoiceStatus    @default(PENDING)
-  profileId              Int?
   currencyId             Int              @default(1)
   userCustomerExternalId String?          @db.VarChar(512)
   gateway                String?          @db.VarChar(56)
@@ -601,13 +205,12 @@ model Invoice {
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
   Currency               AdminCurrencies  @relation(fields: [currencyId], references: [id])
-  order                  Order?           @relation(fields: [orderId], references: [id])
   Items                  InvoiceItem[]
   coupons                Coupon[]
-  user                   Profile?         @relation("InvoiceProfileUser", fields: [userId], references: [id], onDelete: Cascade)
-  profile                Profile?         @relation("InvoiceProfile", fields: [profileId], references: [id], onDelete: Cascade)
+  user                   Organization?    @relation("InvoiceProfileUser", fields: [userId], references: [id], onDelete: Cascade)
+  organization           Organization?    @relation("InvoiceProfile", fields: [organizationId], references: [id], onDelete: Cascade)
 
-  @@index([profileId, currencyId, serviceId])
+  @@index([organizationId, currencyId, serviceId])
 }
 
 model InvoiceItem {
@@ -630,9 +233,10 @@ model InvoiceItem {
   @@index([invoiceId])
 }
 
+// -------- Module Invoice Coupon
 model Coupon {
   id                Int              @id @default(autoincrement())
-  profileId         Int?
+  organizationId    Int?
   name              String
   code              String           @unique
   amountOff         Float?
@@ -641,7 +245,7 @@ model Coupon {
   maxRedemptions    Int?
   percentOff        Float?
   status            String           @default("ACTIVE")
-  profile           Profile?         @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  organization      Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt         DateTime         @default(now())
   updatedAt         DateTime         @updatedAt
   AdminCurrencies   AdminCurrencies? @relation(fields: [adminCurrenciesId], references: [id])
@@ -649,7 +253,7 @@ model Coupon {
   settings          CouponSettings[]
   invoices          Invoice[]
 
-  @@index([profileId])
+  @@index([organizationId])
 }
 
 model CouponSettings {
@@ -670,6 +274,7 @@ enum CouponDuration {
   REPEATING
 }
 
+// -------- Module Payment
 model PaymentMethod {
   id          Int      @id @default(autoincrement())
   name        String
@@ -681,9 +286,10 @@ model PaymentMethod {
   updatedAt   DateTime @updatedAt
 }
 
+// -------- Module Membership (for Organizations)
 model Membership {
   id               Int              @id @default(autoincrement())
-  profileId        Int              @unique
+  organizationId   Int              @unique
   plan             Plan             @relation(fields: [planId], references: [id], onDelete: Cascade)
   planId           Int
   pricingId        Int?
@@ -694,9 +300,9 @@ model Membership {
   endDateFreeTrial DateTime?
   endDate          DateTime
   createdAt        DateTime         @default(now())
-  profile          Profile          @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  @@index([profileId, pricingId])
+  @@index([organizationId, pricingId])
 }
 
 model Plan {
@@ -710,6 +316,39 @@ model Plan {
   PlanCapabilities PlanCapabilities[]
   Permission       Permission[]
   pricing          Pricing[]
+}
+
+model Capabilitie {
+  id               Int                        @id @default(autoincrement())
+  name             String
+  title            String?
+  description      String?                    @db.Text
+  type             String                     @default("LIMIT")
+  PlanCapabilities PlanCapabilities[]
+  UserCapabilities OrganizationCapabilities[]
+}
+
+model PlanCapabilities {
+  id            Int         @id @default(autoincrement())
+  capabilitieId Int
+  planId        Int
+  count         Int
+  name          String?
+  plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
+  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+
+  @@index([planId, capabilitieId])
+}
+
+model OrganizationCapabilities {
+  id             Int          @id @default(autoincrement())
+  capabilitieId  Int
+  organizationId Int
+  count          Int
+  user           Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  capabilitie    Capabilitie  @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, capabilitieId])
 }
 
 model Pricing {
@@ -741,90 +380,31 @@ model PricingSetting {
   @@index([pricingId])
 }
 
-//*************************** ACL ***************************// 
-model Module {
-  id          Int          @id @default(autoincrement())
-  name        String
-  scope       ScopeType    @default(SUPERADMIN)
-  status      Status       @default(ACTIVE)
-  description String?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  Permission  Permission[]
-}
-
+//------- Module Permission
 model Permission {
-  id                Int                 @id @default(autoincrement())
-  name              String
-  description       String?
-  profiles          Profile[]
-  Module            Module[]
-  Plan              Plan[]
-  ProfileMembership ProfileMembership[]
-  User              User[]
+  id               Int             @id @default(autoincrement())
+  name             String
+  description      String
+  UserMembership   UserMembership? @relation(fields: [userMembershipId], references: [id])
+  userMembershipId Int?
+  Plan             Plan?           @relation(fields: [planId], references: [id])
+  planId           Int?
+  User             User?           @relation(fields: [userId], references: [id])
+  userId           Int?
+  Organization     Organization?   @relation(fields: [organizationId], references: [id])
+  organizationId   Int?
 }
 
-//*************************** END ACL ***************************//
-model AdminKpi {
-  id        Int      @id @default(autoincrement())
-  name      String
-  type      String
-  value     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+//------- Module Affiliates
 
 model Referral {
-  id         Int     @id @default(autoincrement())
-  refer      Profile @relation("refer", fields: [referId], references: [id], onDelete: Cascade)
+  id         Int          @id @default(autoincrement())
+  refer      Organization @relation("refer", fields: [referId], references: [id], onDelete: Cascade)
   referId    Int
-  referred   Profile @relation("referred", fields: [referredId], references: [id])
+  referred   Organization @relation("referred", fields: [referredId], references: [id])
   referredId Int
 
   @@index([referId, referredId])
-}
-
-model Capabilitie {
-  id                  Int                   @id @default(autoincrement())
-  name                String
-  title               String?
-  description         String?               @db.Text
-  type                String                @default("LIMIT")
-  PlanCapabilities    PlanCapabilities[]
-  ProfileCapabilities ProfileCapabilities[]
-}
-
-model PlanCapabilities {
-  id            Int         @id @default(autoincrement())
-  capabilitieId Int
-  planId        Int
-  count         Int
-  name          String?
-  plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
-  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
-
-  @@index([planId, capabilitieId])
-}
-
-model ProfileCapabilities {
-  id            Int         @id @default(autoincrement())
-  capabilitieId Int
-  profileId     Int
-  count         Int
-  user          Profile     @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
-
-  @@index([profileId, capabilitieId])
-}
-
-model ProfileSetting {
-  id           Int     @id @default(autoincrement())
-  user         Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int
-  settingName  String  @db.VarChar(128)
-  settingValue String  @db.Text
-
-  @@index([userId])
 }
 
 model SuperAdminSetting {
@@ -843,94 +423,57 @@ model CronJobs {
 }
 
 model Notification {
-  id        Int              @id @default(autoincrement())
-  profileId Int
-  content   String
-  image     String
-  viewed    Boolean          @default(false)
-  type      NotificationType
-  createdAt DateTime         @default(now())
-  profile   Profile          @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id             Int              @id @default(autoincrement())
+  organizationId Int
+  content        String
+  image          String
+  viewed         Boolean          @default(false)
+  type           NotificationType
+  createdAt      DateTime         @default(now())
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  @@index([profileId])
+  @@index([organizationId])
 }
 
 model AdminCurrencies {
-  id                    Int                     @id @default(autoincrement())
-  name                  String                  @db.VarChar(56)
-  main                  Int                     @default(0)
-  code                  String                  @db.VarChar(11)
-  rate                  Float
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  ProfileAmounts        ProfileAmounts[]
-  AdminMovementsAmounts AdminMovementsAmounts[]
-  invoices              Invoice[]
-  Membership            Membership[]
-  Coupon                Coupon[]
-  Product               Product[]
-  ProfileShippingZone   ProfileShippingZone[]
-  Order                 Order[]
-}
-
-model ProfileAmounts {
-  id             Int             @id @default(autoincrement())
-  profile        Profile         @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId      Int
-  Currency       AdminCurrencies @relation(fields: [currencyId], references: [id])
-  currencyId     Int             @default(1)
-  amount         Float           @default(0)
-  amount_pending Float           @default(0)
-  amount_stopad  Float           @default(0)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-
-  @@index([profileId])
-  @@index([currencyId])
-}
-
-model AdminMovementsAmounts {
-  id         BigInt             @id @default(autoincrement())
-  profileId  Int?
-  profile    Profile?           @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  details    String             @db.VarChar(128)
-  Currency   AdminCurrencies    @relation(fields: [currencyId], references: [id])
-  currencyId Int
-  amount     Float
-  type       MovementAmountType @default(CREDIT)
-  status     Status             @default(COMPLETED)
-  createdAt  DateTime           @default(now())
-  updatedAt  DateTime           @updatedAt
-
-  @@index([currencyId, profileId])
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(56)
+  main       Int          @default(0)
+  code       String       @db.VarChar(11)
+  rate       Float
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  invoices   Invoice[]
+  Membership Membership[]
+  Coupon     Coupon[]
 }
 
 model SupportTicket {
-  id          Int                     @id @default(autoincrement())
-  subject     String
-  departament SupportDepartamentType  @default(SALES)
-  status      SupportTicketStatusType @default(OPEN)
-  profileId   Int?
-  profile     Profile?                @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
+  id             Int                     @id @default(autoincrement())
+  subject        String
+  departament    SupportDepartamentType  @default(SALES)
+  status         SupportTicketStatusType @default(OPEN)
+  organizationId Int?
+  organization   Organization?           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
 
   SupportTicketMessage SupportTicketMessage[]
 
-  @@index([profileId])
+  @@index([organizationId])
 }
 
 model SupportTicketMessage {
   id                          Int                           @id @default(autoincrement())
   ticketId                    Int
-  profileId                   Int?
+  organizationId              Int?
   ticket                      SupportTicket                 @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  profile                     Profile?                      @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  organization                Organization?                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt                   DateTime                      @default(now())
   updatedAt                   DateTime                      @updatedAt
   SupportTicketMessageContent SupportTicketMessageContent[]
 
-  @@index([ticketId, profileId])
+  @@index([ticketId, organizationId])
 }
 
 model SupportTicketMessageContent {
@@ -943,163 +486,6 @@ model SupportTicketMessageContent {
   updatedAt DateTime               @updatedAt
 
   @@index([messageId])
-}
-
-//Castings 
-
-enum UserContentType {
-  IMAGE
-  VIDEO
-}
-
-model UserContent {
-  id        Int             @id @default(autoincrement())
-  userId    Int
-  tags      String?
-  type      UserContentType @default(IMAGE)
-  status    Status          @default(ACTIVE)
-  url       String
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model Casting {
-  id                  Int                   @id @default(autoincrement())
-  publicId            String?                @default(uuid())
-  profileId           Int
-  profile             Profile               @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name                String
-  categories          CastingCategory[]
-  ubication           String?
-  dateEvent           DateTime
-  resume              String?
-  description         String?               @db.Text
-  paymentMethod       String?
-  referenceImages     String?               @db.Text
-  notes               String?
-  dateLimitApplicants DateTime?
-  status              CastingStatus         @default(OPEN)
-  format              CastingFormat         @default(PAID)
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  roles               CastingRoles[]
-  informations        CastingInformations[]
-  aplications         CastingAplication[]
-  User                User?                 @relation(fields: [userId], references: [id])
-  userId              Int?
-  logs                Log[]
-
-  @@index([profileId])
-}
-
-model CastingAplication {
-  id           Int                             @id @default(autoincrement())
-  castingId    Int
-  profileId    Int
-  roleId       Int?
-  role         CastingRoles?                   @relation(fields: [roleId], references: [id])
-  status       CastingAplicationStatus         @default(PENDING)
-  createdAt    DateTime                        @default(now())
-  updatedAt    DateTime                        @updatedAt
-  profile      Profile                         @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  casting      Casting                         @relation(fields: [castingId], references: [id], onDelete: Cascade)
-  informations CastingAplicationInformations[]
-
-  @@index([castingId])
-  @@index([profileId])
-}
-
-model ProfileMembershipSetting {
-  id                  Int               @id @default(autoincrement())
-  profileMembershipId Int
-  settingName         String
-  settingValue        String
-  profileMembership   ProfileMembership @relation(fields: [profileMembershipId], references: [id], onDelete: Cascade)
-
-  @@index([profileMembershipId])
-}
-
-model CastingAplicationInformations {
-  id           Int                    @id @default(autoincrement())
-  aplicationId Int
-  value        String                 @db.Text
-  name         String
-  status       String                 @default("PENDING")
-  type         CastingInformationType @default(TEXT)
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
-  aplication   CastingAplication      @relation(fields: [aplicationId], references: [id], onDelete: Cascade)
-
-  @@index([aplicationId])
-}
-
-enum CastingAplicationStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
-enum CastingStatus {
-  OPEN
-  IN_PROGRESS
-  INACTIVE
-  PENDING
-  COMPLETED
-  DRAFT
-}
-
-model CastingInformations {
-  id        Int                    @id @default(autoincrement())
-  profileId Int
-  profile   Profile                @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name      String
-  type      CastingInformationType @default(TEXT)
-  createdAt DateTime               @default(now())
-  updatedAt DateTime               @updatedAt
-  castings  Casting[]
-}
-
-enum CastingInformationType {
-  TEXT
-  NUMBER
-  GALLERY
-  EMAIL
-  LINK
-  TEXTAREAFF
-}
-
-model CastingRoles {
-  id                Int                 @id @default(autoincrement())
-  profileId         Int
-  profile           Profile             @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  name              String
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  castings          Casting[]
-  CastingAplication CastingAplication[]
-
-  @@index([profileId])
-}
-
-model CastingCategory {
-  id        Int       @id @default(autoincrement())
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  castings  Casting[]
-}
-
-enum CastingFormat {
-  PAID
-  COLABORATION
-}
-
-enum CastingType {
-  PRESENTIALD
-  ONLINE
 }
 
 enum SupportDepartamentType {
@@ -1117,35 +503,12 @@ enum SupportTicketStatusType {
   CANCELED
 }
 
-enum MarketingEmailListType {
-  PLATFORM
-  CHURCH
-  MINISTRY
-  BUSINESS
-  ARTIST
-  OTHER
-}
-
-enum MovementAmountType {
-  DEBIT
-  CREDIT
-}
-
 enum InvoiceModelType {
   MEMBERSHIP
   SERVICE
   ORDER
   PRODUCT
   DEPOSIT
-}
-
-enum UserNoteScopeType {
-  PERSON
-  CHURCH
-  MINISTRY
-  BUSINESS
-  ARTIST
-  PLATFORM
 }
 
 enum NotificationType {
@@ -1157,14 +520,6 @@ enum NotificationType {
   PUBLICATION
 }
 
-enum PublicationStatus {
-  DRAFT
-  PUBLISHED
-  DELETED
-  PENDING
-  INACTIVE
-}
-
 enum PublicationContentType {
   TEXT
   VIDEO
@@ -1172,23 +527,6 @@ enum PublicationContentType {
   LINK
   CUSTOM
   DISCUSSION
-}
-
-enum PublicationType {
-  STATUS
-  VIDEO
-  ARTICLE
-  EVENT
-  BIBLE
-  NOTICE
-  ORATION
-  ADS
-  DISCUSSION
-}
-
-enum PublicationFunctionType {
-  POST
-  COMMENT
 }
 
 enum Status {

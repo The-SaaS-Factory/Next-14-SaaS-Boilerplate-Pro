@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { constants } from "@/lib/constants";
-import { createProfile } from "@/utils/facades/serverFacades/profileFacade";
+import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 
 export async function GET(request: Request) {
   // Validate secret params with nextAuthSecret
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
     }
 
     //Find the main profile
-    const mainProfile = await prisma.profile.findFirst({
+    const mainProfile = await prisma.organization.findFirst({
       where: {
         isMainTenant: true,
       },
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     };
 
     //Assign permission of agency to the user
-    await createProfile(newUser);
+    await createOrganization(newUser);
 
     return new NextResponse("User permisisons updated", { status: 200 });
   } catch (error) {

@@ -2,12 +2,12 @@
 
 import prisma from "@/lib/db";
 
-export async function setPermissionForProfile(profileId: number, permissionName: string) {
+export async function setPermissionForProfile(organizationId: number, permissionName: string) {
     try {
         const permission = await prisma.permission.findFirst({ where: { name: permissionName } })
         
         await prisma.profile.update({
-            where: { id: profileId },
+            where: { id: organizationId },
             data: {
                 permissions: {
                     connect: { id: permission.id },

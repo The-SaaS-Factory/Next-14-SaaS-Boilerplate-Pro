@@ -18,7 +18,7 @@ export const upsertShippingZone = async ({
   if (payload.city && payload.state && payload.country) {
     const alreadyZone = await prisma.profileShippingZone.findFirst({
       where: {
-        profileId: id,
+        organizationId: id,
         city: payload.city,
         type: payload.type,
       },
@@ -33,7 +33,7 @@ export const upsertShippingZone = async ({
   if (payload.state && payload.country && !payload.city) {
     const alreadyZone = await prisma.profileShippingZone.findFirst({
       where: {
-        profileId: id,
+        organizationId: id,
         state: payload.state,
         city: null,
         type: payload.type,
@@ -48,7 +48,7 @@ export const upsertShippingZone = async ({
   if (payload.country && !payload.state && !payload.city) {
     const alreadyZone = await prisma.profileShippingZone.findFirst({
       where: {
-        profileId: id,
+        organizationId: id,
         country: payload.country,
         state: null,
         city: null,
@@ -65,7 +65,7 @@ export const upsertShippingZone = async ({
     await prisma.profileShippingZone.upsert({
       where: {
         id: modelId ? modelId : 0,
-        profileId: id,
+        organizationId: id,
       },
       update: {
         status: payload.status,
@@ -78,7 +78,7 @@ export const upsertShippingZone = async ({
         city: payload.city,
       },
       create: {
-        profileId: id,
+        organizationId: id,
         status: payload.status,
         country: payload.country,
         type: payload.type,

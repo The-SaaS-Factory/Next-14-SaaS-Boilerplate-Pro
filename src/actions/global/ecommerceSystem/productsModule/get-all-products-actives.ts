@@ -43,7 +43,7 @@ export const getUserAllProductsActives = async ({
 
   const data = await prisma.product.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
       stock: {
         gt: 0,
       },

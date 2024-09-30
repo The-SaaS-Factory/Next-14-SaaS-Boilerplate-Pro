@@ -9,8 +9,7 @@ import {
 } from "./paymentFacade";
 import prisma from "@/lib/db";
 import { getPricingByStripePricingId } from "./paymentFacade";
-import { InvoiceStatus, OrderStatus, StripeCustomer } from "@prisma/client";
-import { updateOrderStatus } from "@/actions/global/ecommerceSystem/ordersModule/update-order-status";
+import { InvoiceStatus, StripeCustomer } from "@prisma/client";
 import {
   notifyToSuperAdmin,
   sendInternalNotificatoin,
@@ -170,10 +169,7 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
           })
         );
       } else {
-        await updateOrderStatus({
-          orderId: invoice.orderId,
-          status: OrderStatus.IN_PROCESS,
-        });
+        //
       }
     }
   } catch (error) {
@@ -290,7 +286,7 @@ export const stripeCreateCheckoutSession = async ({
       mode: mode,
       discounts: coupons,
       metadata: {
-        modelId: clientPayload.profileId,
+        modelId: clientPayload.organizationId,
       },
       ...urls,
       invoice_creation: {
@@ -345,7 +341,7 @@ const getUrlsForRedirect = async (
 export const createStripeCustomer = async (customerPayload: {
   name: string;
   email: string;
-  profileId: number;
+  organizationId: number;
 }): Promise<StripeCustomer> => {
   const customer = await stripeCreateCustomer({
     name: customerPayload.name,
@@ -354,7 +350,7 @@ export const createStripeCustomer = async (customerPayload: {
 
   if (!customer) throw new Error("Error creating customer");
   const customerInBd = saveStripeCustomerId(
-    customerPayload.profileId,
+    customerPayload.organizationId,
     customer.id
   );
   return customerInBd;

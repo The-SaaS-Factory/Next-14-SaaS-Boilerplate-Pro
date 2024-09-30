@@ -12,14 +12,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { toast } from "sonner";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type LoginInput = {
   email: string;
@@ -55,7 +47,6 @@ const tabs = [
 
 export default function LoginPage() {
   const [action, setAction] = useState("LOGIN");
-  const [profileType, setProfileType] = useState("TALENT");
 
   const [isLoading, setLoading] = useState(false);
   const navigate = useRouter();
@@ -120,13 +111,8 @@ export default function LoginPage() {
     } else {
       const payload = {
         name: inputsInSignUp.name,
-        username: inputsInSignUp.username,
         password: inputsInSignUp.password,
         email: inputsInSignUp.email,
-        profileType: profileType,
-        businessAddress: inputsInSignUp.businessAddress,
-        businessName: inputsInSignUp.businessName || inputsInSignUp.name,
-        bussinessPhone: inputsInSignUp.bussinessPhone,
       };
 
       await registerNewUser(payload)
@@ -160,7 +146,7 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen bg-neutral-100 px-8">
+      <div className="flex items-center justify-center min-h-screen g-main px-8">
         <div className="w-full z-10 max-w-md px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
             <div className="sm:hidden">
@@ -272,8 +258,24 @@ export default function LoginPage() {
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
                       <label
+                        htmlFor="name"
+                        className="block mt-1 text-sm font-medium text-gray-700"
+                      >
+                        Nombre
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        className="input-text mt-1"
+                        onChange={handleChange}
+                      />
+                    </div>{" "}
+                    <div>
+                      <label
                         htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm   font-medium text-gray-700"
                       >
                         Email
                       </label>
@@ -282,11 +284,10 @@ export default function LoginPage() {
                         name="email"
                         type="email"
                         required
-                        className="input-text mt-1"
+                        className="input-text  "
                         onChange={handleChange}
                       />
                     </div>
-
                     <div>
                       <label
                         htmlFor="password"
@@ -303,130 +304,6 @@ export default function LoginPage() {
                         onChange={handleChange}
                       />
                     </div>
-
-                    <Tabs defaultValue="talent" className="w-full">
-                      <TabsList className="grid grid-cols-2 gap-4">
-                        <TabsTrigger
-                          onClick={() => setProfileType("TALENT")}
-                          value="talent"
-                        >
-                          Talento
-                        </TabsTrigger>
-                        <TabsTrigger
-                          onClick={() => setProfileType("AGENCY")}
-                          value="business"
-                        >
-                          Agencia
-                        </TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="talent">
-                        <Card>
-                          <CardHeader>
-                            <CardTitle>Cuenta profesional de talento</CardTitle>
-                            <CardDescription>
-                              Un talento se registra para castings.
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent className="space-y-4">
-                            <div>
-                              <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Nombre
-                              </label>
-                              <input
-                                id="name"
-                                name="name"
-                                type="text"
-                                required
-                                className="input-text mt-1"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div>
-                              <label
-                                htmlFor="username"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Username
-                              </label>
-                              <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                required
-                                className="input-text mt-1"
-                                onChange={handleChange}
-                              />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </TabsContent>
-
-                      <TabsContent value="business">
-                        <Card>
-                          <CardHeader>
-                            <CardTitle>Cuenta profesional de agencia</CardTitle>
-                            <CardDescription>
-                              Una agencia contrata talento para sus castings.
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent className="space-y-4">
-                            <div>
-                              <label
-                                htmlFor="businessName"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Nombre de la agencia
-                              </label>
-                              <input
-                                id="businessName"
-                                name="businessName"
-                                type="text"
-                                required
-                                className="input-text mt-1"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div>
-                              <label
-                                htmlFor="businessAddress"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Dirección de la agencia
-                              </label>
-                              <input
-                                id="businessAddress"
-                                name="businessAddress"
-                                type="text"
-                                required
-                                className="input-text mt-1"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div>
-                              <label
-                                htmlFor="businessPhone"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Teléfono de la agencia
-                              </label>
-                              <input
-                                id="businessPhone"
-                                name="businessPhone"
-                                type="text"
-                                required
-                                className="input-text mt-1"
-                                onChange={handleChange}
-                              />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </TabsContent>
-                    </Tabs>
-
                     <div>
                       <button type="submit" className="w-full btn-main">
                         {isLoading ? "Enviando..." : "Registrarme"}
@@ -437,12 +314,6 @@ export default function LoginPage() {
               )}
             </div>
           </div>
-        </div>
-        <div className="absolute portrait:hidden ">
-          <img
-            className="h-96 ml-[36rem]"
-            src="/assets/img/monkey-casting.png"
-          ></img>
         </div>
       </div>
     </>

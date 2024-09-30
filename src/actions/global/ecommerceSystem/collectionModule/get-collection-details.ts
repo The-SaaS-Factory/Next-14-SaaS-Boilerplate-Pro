@@ -6,7 +6,7 @@ export const getEcommerceCollectionDetails = async (modelId: number) => {
   return await prisma.collection.findUnique({
     where: {
       id: modelId,
-      profileId: id,
+      organizationId: id,
     },
   });
 };

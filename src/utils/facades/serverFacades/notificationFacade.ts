@@ -13,14 +13,14 @@ export const sendInternalNotificatoin = async (
 ): Promise<void> => {
   try {
     const payload = {
-      profileId: id,
+      organizationId: id,
       image: image,
       content: content,
     };
 
     await prisma.notification.create({
       data: {
-        profileId: payload.profileId,
+        organizationId: payload.organizationId,
         image: payload.image ?? "",
         type: "ALERT",
         content: payload.content,

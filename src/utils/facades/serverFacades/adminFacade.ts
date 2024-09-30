@@ -83,7 +83,7 @@ export const getAdminSettingValue = async (
   settingName: string,
   value: string
 ) => {
-  const setting = await prisma.profileSetting.findFirst({
+  const setting = await prisma.organizationSetting.findFirst({
     where: {
       settingName: settingName,
       settingValue: value,

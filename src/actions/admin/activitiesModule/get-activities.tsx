@@ -25,10 +25,10 @@ export const getActivities = async ({
   if (args.search && Object.keys(args.search).length > 0) {
     for (const [key, value] of Object.entries(args.search)) {
       if (value !== "") {
-        if (key === "profile") {
+        if (key === "organization") {
           whereSearch = {
             ...whereSearch,
-            profile: {
+            organization: {
               id: { in: (value as any).split(",").map((i) => parseInt(i)) },
             },
           };
@@ -94,8 +94,7 @@ export const getActivities = async ({
     take: limit,
     skip: args.offset,
     include: {
-      profile: true,
-      casting: true,
+      organization: true,
     },
     orderBy: { createdAt: "desc" },
   });

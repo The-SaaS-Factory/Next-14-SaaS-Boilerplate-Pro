@@ -3,14 +3,14 @@
 import prisma from "@/lib/db";
 
 export const getAllShippingZonesByProfileId = async (
-  profileId,
+  organizationId,
   cityZone,
   state,
   country
 ) => {
   const resultByCity = await prisma.profileShippingZone.findMany({
     where: {
-      profileId: profileId,
+      organizationId: organizationId,
       city: cityZone,
     },
     include: {
@@ -20,7 +20,7 @@ export const getAllShippingZonesByProfileId = async (
 
   const resultByState = await prisma.profileShippingZone.findMany({
     where: {
-      profileId: profileId,
+      organizationId: organizationId,
       state: state,
       city: null,
     },
@@ -31,7 +31,7 @@ export const getAllShippingZonesByProfileId = async (
 
   const resultByCountry = await prisma.profileShippingZone.findMany({
     where: {
-      profileId: profileId,
+      organizationId: organizationId,
       country: country,
       state: null,
       city: null,

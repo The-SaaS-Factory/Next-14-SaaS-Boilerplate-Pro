@@ -16,7 +16,7 @@ export const upsertEcommerceBanner = async ({
     await prisma.banner.upsert({
       where: {
         id: modelId ? modelId : 0,
-        profileId: id,
+        organizationId: id,
       },
       update: {
         name: payload.name as string,
@@ -28,7 +28,7 @@ export const upsertEcommerceBanner = async ({
         name: payload.name as string,
         status: payload.status,
         link: payload.link,
-        profileId: id,
+        organizationId: id,
         image: payload.image,
       },
     });

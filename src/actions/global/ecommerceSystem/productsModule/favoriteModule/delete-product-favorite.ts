@@ -17,14 +17,14 @@ export const deleteProductFavorite = async (
       product = await prisma.productFavorite.findUnique({
         where: {
           id: modelId,
-          profileId: id,
+          organizationId: id,
         },
       });
     } else {
       product = await prisma.productFavorite.findFirst({
         where: {
           productId: productId,
-          profileId: id,
+          organizationId: id,
         },
       });
     }

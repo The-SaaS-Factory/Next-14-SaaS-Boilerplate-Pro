@@ -6,7 +6,7 @@ export const getProductCategoryDetails = async (modelId: number) => {
   return await prisma.productCategory.findUnique({
     where: {
       id: modelId,
-      profileId: id,
+      organizationId: id,
     },
   });
 };

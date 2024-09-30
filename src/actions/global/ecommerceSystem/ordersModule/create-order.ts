@@ -57,7 +57,7 @@ export const createOrder = async ({
       },
       profile: {
         connect: {
-          id: cart.profileId,
+          id: cart.organizationId,
         },
       },
       cart: {
@@ -103,7 +103,7 @@ export const createOrder = async ({
   const invoicePayload: Prisma.InvoiceCreateInput = {
     profile: {
       connect: {
-        id: order.profileId,
+        id: order.organizationId,
       },
     },
     order: {

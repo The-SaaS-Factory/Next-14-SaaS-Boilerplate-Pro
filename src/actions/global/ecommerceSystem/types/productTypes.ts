@@ -4,7 +4,7 @@ export interface Product {
   name: string;
   sku?: string;
   slug: string;
-  profileId: number;
+  organizationId: number;
   profile: Profile;
   regularPrice: number;
   salesPrice?: number;

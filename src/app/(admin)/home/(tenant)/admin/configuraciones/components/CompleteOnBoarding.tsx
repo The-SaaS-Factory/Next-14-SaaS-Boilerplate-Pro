@@ -12,8 +12,8 @@ export const CompleteOnBoarding: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { profile } = await getMembership();
-      const complete = await areRequiredSettingsComplete(profile.id);
+      const { organization } = await getMembership();
+      const complete = await areRequiredSettingsComplete(organization.id);
 
       setIsComplete(complete);
     };

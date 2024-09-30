@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
 
-const TenantAdminSidebar = ({ profile }: { profile: any }) => {
+const TenantAdminSidebar = ({ org }: { org: any }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
@@ -77,7 +77,7 @@ const TenantAdminSidebar = ({ profile }: { profile: any }) => {
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-main text-primary px-6 pb-4">
                   <div className="flex  my-2 shrink-0 items-center">
                     <Link href="/" className=" ">
-                      <span className="font-bold text-2xl">{profile.name}</span>
+                      <span className="font-bold text-2xl">{org.name}</span>
                     </Link>
                   </div>
                   <div className="relative"></div>

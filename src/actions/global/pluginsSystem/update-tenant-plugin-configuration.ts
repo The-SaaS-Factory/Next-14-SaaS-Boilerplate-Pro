@@ -12,7 +12,7 @@ export const updateTenantPluginConfiguration = async (
   const configurationProfile = await prisma.profilePlugin.findFirst({
     where: {
       id: profilePluginId,
-      profileId: id,
+      organizationId: id,
     },
     include: {
       plugin: true,

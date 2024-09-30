@@ -24,5 +24,5 @@ export type CarItemType = {
   name: string;
   currencyId: number;
   regularPrice: number;
-  profileId: number;
+  organizationId: number;
 };

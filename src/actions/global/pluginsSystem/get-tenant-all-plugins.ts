@@ -68,7 +68,7 @@ export const getTenantAllPlugins = async ({
 
   const pluginsInstalleds = await prisma.profilePlugin.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
     },
   });
 
@@ -99,7 +99,7 @@ export const getUserInvoicesPendingCount = async () => {
   const { id } = await getMembership();
   const data = await prisma.invoice.count({
     where: {
-      profileId: id,
+      organizationId: id,
       status: "PENDING",
     },
   });

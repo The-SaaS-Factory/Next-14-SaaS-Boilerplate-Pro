@@ -6,7 +6,7 @@ export const getShippingZoneDetails = async (modelId: number) => {
   return await prisma.profileShippingZone.findUnique({
     where: {
       id: modelId,
-      profileId: id,
+      organizationId: id,
     },
   });
 };

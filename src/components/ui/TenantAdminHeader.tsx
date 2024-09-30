@@ -16,19 +16,17 @@ import React, { Suspense, useState } from "react";
 import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
 import { constants } from "@/lib/constants";
 import { MultiTentantProfileButton } from "./commons/MultiTentantProfileButton";
-import { createProfile } from "@/utils/facades/serverFacades/profileFacade";
+import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
+import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 
 const TenantAdminHeader = ({
-  profile,
-  profileMembership,
-  membershipPermissions,
-  // agencyPermissions,
+  notificationsCount,
+  organization,
+  userMembership,
 }: {
   notificationsCount: number;
-  profile: any;
-  profileMembership: any;
-  membershipPermissions: string[];
-  agencyPermissions: string[];
+  organization: IOrganization;
+  userMembership: IUserMembership;
 }) => {
   const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
     toggleSidebarMenu,
@@ -37,10 +35,15 @@ const TenantAdminHeader = ({
   const [open, setOpen] = useState(false);
   const { daktThemeSelector } = useDarkTheme();
   const [openNewPorfile, setOpenNewProfile] = useState(false);
+  console.log(notificationsCount);
 
   const isSuperAdmin =
-    membershipPermissions.includes("superAdmin:totalAccess") ||
-    membershipPermissions.includes("superAdmin:administration:read");
+    organization.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:totalAccess") ||
+    userMembership.permissions
+      .map((p) => p.name)
+      .includes("superAdmin:administration:read");
 
   return (
     <>
@@ -93,7 +96,6 @@ const TenantAdminHeader = ({
                     </Suspense>
                   </div>
                 </div>
-                
               </div>
             </div>
             <div className="flex -mt-[85px] lg:mt-0 items-center gap-x-4 lg:gap-x-6">
@@ -130,8 +132,8 @@ const TenantAdminHeader = ({
               {/* Profile dropdown */}
               {constants.multiTenant ? (
                 <MultiTentantProfileButton
-                  profileMembership={profileMembership}
-                  profile={profile}
+                  userMembership={userMembership}
+                  organization={organization}
                 />
               ) : null}
             </div>
@@ -158,8 +160,8 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
       email: session?.user?.email,
     };
 
-    await createProfile(payload).then(() => {
-      toast.success("Negocio creado correctamente!");
+    await createOrganization(payload).then(() => {
+      toast.success("Organization created!");
       window.location.reload();
     });
   };

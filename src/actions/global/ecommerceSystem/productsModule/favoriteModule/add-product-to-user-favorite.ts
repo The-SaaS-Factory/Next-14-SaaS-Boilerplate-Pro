@@ -9,7 +9,7 @@ export const addProductFavorite = async (productId: number) => {
   const exitProduct = await prisma.productFavorite.findFirst({
     where: {
       productId,
-      profileId: id,
+      organizationId: id,
     },
   });
 
@@ -19,7 +19,7 @@ export const addProductFavorite = async (productId: number) => {
     await prisma.productFavorite.create({
       data: {
         productId,
-        profileId: id,
+        organizationId: id,
       },
     });
 

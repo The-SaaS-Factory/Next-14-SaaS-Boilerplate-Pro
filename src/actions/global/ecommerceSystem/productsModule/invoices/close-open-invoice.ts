@@ -10,7 +10,7 @@ export const closeOpenInvoice = async (invoiceId: number) => {
   await prisma.invoice.update({
     where: {
       id: invoiceId,
-      profileId: id,
+      organizationId: id,
     },
     data: {
       status: InvoiceStatus.PAID,

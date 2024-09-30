@@ -1,6 +1,5 @@
 "use client";
 
-import { payInvoiceWitWallet } from "@/actions/admin/walletModule/pay-with-wallet";
 import {
   PlanInvoiceType,
   createPlanInvoice,
@@ -141,14 +140,7 @@ const usePaymentMethods = (
 
   const payWithWallet = async (model = "INVOICE", modelId: number) => {
     if (model === "INVOICE") {
-      await payInvoiceWitWallet(modelId)
-        .then(() => {
-          toast.success("Invoice paid successfully");
-        })
-        .catch((err: any) => {
-          toast.error("Error paying invoice:" + " " + err.message);
-          console.log(err);
-        });
+      //
     } else if (model === "PLAN") {
       await createPlanInvoice({
         payload: {
@@ -157,15 +149,8 @@ const usePaymentMethods = (
           paymentMethodName: "WALLET",
         },
       })
-        .then(async (data) => {
-          await payInvoiceWitWallet(data.id)
-            .then(() => {
-              toast.success("Invoice paid successfully");
-            })
-            .catch((err: any) => {
-              toast.error("Error paying invoice:" + " " + err.message);
-              console.log(err);
-            });
+        .then(async () => {
+          //
         })
         .catch((error) => {
           toast.error(error.message);

@@ -13,7 +13,7 @@ export const upsertShopSettings = async ({
   const { id } = await getMembership();
 
   try {
-    await prisma.profileSetting.upsert({
+    await prisma.organizationSetting.upsert({
       where: {
         id: modelId ? modelId : 0,
         userId: id,

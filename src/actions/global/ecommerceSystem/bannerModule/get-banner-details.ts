@@ -6,7 +6,7 @@ export const getEcommerceBannerDetails = async (bannerId: number) => {
   return await prisma.banner.findUnique({
     where: {
       id: bannerId,
-      profileId: id,
+      organizationId: id,
     },
   });
 };

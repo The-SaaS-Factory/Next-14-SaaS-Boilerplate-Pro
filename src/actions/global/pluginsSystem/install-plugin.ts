@@ -9,7 +9,7 @@ export const installPlugin = async (pluginId: number) => {
 
   const installed = await prisma.profilePlugin.findFirst({
     where: {
-      profileId: id,
+      organizationId: id,
       pluginId: pluginId,
     },
   });
@@ -20,7 +20,7 @@ export const installPlugin = async (pluginId: number) => {
 
   await prisma.profilePlugin.create({
     data: {
-      profileId: id,
+      organizationId: id,
       pluginId,
     },
   });

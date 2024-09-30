@@ -1,7 +1,7 @@
 "use server";
 import { hash } from "bcrypt";
 import prisma from "@/lib/db";
-import { createProfile } from "@/utils/facades/serverFacades/profileFacade";
+import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 export const registerNewUser = async (payload) => {
   const { password, email } = payload;
 
@@ -11,8 +11,7 @@ export const registerNewUser = async (payload) => {
     },
   });
 
-  if (existedUser)
-    throw Error("Já existe um usuário cadastrado com esses dados");
+  if (existedUser) throw Error("User already existed");
 
   const hashedPassword = await hash(password, 10);
 
@@ -29,15 +28,14 @@ export const registerNewUser = async (payload) => {
 
   const newpRofile = {
     ...user,
-    profileName: businessName,
+    profileName: payload.name,
     address: payload.businessAddress,
     phone: payload.businessPhone,
-    type: payload.profileType,
   };
 
   if (businessName) {
     //Assign permission of agency to the user
-    await createProfile(newpRofile);
+    await createOrganization(newpRofile);
   }
 
   return user;

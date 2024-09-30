@@ -13,7 +13,7 @@ export const getSupportTicketById = async (ticketId: number): Promise<any> => {
   let whereOwner: Prisma.SupportTicketWhereInput;
 
   whereOwner = {
-      profileId: id,
+      organizationId: id,
   };
 
   const ticket = await prisma.supportTicket.findFirst({

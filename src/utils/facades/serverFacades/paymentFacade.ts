@@ -45,7 +45,7 @@ export const createStripeServiceByDefault = async (serviceName: string) => {
 export const saveStripeCustomerId = async (id: number, customerId: string) => {
   return await prisma.stripeCustomer.create({
     data: {
-      profileId: id,
+      organizationId: id,
       customerId: customerId,
     },
   });
@@ -54,7 +54,7 @@ export const saveStripeCustomerId = async (id: number, customerId: string) => {
 export const getClientCustomer = async (id: number) => {
   let client: StripeCustomer | null = null;
 
-  const profile = await prisma.profile.findFirst({
+  const profile = await prisma.organization.findFirst({
     where: {
       id,
     },
@@ -64,7 +64,7 @@ export const getClientCustomer = async (id: number) => {
 
   client = await prisma.stripeCustomer.findFirst({
     where: {
-      profileId: id,
+      organizationId: id,
     },
   });
 
@@ -90,7 +90,7 @@ export const getClientCustomer = async (id: number) => {
     client = await createStripeCustomer({
       email: profile.email,
       name: profile.name,
-      profileId: id,
+      organizationId: id,
     });
   }
 
@@ -149,12 +149,12 @@ export const planPaid = async (
 ) => {
   let months = getMonthCountByFrecuency(pricing.frequency);
 
-  if (!invoice.profileId) throw new Error("Profile not found");
+  if (!invoice.organizationId) throw new Error("Profile not found");
 
   const membership = await updateMembership({
     pricingId: pricing ? pricing.id : null,
     currencyId: invoice.currencyId,
-    profileId: invoice.profileId,
+    organizationId: invoice.organizationId,
     months,
     planId: plan.id,
   });
@@ -197,7 +197,7 @@ export const invoiceItemPaid = async ({
           },
           {
             Invoice: {
-              profileId: stripeCustomer.profileId,
+              organizationId: stripeCustomer.organizationId,
             },
           },
         ],

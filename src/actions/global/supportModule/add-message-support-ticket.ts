@@ -13,7 +13,7 @@ export const addMessageSupportTicket = async (args: any) => {
       let dataForMessage = {};
 
       dataForMessage = {
-        profileId: id,
+        organizationId: id,
       };
 
       const message = await tx.supportTicketMessage.create({

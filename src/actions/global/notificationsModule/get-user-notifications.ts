@@ -19,7 +19,7 @@ export const getUserNotifications = async ({
   const { id } = await getMembership();
   const data = await prisma.notification.findMany({
     where: {
-      profileId: id,
+      organizationId: id,
     },
     skip: offset,
     take: limit,
@@ -31,7 +31,7 @@ export const getUserNotifications = async ({
   //Update all notifications to viewed
   await prisma.notification.updateMany({
     where: {
-      profileId: id,
+      organizationId: id,
       viewed: false,
     },
     data: {
@@ -41,7 +41,7 @@ export const getUserNotifications = async ({
 
   const totalCount = await prisma.notification.count({
     where: {
-      profileId: id,
+      organizationId: id,
     },
   });
 
@@ -54,7 +54,7 @@ export const getUserNotificationsUnreadCount = async () => {
   const { id } = await getMembership();
   return await prisma.notification.count({
     where: {
-      profileId: id,
+      organizationId: id,
       viewed: false,
     },
     orderBy: {

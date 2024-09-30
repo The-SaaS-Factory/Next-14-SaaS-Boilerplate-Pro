@@ -32,12 +32,12 @@ export async function GET(request: Request) {
       permission.name.includes("superAdmin")
     );
 
-    const userMemberships = await prisma.profileMembership.findMany({
+    const userMemberships = await prisma.userMembership.findMany({
       where: { userId: user.id },
     });
 
     userMemberships.forEach(async (membership) => {
-      await prisma.profileMembership.update({
+      await prisma.userMembership.update({
         where: {
           id: membership.id,
         },
@@ -63,9 +63,9 @@ export async function GET(request: Request) {
         return new NextResponse("Main profile not found", { status: 404 });
       }
 
-      await prisma.profileMembership.create({
+      await prisma.userMembership.create({
         data: {
-          profileId: mainProfile.id,
+          organizationId: mainProfile.id,
           userId: user.id,
           permissions: {
             connect: adminPermissions.map((permission) => ({
