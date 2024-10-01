@@ -3,7 +3,7 @@ import {
   getStripeCustomer,
   stripeCreateProduct,
 } from "./stripeFacade";
-import { getAdminSettingValue, getSuperAdminSetting } from "./adminFacade";
+import { getAdminSettingValue, getSuperAdminSetting } from "./superAdminFacade";
 import { updateMembership } from "./membershipFacade";
 import {
   notifyToSuperAdmin,

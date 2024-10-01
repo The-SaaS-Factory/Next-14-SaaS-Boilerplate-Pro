@@ -5,23 +5,16 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import FullLoader from "../ui/loaders/FullLoader";
 import ForbiddenPage from "./errors/ForbiddenPage";
 import { HeroPattern } from "../ui/commons/HeroPattern";
+import { isSuperAdmin } from "@/utils/facades/serverFacades/superAdminFacade";
 
 export default async function SuperAdminLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const { organization, userMembership } = await getMembership();
+  const { userMembership, organization } = await getMembership();
 
-  const isAdmin =
-    organization.permissions
-      .map((p) => p.name)
-      .includes("superAdmin:totalAccess") ||
-    userMembership.permissions
-      .map((p) => p.name)
-      .includes("superAdmin:administration:read");
-
-  if (!isAdmin) {
+  if (!isSuperAdmin(userMembership)) {
     return <ForbiddenPage />;
   }
 

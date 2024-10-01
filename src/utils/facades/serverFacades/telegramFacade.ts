@@ -1,4 +1,4 @@
-import { getSuperAdminSetting } from "./adminFacade";
+import { getSuperAdminSetting } from "./superAdminFacade";
 
 export const sendMessageToTelegram = async (message: string) => {
   //With Api web

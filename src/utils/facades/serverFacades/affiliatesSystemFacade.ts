@@ -1,6 +1,6 @@
 import { Invoice } from "@prisma/client";
 import prisma from "@/lib/db";
-import { getSuperAdminSetting } from "./adminFacade";
+import { getSuperAdminSetting } from "./superAdminFacade";
 import { getUserCapabilitiesNames } from "./membershipFacade";
 
 //An invoice can have many invoice items, because it, we need to process all of them to pay to affiliate

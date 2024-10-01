@@ -5,19 +5,17 @@ export async function GET(request: Request) {
   // Validate secret params with nextAuthSecret
   const url = new URL(request.url);
   const secret = url.searchParams.get("secret");
+  const email = url.searchParams.get("email");
 
   if (secret !== process.env.NEXTAUTH_SECRET) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
-
-  const email = url.searchParams.get("email");
 
   if (!email) {
     return new NextResponse("Email parameter is required", { status: 400 });
   }
 
   try {
-    // Buscar el usuario en la base de datos
     const user = await prisma.user.findUnique({
       where: { email: email },
     });

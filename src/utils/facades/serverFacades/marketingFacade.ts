@@ -1,6 +1,6 @@
 import { updateMembership } from "./membershipFacade";
 import { calculateMonthsFromDays } from "./strFacade";
-import { getSuperAdminSetting } from "./adminFacade";
+import { getSuperAdminSetting } from "./superAdminFacade";
 import prisma from "@/lib/db";
 import {
   sendLoopsTransactionalEventToUser,

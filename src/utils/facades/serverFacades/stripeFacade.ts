@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { getSuperAdminSetting } from "./adminFacade";
+import { getSuperAdminSetting } from "./superAdminFacade";
 import {
   invoiceItemPaid,
   processInvoiceItemInPayment,
