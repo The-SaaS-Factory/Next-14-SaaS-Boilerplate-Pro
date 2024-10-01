@@ -5,15 +5,17 @@ import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { hash } from "bcrypt";
 import { constants } from "@/lib/constants";
+import { UserMembershipRole } from "@prisma/client";
 const sendInvitationEmailId = process.env.AGENCY_SEND_INVITE_ID;
 
-export interface PayloadIntiteMember {
+export interface PayloadInviteMember {
   email: string;
   name: string;
   password: string;
+  role: UserMembershipRole;
 }
 
-export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
+export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
   const { organization } = await getMembership();
 
   let user;
@@ -37,6 +39,7 @@ export const tenantSendInvitation = async (payload: PayloadIntiteMember) => {
                 id: organization.id,
               },
             },
+            role: payload.role,
           },
         },
       },

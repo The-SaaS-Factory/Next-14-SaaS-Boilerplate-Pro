@@ -32,6 +32,7 @@ export interface IOrganization {
   referredBy?: Referral[];
   notification?: Notification[];
   membership?: Membership[];
+  isOnboardingCompleted?: boolean;
   supportTicket?: SupportTicket[];
   supportTicketMessage?: SupportTicketMessage[];
   stripeCustomer?: StripeCustomer[];

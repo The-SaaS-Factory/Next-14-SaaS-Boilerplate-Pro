@@ -14,5 +14,5 @@ export const deleteTenantMember = async (modelId: number) => {
     },
   });
 
-  revalidatePath("home/admin/agentes");
+  revalidatePath("home/admin/members");
 };

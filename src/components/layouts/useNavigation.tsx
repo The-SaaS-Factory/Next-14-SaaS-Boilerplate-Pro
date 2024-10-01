@@ -14,24 +14,20 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const useNavigation = (isOrganizationAdmin?: boolean) => {
-  console.log(isOrganizationAdmin);
-  
   const tenantNavigation = [
     isOrganizationAdmin && {
-      sectionName: "My organization",
+      sectionName: `My ${constants.tanantModelName}`,
       icon: BuildingLibraryIcon,
-      href: "/home/admin/configuraciones",
+      href: "/home/admin/settings",
       items: [
         {
-          name: "Configuraciones",
-          href: "/home/admin/configuraciones",
-          icon: HomeIcon,
+          name: "Settings",
+          href: "/home/admin/settings",
           current: true,
         },
         {
-          name: "Miembros",
+          name: "Members",
           href: "/home/admin/members",
-          icon: HomeIcon,
           current: true,
         },
       ],

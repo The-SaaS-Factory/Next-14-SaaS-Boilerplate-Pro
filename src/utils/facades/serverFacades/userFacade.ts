@@ -5,9 +5,11 @@ import { IUserMembership } from "@/interfaces/saasTypes";
 import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
-export const getMembership = async () => {
+export const getMembership = cache(async () => {
   const session = await getServerSession(authOptions);
+
   if (!session) redirect("/login");
 
   const membership: IUserMembership = await prisma.userMembership.findFirst({
@@ -54,6 +56,7 @@ export const getMembership = async () => {
       id: membership.organization?.id,
       name: membership.organization.name,
       avatar: membership.organization.avatar,
+      isOnboardingCompleted: membership.organization.isOnboardingCompleted ?? false,
       status: membership.organization.status,
       permissions: membership.organization.permissions,
       membership: membership.organization.membership,
@@ -61,4 +64,4 @@ export const getMembership = async () => {
   };
 
   return authData;
-};
+});

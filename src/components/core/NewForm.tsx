@@ -993,7 +993,7 @@ const NewForm = ({
               </button>
             ) : (
               <button type="submit" className="btn-main">
-                {customSaveButtonText ? customSaveButtonText : "Guardar"}
+                {customSaveButtonText ? customSaveButtonText : "Save"}
               </button>
             )}
           </div>

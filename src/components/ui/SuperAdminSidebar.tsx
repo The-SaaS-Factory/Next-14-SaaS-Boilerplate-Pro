@@ -12,7 +12,6 @@ import Link from "next/link";
 
 import { Navigation } from "./Navigation";
 import { useNavigation } from "../layouts/useNavigation";
-import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
 
 const SuperAdminSidebar = () => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(

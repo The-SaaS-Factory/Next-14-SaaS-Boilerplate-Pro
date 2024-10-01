@@ -61,6 +61,7 @@ model Organization {
   name                     String?                    @db.VarChar(255)
   isMainTenant             Boolean                    @default(false)
   status                   OrganizationStatus         @default(ACTIVE)
+  isOnboardingCompleted     Boolean                    @default(false)
   address                  String?                    @db.VarChar(512)
   phone                    String?                    @db.VarChar(32)
   avatar                   String?                    @db.VarChar(255)

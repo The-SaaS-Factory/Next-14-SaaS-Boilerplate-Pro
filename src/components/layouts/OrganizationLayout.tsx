@@ -5,9 +5,10 @@ import TenantAdminHeader from "../ui/TenantAdminHeader";
 import TenantAdminSidebar from "../ui/TenantAdminSidebar";
 import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
-import CompleteOnBoarding from "@/app/(admin)/home/(tenant)/admin/configuraciones/components/CompleteOnBoarding";
 import { redirect } from "next/navigation";
-import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { saasFeatures } from "@/lib/constants";
+import CompleteOnBoarding from "@/app/(admin)/home/(tenant)/admin/settings/components/CompleteOnBoarding";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -17,7 +18,7 @@ export default async function OrganizationLayout({
 
   const { organization, userMembership } = await getMembership();
 
-  if (isOrganizationAdmin(userMembership)) {
+  if (isSuperAdmin(userMembership)) {
     redirect("/admin");
   }
 
@@ -25,7 +26,10 @@ export default async function OrganizationLayout({
     <Suspense fallback={<FullLoader />}>
       <main className="relative text-primary">
         <HeroPattern />
-        <TenantAdminSidebar org={organization}  userMembership={userMembership} />{" "}
+        <TenantAdminSidebar
+          org={organization}
+          userMembership={userMembership}
+        />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader
@@ -41,7 +45,12 @@ export default async function OrganizationLayout({
           </div>
         </div>{" "}
       </main>
-      <CompleteOnBoarding />
+
+      {saasFeatures.onboarding && (
+        <CompleteOnBoarding
+          isOnboardingCompleted={organization.isOnboardingCompleted ?? false}
+        />
+      )}
     </Suspense>
   );
 }

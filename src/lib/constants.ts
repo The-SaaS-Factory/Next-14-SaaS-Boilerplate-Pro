@@ -1,5 +1,6 @@
 export const constants = {
   multiTenant: true,
+  tanantModelName: "Project",
   appUrl: "https://localhost:3000",
   appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",
@@ -35,6 +36,10 @@ export const constants = {
     jpy: "¥",
     uyu: "UYU",
   },
+};
+
+export const saasFeatures = {
+  onboarding: true,
 };
 
 export const sliderSettings = {

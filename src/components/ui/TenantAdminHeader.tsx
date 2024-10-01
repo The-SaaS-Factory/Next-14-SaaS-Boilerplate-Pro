@@ -33,7 +33,7 @@ const TenantAdminHeader = ({
   }));
 
   const [open, setOpen] = useState(false);
-  const { daktThemeSelector } = useDarkTheme();
+  const { darkThemeSelector } = useDarkTheme();
   const [openNewPorfile, setOpenNewProfile] = useState(false);
   console.log(notificationsCount);
 
@@ -117,7 +117,7 @@ const TenantAdminHeader = ({
                 aria-hidden="true"
               />
 
-              {daktThemeSelector}
+              {darkThemeSelector}
 
               {/* Notification button */}
               {/* <Link className="relative" href="/home/notifications">

@@ -26,7 +26,7 @@ const ClientAdminHeader = ({
     toggleSidebarMenu,
   }));
 
-  const { daktThemeSelector } = useDarkTheme();
+  const { darkThemeSelector } = useDarkTheme();
 
   return (
     <div>
@@ -61,7 +61,7 @@ const ClientAdminHeader = ({
                 </Link>
               )} */}
 
-              {daktThemeSelector}
+              {darkThemeSelector}
 
               {/* Notification button */}
               <Link className="relative" href="/home/notifications">

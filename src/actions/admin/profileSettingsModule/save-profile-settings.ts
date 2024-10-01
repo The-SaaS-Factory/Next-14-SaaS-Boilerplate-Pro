@@ -3,9 +3,8 @@
 import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
-export const saveProfileSettings = async (settings: any) => {
-  console.log(settings);
 
+export const saveProfileSettings = async (settings: any) => {
   try {
     await Promise.all(
       settings.map(async (setting: any) => {
@@ -48,7 +47,7 @@ export const saveProfileSettings = async (settings: any) => {
       console.log(err);
     });
 
-    revalidatePath("/home/admin/configuraciones");
+    revalidatePath("/home/admin/settings");
 
     return "ok";
   } catch (error) {

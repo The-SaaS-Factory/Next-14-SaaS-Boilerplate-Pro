@@ -272,7 +272,7 @@ export default function LoginPage() {
                         htmlFor="name"
                         className="block mt-1 text-sm font-medium text-gray-700"
                       >
-                        Project / Organization Name
+                        {constants.tanantModelName} name
                       </label>
                       <input
                         id="businessName"
