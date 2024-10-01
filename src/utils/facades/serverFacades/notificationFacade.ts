@@ -1,5 +1,5 @@
 import prisma from "@/lib/db";
-import { getSuperAdminAdmins } from "./scurityFacade";
+import { getSuperAdminAdmins } from "./securityFacade";
 import { sendMessageToTelegram } from "./telegramFacade";
 import { sendLoopsTransactionalEventToUser } from "./loopsEmailMarketingFacade";
 import { constants } from "@/lib/constants";

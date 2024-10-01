@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { constants } from "@/lib/constants";
-import useSuperAdmin from "@/app/hooks/useSuperAdmin";
+import useSuperAdmin from "@/utils/hooks/useSuperAdmin";
 
 const SettingsTabs = ({ profile }: { profile: any }) => {
   const { isSuperAdmin } = useSuperAdmin(profile);

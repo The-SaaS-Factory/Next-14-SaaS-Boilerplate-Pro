@@ -20,11 +20,8 @@ type LoginInput = {
 type RegisterInput = {
   name: string;
   password: string;
-  username: string;
   email: string;
   businessName: string;
-  businessAddress: string;
-  bussinessPhone: string;
 };
 
 import { classNames } from "@/utils/facades/serverFacades/strFacade";
@@ -60,10 +57,7 @@ export default function LoginPage() {
     name: "",
     password: "",
     email: "",
-    username: "",
     businessName: "",
-    businessAddress: "",
-    bussinessPhone: "",
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +107,7 @@ export default function LoginPage() {
         name: inputsInSignUp.name,
         password: inputsInSignUp.password,
         email: inputsInSignUp.email,
+        businessName: inputsInSignUp.businessName,
       };
 
       await registerNewUser(payload)
@@ -261,11 +256,27 @@ export default function LoginPage() {
                         htmlFor="name"
                         className="block mt-1 text-sm font-medium text-gray-700"
                       >
-                        Nombre
+                        Name
                       </label>
                       <input
                         id="name"
                         name="name"
+                        type="text"
+                        required
+                        className="input-text mt-1"
+                        onChange={handleChange}
+                      />
+                    </div>{" "}
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block mt-1 text-sm font-medium text-gray-700"
+                      >
+                        Project / Organization Name
+                      </label>
+                      <input
+                        id="businessName"
+                        name="businessName"
                         type="text"
                         required
                         className="input-text mt-1"

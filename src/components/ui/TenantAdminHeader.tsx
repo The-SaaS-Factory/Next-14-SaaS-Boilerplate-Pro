@@ -1,6 +1,6 @@
 "use client";
 import { useSidebarState } from "@/states/ui/sidebarState";
-import useDarkTheme from "@/app/hooks/useDarkTheme";
+import useDarkTheme from "@/utils/hooks/useDarkTheme";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import Link from "next/link";
 import {

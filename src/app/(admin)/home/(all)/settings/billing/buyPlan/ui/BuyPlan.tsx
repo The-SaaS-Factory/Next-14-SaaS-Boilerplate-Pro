@@ -15,7 +15,7 @@ import { Select, SelectItem } from "@tremor/react";
 import { parsePriceInLocalCurrency } from "@/utils/facades/frontendFacades/parseValuesFacade";
 import { IPricing, PlanType } from "@/interfaces/billingModule";
 import { constants } from "@/lib/constants";
-import usePaymentMethods from "@/app/hooks/usePaymentMethods";
+import usePaymentMethods from "@/utils/hooks/usePaymentMethods";
 import { toast } from "sonner";
 import { activateTrialPlan } from "@/actions/superAdmin/superAdminBillingModule/activate-trial-plan";
 import { useSession } from "next-auth/react";

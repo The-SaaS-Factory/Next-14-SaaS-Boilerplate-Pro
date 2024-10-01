@@ -28,7 +28,7 @@ const useDarkTheme = () => {
   }, []);
 
   return {
-    daktThemeSelector: (
+    darkThemeSelector: (
       <div>
         {" "}
         <button className="icon p-2" onClick={handleDarkTheme}>

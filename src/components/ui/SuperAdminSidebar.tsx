@@ -2,12 +2,17 @@
 import React from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Cog6ToothIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Cog6ToothIcon,
+  LifebuoyIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useSidebarState } from "@/states/ui/sidebarState";
 import Link from "next/link";
-import { useNavigation } from "../layouts/useNavigation";
 
 import { Navigation } from "./Navigation";
+import { useNavigation } from "../layouts/useNavigation";
+import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
 
 const SuperAdminSidebar = () => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
@@ -16,6 +21,7 @@ const SuperAdminSidebar = () => {
       isSidebarMenuOpen,
     })
   );
+
   const { superAdminNavigation } = useNavigation();
 
   return (
@@ -144,17 +150,6 @@ const SuperAdminSidebar = () => {
               </li>
 
               <li className="mt-auto">
-                {/* <Link
-                  onClick={() => toggleSidebarMenu()}
-                  href="/home/affiliates/link"
-                  className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
-                >
-                  <UsersIcon
-                    className="h-6 w-6 shrink-0 text-primary "
-                    aria-hidden="true"
-                  />
-                  {t("affiliatePanel")}
-                </Link>
                 <Link
                   onClick={() => toggleSidebarMenu()}
                   href="/home/support"
@@ -164,8 +159,8 @@ const SuperAdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  {t("support")}
-                </Link> */}
+                  Support
+                </Link>
                 <Link
                   onClick={() => toggleSidebarMenu()}
                   href="/admin/settings/general"

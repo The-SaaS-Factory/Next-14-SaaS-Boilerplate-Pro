@@ -7,7 +7,8 @@ import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
 import CompleteOnBoarding from "@/app/(admin)/home/(tenant)/admin/configuraciones/components/CompleteOnBoarding";
 import { redirect } from "next/navigation";
-export default async function TenantAdminLayout({
+import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+export default async function OrganizationLayout({
   children,
 }: {
   children: ReactNode;
@@ -16,15 +17,7 @@ export default async function TenantAdminLayout({
 
   const { organization, userMembership } = await getMembership();
 
-  const isAdmin =
-    organization.permissions
-      .map((p) => p.name)
-      .includes("superAdmin:totalAccess") ||
-    userMembership.permissions
-      .map((p) => p.name)
-      .includes("superAdmin:administration:read");
-
-  if (isAdmin) {
+  if (isOrganizationAdmin(userMembership)) {
     redirect("/admin");
   }
 
@@ -32,7 +25,7 @@ export default async function TenantAdminLayout({
     <Suspense fallback={<FullLoader />}>
       <main className="relative text-primary">
         <HeroPattern />
-        <TenantAdminSidebar org={organization} />{" "}
+        <TenantAdminSidebar org={organization}  userMembership={userMembership} />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader

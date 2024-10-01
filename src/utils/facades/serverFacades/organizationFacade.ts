@@ -2,6 +2,8 @@
 import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
 import { UserMembershipRole } from "@prisma/client";
+import { IUserMembership } from "@/interfaces/saasTypes";
+
 export const createOrganization = async (
   user: {
     id: number;
@@ -77,3 +79,4 @@ export const createOrganization = async (
 
   return newProfileMembership;
 };
+

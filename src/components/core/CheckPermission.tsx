@@ -1,5 +1,5 @@
 "use client";
-import useSuperAdmin from "@/app/hooks/useSuperAdmin";
+import useSuperAdmin from "@/utils/hooks/useSuperAdmin";
 import React from "react";
 import ForbiddenPage from "../layouts/errors/ForbiddenPage";
 

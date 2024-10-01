@@ -1,4 +1,3 @@
-import { useMembership } from "@/app/hooks/useMembership";
 import { constants } from "@/lib/constants";
 import {
   CreditCardIcon,
@@ -8,98 +7,18 @@ import {
   TicketIcon,
   UsersIcon,
   ClipboardDocumentIcon,
-  BookOpenIcon,
-  HeartIcon,
-  BoltIcon,
   FolderIcon,
-  ClockIcon,
-  TruckIcon,
-  CheckBadgeIcon,
-  XMarkIcon,
-  BuildingStorefrontIcon,
   MegaphoneIcon,
   ListBulletIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
 
-export const useNavigation = () => {
-  const clientNavigation = [
-    {
-      sectionName: "Mis pedidos",
-      icon: BuildingStorefrontIcon,
-      href: "/home/orders/pendings",
-      items: [
-        {
-          name: "Pedidos pendintes",
-          href: "/home/orders/pendings",
-          icon: ClockIcon,
-          current: true,
-        },
-        {
-          name: "Pedidos en proceso",
-          href: "/home/orders/actives",
-          icon: BoltIcon,
-          current: true,
-        },
-        {
-          name: "Pedidos en delivery",
-          href: "/home/orders/delivery",
-          icon: TruckIcon,
-          current: true,
-        },
-        {
-          name: "Pedidos completados",
-          href: "/home/orders/completed",
-          icon: CheckBadgeIcon,
-          current: true,
-        },
-        {
-          name: "Pedidos cancelados",
-          href: "/home/orders/canceled",
-          icon: XMarkIcon,
-          current: true,
-        },
-      ],
-    },
-    {
-      sectionName: "Mis contactos",
-      icon: HomeIcon,
-      href: "/home/contacts",
-      items: [
-        {
-          name: " Mis contactos",
-          href: "/home/contacts",
-          icon: BookOpenIcon,
-          current: true,
-        },
-        {
-          name: " Adicionar contactos",
-          href: "/home/contacts/add",
-          icon: BookOpenIcon,
-          current: true,
-        },
-      ],
-    },
-    {
-      sectionName: "Mis favoritos",
-      icon: HeartIcon,
-      href: "/home/favorites",
-      items: [
-        {
-          name: " Mis favoritos",
-          href: "/home/favorites",
-          icon: HeartIcon,
-          current: true,
-        },
-      ],
-    },
-  ];
-
-  const { profile } = useMembership();
-
+export const useNavigation = (isOrganizationAdmin?: boolean) => {
+  console.log(isOrganizationAdmin);
+  
   const tenantNavigation = [
-    profile?.permissions?.includes("agency:admin") && {
-      sectionName: "Mi agencia",
+    isOrganizationAdmin && {
+      sectionName: "My organization",
       icon: BuildingLibraryIcon,
       href: "/home/admin/configuraciones",
       items: [
@@ -239,5 +158,5 @@ export const useNavigation = () => {
     });
   }
 
-  return { tenantNavigation, clientNavigation, superAdminNavigation };
+  return { tenantNavigation, superAdminNavigation };
 };

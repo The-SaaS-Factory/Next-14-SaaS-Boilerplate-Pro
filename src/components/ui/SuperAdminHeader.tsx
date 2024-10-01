@@ -4,7 +4,7 @@ import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 
 import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
-import useDarkTheme from "@/app/hooks/useDarkTheme";
+import useDarkTheme from "@/utils/hooks/useDarkTheme";
 
 const SuperAdminHeader = ({
   notificationsCount,
@@ -16,7 +16,7 @@ const SuperAdminHeader = ({
     toggleSidebarMenu,
   }));
 
-  const { daktThemeSelector } = useDarkTheme();
+  const { darkThemeSelector } = useDarkTheme();
 
   return (
     <div>
@@ -44,7 +44,7 @@ const SuperAdminHeader = ({
             </div>
 
             <div className="flex items-center gap-x-4 lg:gap-x-6">
-              {daktThemeSelector}
+              {darkThemeSelector}
 
               {/* Notification button */}
               <Link className="relative" href="/admin/notifications">

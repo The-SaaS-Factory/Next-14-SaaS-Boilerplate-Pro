@@ -5,7 +5,7 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import FullLoader from "../ui/loaders/FullLoader";
 import ForbiddenPage from "./errors/ForbiddenPage";
 import { HeroPattern } from "../ui/commons/HeroPattern";
-import { isSuperAdmin } from "@/utils/facades/serverFacades/superAdminFacade";
+import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 
 export default async function SuperAdminLayout({
   children,

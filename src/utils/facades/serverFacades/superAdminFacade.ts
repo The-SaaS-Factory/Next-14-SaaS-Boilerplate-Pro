@@ -62,10 +62,3 @@ export const getAdminSettingValue = async (
   return setting ? setting : null;
 };
 
-export const isSuperAdmin = (userMembership: IUserMembership): boolean => {
-  const userPermissions = new Set(
-    userMembership.permissions.map((p) => p.name)
-  );
-
-  return userPermissions.has("superAdmin:administration:read");
-};
