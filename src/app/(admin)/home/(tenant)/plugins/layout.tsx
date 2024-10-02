@@ -12,7 +12,7 @@ const TenentPluginsRoot = ({ children }: { children: ReactNode }) => {
             name={"Plugins"}
             breadcrumbs={[
               {
-                name: "Escritorio",
+                name: "Dashboard",
                 href: "/home",
               },
               {

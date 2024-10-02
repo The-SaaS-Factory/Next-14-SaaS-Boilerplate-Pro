@@ -4,7 +4,8 @@ import Search from "@/components/ui/commons/Search";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import SupportTicketsList from "./ui/SupportTicketsList";
 import { Metadata } from "next";
- 
+import SlideOver from "@/components/core/SlideOver";
+import NewTicketSupportForm from "./ui/NewTicketSupportForm";
 
 export const metadata: Metadata = {
   title: "Support",
@@ -24,12 +25,20 @@ const AdminSupportPage = ({
   return (
     <div>
       <PageName
-        name={"Soporte"}
+        name={"Support"}
         breadcrumbs={[
-          { name: "Escritorio", href: "/home" },
-          { name: "Soporte", href: "/home/support" },
+          { name: "Dashboard", href: "/home" },
+          { name: "Support", href: "/home/support" },
         ]}
-       
+        btn2={
+          <SlideOver
+            button={{
+              name: t("newTicket"),
+            }}
+          >
+            <NewTicketSupportForm />
+          </SlideOver>
+        }
       />
       <Search placeholder={"Buscar ticket por ID"} />
       <Suspense

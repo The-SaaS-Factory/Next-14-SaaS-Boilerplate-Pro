@@ -10,7 +10,7 @@ const NewTicketSupportForm = () => {
   const fields = [
     {
       name: "subject",
-      label: "Asunto",
+      label: "Subject",
       type: "text",
       required: true,
     },
@@ -21,28 +21,28 @@ const NewTicketSupportForm = () => {
       required: true,
       options: [
         {
-          optionName: "Facturación",
+          optionName: "Billing",
           optionValue: SupportDepartamentType.BILLING,
         },
         {
-          optionName: "Ventas",
+          optionName: "Sales",
           optionValue: SupportDepartamentType.SALES,
         },
         {
-          optionName: "Soporte",
+          optionName: "Support",
           optionValue: SupportDepartamentType.SUPPORT,
         },
       ],
     },
     {
       name: "description",
-      label: "Descripción",
+      label: "Description",
       type: "textarea",
       required: true,
     },
     {
       name: "images",
-      label: "Imágenes",
+      label: "Images",
       type: "gallery",
       required: true,
     },
@@ -61,7 +61,7 @@ const NewTicketSupportForm = () => {
       <NewForm
         fields={fields}
         onSubmit={handleSendForm}
-        customSaveButtonText={"Enviar Ticket"}
+        customSaveButtonText={"Send Ticket"}
       />
     </>
   );

@@ -46,7 +46,7 @@ const AgentesPage = () => {
       email: watch("email"),
       name: watch("name"),
       password: watch("password"),
-      role: watch("role")
+      role: watch("role"),
     })
       .then(() => {
         getMembers();
@@ -155,7 +155,10 @@ const AgentesPage = () => {
               </div>
               <div className="flex flex-col">
                 <label htmlFor="">Role</label>
-                <select className="input-text" {...register("role", { required: true })}>
+                <select
+                  className="input-text"
+                  {...register("role", { required: true })}
+                >
                   {Object.keys(UserMembershipRole).map((key) => {
                     return (
                       <option value={UserMembershipRole[key]}>

@@ -32,7 +32,7 @@ export const useNavigation = (isOrganizationAdmin?: boolean) => {
       href: "/home/admin/dashboard",
       items: [
         {
-          name: "Escritorio",
+          name: "Dashboard",
           href: "/home/admin/dashboard",
           icon: HomeIcon,
           current: true,
@@ -48,7 +48,7 @@ export const useNavigation = (isOrganizationAdmin?: boolean) => {
       href: "/admin",
       items: [
         {
-          name: "Escritorio",
+          name: "Dashboard",
           href: "/admin",
           icon: HomeIcon,
           current: true,

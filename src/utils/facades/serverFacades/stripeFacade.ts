@@ -246,6 +246,51 @@ export const stripCreatePaymentMethod = async () => {
   }
 };
 
+export async function getStripeMetrics() {
+  const stripe = await makeStripeClient();
+  const charges = await stripe.charges.list({
+    limit: 100,
+  });
+
+  const totalRevenue =
+    charges.data
+      .filter((charge) => charge.paid && charge.status === "succeeded")
+      .reduce((acc, charge) => acc + charge.amount, 0) / 100; // Total en la moneda base
+
+  const subscriptions = await stripe.subscriptions.list({
+    limit: 100,
+    status: "active",
+  });
+
+  const activeUsers = subscriptions.data.length;
+
+  const canceledSubscriptions = await stripe.subscriptions.list({
+    limit: 100,
+    status: "canceled",
+  });
+
+  const churnRate =
+    subscriptions.data.length == 0
+      ? 0
+      : (canceledSubscriptions.data.length /
+          (subscriptions.data.length + canceledSubscriptions.data.length)) *
+        100;
+
+  console.log(churnRate);
+
+  const MRR = subscriptions.data.reduce((acc, subscription) => {
+    const planAmount = subscription.items.data[0]?.plan.amount / 100; // Verifica que el plan exista
+    return acc + (planAmount || 0); // Suma el monto o 0 si no existe el plan
+  }, 0);
+
+  return {
+    totalRevenue,
+    activeUsers,
+    churnRate,
+    MRR,
+  };
+}
+
 export const getStripeCustomer = async (customerId: string) => {
   try {
     const stripe = await makeStripeClient();

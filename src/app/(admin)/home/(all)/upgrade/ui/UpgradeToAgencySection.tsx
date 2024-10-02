@@ -14,9 +14,9 @@ const features = [
       "Obten un 35% de descuento en cada nuevo servicio que se compre desde una organización creada por tu agencia (Ya sea que el cliente tenga acceso o no)",
   },
   {
-    name: "Soporte prioritario",
+    name: "Support prioritario",
     description:
-      "Soporte prioritario para ti y tus organizaciones. Directamente desde WhatsApp o correo electrónico.",
+      "Support prioritario para ti y tus organizaciones. Directamente desde WhatsApp o correo electrónico.",
   },
 ];
 

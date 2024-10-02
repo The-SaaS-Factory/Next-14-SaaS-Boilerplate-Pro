@@ -64,7 +64,7 @@ const SupportTicketsList = async ({
       >
         {data.length === 0 ? (
           <div className="flex justify-center items-center h-96">
-            <NotFound message={"No se encontraron tickets"} />
+            <NotFound message={"No tickets found"} />
           </div>
         ) : (
           <div className="flex flex-col">
@@ -72,16 +72,16 @@ const SupportTicketsList = async ({
               <TableHead>
                 <TableRow className="">
                   <TableHeaderCell className="text-left">
-                    Asunto
+                    Subject
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Departamento
+                    Department
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Estado
+                    Status
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Fecha
+                    Date
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -106,7 +106,7 @@ const SupportTicketsList = async ({
                         href={`/home/support/ticket/${item.id}`}
                         className="btn-main"
                       >
-                        Ver
+                        See
                       </Link>
                     </TableCell>
                   </TableRow>

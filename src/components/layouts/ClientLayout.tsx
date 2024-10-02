@@ -4,7 +4,7 @@ export const clientNavigation = [
   {
     sectionName: "General",
     items: [
-      { name: "Escritorio", href: "/home", icon: HomeIcon, current: true },
+      { name: "Dashboard", href: "/home", icon: HomeIcon, current: true },
     ],
   },
   {
