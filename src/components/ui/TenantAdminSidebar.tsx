@@ -121,7 +121,7 @@ const TenantAdminSidebar = ({
                             className="h-6 w-6 shrink-0 text-primary "
                             aria-hidden="true"
                           />
-                          Ajustes
+                          Settings
                         </Link>
                       </li>
                     </ul>
@@ -201,7 +201,7 @@ const TenantAdminSidebar = ({
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Ajustes
+                  Settings
                 </Link>
               </li>
             </ul>

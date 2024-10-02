@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import { Card, Flex, ProgressBar, Text } from "@tremor/react";
+import { PlanCapabilitieType } from "@/interfaces/userModule";
 import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const PlanActive = ({
   planCapabilities,
   usedCapabilities,
 }: {
-  planCapabilities: any[];
+  planCapabilities: PlanCapabilitieType[];
   usedCapabilities: any[];
 }) => {
   const getUserCountCapabilitie = (capabilitieId: number) => {
@@ -21,15 +22,13 @@ const PlanActive = ({
     return (userCount * 100) / planCount;
   };
 
-  console.log(planCapabilities);
-
   return (
     <div>
       <Card className="my-7">
         {planCapabilities?.filter((c: any) => c.capabilitie?.type === "LIMIT")
           .length > 0 && (
           <div>
-            <h2 className="title">{"Uso actual"}:</h2>
+            <h2 className="title">Current use:</h2>
             <div className="grid mt-10 grid-cols-1 gap-4 lg:grid-cols-3">
               {planCapabilities
                 ?.filter((c: any) => c.capabilitie.type === "LIMIT")
@@ -39,7 +38,7 @@ const PlanActive = ({
                       <Text>{capabilitie.capabilitie?.name}</Text>
                       <Flex>
                         <Text>
-                          {getUserCountCapabilitie(capabilitie?.capabilitieId)}
+                          {getUserCountCapabilitie(capabilitie.capabilitieId)}
                         </Text>
                         <Text>max {capabilitie.count}</Text>
                       </Flex>
@@ -59,7 +58,7 @@ const PlanActive = ({
           </div>
         )}
         <div>
-          <h2 className="title">{"Caracteristica de limite de plan"} :</h2>
+          <h2 className="title">Features and limits of plans</h2>
           <ul
             role="list"
             className="divide-y my-3 grid grid-cols-2 lg:grid-cols-1 space-y-3 divide-gray-100"
@@ -69,7 +68,7 @@ const PlanActive = ({
                 key={`capa-${index}`}
                 className="items-center flex space-x-3 p-1"
               >
-                {capa.capabilitie?.type === "PERMISSION" ? (
+                {capa.capabilitie.type === "PERMISSION" ? (
                   capa.count == 1 ? (
                     <button className="btn-icon  mr-2">
                       {" "}
@@ -84,8 +83,8 @@ const PlanActive = ({
                 ) : (
                   capa.count
                 )}{" "}
-                {capa.capabilitie?.name}{" "}
-                {capa.capabilitie?.type === "LIMIT" && "/ month"}
+                {capa.capabilitie.name}{" "}
+                {capa.capabilitie.type === "LIMIT" && "/ month"}
               </li>
             ))}
           </ul>

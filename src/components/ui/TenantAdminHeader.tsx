@@ -18,6 +18,7 @@ import { constants } from "@/lib/constants";
 import { MultiTentantProfileButton } from "./commons/MultiTentantProfileButton";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
+import { BellIcon } from "lucide-react";
 
 const TenantAdminHeader = ({
   notificationsCount,
@@ -35,7 +36,6 @@ const TenantAdminHeader = ({
   const [open, setOpen] = useState(false);
   const { darkThemeSelector } = useDarkTheme();
   const [openNewPorfile, setOpenNewProfile] = useState(false);
-  console.log(notificationsCount);
 
   const isSuperAdmin =
     organization.permissions
@@ -87,12 +87,7 @@ const TenantAdminHeader = ({
                       </kbd>
                     </button>
                     <Suspense fallback={null}>
-                      <SearchHeader
-                        // agencyPermissions={agencyPermissions}
-                        // membershipPermissions={membershipPermissions}
-                        open={open}
-                        setOpen={setOpen}
-                      />
+                      <SearchHeader open={open} setOpen={setOpen} />
                     </Suspense>
                   </div>
                 </div>
@@ -101,14 +96,14 @@ const TenantAdminHeader = ({
             <div className="flex -mt-[85px] lg:mt-0 items-center gap-x-4 lg:gap-x-6">
               {isSuperAdmin && (
                 <Link href="/admin" className="btn-main">
-                  Acceso Súper Admin
+                  Super Admin Access
                 </Link>
               )}
               <Link
                 href="/home/help"
                 className="hidden lg:flex items-center gap-x-2 text-primary"
               >
-                Ayuda
+                Help
               </Link>
 
               {/* Separator */}
@@ -119,15 +114,14 @@ const TenantAdminHeader = ({
 
               {darkThemeSelector}
 
-              {/* Notification button */}
-              {/* <Link className="relative" href="/home/notifications">
+              <Link className="relative" href="/home/notifications">
                 <BellIcon className="h-6 w-6 text" aria-hidden="true" />
                 {notificationsCount > 0 && (
                   <span className=" h-5 w-5 top-0 -mt-1 text-center -pt-7 absolute right-0  text-white rounded-full">
                     <p className="-mt-1 p-1">{notificationsCount}</p>
                   </span>
                 )}
-              </Link> */}
+              </Link>
 
               {/* Profile dropdown */}
               {constants.multiTenant ? (
@@ -177,7 +171,7 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity" />
+          <div className="fixed inset-0 bg-neutral-800/30 backdrop-blur-sm   transition-opacity" />
         </TransitionChild>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
@@ -189,21 +183,23 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="mx-auto min-h-48 max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
+            <DialogPanel className="mx-auto min-h-48 max-w-lg transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
               <div className=" divide-y pt-2 flex flex-col space-y-3 divide-gray-500 divide-opacity-10 px-3  ">
                 <span className="mt-3 ">
-                  <h3 className="text-subtitle">Nombre del nuevo negocio</h3>
+                  <h3 className="text-subtitle">
+                    New {constants.tanantModelName} name
+                  </h3>
                 </span>
                 <hr />
                 <input
                   type="text"
                   onChange={(e) => setProfileName(e.target.value)}
                   className="input-text"
-                  placeholder="Nombre del negocio"
+                  placeholder="Name"
                 />
 
                 <button className="btn-main" onClick={handleCreateProfile}>
-                  Crear negocio
+                  Add {constants.tanantModelName}
                 </button>
               </div>
             </DialogPanel>

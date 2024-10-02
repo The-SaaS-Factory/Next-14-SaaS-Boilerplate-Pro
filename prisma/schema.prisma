@@ -57,11 +57,12 @@ enum UserMembershipRole {
 
 model Organization {
   id                       Int                        @id @default(autoincrement())
+  subscription             Subscription?
   email                    String?                    @db.VarChar(255)
   name                     String?                    @db.VarChar(255)
   isMainTenant             Boolean                    @default(false)
   status                   OrganizationStatus         @default(ACTIVE)
-  isOnboardingCompleted     Boolean                    @default(false)
+  isOnboardingCompleted    Boolean                    @default(false)
   address                  String?                    @db.VarChar(512)
   phone                    String?                    @db.VarChar(32)
   avatar                   String?                    @db.VarChar(255)
@@ -70,7 +71,6 @@ model Organization {
   refer                    Referral[]                 @relation("refer")
   referredBy               Referral[]                 @relation("referred")
   notification             Notification[]
-  membership               Membership[]
   supportTicket            SupportTicket[]
   supportTicketMessage     SupportTicketMessage[]
   stripeCustomer           StripeCustomer[]
@@ -288,9 +288,10 @@ model PaymentMethod {
 }
 
 // -------- Module Membership (for Organizations)
-model Membership {
+model Subscription {
   id               Int              @id @default(autoincrement())
   organizationId   Int              @unique
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   plan             Plan             @relation(fields: [planId], references: [id], onDelete: Cascade)
   planId           Int
   pricingId        Int?
@@ -301,7 +302,6 @@ model Membership {
   endDateFreeTrial DateTime?
   endDate          DateTime
   createdAt        DateTime         @default(now())
-  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, pricingId])
 }
@@ -313,7 +313,7 @@ model Plan {
   freeTrialDays    Int?
   status           String             @default("ACTIVE")
   description      String?            @db.Text
-  Membership       Membership[]
+  subscriptions    Subscription[]
   PlanCapabilities PlanCapabilities[]
   Permission       Permission[]
   pricing          Pricing[]
@@ -353,18 +353,18 @@ model OrganizationCapabilities {
 }
 
 model Pricing {
-  id         Int              @id @default(autoincrement())
-  frequency  frequencyType    @default(YEARLY)
-  status     String           @default("ACTIVE")
-  price      Float
-  oldPrice   Float?
-  createdAt  DateTime         @default(now())
-  updatedAt  DateTime         @updatedAt
-  Plan       Plan?            @relation(fields: [planId], references: [id], onDelete: Cascade)
-  planId     Int?
-  serviceId  Int?
-  settings   PricingSetting[]
-  Membership Membership[]
+  id           Int              @id @default(autoincrement())
+  frequency    frequencyType    @default(YEARLY)
+  status       String           @default("ACTIVE")
+  price        Float
+  oldPrice     Float?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  Plan         Plan?            @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId       Int?
+  serviceId    Int?
+  settings     PricingSetting[]
+  suscriptions Subscription[]
 
   @@index([planId, serviceId])
 }
@@ -436,16 +436,16 @@ model Notification {
 }
 
 model AdminCurrencies {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(56)
-  main       Int          @default(0)
-  code       String       @db.VarChar(11)
-  rate       Float
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  invoices   Invoice[]
-  Membership Membership[]
-  Coupon     Coupon[]
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(56)
+  main          Int            @default(0)
+  code          String         @db.VarChar(11)
+  rate          Float
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  invoices      Invoice[]
+  subscriptions Subscription[]
+  Coupon        Coupon[]
 }
 
 model SupportTicket {

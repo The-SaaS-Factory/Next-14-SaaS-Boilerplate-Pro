@@ -66,7 +66,7 @@
         "plansOfFidelity": "Planos de fidelidade em",
         "plansOfFidelityDescription": "Descrição dos planos de fidelidade",
         "paymentFrequency": "Frequência de pagamento",
-        "buyPlan": "Comprar plano",
+        "buyPlan": "Buy plano",
         "congratulation": "Parabéns!",
         "plan": "plano",
         "activeUntil": "ativo até",
@@ -77,7 +77,7 @@
         "trialPlanActivated": "Plano de teste ativado",
         "selectPaymentMethod": "Selecionar método de pagamento",
         "payWith": "Pagar com",
-        "cancel": "Cancelar",
+        "cancel": "Cancel",
         "needLogin": "Você precisa fazer login para comprar um plano",
         "login": "Entrar"
       },

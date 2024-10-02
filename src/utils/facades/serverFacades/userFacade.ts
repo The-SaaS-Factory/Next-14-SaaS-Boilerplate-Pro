@@ -28,7 +28,15 @@ export const getMembership = cache(async () => {
       organization: {
         include: {
           permissions: true,
-          membership: true,
+          subscription: {
+            include: {
+              plan: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
         },
       },
       user: true,
@@ -36,7 +44,7 @@ export const getMembership = cache(async () => {
   });
 
   if (!membership) {
-    throw new Error("User does not have an active or inactive membership");
+    redirect("/login");
   }
 
   const authData = {
@@ -56,10 +64,11 @@ export const getMembership = cache(async () => {
       id: membership.organization?.id,
       name: membership.organization.name,
       avatar: membership.organization.avatar,
-      isOnboardingCompleted: membership.organization.isOnboardingCompleted ?? false,
+      isOnboardingCompleted:
+        membership.organization.isOnboardingCompleted ?? false,
       status: membership.organization.status,
       permissions: membership.organization.permissions,
-      membership: membership.organization.membership,
+      subscription: membership.organization.subscription,
     },
   };
 

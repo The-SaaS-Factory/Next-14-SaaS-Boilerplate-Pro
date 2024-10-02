@@ -15,7 +15,7 @@ const CapabilitiesList = async () => {
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         {data.length === 0 ? (
           <div className="flex justify-center w-full items-center h-96">
-            <NotFound message="No users found" />
+            <NotFound message="No capabilities found" />
           </div>
         ) : (
           <div className=" ">

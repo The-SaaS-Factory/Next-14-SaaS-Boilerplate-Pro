@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
+import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
 import { tenantModuleScope } from "./tenantFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 

@@ -46,7 +46,7 @@ export const permissions = [
   },
   {
     name: "agency:admin:settings",
-    description: "Agency Settings",
+    description: "AgencySettings",
   },
   {
     name: "agency:admin",

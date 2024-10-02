@@ -55,7 +55,7 @@ export const SuperAdminProfileButton = () => {
                 )}
               >
                 <UserIcon className="w-5 h-5" />
-                <span> Ajustes del perfil</span>
+                <span> Settings del perfil</span>
               </Link>
 
               <button

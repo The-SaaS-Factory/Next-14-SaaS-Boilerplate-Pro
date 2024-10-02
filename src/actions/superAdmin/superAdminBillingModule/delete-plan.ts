@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
 
-import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
 const scope = "superAdmin:billing:upsert";
 
 export const deletePlan = async (modelId: number) => {

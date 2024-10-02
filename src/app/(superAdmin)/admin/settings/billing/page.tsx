@@ -6,7 +6,7 @@ import CurrenciesSettingsSection from "./ui/CurrenciesSettingsSection";
 import PaymentMethodsSection from "./ui/PaymentMethodsSection";
 
 export const metadata: Metadata = {
-  title: "Billing Settings",
+  title: "BillingSettings",
 };
 
 const SuperAdminSettingsModuleBillingPage = async () => {

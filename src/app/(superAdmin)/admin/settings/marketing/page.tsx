@@ -6,7 +6,7 @@ import { Plan } from "@prisma/client";
 import { Metadata } from "next";
 import React from "react";
 export const metadata: Metadata = {
-  title: "Marketing Settings",
+  title: "MarketingSettings",
 };
 
 const SuperAdminSettingsModuleMarketingPage = async () => {

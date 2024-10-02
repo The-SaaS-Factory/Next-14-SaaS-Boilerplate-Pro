@@ -1,15 +1,9 @@
 import { constants } from "@/lib/constants";
 import {
-  CreditCardIcon,
   DocumentTextIcon,
   HomeIcon,
   BuildingLibraryIcon,
-  TicketIcon,
   UsersIcon,
-  ClipboardDocumentIcon,
-  FolderIcon,
-  MegaphoneIcon,
-  ListBulletIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
 
@@ -45,37 +39,6 @@ export const useNavigation = (isOrganizationAdmin?: boolean) => {
         },
       ],
     },
-    {
-      sectionName: "Castings",
-      href: "/home/admin/castings/all",
-      icon: MegaphoneIcon,
-      items: [
-        {
-          name: "Todos mis castings",
-          href: "/home/admin/castings/all",
-          icon: ListBulletIcon,
-          current: true,
-        },
-        {
-          name: "Nuevo casting",
-          href: "/home/admin/castings/add",
-          icon: FolderIcon,
-          current: true,
-        },
-        {
-          name: "Roles",
-          href: "/home/admin/settings/roles",
-          icon: ClipboardDocumentIcon,
-          current: true,
-        },
-        {
-          name: "Informaciones",
-          href: "/home/admin/settings/informations",
-          icon: ClipboardDocumentIcon,
-          current: true,
-        },
-      ].filter(Boolean),
-    },
   ].filter(Boolean);
 
   const superAdminNavigation = [
@@ -99,20 +62,20 @@ export const useNavigation = (isOrganizationAdmin?: boolean) => {
       ],
     },
     {
-      sectionName: "Financiero",
-      href: "/admin/billing/invoices",
+      sectionName: "Billing",
+      href: "/admin/billing/plans/plans",
       icon: DocumentTextIcon,
       items: [
         {
-          name: "Facturas",
-          href: "/admin/billing/facturas",
+          name: "Plans",
+          href: "/admin/billing/plans/plans",
           icon: DocumentTextIcon,
           current: false,
         },
         {
-          name: "Reportes",
-          href: "/admin/billing/reportes",
-          icon: TicketIcon,
+          name: "Subscripciones",
+          href: "/admin/billing/subscriptions",
+          icon: BuildingLibraryIcon,
           current: false,
         },
       ],
@@ -131,28 +94,6 @@ export const useNavigation = (isOrganizationAdmin?: boolean) => {
       ],
     },
   ];
-
-  if (constants.multiTenant) {
-    superAdminNavigation.push({
-      sectionName: "Facturación",
-      icon: CreditCardIcon,
-      href: "/admin/billing/plans/plans",
-      items: [
-        {
-          name: "Planes",
-          href: "/admin/billing/plans/plans",
-          icon: CreditCardIcon,
-          current: true,
-        },
-        {
-          name: "Subscripciones",
-          href: "/admin/billing/subscriptions",
-          icon: BuildingLibraryIcon,
-          current: false,
-        },
-      ],
-    });
-  }
 
   return { tenantNavigation, superAdminNavigation };
 };

@@ -256,6 +256,11 @@ export const getStripeCustomer = async (customerId: string) => {
   }
 };
 
+type ClientSessionPayloadType = {
+  customerId: string;
+  userId: number | null;
+};
+
 export const stripeCreateCheckoutSession = async ({
   items,
   coupons,
@@ -263,22 +268,17 @@ export const stripeCreateCheckoutSession = async ({
   referenceId,
   modelName,
   mode = "subscription",
-  shippingPrice,
 }: {
   items: Stripe.Checkout.SessionCreateParams.LineItem[];
   coupons: Stripe.Checkout.SessionCreateParams.Discount[];
-  clientPayload: any;
+  clientPayload: ClientSessionPayloadType;
   referenceId: string;
   modelName: string;
   mode?: "subscription" | "payment";
-  shippingPrice: number;
 }) => {
   try {
     const stripe = await makeStripeClient();
     const urls = await getUrlsForRedirect(modelName, referenceId);
-
-    //parse Int shippingPrice
-    const newshippingPrice = parseInt(shippingPrice.toString());
 
     let sessionPayload: Stripe.Checkout.SessionCreateParams = {
       line_items: items,
@@ -286,24 +286,9 @@ export const stripeCreateCheckoutSession = async ({
       mode: mode,
       discounts: coupons,
       metadata: {
-        modelId: clientPayload.organizationId,
+        modelId: clientPayload.userId,
       },
       ...urls,
-      invoice_creation: {
-        enabled: true,
-      },
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            type: "fixed_amount",
-            fixed_amount: {
-              amount: newshippingPrice * 100,
-              currency: items[0] ? items[0].price_data.currency : "usd",
-            },
-            display_name: "Envío",
-          },
-        },
-      ],
       customer: clientPayload.customerId,
     };
 

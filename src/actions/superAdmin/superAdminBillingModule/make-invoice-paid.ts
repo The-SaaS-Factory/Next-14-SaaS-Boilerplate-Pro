@@ -6,7 +6,7 @@ import {
 } from "@/utils/facades/serverFacades/paymentFacade";
 import prisma from "@/lib/db";
 import { InvoiceItem } from "@prisma/client";
-import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
+import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
  
 import { revalidatePath } from "next/cache";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";

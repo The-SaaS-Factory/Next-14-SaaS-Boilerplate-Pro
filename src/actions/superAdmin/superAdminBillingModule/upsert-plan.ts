@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { checkPermission } from "@/utils/facades/serverFacades/scurityFacade";
+import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
  import { getMembership} from "@/utils/facades/serverFacades/userFacade";
  
 import { Prisma } from "@prisma/client";

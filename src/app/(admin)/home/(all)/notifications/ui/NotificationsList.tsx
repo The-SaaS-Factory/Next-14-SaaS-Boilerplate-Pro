@@ -30,7 +30,7 @@ const NotificationsList = async ({
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         {data.length === 0 ? (
           <div className="flex justify-center items-center h-96">
-            <NotFound message="No tienes notificaciones" />
+            <NotFound message="No notifications found" />
           </div>
         ) : (
           <div className="flex flex-col">

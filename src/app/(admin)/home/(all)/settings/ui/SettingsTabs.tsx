@@ -33,14 +33,10 @@ const SettingsTabs = ({ profile }: { profile: any }) => {
           label: "Perfil",
           icon: UsersIcon,
         },
-        {
-          path: "/home/settings/ecomemrce",
-          label: "Ajustes de la tienda",
-          icon: UsersIcon,
-        },
+
         {
           path: "/home/settings/billing/planActive",
-          label: "Planes de membresía",
+          label: "Membership plans",
           icon: UserGroupIcon,
         },
         {
@@ -58,7 +54,7 @@ const SettingsTabs = ({ profile }: { profile: any }) => {
         },
         {
           path: "/home/settings/ecommerce",
-          label: "Ajustes de la tienda",
+          label: "Settings de la tienda",
           icon: BuildingStorefrontIcon,
         },
       ]);

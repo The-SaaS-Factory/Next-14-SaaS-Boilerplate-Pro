@@ -1,17 +1,36 @@
+"use client";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { useState, useEffect } from "react";
 
 export const useMembership = () => {
-  const [data, setData] = useState<any>(null);
+  const [organizationData, setOrganizationData] = useState<any>(null);
+  const [userMembershipData, setUserMembershipData] = useState<any>(null);
 
   useEffect(() => {
     const fetchMembershipData = async () => {
       try {
-        const { organization } = await getMembership();
-        if (!organization) {
-          throw new Error("Failed to fetch membership data");
+        const storedOrganization = localStorage.getItem("organization");
+        const storedUserMembership = localStorage.getItem("userMembership");
+
+        if (storedOrganization && storedUserMembership) {
+          setOrganizationData(JSON.parse(storedOrganization));
+          setUserMembershipData(JSON.parse(storedUserMembership));
+        } else {
+          const { organization, userMembership } = await getMembership();
+
+          if (!organization || !userMembership) {
+            throw new Error("Failed to fetch membership data");
+          }
+
+          localStorage.setItem("organization", JSON.stringify(organization));
+          localStorage.setItem(
+            "userMembership",
+            JSON.stringify(userMembership)
+          );
+
+          setOrganizationData(organization);
+          setUserMembershipData(userMembership);
         }
-        setData(organization);
       } catch (err) {
         console.log(err);
       }
@@ -21,8 +40,7 @@ export const useMembership = () => {
   }, []);
 
   return {
-    permissions: data?.permissions,
-    profile: data?.profile,
-    userMembership: data?.userMembership,
+    organization: organizationData,
+    userMembership: userMembershipData,
   };
 };

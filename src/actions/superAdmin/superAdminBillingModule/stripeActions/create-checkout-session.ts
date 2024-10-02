@@ -5,14 +5,15 @@ import { stripeCreateCheckoutSession } from "@/utils/facades/serverFacades/strip
 import { getClientCustomer } from "@/utils/facades/serverFacades/paymentFacade";
 import prisma from "@/lib/db";
 import { InvoiceItem } from "@prisma/client";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const createCheckoutSession = async (
   invoiceId: number,
   modelName: string
 ) => {
   if (!invoiceId) throw new Error("Invoice Id not found");
-  let stripeModeSuscription = false;
+  let stripeModeSubscription = false;
+
   const invoice = await prisma.invoice.findUnique({
     where: { id: invoiceId },
     include: {
@@ -38,7 +39,7 @@ export const createCheckoutSession = async (
           price: item.pricingId ? item.pricingId.toString() : "",
           quantity: item.quantity,
         });
-        stripeModeSuscription = true;
+        stripeModeSubscription = true;
       } else {
         items.push({
           price_data: {
@@ -46,7 +47,7 @@ export const createCheckoutSession = async (
             product_data: {
               name: item.name,
             },
-            unit_amount:  Math.round(item.price * 100),
+            unit_amount: Math.round(item.price * 100),
             tax_behavior: "inclusive",
           },
           quantity: item.quantity,
@@ -73,10 +74,8 @@ export const createCheckoutSession = async (
   }
 
   const { organization } = await getMembership();
-  
-  const client = await getClientCustomer(organization.id);
 
-  
+  const client = await getClientCustomer(organization.id);
 
   if (!client || (client && !client.customerId))
     throw new Error("Customer not found");
@@ -92,7 +91,6 @@ export const createCheckoutSession = async (
     clientPayload,
     referenceId: invoiceId.toString(),
     modelName: modelName,
-    mode: stripeModeSuscription ? "subscription" : "payment",
-    shippingPrice: 0
+    mode: stripeModeSubscription ? "subscription" : "payment",
   });
 };

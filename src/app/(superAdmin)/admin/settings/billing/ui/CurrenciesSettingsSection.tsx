@@ -12,17 +12,16 @@ const CurrenciesSettingsSection = async () => {
         <div className="space-y-12">
           <div className={`grid grid-cols-1 gap-x-8  md:grid-cols-3`}>
             <div className="lg:col-span-1 p-7">
-              <h2 className="text-subtitle">Cuentas de saldo</h2>
+              <h2 className="text-subtitle">Currencies </h2>
               <p className="mt-3 text-sm leading-6 text-primary">
-                Administra las cuentas de saldo de tu plataforma. Puedes
-                agregar, editar y eliminar cuentas de saldo.
+                Manage the currencies accepted on the platform.
               </p>
             </div>
 
             <div className="lg:col-span-2 flex flex-col w-full max-w-md pt-7">
               <div className="flex justify-between">
                 <h2 className="text-subtitle">
-                  Cuentas adicionadas{" "}
+                  Currencies
                   <span className="text-sm">({currencies?.length})</span>
                 </h2>
                 <Link
@@ -31,7 +30,7 @@ const CurrenciesSettingsSection = async () => {
                 >
                   <button className="btn-icon">
                     <PlusCircleIcon className="w-6 h-6" />
-                    Adicionar cuenta
+                    Add currency
                   </button>
                 </Link>
               </div>

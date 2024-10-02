@@ -7,22 +7,20 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import DeleteModel from "@/components/core/DeleteModel";
 import { deletePlan } from "@/actions/superAdmin/superAdminBillingModule/delete-plan";
 import { getPriceRange } from "@/utils/facades/modulesFacades/billingFacade";
-import { traslateData } from "@/utils/facades/frontendFacades/parseValuesFacade";
 import {
   getBadgeClass,
   getStatusName,
 } from "@/utils/facades/frontendFacades/visualFacade";
 
-const BillingPlansList = async ({ locale }: { locale: string }) => {
+const BillingPlansList = async () => {
   const { data } = await getAllPlans();
-  console.log(locale);
 
   return (
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         {data.length === 0 ? (
           <div className="flex justify-center w-full items-center h-96">
-            <NotFound message="No users found" />
+            <NotFound message="No plans found" />
           </div>
         ) : (
           <div className=" ">
@@ -70,9 +68,7 @@ const BillingPlansList = async ({ locale }: { locale: string }) => {
                       {data?.map((plan: any) => (
                         <tr key={plan.id}>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                            <div className=" ">
-                              {traslateData(plan.name, locale)}
-                            </div>
+                            <div className=" ">{plan.name}</div>
                           </td>
 
                           <td className="whitespace-nowrap px-3 py-5 text-sm  ">

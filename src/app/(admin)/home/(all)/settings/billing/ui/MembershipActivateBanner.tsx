@@ -15,7 +15,7 @@ const MembershipActivateBanner = ({
       {membershipName && (
         <>
           <div
-            className="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"
+            className="9"
             aria-hidden="true"
           >
             <div

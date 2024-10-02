@@ -5,7 +5,7 @@ import { Metadata } from "next";
  import { getMembership} from "@/utils/facades/serverFacades/userFacade";
  
 export const metadata: Metadata = {
-  title: "Ajustes",
+  title: "Settings",
 };
 
 const SettingRoot = async ({ children }: { children: ReactNode }) => {
@@ -14,7 +14,7 @@ const SettingRoot = async ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <PageName
-        name={"Ajustes"}
+        name={"Settings"}
         
       />
       <SettingsTabs profile={profile} />

@@ -138,10 +138,10 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
           <div className="mx-auto flex flex-col mt-3 max-w-7xl px-6   lg:px-8">
             <div className="mx-auto max-w-4xl sm:text-center">
               <h2 className="text-base font-semibold leading-7 text-indigo-600">
-                Precios
+                Prices
               </h2>
               <p className="mt-2 mega-title">
-                Planes de membresía {constants.appName}
+                Membership plans {constants.appName}
               </p>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center"></p>
@@ -296,7 +296,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                               )}
                             >
-                              Comprar Plan
+                              Buy Plan
                             </button>
                           </div>
                         </div>
@@ -395,7 +395,7 @@ export function SelectPaymentMethod({
                           as="h3"
                           className="text-base font-semibold leading-6 text"
                         >
-                          Selecciona {currencySelected.name}
+                          Select  {currencySelected.name}
                         </Dialog.Title>
                       </div>
                     </div>
@@ -414,7 +414,7 @@ export function SelectPaymentMethod({
                                   handleSelectPaymentMethod(paymentMethod);
                                 }}
                               >
-                                Pagar con {paymentMethod.name}
+                                Pay with {paymentMethod.name}
                                 {paymentMethod.image && (
                                   <Image
                                     width={100}
@@ -437,7 +437,7 @@ export function SelectPaymentMethod({
                         onClick={() => setOpen()}
                         ref={cancelButtonRef}
                       >
-                        Cancelar
+                        Cancel
                       </button>
                     </div>
                   </>

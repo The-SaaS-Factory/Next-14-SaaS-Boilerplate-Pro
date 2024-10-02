@@ -15,6 +15,7 @@ import { signOut } from "next-auth/react";
 import { NewProfileModal } from "../TenantAdminHeader";
 import Image from "next/image";
 import Link from "next/link";
+import { constants } from "@/lib/constants";
 
 export const MultiTentantProfileButton = ({
   organization,
@@ -29,7 +30,7 @@ export const MultiTentantProfileButton = ({
   }, []);
 
   useEffect(() => {
- //   getAllUserOrganizations();
+    getAllUserOrganizations();
   }, []);
 
   const handleChangeProfile = async (organizationId: number) => {
@@ -55,7 +56,7 @@ export const MultiTentantProfileButton = ({
               className="ml-4 text-sm font-semibold leading-6 text-gray-900"
               aria-hidden="true"
             >
-              {userMembership?.name || organization?.name}
+              {organization?.name}
             </span>
             <ChevronDownIcon
               className="ml-2 h-5 w-5 text-gray-400"
@@ -81,7 +82,7 @@ export const MultiTentantProfileButton = ({
                       "block px-3 py-1 hover:bg-main text-sm leading-6 text"
                     )}
                   >
-                    Ajustes del perfil
+                    Profile settings
                   </a>
                 )}
               </MenuItem>
@@ -89,12 +90,12 @@ export const MultiTentantProfileButton = ({
               <MenuItem>
                 {() => (
                   <Link
-                    href={"/home/admin/configuraciones"}
+                    href={"/home/admin/settings"}
                     className={classNames(
                       "block px-3 py-1 hover:bg-main text-sm leading-6 text"
                     )}
                   >
-                    Ajustes de la Agencia
+                    {constants.tanantModelName} settings
                   </Link>
                 )}
               </MenuItem>
@@ -105,12 +106,12 @@ export const MultiTentantProfileButton = ({
                 )}
                 onClick={() => signOut()}
               >
-                Cerrar sessión
+                Sign out
               </button>
               <hr />
 
               <div className="p-3">
-                <span>Cambiar de agencia</span>
+                <span>Change {constants.tanantModelName}</span>
               </div>
               <div className="px-3">
                 {organizations.map((org) => (
@@ -138,7 +139,7 @@ export const MultiTentantProfileButton = ({
                   onClick={() => setOpenNewProfile(true)}
                   className="btn-main w-full"
                 >
-                  Nuevo agencia
+                  New {constants.tanantModelName}
                 </button>
               </div>
             </>

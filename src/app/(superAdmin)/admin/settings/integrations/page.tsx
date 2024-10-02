@@ -4,7 +4,7 @@ import NewForm from "@/components/core/NewForm";
 import { Metadata } from "next";
 import React from "react";
 export const metadata: Metadata = {
-  title: "Integrations Settings",
+  title: "IntegrationsSettings",
 };
 
 const SuperAdminSettingsModuleIntegrationsPage = async () => {

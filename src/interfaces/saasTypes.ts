@@ -2,7 +2,6 @@ import {
   Coupon,
   Invoice,
   Log,
-  Membership,
   OrganizationCapabilities,
   OrganizationPlugin,
   OrganizationSetting,
@@ -10,6 +9,7 @@ import {
   Permission,
   Referral,
   StripeCustomer,
+  Subscription,
   SupportTicket,
   SupportTicketMessage,
   User,
@@ -31,7 +31,7 @@ export interface IOrganization {
   refer?: Referral[];
   referredBy?: Referral[];
   notification?: Notification[];
-  membership?: Membership[];
+  subscription?: Subscription;
   isOnboardingCompleted?: boolean;
   supportTicket?: SupportTicket[];
   supportTicketMessage?: SupportTicketMessage[];

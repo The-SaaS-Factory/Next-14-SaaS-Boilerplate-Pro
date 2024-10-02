@@ -66,7 +66,7 @@ export const pricings = [
 export const paymentsMethods = [
   {
     name: "Stripe",
-    currencies: JSON.stringify(["1", "2"]),
+    currencies: JSON.stringify(["1"]),
     status: "ACTIVE",
   },
 ];

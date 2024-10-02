@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import NotificationsList from "./ui/NotificationsList";
 
 export const metadata: Metadata = {
-  title: "Notificaciones",
+  title: "Notifications",
 };
 
 const NotificationsPage = async ({
@@ -20,7 +20,7 @@ const NotificationsPage = async ({
 
   return (
     <div>
-      <PageName name={"Notificaciones"} />
+      <PageName name={"Notifications"} />
       <NotificationsList query={query} currentPage={currentPage} />
     </div>
   );

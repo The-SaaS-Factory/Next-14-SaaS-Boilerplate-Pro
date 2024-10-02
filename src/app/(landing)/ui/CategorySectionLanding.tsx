@@ -69,7 +69,7 @@ export const CategorySectionLandingPage = () => {
                   </a>
                 </h3>
                 <p aria-hidden="true" className="mt-1 text-sm text-white">
-                  Comprar ahora
+                  Buy ahora
                 </p>
               </div>
             </div>
@@ -95,7 +95,7 @@ export const CategorySectionLandingPage = () => {
                   </a>
                 </h3>
                 <p aria-hidden="true" className="mt-1 text-sm text-white">
-                  Comprar ahora
+                  Buy ahora
                 </p>
               </div>
             </div>
