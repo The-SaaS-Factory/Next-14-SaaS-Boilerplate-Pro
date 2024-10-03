@@ -90,7 +90,7 @@ export default function Example() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 hover:text-gray-500"
+                  className="text-gray-400 hover: text"
                 >
                   <span className="sr-only">{item.name}</span>
                   <item.icon aria-hidden="true" className="h-6 w-6" />
@@ -152,12 +152,12 @@ export default function Example() {
           </ul>
         </div>
         <div className="mt-3 border-t border-gray-900/10 pt-8   ">
-          <p className="text-base leading-5 text-gray-500">
+          <p className="text-base leading-5  text">
             &copy; {new Date().getFullYear()} {constants.appName}. All rights
             reserved.
           </p>
           <a
-            className="text-xs leading-5 text-gray-500"
+            className="text-xs leading-5  text"
             target="_blank"
             href="https://cluzstudio.com"
           >

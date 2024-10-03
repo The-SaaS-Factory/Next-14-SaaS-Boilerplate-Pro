@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
-import { redirect } from "next/navigation";
 
 export const makeOrganizationOnboardingCompleted = async () => {
   const { organization } = await getMembership();
@@ -15,6 +14,4 @@ export const makeOrganizationOnboardingCompleted = async () => {
       isOnboardingCompleted: true,
     },
   });
-
-  redirect("/home");
 };

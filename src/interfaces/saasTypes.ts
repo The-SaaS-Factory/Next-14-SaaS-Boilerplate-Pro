@@ -58,3 +58,9 @@ export interface IUserMembership {
   organization?: IOrganization;
   settings: UserMembershipSetting[];
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+}

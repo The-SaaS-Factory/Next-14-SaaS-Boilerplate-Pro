@@ -9,23 +9,6 @@ import {
 
 export const useNavigation = (isOrganizationAdmin?: boolean) => {
   const tenantNavigation = [
-    isOrganizationAdmin && {
-      sectionName: `My ${constants.tanantModelName}`,
-      icon: BuildingLibraryIcon,
-      href: "/home/admin/settings",
-      items: [
-        {
-          name: "Settings",
-          href: "/home/admin/settings",
-          current: true,
-        },
-        {
-          name: "Members",
-          href: "/home/admin/members",
-          current: true,
-        },
-      ],
-    },
     {
       sectionName: "General",
       icon: HomeIcon,

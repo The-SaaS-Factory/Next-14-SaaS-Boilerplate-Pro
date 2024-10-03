@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChangeEvent } from "react";
@@ -26,16 +26,17 @@ type RegisterInput = {
 
 import { classNames } from "@/utils/facades/serverFacades/strFacade";
 import { track } from "@vercel/analytics";
+import { Button } from "@/components/ui/button";
 
 const tabs = [
   {
-    name: "Cuenta existente",
+    name: "Existing account",
     action: "LOGIN",
     icon: ArrowRightEndOnRectangleIcon,
     current: true,
   },
   {
-    name: "Crear cuenta",
+    name: "Create account",
     action: "REGISTER",
     icon: UserPlusIcon,
     current: false,
@@ -85,7 +86,7 @@ export default function LoginPage() {
         console.log(result.error);
 
         toast.error(
-          "Credenciales no válidas o registro pendiente de aprobación"
+          "Invalid credentials"
         );
         return;
       }
@@ -169,7 +170,7 @@ export default function LoginPage() {
                     className={classNames(
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
-                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                        : "border-transparent  text hover:border-gray-300 hover:text-gray-700",
                       "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium"
                     )}
                   >
@@ -178,7 +179,7 @@ export default function LoginPage() {
                       className={classNames(
                         tab.action === action
                           ? "text-indigo-500"
-                          : "text-gray-400 group-hover:text-gray-500",
+                          : "text-gray-400 group-hover: text",
                         "h-5 w-5 mr-2"
                       )}
                     />
@@ -201,7 +202,7 @@ export default function LoginPage() {
               {action === "LOGIN" ? (
                 <>
                   <h2 className="text-2xl font-bold text-gray-900 mt-6 text-center">
-                    Accede a {constants.appName}
+                    Login to {constants.appName}
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
@@ -226,7 +227,7 @@ export default function LoginPage() {
                         htmlFor="password"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Contraseña
+                        Password
                       </label>
                       <input
                         id="password"
@@ -240,16 +241,24 @@ export default function LoginPage() {
 
                     <div>
                       <button type="submit" className="w-full btn-main">
-                        {isLoading ? "Acessando..." : "Entrar"}
+                        {isLoading ? "Accessing..." : "Login"}
                       </button>
                     </div>
                   </form>
+
+                  <hr className="my-7" />
+                  <div className="flex w-full my-3">
+                    <Button className="w-full" onClick={() => signIn("google")}>
+                      Sign in with Google
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <>
                   <h2 className="text-2xl font-bold text-gray-900 mt-6">
-                    Crea una nueva cuenta
+                    Create a new account
                   </h2>
+
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
                       <label
@@ -304,7 +313,7 @@ export default function LoginPage() {
                         htmlFor="password"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Contraseña
+                        Password
                       </label>
                       <input
                         id="password"
@@ -317,10 +326,16 @@ export default function LoginPage() {
                     </div>
                     <div>
                       <button type="submit" className="w-full btn-main">
-                        {isLoading ? "Enviando..." : "Registrarme"}
+                        {isLoading ? "Sending..." : "Register"}
                       </button>
                     </div>
                   </form>
+                  <hr className="my-7" />
+                  <div className="flex w-full my-3">
+                    <Button className="w-full" onClick={() => signIn("google")}>
+                      Sign up with Google
+                    </Button>
+                  </div>
                 </>
               )}
             </div>

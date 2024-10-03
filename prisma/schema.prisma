@@ -15,10 +15,13 @@ datasource db {
 
 // ------------------------------------SaaS Core--------------------------------------------
 model User {
-  id              Int              @id @default(autoincrement())
-  name            String
-  password        String?
+  id       Int     @id @default(autoincrement())
+  name     String
+  password String?
+  provider String?
+  providerId      String?
   phone           String?
+  avatar          String?
   email           String?          @unique @db.VarChar(255)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
@@ -57,6 +60,7 @@ enum UserMembershipRole {
 
 model Organization {
   id                       Int                        @id @default(autoincrement())
+  isTOSAccepted            Boolean                    @default(false)
   subscription             Subscription?
   email                    String?                    @db.VarChar(255)
   name                     String?                    @db.VarChar(255)

@@ -10,17 +10,16 @@ import { classNames } from "@/utils/facades/serverFacades/strFacade";
 import { useCallback, useEffect, useState } from "react";
 import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { NewProfileModal } from "../TenantAdminHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import { LogOut, SettingsIcon, User } from "lucide-react";
 
-export const MultiTentantProfileButton = ({
-  organization,
-  userMembership,
-}: any) => {
+export const MultiTentantProfileButton = ({ organization }: any) => {
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [openNewPorfile, setOpenNewProfile] = useState(false);
 
@@ -53,7 +52,7 @@ export const MultiTentantProfileButton = ({
           />
           <span className="hidden lg:flex lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text-gray-900"
+              className="ml-4 text-sm font-semibold leading-6 text "
               aria-hidden="true"
             >
               {organization?.name}
@@ -72,42 +71,73 @@ export const MultiTentantProfileButton = ({
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <MenuItems className="absolute right-0 z-10 mt-2.5 w-48 origin-top-right rounded-md bg-main py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none space-y-3">
-            <>
+          <MenuItems className="absolute  right-0 z-10 mt-2.5 w-64 origin-top-right rounded-md bg-main py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none ">
+            <div className="flex flex-col px-3 space-y-2">
               <MenuItem>
                 {() => (
-                  <a
-                    href={"/home/settings/profile"}
-                    className={classNames(
-                      "block px-3 py-1 hover:bg-main text-sm leading-6 text"
-                    )}
-                  >
-                    Profile settings
-                  </a>
+                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                    <UsersIcon className="w-6 h-6  text" />
+                    <Link
+                      href={"/home/settings/organization/members"}
+                      className={classNames("block px-3  leading-6 text")}
+                    >
+                      Members
+                    </Link>
+                  </div>
                 )}
               </MenuItem>
 
               <MenuItem>
                 {() => (
-                  <Link
-                    href={"/home/admin/settings"}
-                    className={classNames(
-                      "block px-3 py-1 hover:bg-main text-sm leading-6 text"
-                    )}
-                  >
-                    {constants.tanantModelName} settings
-                  </Link>
+                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                    <SettingsIcon className="w-6 h-6  text" />
+                    <Link
+                      href={"/home/settings/organization/settings"}
+                      className={classNames("block px-3  leading-6 text")}
+                    >
+                      {constants.tanantModelName} settings
+                    </Link>
+                  </div>
+                )}
+              </MenuItem>
+              <Button variant="secondary" className="w-full">
+                Upgrade
+                <span className="relative ml-3 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                </span>
+              </Button>
+
+              <hr />
+              <MenuItem>
+                {() => (
+                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                    <User className="w-6 h-6  text" />
+                    <Link
+                      href={"/home/settings/profile"}
+                      className={classNames("block px-3  leading-6 text")}
+                    >
+                      Profile settings
+                    </Link>
+                  </div>
+                )}
+              </MenuItem>
+              <MenuItem>
+                {() => (
+                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                    <LogOut className="w-6 h-6  text" />
+                    <button
+                      className={classNames(
+                        " bg-main-hover px-3   leading-6 text text-left w-full"
+                      )}
+                      onClick={() => signOut()}
+                    >
+                      Sign out
+                    </button>
+                  </div>
                 )}
               </MenuItem>
 
-              <button
-                className={classNames(
-                  " bg-main-hover px-3 py-1 text-sm leading-6 text text-left w-full"
-                )}
-                onClick={() => signOut()}
-              >
-                Sign out
-              </button>
               <hr />
 
               <div className="p-3">
@@ -135,14 +165,14 @@ export const MultiTentantProfileButton = ({
               </div>
               <hr />
               <div className="p-3">
-                <button
+                <Button
                   onClick={() => setOpenNewProfile(true)}
-                  className="btn-main w-full"
+                  className=" w-full"
                 >
                   New {constants.tanantModelName}
-                </button>
+                </Button>
               </div>
-            </>
+            </div>
           </MenuItems>
         </Transition>
       </Menu>

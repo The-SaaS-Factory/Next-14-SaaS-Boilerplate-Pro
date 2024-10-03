@@ -11,7 +11,7 @@ export default function FeaturesLanding() {
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
             Connect. Learn. Earn
           </h2>
-          <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed">
+          <p className="max-w-[600px]  text md:text-xl/relaxed">
             Your data is a profitable asset. With Earnware you control what data
             to share anonymously and earn from it.
           </p>
@@ -26,11 +26,11 @@ export default function FeaturesLanding() {
         <div className="grid gap-6 lg:grid-cols-3">
           <Card className="bg-white shadow-lg rounded-xl overflow-hidden">
             <CardContent className="p-6">
-              <h3 className="text-sm font-medium text-gray-500 mb-2">
+              <h3 className="text-sm font-medium  text mb-2">
                 Your earnings
               </h3>
               <div className="text-4xl font-bold mb-4">$30.00</div>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm  text mb-4">
                 Next payout in: 10,550 pts
               </p>
               <div className="w-full h-12 bg-gray-100 rounded-lg overflow-hidden">

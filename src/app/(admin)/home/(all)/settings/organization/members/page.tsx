@@ -14,13 +14,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { constants } from "@/lib/constants";
 import { ViewMember } from "./components/ViewMember";
-import { Select, SelectItem } from "@/components/ui/select";
 import { UserMembershipRole } from "@prisma/client";
-import {
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@radix-ui/react-select";
+
+import { Button } from "@/components/ui/button";
 
 const AgentesPage = () => {
   const [members, setMembers] = useState([]);
@@ -42,12 +38,19 @@ const AgentesPage = () => {
   }, []);
 
   const handleAddMember = async () => {
-    await tenantSendInvitation({
+    const payload = {
       email: watch("email"),
       name: watch("name"),
       password: watch("password"),
-      role: watch("role"),
-    })
+      role: watch("role") ?? "MEMBER",
+    };
+
+    if (!payload.email || !payload.name) {
+      toast.error("Info required");
+      return;
+    }
+
+    await tenantSendInvitation(payload)
       .then(() => {
         getMembers();
         toast.success("Member successfully added");
@@ -63,6 +66,12 @@ const AgentesPage = () => {
   const generateRandomPassword = () => {
     const randomPassword = Math.random().toString(36).slice(-8);
     setValue("password", randomPassword);
+  };
+
+  const handleDeleteTenantRefresh = () => {
+    console.log("dd");
+
+    getMembers();
   };
 
   return (
@@ -89,7 +98,7 @@ const AgentesPage = () => {
                         {person.user.name}
                       </a>
                     </p>
-                    <p className="mt-1 flex text-xs leading-5 text-gray-500">
+                    <p className="mt-1 flex text-xs leading-5  text">
                       <a
                         href={`mailto:${person.user.email}`}
                         className="relative truncate hover:underline"
@@ -109,6 +118,7 @@ const AgentesPage = () => {
                     <div>
                       {!isTenantAdmin(person.permissions) && (
                         <DeleteModel
+                          callbackAction={handleDeleteTenantRefresh}
                           deleteAction={deleteTenantMember}
                           modelId={person.id}
                         />
@@ -123,7 +133,7 @@ const AgentesPage = () => {
                         <EyeIcon aria-hidden="true" className="w-6 mb-2 h-6" />
                       }
                     >
-                      <div className="flex h-full bg-slate-800 flex-col bg-main overflow-auto py-6">
+                      <div className="flex h-full   flex-col bg-main overflow-auto  ">
                         <ViewMember member={person} />
                       </div>
                     </CustomDialog>
@@ -134,7 +144,7 @@ const AgentesPage = () => {
           </ul>
         </div>
         <div className="col-span-1">
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-main p-6 rounded-lg">
             <h2 className="text-title">
               Add a member to the {constants.tanantModelName}
             </h2>
@@ -155,18 +165,25 @@ const AgentesPage = () => {
               </div>
               <div className="flex flex-col">
                 <label htmlFor="">Role</label>
-                <select
-                  className="input-text"
-                  {...register("role", { required: true })}
-                >
+                <div className="flex gap-3">
                   {Object.keys(UserMembershipRole).map((key) => {
                     return (
-                      <option value={UserMembershipRole[key]}>
+                      <Button
+                        onClick={() =>
+                          setValue("role", UserMembershipRole[key])
+                        }
+                        variant={
+                          watch("role") === UserMembershipRole[key]
+                            ? "default"
+                            : "secondary"
+                        }
+                        value={UserMembershipRole[key]}
+                      >
                         {UserMembershipRole[key]}
-                      </option>
+                      </Button>
                     );
                   })}
-                </select>
+                </div>
               </div>
               <div className="flex flex-col">
                 <div className="flex justify-between">
@@ -185,9 +202,7 @@ const AgentesPage = () => {
               </div>
 
               <div className="flex flex-col mt-2">
-                <button onClick={handleAddMember} className="btn-main">
-                  Agregar
-                </button>
+                <Button onClick={handleAddMember}>Agregar</Button>
               </div>
             </div>
           </div>

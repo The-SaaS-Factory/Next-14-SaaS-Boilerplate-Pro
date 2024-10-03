@@ -30,16 +30,16 @@ const AdminSupportPage = ({
           { name: "Dashboard", href: "/home" },
           { name: "Support", href: "/home/support" },
         ]}
-        btn2={
-          <SlideOver
-            button={{
-              name: t("newTicket"),
-            }}
-          >
-            <NewTicketSupportForm />
-          </SlideOver>
-        }
       />
+      <div className="flex justify-end -mt-14 mb-7">
+        <SlideOver
+          button={{
+            name: "New Ticket",
+          }}
+        >
+          <NewTicketSupportForm />
+        </SlideOver>
+      </div>
       <Search placeholder={"Buscar ticket por ID"} />
       <Suspense
         key={query + Math.random}

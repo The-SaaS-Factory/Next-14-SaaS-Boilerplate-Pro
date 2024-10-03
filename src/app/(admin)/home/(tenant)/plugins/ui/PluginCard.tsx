@@ -45,7 +45,7 @@ export const PluginCard = ({ plugin }: { plugin: any }) => {
           <div className="text-sm font-medium leading-6 text-gray-900">
             {plugin.name}
           </div>
-          <div className="text-sm font-medium leading-6 text-gray-500">
+          <div className="text-sm font-medium leading-6  text">
             {plugin.description}
           </div>
         </div>

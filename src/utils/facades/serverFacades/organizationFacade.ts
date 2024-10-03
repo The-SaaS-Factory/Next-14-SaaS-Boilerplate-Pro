@@ -2,7 +2,7 @@
 import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
 import { UserMembershipRole } from "@prisma/client";
-import { IUserMembership } from "@/interfaces/saasTypes";
+import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 
 export const createOrganization = async (
   user: {
@@ -15,6 +15,11 @@ export const createOrganization = async (
   },
   isMainTenant?: boolean
 ) => {
+  const userDB = await prisma.user.findFirst({
+    where: {
+      email: user.email,
+    },
+  });
   const permissions = await prisma.permission.findMany({
     where: {
       name: {
@@ -23,10 +28,9 @@ export const createOrganization = async (
     },
   });
 
-  //Desactive all other profiles
   const userMemberships = await prisma.userMembership.findMany({
     where: {
-      userId: user.id,
+      id: userDB.id,
     },
   });
 
@@ -56,7 +60,7 @@ export const createOrganization = async (
     data: {
       user: {
         connect: {
-          id: user.id,
+          id: userDB.id,
         },
       },
       organization: {
@@ -79,4 +83,3 @@ export const createOrganization = async (
 
   return newProfileMembership;
 };
-

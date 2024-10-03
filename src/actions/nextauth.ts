@@ -1,8 +1,8 @@
- 
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authenticate } from "./auth/login-user";
 import GoogleProvider from "next-auth/providers/google";
+import { registerNewUser } from "./auth/register-new-user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -33,7 +33,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, trigger, session }) {
+
+      console.log(account);
+      
+
       if (account && account.type === "credentials") {
+        token.userId = account.providerAccountId;
+      }
+      if (account && account.type === "oauth") {
         token.userId = account.providerAccountId;
       }
 
@@ -47,6 +54,40 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.user.id = token.userId;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log(url,baseUrl);
+      
+      if (url.startsWith(baseUrl) && !url.includes("login")) {
+        return url;
+      }
+
+      return baseUrl + "/home";
+    },
+  },
+  events: {
+    async signIn({ user, account, profile, isNewUser }) {
+      const email = user.email;
+
+      const payload = {
+        name: user.name,
+        provider: account.provider,
+        providerId: account.providerAccountId,
+        email: user.email,
+        avatar: user.image,
+        businessName: user.name,
+      };
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (!existingUser) {
+        await registerNewUser(payload).catch((e) => {
+          console.log(e);
+          
+        })
+      }
     },
   },
   pages: {

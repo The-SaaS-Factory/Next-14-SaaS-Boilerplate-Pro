@@ -1,6 +1,6 @@
 export const constants = {
   multiTenant: true,
-  tanantModelName: "Project",
+  tanantModelName: "Workspace",
   appUrl: "https://localhost:3000",
   appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",

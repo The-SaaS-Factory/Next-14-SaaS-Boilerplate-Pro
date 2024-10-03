@@ -137,11 +137,10 @@ const TenantAdminSidebar = ({
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-[20%] 2xl:w-[14.4%]  lg:flex-col">
-        {/* Sidebar component, swap this element with another sidebar if you like */}
+      <div className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-[20%] 2xl:w-[14.4%]  lg:flex-col">
         <div
-          className="flex backdrop-blur-lg lg:left-72 xl:left-80 dark:backdrop-blur-3xl
+          className="flex backdrop-blur-lg lg:left-72 xl:left-80
+           dark:backdrop-blur-3xl
          grow flex-col gap-y-5 overflow-y-auto 
         border-r  border-gray-300  dark:border-gray-600 bg-main text-primary px-6 pb-4"
         >
@@ -183,18 +182,6 @@ const TenantAdminSidebar = ({
                     aria-hidden="true"
                   />
                   Support
-                </Link>
-                <Link
-                  onClick={() => toggleSidebarMenu()}
-                  href="/home/settings/profile
-"
-                  className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
-                >
-                  <Cog6ToothIcon
-                    className="h-6 w-6 shrink-0 text-primary "
-                    aria-hidden="true"
-                  />
-                  Settings
                 </Link>
               </li>
             </ul>

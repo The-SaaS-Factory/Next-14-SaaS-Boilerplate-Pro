@@ -94,7 +94,7 @@ export default function BlogLanding() {
               className="flex max-w-xl flex-col items-start justify-between"
             >
               <div className="flex items-center gap-x-4 text-xs">
-                <time dateTime={post.datetime} className="text-gray-500">
+                <time dateTime={post.datetime} className=" text">
                   {post.date}
                 </time>
                 <Link

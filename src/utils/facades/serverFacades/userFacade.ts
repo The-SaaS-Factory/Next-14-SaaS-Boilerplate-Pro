@@ -15,7 +15,7 @@ export const getMembership = cache(async () => {
   const membership: IUserMembership = await prisma.userMembership.findFirst({
     where: {
       user: {
-        id: Number(session.user.id),
+        email: session.user.email,
       },
       OR: [{ isActive: true }, { isActive: false }],
     },

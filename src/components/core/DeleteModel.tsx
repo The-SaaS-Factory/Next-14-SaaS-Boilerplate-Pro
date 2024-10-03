@@ -6,10 +6,12 @@ const DeleteModel = ({
   modelId,
   primaryModelId,
   deleteAction,
+  callbackAction,
 }: {
   modelId: number;
   primaryModelId?: number;
   deleteAction: (modelId: number, primaryModelId?: number | undefined) => void;
+  callbackAction?;
 }) => {
   const handleDeleteModel = () => {
     toast("You're sure?", {
@@ -22,6 +24,7 @@ const DeleteModel = ({
           } else {
             deleteAction(modelId);
           }
+          callbackAction && callbackAction();
         },
       },
     });

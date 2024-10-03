@@ -8,7 +8,7 @@ import { HeroPattern } from "../ui/commons/HeroPattern";
 import { redirect } from "next/navigation";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
-import CompleteOnBoarding from "@/app/(admin)/home/(tenant)/admin/settings/components/CompleteOnBoarding";
+import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/profile/components/CompleteOnBoarding";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -24,7 +24,7 @@ export default async function OrganizationLayout({
 
   return (
     <Suspense fallback={<FullLoader />}>
-      <main className="relative text-primary">
+      <main className="relative bg-main  text-primary">
         <HeroPattern />
         <TenantAdminSidebar
           org={organization}
@@ -38,10 +38,8 @@ export default async function OrganizationLayout({
               organization={organization}
             />
           </Suspense>
-          <div className="py-3 relative lg:pt-[5%]  z-20">
-            <div className="mx-auto bg-transparent  px-4 lg:px-8">
-              {children}
-            </div>
+          <div className="py-3 relative lg:pt-[5%]   ">
+            <div className="mx-auto  px-4 lg:px-8">{children}</div>
           </div>
         </div>{" "}
       </main>

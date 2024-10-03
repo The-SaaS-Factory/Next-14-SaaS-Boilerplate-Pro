@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
@@ -31,13 +32,13 @@ const useDarkTheme = () => {
     darkThemeSelector: (
       <div>
         {" "}
-        <button className="icon p-2" onClick={handleDarkTheme}>
+        <Button variant="outline" size="icon" onClick={handleDarkTheme}>
           {!isDarkTheme ? (
-            <MoonIcon className="h-6 w-6 text" aria-hidden="true" />
+            <MoonIcon className="h-4 w-4  " aria-hidden="true" />
           ) : (
-            <SunIcon className="h-6 w-6 text" aria-hidden="true" />
+            <SunIcon className="h-4 w-4  " aria-hidden="true" />
           )}
-        </button>
+        </Button>
       </div>
     ),
     isDarkTheme: isDarkTheme,

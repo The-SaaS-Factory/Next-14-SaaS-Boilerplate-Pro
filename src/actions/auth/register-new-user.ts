@@ -22,6 +22,9 @@ export const registerNewUser = async (payload) => {
       password: hashedPassword,
       name: payload.name,
       email: payload.email,
+      avatar: payload.image,
+      provider: payload.provider ?? "credentials",
+      providerId: payload.providerId,
     },
   });
 

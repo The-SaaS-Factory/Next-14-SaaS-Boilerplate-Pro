@@ -33,7 +33,7 @@ const Tabs = ({
           {tabs.map((tab) => (
             <div
               key={tab.path}
-              className={`flex space-x-2 hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-xl ${
+              className={`flex items-center space-x-2 hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-xl ${
                 isActive(tab.path) ? "active-tab" : ""
               }`}
             >

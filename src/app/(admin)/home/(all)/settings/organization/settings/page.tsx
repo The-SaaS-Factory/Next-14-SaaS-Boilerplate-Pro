@@ -1,4 +1,3 @@
-import PageName from "@/components/ui/commons/PageName";
 import { Metadata } from "next";
 import { AgencySettingsForm } from "./components/AgencySettingsForm";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
@@ -13,7 +12,6 @@ export default async function Page() {
 
   return (
     <>
-      <PageName name="Settings" />
       <AgencySettingsForm settings={settings} />
     </>
   );

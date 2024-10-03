@@ -1,8 +1,6 @@
-import { getProfileSettings } from "@/actions/admin/profileSettingsModule/get-profile-settings";
 import { saveProfileSettings } from "@/actions/admin/profileSettingsModule/save-profile-settings";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
 import NewForm from "@/components/core/NewForm";
-import { IOrganization } from "@/interfaces/saasTypes";
 import { constants } from "@/lib/constants";
 
 export const AgencySettingsForm = ({

@@ -10,7 +10,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
         <p className="text-sm font-semibold leading-6 text-primary">
           {notification.content}
         </p>
-        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+        <p className="mt-1 truncate text-xs leading-5  text">
           {formatTimestampToDateString(notification.createdAt)}
         </p>
       </div>

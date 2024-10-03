@@ -83,7 +83,6 @@ const NewForm = ({
 
   const action: SubmitHandler<any> = async (data) => {
     setLoading(true);
-    //const action: () => void = handleSubmit(async (data) => {
     let payload: any = isSettingForm
       ? await parseSettingDataOnSubmit(data, fields)
       : await parseDataOnSubmit(data, fields);
@@ -101,7 +100,7 @@ const NewForm = ({
 
     await onSubmit(payload)
       .then(() => {
-        toast.success(isSettingForm ? "Settings saved" : "Guardado con éxito");
+        toast.success(isSettingForm ? "Settings saved" : "Saved!");
         reset();
         callback && callback();
       })
@@ -291,13 +290,11 @@ const NewForm = ({
           >
             {info && (
               <div className="lg:col-span-1 py-7 lg:p-7">
-                <h2 className="text-subtitle">{info.name}</h2>
-                <p className="mt-3 text-sm leading-6 text-secundary">
-                  {info.description}
-                </p>
+                <h2 className="text-base">{info.name}</h2>
+                <p className="mt-3 text-base leading-6  ">{info.description}</p>
               </div>
             )}
-            <div className="lg:col-span-2 grid grid-cols-1 gap-x-4   text-secundary">
+            <div className="lg:col-span-2 grid grid-cols-1 gap-x-4    ">
               {fields.map((field, index) => (
                 <div
                   className={`  my-3 flex max-w-md  ${
@@ -307,7 +304,7 @@ const NewForm = ({
                   } `}
                   key={index}
                 >
-                  <label htmlFor={field.name} className="text-secundary  ">
+                  <label htmlFor={field.name} className="   ">
                     {field.label}
                   </label>
                   {field.type === "text" && (
@@ -988,13 +985,13 @@ const NewForm = ({
         {!autoSave && (
           <div className="mt-6 max-w-5xl flex items-center justify-end gap-x-6 pr-7">
             {isDemoMode ? (
-              <button type="submit" className="btn-main" disabled>
+              <Button type="submit" disabled>
                 Demo Mode Enabled
-              </button>
+              </Button>
             ) : (
-              <button type="submit" className="btn-main">
+              <Button type="submit">
                 {customSaveButtonText ? customSaveButtonText : "Save"}
-              </button>
+              </Button>
             )}
           </div>
         )}
@@ -1179,7 +1176,7 @@ import {
   parseSettingDataOnSubmit,
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
-import { stringArray } from "@/actions/utils/strings";
+import { Button } from "../ui/button";
 export function MapSelector({
   openModal,
   address,

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Tabs from "@/components/core/Tabs";
 import {
+  BuildingLibraryIcon,
   BuildingStorefrontIcon,
   CodeBracketIcon,
   CreditCardIcon,
@@ -12,6 +13,7 @@ import {
 
 import { constants } from "@/lib/constants";
 import useSuperAdmin from "@/utils/hooks/useSuperAdmin";
+import { Users } from "lucide-react";
 
 const SettingsTabs = ({ profile }: { profile: any }) => {
   const { isSuperAdmin } = useSuperAdmin(profile);
@@ -19,47 +21,30 @@ const SettingsTabs = ({ profile }: { profile: any }) => {
   const [tabs, setTabs] = useState([
     {
       path: "/home/settings/profile",
-      label: "Perfil",
+      label: "Profile",
       icon: UsersIcon,
     },
+    {
+      path: "/home/settings/organization/settings",
+      label: constants.tanantModelName + " settings",
+      icon: BuildingLibraryIcon,
+    },
+    {
+      path: "/home/settings/organization/members",
+      label: "Members",
+      icon: Users,
+    },
+    {
+      path: "/home/settings/billing/planActive",
+      label: "Billing",
+      icon: CreditCardIcon,
+    },
+    {
+      path: "/home/settings/profile/portal",
+      label: "Portal",
+      icon: CreditCardIcon,
+    },
   ]);
-
-  useEffect(() => {
-    if (profile?.type === "CLIENT") return;
-    if (constants.multiTenant) {
-      setTabs([
-        {
-          path: "/home/settings/profile",
-          label: "Perfil",
-          icon: UsersIcon,
-        },
-
-        {
-          path: "/home/settings/billing/planActive",
-          label: "Membership plans",
-          icon: UserGroupIcon,
-        },
-        {
-          path: "/home/settings/profile/portal",
-          label: "Portal",
-          icon: CreditCardIcon,
-        },
-      ]);
-    } else {
-      setTabs([
-        {
-          path: "/home/settings/profile",
-          label: "Perfil",
-          icon: UsersIcon,
-        },
-        {
-          path: "/home/settings/ecommerce",
-          label: "Settings de la tienda",
-          icon: BuildingStorefrontIcon,
-        },
-      ]);
-    }
-  }, [profile, isSuperAdmin]);
 
   useEffect(() => {
     if (!isSuperAdmin) return;

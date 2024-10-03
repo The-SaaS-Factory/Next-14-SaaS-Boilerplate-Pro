@@ -160,7 +160,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                           ring-inset ring-gray-200`}
                       >
                         <RadioGroup.Label className="sr-only">
-                          Frecuencia
+                          Frequency
                         </RadioGroup.Label>
                         {pricing.frequencies.map((option: any) => (
                           <RadioGroup.Option
@@ -170,7 +170,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                               classNames(
                                 frequency.value === option.value
                                   ? "bg-indigo-600 text-white"
-                                  : "text-gray-500",
+                                  : " text",
                                 "cursor-pointer rounded-full px-2.5 py-1"
                               )
                             }
@@ -252,7 +252,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                         )}{" "}
                                         <div className="flex flex-col">
                                           <span>{capa.capabilitie.title}</span>
-                                          <p className="text-sm text-gray-500">
+                                          <p className="text-sm  text">
                                             {capa.capabilitie.description}
                                           </p>
                                         </div>
@@ -395,7 +395,7 @@ export function SelectPaymentMethod({
                           as="h3"
                           className="text-base font-semibold leading-6 text"
                         >
-                          Select  {currencySelected.name}
+                          Select {currencySelected.name}
                         </Dialog.Title>
                       </div>
                     </div>

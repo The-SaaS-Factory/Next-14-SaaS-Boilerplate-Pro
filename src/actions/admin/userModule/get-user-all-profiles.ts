@@ -12,7 +12,7 @@ export const getUserAllOrganizations = async () => {
       userMemberships: {
         some: {
           user: {
-            id: Number(session?.user.id),
+            email: session?.user.email,
           },
         },
       },

@@ -18,7 +18,8 @@ import { constants } from "@/lib/constants";
 import { MultiTentantProfileButton } from "./commons/MultiTentantProfileButton";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
-import { BellIcon } from "lucide-react";
+import { Bell, BellIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const TenantAdminHeader = ({
   notificationsCount,
@@ -49,20 +50,21 @@ const TenantAdminHeader = ({
     <>
       <div className=" relative    w-full flex    z-50   ">
         <div
-          className="lg:fixed  w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl bg-transparent
+          className="lg:fixed  w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
            bg-opacity-25 transition-opacity 
          items-center gap-x-4 border-b text-primary
-          border-gray-300  dark:border-gray-600 px-4 
+          border-gray-300 bg-transparent  dark:border-gray-600 px-4 
           shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
         >
-          <button
-            type="button"
-            className="  p-4   lg:hidden"
+          <Button
+            variant="outline"
+            className="  first-line:  lg:hidden"
             onClick={() => toggleSidebarMenu()}
+            size="icon"
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-7 w-7 " aria-hidden="true" />
-          </button>
+          </Button>
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="relative p-3 pl-7 flex-1">
@@ -115,7 +117,9 @@ const TenantAdminHeader = ({
               {darkThemeSelector}
 
               <Link className="relative" href="/home/notifications">
-                <BellIcon className="h-6 w-6 text" aria-hidden="true" />
+                <Button variant="outline" size="icon">
+                  <Bell className="h-4 w-4" />
+                </Button>
                 {notificationsCount > 0 && (
                   <span className=" h-5 w-5 top-0 -mt-1 text-center -pt-7 absolute right-0  text-white rounded-full">
                     <p className="-mt-1 p-1">{notificationsCount}</p>
@@ -198,9 +202,9 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
                   placeholder="Name"
                 />
 
-                <button className="btn-main" onClick={handleCreateProfile}>
+                <Button onClick={handleCreateProfile}>
                   Add {constants.tanantModelName}
-                </button>
+                </Button>
               </div>
             </DialogPanel>
           </TransitionChild>

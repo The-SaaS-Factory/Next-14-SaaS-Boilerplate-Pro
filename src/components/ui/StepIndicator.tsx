@@ -48,7 +48,7 @@ export function StepIndicator({
                   className={`rounded-full flex items-center justify-center transition-all ${
                     activeStep >= step.id
                       ? "bg-indigo-500 text-white h-10 w-10"
-                      : "bg-gray-300 text-gray-500 h-8 w-8"
+                      : "bg-gray-300  text h-8 w-8"
                   }`}
                 >
                   {step.id}

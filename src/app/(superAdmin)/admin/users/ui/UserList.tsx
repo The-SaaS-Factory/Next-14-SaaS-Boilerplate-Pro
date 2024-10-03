@@ -70,14 +70,14 @@ const UserList = async ({
                         <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                           <UserCard user={person} />
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
                           <div className=" ">{person.Membership.length}</div>
-                          <div className="mt-1 text-gray-500">
+                          <div className="mt-1  text">
                             {person.Membership[0]?.plan?.name}
                           </div>
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                          <div className="mt-1 text-gray-500 flex flex-col">
+                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
+                          <div className="mt-1  text flex flex-col">
                             
                           </div>
                         </td>

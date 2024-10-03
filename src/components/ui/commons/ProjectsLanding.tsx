@@ -57,7 +57,7 @@ export default function ProjectsLanding() {
               </div>
               <div className="max-w-xl">
                 <div className="mt-8 flex items-center gap-x-4 text-xs">
-                  <time dateTime={post.datetime} className="text-gray-500">
+                  <time dateTime={post.datetime} className=" text">
                     {post.date}
                   </time>
                   <Link
