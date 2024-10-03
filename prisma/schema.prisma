@@ -2,23 +2,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-// provider  = "postgresql"
-// url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-// directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-//}
-
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
+
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
 
 // ------------------------------------SaaS Core--------------------------------------------
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  password String?
-  provider String?
+  id              Int              @id @default(autoincrement())
+  name            String
+  password        String?
+  provider        String?
   providerId      String?
   phone           String?
   avatar          String?
