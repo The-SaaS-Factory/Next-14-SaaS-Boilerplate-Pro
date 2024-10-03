@@ -8,7 +8,7 @@ import { HeroPattern } from "../ui/commons/HeroPattern";
 import { redirect } from "next/navigation";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
-import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/profile/components/CompleteOnBoarding";
+import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/settings/components/CompleteOnBoarding";
 export default async function OrganizationLayout({
   children,
 }: {

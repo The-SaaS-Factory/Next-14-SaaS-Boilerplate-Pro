@@ -12,16 +12,9 @@ import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
 import Image from "next/image";
-import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
-import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { IOrganization  } from "@/interfaces/saasTypes";
 
-const TenantAdminSidebar = ({
-  org,
-  userMembership,
-}: {
-  org: IOrganization;
-  userMembership: IUserMembership;
-}) => {
+const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
@@ -29,9 +22,7 @@ const TenantAdminSidebar = ({
     })
   );
 
-  const { tenantNavigation } = useNavigation(
-    isOrganizationAdmin(userMembership)
-  );
+  const { tenantNavigation } = useNavigation();
 
   return (
     <div>

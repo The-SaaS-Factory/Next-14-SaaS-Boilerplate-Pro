@@ -1,4 +1,3 @@
-import { constants } from "@/lib/constants";
 import {
   DocumentTextIcon,
   HomeIcon,
@@ -7,7 +6,7 @@ import {
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
 
-export const useNavigation = (isOrganizationAdmin?: boolean) => {
+export const useNavigation = () => {
   const tenantNavigation = [
     {
       sectionName: "General",

@@ -14,44 +14,53 @@ import {
 import { constants } from "@/lib/constants";
 import useSuperAdmin from "@/utils/hooks/useSuperAdmin";
 import { Users } from "lucide-react";
+import { IOrganization } from "@/interfaces/saasTypes";
 
-const SettingsTabs = ({ profile }: { profile: any }) => {
+const SettingsTabs = ({
+  profile,
+  isOrganizationAdmin,
+}: {
+  profile: IOrganization;
+  isOrganizationAdmin: boolean;
+}) => {
   const { isSuperAdmin } = useSuperAdmin(profile);
 
-  const [tabs, setTabs] = useState([
-    {
-      path: "/home/settings/profile",
-      label: "Profile",
-      icon: UsersIcon,
-    },
-    {
-      path: "/home/settings/organization/settings",
-      label: constants.tanantModelName + " settings",
-      icon: BuildingLibraryIcon,
-    },
-    {
-      path: "/home/settings/organization/members",
-      label: "Members",
-      icon: Users,
-    },
-    {
-      path: "/home/settings/billing/planActive",
-      label: "Billing",
-      icon: CreditCardIcon,
-    },
-    {
-      path: "/home/settings/profile/portal",
-      label: "Portal",
-      icon: CreditCardIcon,
-    },
-  ]);
+  const [tabs, setTabs] = useState(
+    [
+      {
+        path: "/home/settings/profile",
+        label: "Profile",
+        icon: UsersIcon,
+      },
+      isOrganizationAdmin && {
+        path: "/home/settings/organization/settings",
+        label: constants.tanantModelName + " settings",
+        icon: BuildingLibraryIcon,
+      },
+      isOrganizationAdmin && {
+        path: "/home/settings/organization/members",
+        label: "Members",
+        icon: Users,
+      },
+      isOrganizationAdmin && {
+        path: "/home/settings/billing/planActive",
+        label: "Billing",
+        icon: CreditCardIcon,
+      },
+      isOrganizationAdmin && {
+        path: "/home/settings/profile/portal",
+        label: "Portal",
+        icon: CreditCardIcon,
+      },
+    ].filter((item) => item)
+  );
 
   useEffect(() => {
     if (!isSuperAdmin) return;
     setTabs([
       {
         path: "/home/settings/profile",
-        label: "Perfil",
+        label: "Profile",
         icon: UsersIcon,
       },
       {

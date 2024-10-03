@@ -18,8 +18,15 @@ import Link from "next/link";
 import { constants } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { LogOut, SettingsIcon, User } from "lucide-react";
-
-export const MultiTentantProfileButton = ({ organization }: any) => {
+import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
+import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+export const MultiTentantProfileButton = ({
+  organization,
+  userMembership,
+}: {
+  userMembership: IUserMembership;
+  organization: IOrganization;
+}) => {
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [openNewPorfile, setOpenNewProfile] = useState(false);
 
@@ -73,42 +80,45 @@ export const MultiTentantProfileButton = ({ organization }: any) => {
         >
           <MenuItems className="absolute  right-0 z-10 mt-2.5 w-64 origin-top-right rounded-md bg-main py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none ">
             <div className="flex flex-col px-3 space-y-2">
-              <MenuItem>
-                {() => (
-                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                    <UsersIcon className="w-6 h-6  text" />
-                    <Link
-                      href={"/home/settings/organization/members"}
-                      className={classNames("block px-3  leading-6 text")}
-                    >
-                      Members
-                    </Link>
-                  </div>
-                )}
-              </MenuItem>
+              {isOrganizationAdmin(userMembership) && (
+                <>
+                  <MenuItem>
+                    {() => (
+                      <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                        <UsersIcon className="w-6 h-6  text" />
+                        <Link
+                          href={"/home/settings/organization/members"}
+                          className={classNames("block px-3  leading-6 text")}
+                        >
+                          Members
+                        </Link>
+                      </div>
+                    )}
+                  </MenuItem>
+                  <MenuItem>
+                    {() => (
+                      <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
+                        <SettingsIcon className="w-6 h-6  text" />
+                        <Link
+                          href={"/home/settings/organization/settings"}
+                          className={classNames("block px-3  leading-6 text")}
+                        >
+                          {constants.tanantModelName} settings
+                        </Link>
+                      </div>
+                    )}
+                  </MenuItem>
+                  <Button variant="secondary" className="w-full">
+                    Upgrade
+                    <span className="relative ml-3 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                    </span>
+                  </Button>
 
-              <MenuItem>
-                {() => (
-                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                    <SettingsIcon className="w-6 h-6  text" />
-                    <Link
-                      href={"/home/settings/organization/settings"}
-                      className={classNames("block px-3  leading-6 text")}
-                    >
-                      {constants.tanantModelName} settings
-                    </Link>
-                  </div>
-                )}
-              </MenuItem>
-              <Button variant="secondary" className="w-full">
-                Upgrade
-                <span className="relative ml-3 flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                </span>
-              </Button>
-
-              <hr />
+                  <hr />
+                </>
+              )}
               <MenuItem>
                 {() => (
                   <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
