@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
 const getCurrentMembership = async (organizationId: number) => {
-  return await prisma.membership.findFirst({
+  return await  prisma.subscription.findFirst({
     where: {
       organizationId,
     },
@@ -68,7 +68,7 @@ const createMembership = async ({
     ? new Date(currentMemberShip.endDate)
     : new Date();
 
-  return await prisma.membership.upsert({
+  return await  prisma.subscription.upsert({
     where: {
       id: currentMemberShip ? currentMemberShip.id : 0,
     },
@@ -88,7 +88,7 @@ const createMembership = async ({
 export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
   planId = 0
 ) => {
-  const users = await prisma.membership.findMany({
+  const users = await  prisma.subscription.findMany({
     where: {
       planId: planId,
     },
@@ -147,7 +147,7 @@ export const propagateCapabilitiesFromPlanToUser = async (
 };
 
 export const getUserCapabilitiesNames = async (organizationId: number) => {
-  const membership = await prisma.membership.findFirst({
+  const membership = await  prisma.subscription.findFirst({
     where: {
       organizationId,
     },
@@ -190,7 +190,7 @@ export const getUserCapabilitieLimitAvailable = async (
 
   if (!userCapabilities) return false;
 
-  const userMembership = await prisma.membership.findFirst({
+  const userMembership = await  prisma.subscription.findFirst({
     where: {
       organizationId,
     },
@@ -228,7 +228,7 @@ export const registerCapabilitieUsage = async (
 
   if (!userCapabilities) return false;
 
-  const userMembership = await prisma.membership.findFirst({
+  const userMembership = await  prisma.subscription.findFirst({
     where: {
       organizationId,
     },

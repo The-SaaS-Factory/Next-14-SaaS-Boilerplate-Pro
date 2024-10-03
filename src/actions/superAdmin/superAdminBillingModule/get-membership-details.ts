@@ -1,11 +1,9 @@
 "use server";
 
- 
 import prisma from "@/lib/db";
 
 export const getMembershipDetails = async (membershipId: number) => {
-    
-  const membership = await prisma.membership.findFirst({
+  const membership = await prisma.subscription.findFirst({
     where: {
       id: membershipId,
     },

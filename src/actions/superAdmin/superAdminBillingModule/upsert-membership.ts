@@ -19,7 +19,7 @@ const { userMembership } = await getMembership(); const permissions = userMember
   checkPermission(permissions, scope);
   
   try {
-    await prisma.membership.upsert({
+    await prisma.subscription.upsert({
       where: {
         id: modelId ? modelId : 0,
       },

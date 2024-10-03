@@ -26,10 +26,7 @@ export default async function OrganizationLayout({
     <Suspense fallback={<FullLoader />}>
       <main className="relative bg-main  text-primary">
         <HeroPattern />
-        <TenantAdminSidebar
-          org={organization}
-          userMembership={userMembership}
-        />{" "}
+        <TenantAdminSidebar org={organization} />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader

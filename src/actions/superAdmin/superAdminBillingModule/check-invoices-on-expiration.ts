@@ -1,11 +1,11 @@
 "use server";
 import prisma from "@/lib/db";
-import { getSuperAdminSetting } from "@/utils/facades/serverFacades/adminFacade";
 import { sendLoopsTransactionalEventToUser } from "@/utils/facades/serverFacades/loopsEmailMarketingFacade";
 import {
   notifyToSuperAdmin,
   sendInternalNotificatoin,
 } from "@/utils/facades/serverFacades/notificationFacade";
+import { getSuperAdminSetting } from "@/utils/facades/serverFacades/superAdminFacade";
 import { InvoiceStatus } from "@prisma/client";
 
 export const checkInvoicesOnExpiration = async () => {
@@ -13,8 +13,8 @@ export const checkInvoicesOnExpiration = async () => {
     const invoicesWithExpirationDateInThisWeek = await prisma.invoice.findMany({
       where: {
         dueAt: {
-          lte: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000), //prixima semana
-          gte: new Date(), //Desde ahora
+          lte: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),  
+          gte: new Date(),  
         },
         notifiedAt: null,
         paidAt: null,

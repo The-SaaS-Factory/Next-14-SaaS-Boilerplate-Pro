@@ -3,7 +3,7 @@ import { hash } from "bcrypt";
 import prisma from "@/lib/db";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 export const registerNewUser = async (payload) => {
-  const { password, email, name, businessName } = payload;
+  const { password, email, businessName } = payload;
 
   const existedUser = await prisma.user.findUnique({
     where: {

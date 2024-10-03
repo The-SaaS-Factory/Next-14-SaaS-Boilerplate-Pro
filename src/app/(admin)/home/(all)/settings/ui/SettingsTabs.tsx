@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Tabs from "@/components/core/Tabs";
 import {
   BuildingLibraryIcon,
-  BuildingStorefrontIcon,
   CodeBracketIcon,
   CreditCardIcon,
   FaceSmileIcon,

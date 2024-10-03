@@ -1,5 +1,4 @@
 "use server";
-import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
 
 export const getAllSuscriptions = async ({
@@ -11,11 +10,10 @@ export const getAllSuscriptions = async ({
     search: string;
   };
 }) => {
-  let whereSearch: Prisma.MembershipWhereInput;
   const limit = args.limit;
   const offset = args.offset;
 
-  whereSearch = {};
+  let whereSearch = {};
 
   if (args.search) {
     whereSearch = {
@@ -26,7 +24,7 @@ export const getAllSuscriptions = async ({
       },
     };
   }
-  const data = await prisma.membership.findMany({
+  const data = await prisma.subscription.findMany({
     where: {
       ...whereSearch,
     },
@@ -41,14 +39,10 @@ export const getAllSuscriptions = async ({
           email: true,
         },
       },
-      plan: true,
-    },
-    orderBy: {
-      createdAt: "desc",
     },
   });
 
-  const totalCount = await prisma.membership.count({
+  const totalCount = await prisma.subscription.count({
     where: whereSearch,
   });
 

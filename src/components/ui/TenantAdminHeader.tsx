@@ -18,7 +18,7 @@ import { constants } from "@/lib/constants";
 import { MultiTentantProfileButton } from "./commons/MultiTentantProfileButton";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
-import { Bell, BellIcon } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TenantAdminHeader = ({

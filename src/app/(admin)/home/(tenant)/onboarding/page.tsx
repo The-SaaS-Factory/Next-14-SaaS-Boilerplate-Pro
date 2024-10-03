@@ -19,8 +19,8 @@ export default function Component() {
   const navigation = useRouter();
   const { width, height } = useWindowSize(); // Obtén el tamaño de la ventana para el confetti
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+
     await updateProfileFields([
       {
         name: "isTOSAccepted",

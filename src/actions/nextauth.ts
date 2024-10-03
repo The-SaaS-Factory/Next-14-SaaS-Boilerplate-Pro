@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import { authenticate } from "./auth/login-user";
 import GoogleProvider from "next-auth/providers/google";
 import { registerNewUser } from "./auth/register-new-user";
+import prisma from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -33,9 +34,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, trigger, session }) {
-
       console.log(account);
-      
 
       if (account && account.type === "credentials") {
         token.userId = account.providerAccountId;
@@ -56,8 +55,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log(url,baseUrl);
-      
+      console.log(url, baseUrl);
+
       if (url.startsWith(baseUrl) && !url.includes("login")) {
         return url;
       }
@@ -66,7 +65,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   events: {
-    async signIn({ user, account, profile, isNewUser }) {
+    async signIn({ user, account }) {
       const email = user.email;
 
       const payload = {
@@ -85,8 +84,7 @@ export const authOptions: NextAuthOptions = {
       if (!existingUser) {
         await registerNewUser(payload).catch((e) => {
           console.log(e);
-          
-        })
+        });
       }
     },
   },

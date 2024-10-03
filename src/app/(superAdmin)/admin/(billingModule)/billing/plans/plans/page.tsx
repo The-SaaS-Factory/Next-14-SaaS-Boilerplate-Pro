@@ -7,11 +7,7 @@ export const metadata: Metadata = {
   title: "Plans",
 };
 
-const SuperAdminBillingPlansModulePage = ({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) => {
+const SuperAdminBillingPlansModulePage = () => {
   return (
     <div>
       <PageName

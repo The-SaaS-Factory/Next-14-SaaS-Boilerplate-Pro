@@ -169,6 +169,7 @@ const AgentesPage = () => {
                   {Object.keys(UserMembershipRole).map((key) => {
                     return (
                       <Button
+                        key={key}
                         onClick={() =>
                           setValue("role", UserMembershipRole[key])
                         }

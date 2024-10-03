@@ -2,7 +2,6 @@
 import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
 import { UserMembershipRole } from "@prisma/client";
-import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 
 export const createOrganization = async (
   user: {

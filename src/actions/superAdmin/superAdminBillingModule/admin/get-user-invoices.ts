@@ -59,7 +59,7 @@ export const getUserInvoices = async ({
     },
   });
 
-  const totalCount = await prisma.membership.count();
+  const totalCount = await prisma.userMembership.count();
 
   const totalPages = Math.ceil(totalCount / limit);
 

@@ -2,8 +2,8 @@
 
 import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
-import { hasPermission } from "@/utils/facades/serverFacades/scurityFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+import { hasPermission } from "@/utils/facades/serverFacades/securityFacade";
 
 export const getInvoiceDetails = async (invoiceId: number) => {
   const { userMembership, organization } = await getMembership();

@@ -23,7 +23,6 @@ import {
 import { parsePriceInLocalCurrency } from "../frontendFacades/parseValuesFacade";
 
 import { getMonthCountByFrecuency } from "../modulesFacades/billingFacade";
-import { payToAffiliate } from "./affiliatesSystemFacade";
 
 export const createStripeServiceByDefault = async (serviceName: string) => {
   const existingSetting = await getSuperAdminSetting(serviceName);
@@ -244,7 +243,7 @@ export const processInvoiceItemInPayment = async (
 ) => {
   /////////////////////userId - currency ///price/
 
-  payToAffiliate(invoice, invoiceItem);
+  //payToAffiliate(invoice, invoiceItem);
 
   if (invoiceItem.modelType === "PLAN") {
     if (!pricing) return;

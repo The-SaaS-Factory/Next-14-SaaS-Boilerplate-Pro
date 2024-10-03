@@ -10,6 +10,7 @@ const DeleteModel = ({
 }: {
   modelId: number;
   primaryModelId?: number;
+  // eslint-disable-next-line no-unused-vars
   deleteAction: (modelId: number, primaryModelId?: number | undefined) => void;
   callbackAction?;
 }) => {

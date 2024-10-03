@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChangeEvent } from "react";
@@ -85,9 +85,7 @@ export default function LoginPage() {
       if (result.error) {
         console.log(result.error);
 
-        toast.error(
-          "Invalid credentials"
-        );
+        toast.error("Invalid credentials");
         return;
       }
       let lastUrl;
