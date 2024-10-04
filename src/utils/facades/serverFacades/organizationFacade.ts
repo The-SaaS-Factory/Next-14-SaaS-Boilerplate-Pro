@@ -88,5 +88,5 @@ export const createOrganization = async (
 };
 
 export const refreshOrganizationData = () => {
-  revalidatePath("/", "layout");
+  revalidatePath("/home", "layout");
 };
