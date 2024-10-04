@@ -1,6 +1,6 @@
 export const agencyPermissions = [
-  { name: "agency:casting:admin", description: "Módulo de Castings" },
-  { name: "agency:marketing:admin", description: "Módulo de Marketing" },
+  { name: "agency:admin", description: "Agency Admin" },
+  { name: "agency:billing", description: "Agency Billing" },
 ];
 
 export const permissions = [
@@ -43,13 +43,5 @@ export const permissions = [
   {
     name: "superAdmin:tenant-admin",
     description: "Admin MOdule Tenant",
-  },
-  {
-    name: "agency:admin:settings",
-    description: "AgencySettings",
-  },
-  {
-    name: "agency:admin",
-    description: "",
   },
 ];
