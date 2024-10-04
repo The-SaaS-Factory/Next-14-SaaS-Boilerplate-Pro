@@ -1,8 +1,8 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { refreshOrganizationData } from "@/utils/facades/serverFacades/organizationFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
-import { revalidatePath } from "next/cache";
 
 export const makeOrganizationOnboardingCompleted = async () => {
   const { organization } = await getMembership();
@@ -16,7 +16,7 @@ export const makeOrganizationOnboardingCompleted = async () => {
     },
   });
 
-  revalidatePath("/", "layout");
+  refreshOrganizationData();
 
   return "ok";
 };
