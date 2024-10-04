@@ -22,7 +22,8 @@ export default function Component() {
 
   const { organization } = useMembership();
 
-  const handleSubmit = async (event:any) => { //#fix type here
+  const handleSubmit = async (event: any) => {
+    //#fix type here
     event.preventDefault();
     await updateProfileFields([
       {
@@ -38,9 +39,8 @@ export default function Component() {
         setShowConfetti(true);
         makeOrganizationOnboardingCompleted();
         setTimeout(() => {
-          navigation.push("/home");
-          window.location.reload();
-        }, 5000);
+          navigation.replace("/home");
+        }, 3000);
       })
       .catch((e) => console.log(e.message));
   };

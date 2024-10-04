@@ -14,4 +14,8 @@ export const makeOrganizationOnboardingCompleted = async () => {
       isOnboardingCompleted: true,
     },
   });
+  //Update again
+  const { organization: org } = await getMembership();
+
+  return org;
 };
