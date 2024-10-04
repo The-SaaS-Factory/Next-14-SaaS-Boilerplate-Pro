@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,16 +8,19 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { constants } from "@/lib/constants";
 import { updateProfileFields } from "@/actions/admin/userModule/update-profile-fields";
 import { useRouter } from "next/navigation";
-import Confetti from "react-confetti"; // Importa la librería de confetti
-import { useWindowSize } from "react-use"; // Para obtener el tamaño de la ventana
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
+import { useMembership } from "@/utils/hooks/useMembership";
 
 export default function Component() {
   const [projectName, setProjectName] = useState("");
   const [agreed, setAgreed] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false); // Estado para mostrar el confetti
+  const [showConfetti, setShowConfetti] = useState(false);
   const navigation = useRouter();
-  const { width, height } = useWindowSize(); // Obtén el tamaño de la ventana para el confetti
+  const { width, height } = useWindowSize();
+
+  const { organization } = useMembership();
 
   const handleSubmit = async () => {
     await updateProfileFields([
@@ -29,15 +32,23 @@ export default function Component() {
         name: "name",
         value: projectName,
       },
-    ]).then(() => {
-      setShowConfetti(true);
-      makeOrganizationOnboardingCompleted();
-      setTimeout(() => {
-        window.location.reload();
-        navigation.push("/home/admin/dashboard", {});
-      }, 3000);
-    });
+    ])
+      .then(() => {
+        setShowConfetti(true);
+        makeOrganizationOnboardingCompleted();
+        setTimeout(() => {
+          window.location.reload();
+          navigation.push("/home", {});
+        }, 3000);
+      })
+      .catch((e) => console.log(e.message));
   };
+
+  useEffect(() => {
+    if (organization.isOnboardingCompleted) {
+      navigation.push("/home", {});
+    }
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-pink-50 to-orange-50 flex items-center justify-center z-50">
