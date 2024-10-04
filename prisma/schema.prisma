@@ -387,16 +387,15 @@ model PricingSetting {
 
 //------- Module Permission
 model Permission {
-  id               Int             @id @default(autoincrement())
-  name             String
-  description      String
-  UserMembership   UserMembership? @relation(fields: [userMembershipId], references: [id])
-  userMembershipId Int?
-  Plan             Plan?           @relation(fields: [planId], references: [id])
-  planId           Int?
-  User             User?           @relation(fields: [userId], references: [id])
-  userId           Int?
-  organizations    Organization[]
+  id             Int              @id @default(autoincrement())
+  name           String
+  description    String
+  Plan           Plan?            @relation(fields: [planId], references: [id])
+  planId         Int?
+  User           User?            @relation(fields: [userId], references: [id])
+  userId         Int?
+  UserMembership UserMembership[]
+  organizations  Organization[]
 }
 
 //------- Module Affiliates
