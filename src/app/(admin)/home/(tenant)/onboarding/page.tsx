@@ -39,6 +39,7 @@ export default function Component() {
         setShowConfetti(true);
         makeOrganizationOnboardingCompleted();
         setTimeout(() => {
+          window.location.reload();
           navigation.replace("/home");
         }, 3000);
       })
@@ -47,7 +48,7 @@ export default function Component() {
 
   useEffect(() => {
     if (organization?.isOnboardingCompleted) {
-      navigation.push("/home", {});
+      navigation.push("/home");
     }
   }, [organization]);
 
