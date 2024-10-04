@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { agencyPermissions, permissions } from "./seeds/permissions";
+import { organizationPermissions, permissions } from "./seeds/permissions";
 import { settings } from "./seeds/platform";
 import { currencies } from "./seeds/currenciess";
 import { paymentsMethods } from "./seeds/pricing";
@@ -35,7 +35,7 @@ async function main() {
       data: permissions,
     });
     await tx.permission.createMany({
-      data: agencyPermissions,
+      data: organizationPermissions,
     });
     await tx.planCapabilities.createMany({
       data: planCapabilities,

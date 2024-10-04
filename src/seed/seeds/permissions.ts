@@ -1,6 +1,6 @@
-export const agencyPermissions = [
-  { name: "agency:admin", description: "Agency Admin" },
-  { name: "agency:billing", description: "Agency Billing" },
+export const organizationPermissions = [
+  { name: "organization:admin", description: "Organization Admin" },
+  { name: "organization:billing", description: "Organization Billing" },
 ];
 
 export const permissions = [
