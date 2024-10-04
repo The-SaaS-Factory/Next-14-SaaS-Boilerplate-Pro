@@ -5,8 +5,9 @@ import { IUserMembership } from "@/interfaces/saasTypes";
 import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
-export const getMembership = async () => {
+export const getMembership = cache(async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) redirect("/login");
@@ -72,4 +73,4 @@ export const getMembership = async () => {
   };
 
   return authData;
-};
+});
