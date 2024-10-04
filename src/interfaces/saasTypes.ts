@@ -7,6 +7,7 @@ import {
   OrganizationSetting,
   OrganizationStatus,
   Permission,
+  Plan,
   Referral,
   StripeCustomer,
   Subscription,
@@ -16,6 +17,19 @@ import {
   UserMembershipRole,
   UserMembershipSetting,
 } from "@prisma/client";
+
+export interface ISubscription {
+  id: number;
+  organizationId: number;
+  planId: number;
+  plan: Plan;
+  pricingId?: number;
+  currencyId?: number;
+  startDate: Date;
+  endDateFreeTrial?: Date;
+  endDate: Date;
+  createdAt: Date;
+}
 
 export interface IOrganization {
   id: number;
@@ -31,7 +45,7 @@ export interface IOrganization {
   refer?: Referral[];
   referredBy?: Referral[];
   notification?: Notification[];
-  subscription?: Subscription;
+  subscription?: ISubscription;
   isOnboardingCompleted?: boolean;
   supportTicket?: SupportTicket[];
   supportTicketMessage?: SupportTicketMessage[];

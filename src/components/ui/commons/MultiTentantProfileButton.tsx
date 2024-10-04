@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut, SettingsIcon, User } from "lucide-react";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { Badge } from "@/app/components/ui/badge";
 export const MultiTentantProfileButton = ({
   organization,
   userMembership,
@@ -57,13 +58,16 @@ export const MultiTentantProfileButton = ({
             src={organization?.avatar ?? "/assets/img/avatar.png"}
             alt=""
           />
-          <span className="hidden lg:flex lg:items-center">
+          <span className="hidden lg:flex space-x-1 relative lg:items-center">
             <span
               className="ml-4 text-sm font-semibold leading-6 text "
               aria-hidden="true"
             >
               {organization?.name}
             </span>
+            {organization.subscription && (
+              <Badge> {organization.subscription?.plan?.name}</Badge>
+            )}
             <ChevronDownIcon
               className="ml-2 h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -108,14 +112,17 @@ export const MultiTentantProfileButton = ({
                       </div>
                     )}
                   </MenuItem>
-                  <Button variant="secondary" className="w-full">
-                    Upgrade
-                    <span className="relative ml-3 flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                    </span>
-                  </Button>
-
+                  <Link
+                    href={"http://localhost:3000/home/settings/billing/buyPlan"}
+                  >
+                    <Button variant="secondary" className="w-full">
+                      Upgrade
+                      <span className="relative ml-3 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                      </span>
+                    </Button>
+                  </Link>
                   <hr />
                 </>
               )}
