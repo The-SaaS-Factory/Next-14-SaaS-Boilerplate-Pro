@@ -20,7 +20,6 @@ export default function Component() {
   const { width, height } = useWindowSize(); // Obtén el tamaño de la ventana para el confetti
 
   const handleSubmit = async () => {
-
     await updateProfileFields([
       {
         name: "isTOSAccepted",
@@ -33,8 +32,8 @@ export default function Component() {
     ]).then(() => {
       setShowConfetti(true);
       makeOrganizationOnboardingCompleted();
-      navigation.refresh();
       setTimeout(() => {
+        window.location.reload();
         navigation.push("/home/admin/dashboard", {});
       }, 3000);
     });
