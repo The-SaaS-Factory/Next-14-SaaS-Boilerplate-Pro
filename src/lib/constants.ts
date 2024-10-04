@@ -1,7 +1,10 @@
 export const constants = {
   multiTenant: true,
   tanantModelName: "Workspace",
-  appUrl: "https://localhost:3000",
+  appUrl:
+    process.env.NODE_ENV === "production"
+      ? "https://next14pro.thesaasfactory.dev"
+      : "https://localhost:3000",
   appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",
   logoUrl: "/assets/img/logo.webp",
