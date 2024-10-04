@@ -45,10 +45,10 @@ export default function Component() {
   };
 
   useEffect(() => {
-    if (organization.isOnboardingCompleted) {
+    if (organization?.isOnboardingCompleted) {
       navigation.push("/home", {});
     }
-  }, []);
+  }, [organization]);
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-pink-50 to-orange-50 flex items-center justify-center z-50">
