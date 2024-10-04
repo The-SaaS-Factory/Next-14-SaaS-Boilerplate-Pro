@@ -15,6 +15,10 @@ const UserPortal = async () => {
       <div className="flex">
         <div className="flex-1 p-3 bg-gradient-to-br bg-main">
           <div className="text-xl  flex space-x-3 justify-center font-bold text-center">
+            <span className="text-red-500">
+              {!constants.portalStripe &&
+                "Not found Stripe Portal URL, Get the portal URL in Stripe"}
+            </span>
             <Link
               className="  flex items-center space-x-3"
               href={`${constants.portalStripe} `}

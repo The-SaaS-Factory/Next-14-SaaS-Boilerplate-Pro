@@ -27,13 +27,11 @@ const AdminPlanActive = ({
 
   useEffect(() => {
     if (organization) {
-      if (!organization.subscription) {
+      if (!organization.subscription?.plan?.name) {
         router.push("buyPlan", { scroll: false });
       }
 
       getPlan(organization.subscription?.plan?.name).then((data) => {
-        console.log(data);
-
         if (!data) return;
         setPlanCapabilities(data.PlanCapabilities);
       });
@@ -44,7 +42,7 @@ const AdminPlanActive = ({
         setCapacitiesUsed(data);
       });
     }
-  }, [organization, router]);
+  }, [organization]);
 
   return (
     <div>
