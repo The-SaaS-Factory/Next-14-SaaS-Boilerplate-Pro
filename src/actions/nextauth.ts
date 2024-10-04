@@ -70,6 +70,9 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       const email = user.email;
 
+      console.log('user en event sign Int', user);
+      
+
       const payload = {
         name: user.name,
         provider: account.provider,
