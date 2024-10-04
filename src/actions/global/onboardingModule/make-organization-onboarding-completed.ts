@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+import { revalidatePath } from "next/cache";
 
 export const makeOrganizationOnboardingCompleted = async () => {
   const { organization } = await getMembership();
@@ -14,8 +15,8 @@ export const makeOrganizationOnboardingCompleted = async () => {
       isOnboardingCompleted: true,
     },
   });
-  //Update again
-  const { organization: org } = await getMembership();
 
-  return org;
+  revalidatePath("/home");
+
+  return "ok";
 };
