@@ -39,7 +39,7 @@ export default function Component() {
         setTimeout(() => {
           window.location.reload();
           navigation.push("/home", {});
-        }, 3000);
+        }, 5000);
       })
       .catch((e) => console.log(e.message));
   };
