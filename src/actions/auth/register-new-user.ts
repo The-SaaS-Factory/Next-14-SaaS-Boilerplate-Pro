@@ -12,8 +12,10 @@ export const registerNewUser = async (payload) => {
   });
 
   if (existedUser) throw Error("User already existed");
-
-  const hashedPassword = await hash(password, 10);
+  let hashedPassword;
+  if (password) {
+    hashedPassword = await hash(password, 10);
+  }
 
   delete payload.password;
 
