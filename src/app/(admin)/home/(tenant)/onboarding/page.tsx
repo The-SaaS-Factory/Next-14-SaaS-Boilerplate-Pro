@@ -22,7 +22,8 @@ export default function Component() {
 
   const { organization } = useMembership();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    event.preventDefault();
     await updateProfileFields([
       {
         name: "isTOSAccepted",
