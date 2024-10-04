@@ -39,7 +39,7 @@ export default function Component() {
         makeOrganizationOnboardingCompleted();
         setTimeout(() => {
           window.location.reload();
-          navigation.push("/home", {});
+         // navigation.push("/home", {});
         }, 5000);
       })
       .catch((e) => console.log(e.message));
