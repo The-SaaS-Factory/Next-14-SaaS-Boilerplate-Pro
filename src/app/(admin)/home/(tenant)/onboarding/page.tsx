@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
-import { useMembership } from "@/utils/hooks/useMembership";
 
 export default function Component() {
   const [projectName, setProjectName] = useState("");
@@ -19,8 +18,6 @@ export default function Component() {
   const [showConfetti, setShowConfetti] = useState(false);
   const navigation = useRouter();
   const { width, height } = useWindowSize();
-
-  const { organization } = useMembership();
 
   const handleSubmit = async (event: any) => {
     //#fix type here
@@ -35,22 +32,15 @@ export default function Component() {
         value: projectName,
       },
     ])
-      .then(() => {
+      .then(async () => {
         setShowConfetti(true);
-        makeOrganizationOnboardingCompleted();
+        await makeOrganizationOnboardingCompleted();
         setTimeout(() => {
-          window.location.reload();
-          navigation.replace("/home");
+          navigation.push("/home");
         }, 3000);
       })
       .catch((e) => console.log(e.message));
   };
-
-  useEffect(() => {
-    if (organization?.isOnboardingCompleted) {
-      navigation.push("/home");
-    }
-  }, [organization]);
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-pink-50 to-orange-50 flex items-center justify-center z-50">
