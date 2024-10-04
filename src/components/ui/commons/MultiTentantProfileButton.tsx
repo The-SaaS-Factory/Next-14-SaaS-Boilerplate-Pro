@@ -28,7 +28,7 @@ export const MultiTentantProfileButton = ({
   organization: IOrganization;
 }) => {
   const [organizations, setOrganizations] = useState<any[]>([]);
-  const [openNewPorfile, setOpenNewProfile] = useState(false);
+  const [openNewProfile, setOpenNewProfile] = useState(false);
 
   const getAllUserOrganizations = useCallback(async () => {
     const profiles = await getUserAllOrganizations();
@@ -187,7 +187,7 @@ export const MultiTentantProfileButton = ({
         </Transition>
       </Menu>
 
-      <NewProfileModal open={openNewPorfile} setOpen={setOpenNewProfile} />
+      <NewProfileModal open={openNewProfile} setOpen={setOpenNewProfile} />
     </div>
   );
 };

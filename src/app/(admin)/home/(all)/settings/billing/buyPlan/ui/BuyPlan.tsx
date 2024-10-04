@@ -19,6 +19,9 @@ import usePaymentMethods from "@/utils/hooks/usePaymentMethods";
 import { toast } from "sonner";
 import { activateTrialPlan } from "@/actions/superAdmin/superAdminBillingModule/activate-trial-plan";
 import { useSession } from "next-auth/react";
+
+const onlyStripe = true;
+
 export type SettingType = {
   settingName: string;
   settingValue: string;
@@ -102,6 +105,11 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
         toast.error(error.message);
       });
   };
+
+  const { payWithStripe } = usePaymentMethods(
+    currencySelected.id,
+    paymentMethods
+  );
 
   return (
     <div>
@@ -287,7 +295,11 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                             <button
                               onClick={() => {
                                 setPlanSelected(tier);
-                                setSelectMethodModal(true);
+                                if (!onlyStripe) {
+                                  setSelectMethodModal(true);
+                                } else {
+                                  payWithStripe("PLAN", tier.id);
+                                }
                               }}
                               className={classNames(
                                 tier.mostPopular
