@@ -38,8 +38,8 @@ export default function Component() {
         setShowConfetti(true);
         makeOrganizationOnboardingCompleted();
         setTimeout(() => {
+          navigation.push("/home");
           window.location.reload();
-          navigation.push("/home", {});
         }, 5000);
       })
       .catch((e) => console.log(e.message));
