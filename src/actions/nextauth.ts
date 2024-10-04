@@ -34,8 +34,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, trigger, session }) {
-      console.log("account", account);
-
       if (account && account.type === "credentials") {
         token.userId = account.providerAccountId;
       }
@@ -51,8 +49,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("session", session);
-
       session.user.id = token.userId;
       return session;
     },
@@ -70,9 +66,6 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       const email = user.email;
 
-      console.log('user en event sign Int', user);
-      
-
       const payload = {
         name: user.name,
         provider: account.provider,
@@ -85,9 +78,6 @@ export const authOptions: NextAuthOptions = {
       const existingUser = await prisma.user.findUnique({
         where: { email },
       });
-
-      console.log("existingUser", existingUser);
-      
 
       if (!existingUser) {
         await registerNewUser(payload).catch((e) => {

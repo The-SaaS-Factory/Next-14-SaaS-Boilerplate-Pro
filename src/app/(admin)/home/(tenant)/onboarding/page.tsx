@@ -22,7 +22,7 @@ export default function Component() {
 
   const { organization } = useMembership();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event:any) => { //#fix type here
     event.preventDefault();
     await updateProfileFields([
       {
