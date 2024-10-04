@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
 import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/settings/components/CompleteOnBoarding";
+import { UpdateClientCache } from "../core/UpdateClientCache";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -40,12 +41,15 @@ export default async function OrganizationLayout({
           </div>
         </div>{" "}
       </main>
-
       {saasFeatures.onboarding && (
         <CompleteOnBoarding
           isOnboardingCompleted={organization.isOnboardingCompleted ?? false}
         />
       )}
+      <UpdateClientCache
+        organization={organization}
+        userMembership={userMembership}
+      />
     </Suspense>
   );
 }
