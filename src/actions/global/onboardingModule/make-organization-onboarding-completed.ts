@@ -16,7 +16,7 @@ export const makeOrganizationOnboardingCompleted = async () => {
     },
   });
 
-  revalidatePath("/home");
+  revalidatePath("/", "layout");
 
   return "ok";
 };
