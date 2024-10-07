@@ -5,8 +5,8 @@ export const constants = {
     process.env.NODE_ENV === "production"
       ? "https://next14pro.thesaasfactory.dev"
       : "https://localhost:3000",
-  appName: "SaaS Boilerplate Pro",
-  appNameAbb: "EC",
+  appName: "The SaaS Factory",
+  appNameAbb: "TSF",
   logoUrl: "/assets/img/logo.webp",
   supportTel: "5541999568376",
   logoHUrl: "/assets/img/logoh.webp",
@@ -42,7 +42,7 @@ export const constants = {
 };
 
 export const saasFeatures = {
-  onboarding: true,
+  onboarding: false,
 };
 
 export const sliderSettings = {

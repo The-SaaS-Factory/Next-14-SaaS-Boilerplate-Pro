@@ -5,6 +5,7 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
+import { BoltIcon, BoxIcon, Calendar, ShoppingBag } from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [
@@ -16,6 +17,45 @@ export const useNavigation = () => {
         {
           name: "Dashboard",
           href: "/home/admin/dashboard",
+          icon: HomeIcon,
+          current: true,
+        },
+      ],
+    },
+    {
+      sectionName: "Boilerplates",
+      icon: BoxIcon,
+      href: "/home/admin/boilerplates",
+      items: [
+        {
+          name: "Boilerplates",
+          href: "/home/admin/boilerplates",
+          icon: HomeIcon,
+          current: true,
+        },
+      ],
+    },
+    {
+      sectionName: "Services",
+      icon: Calendar,
+      href: "/home/admin/services",
+      items: [
+        {
+          name: "Services",
+          href: "/home/admin/services",
+          icon: HomeIcon,
+          current: true,
+        },
+      ],
+    },
+    {
+      sectionName: "Marketplace",
+      icon: ShoppingBag,
+      href: "/home/admin/marketplace",
+      items: [
+        {
+          name: "Marketplace",
+          href: "/home/admin/marketplace",
           icon: HomeIcon,
           current: true,
         },
