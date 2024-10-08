@@ -22,6 +22,7 @@ export default async function OrganizationLayout({
   if (isSuperAdmin(userMembership)) {
     redirect("/admin");
   }
+  
 
   return (
     <Suspense fallback={<FullLoader />}>

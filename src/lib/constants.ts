@@ -7,7 +7,7 @@ export const constants = {
       : "https://localhost:3000",
   appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",
-  logoUrl: "/assets/img/logo.webp",
+  logoUrl: "/assets/img/logo-next-14.jpg",
   supportTel: "5541999568376",
   logoHUrl: "/assets/img/logoh.webp",
   logoDarkUrl: "/assets/img/logo-next-14-dark.png",
@@ -43,6 +43,7 @@ export const constants = {
 
 export const saasFeatures = {
   onboarding: true,
+  telegramNotification: true,
 };
 
 export const sliderSettings = {

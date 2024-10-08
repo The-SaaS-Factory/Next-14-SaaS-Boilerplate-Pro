@@ -12,7 +12,8 @@ import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
 import Image from "next/image";
-import { IOrganization  } from "@/interfaces/saasTypes";
+import { IOrganization } from "@/interfaces/saasTypes";
+import { constants } from "@/lib/constants";
 
 const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
@@ -141,15 +142,15 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
               <Image
                 width={80}
                 height={80}
-                src="/assets/img/Nvar-logo-black.png"
-                alt="Logo oscuro"
+                src={constants.logoUrl}
+                alt="Logo dark"
                 className="hidden dark:block"
               />
               <Image
                 width={80}
                 height={80}
-                src="/assets/img/Nvar-logo-white.png"
-                alt="Logo claro"
+                src={constants.logoUrl}
+                alt="Logo light"
                 className="block dark:hidden"
               />
             </Link>

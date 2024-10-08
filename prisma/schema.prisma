@@ -2,16 +2,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-}
-
 // datasource db {
-//   provider = "mysql"
-//   url      = env("DATABASE_URL")
+//   provider  = "postgresql"
+//   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 // }
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 // ------------------------------------SaaS Core--------------------------------------------
 model User {
@@ -60,12 +60,14 @@ enum UserMembershipRole {
 
 model Organization {
   id                       Int                        @id @default(autoincrement())
-  isTOSAccepted            Boolean                    @default(false)
+  status                   OrganizationStatus         @default(ACTIVE)
+  userMemberships          UserMembership[]
+  settings                 OrganizationSetting[]
   subscription             Subscription?
   email                    String?                    @db.VarChar(255)
+  isTOSAccepted            Boolean                    @default(false)
   name                     String?                    @db.VarChar(255)
   isMainTenant             Boolean                    @default(false)
-  status                   OrganizationStatus         @default(ACTIVE)
   isOnboardingCompleted    Boolean                    @default(false)
   address                  String?                    @db.VarChar(512)
   phone                    String?                    @db.VarChar(32)
@@ -82,9 +84,7 @@ model Organization {
   invoices                 Invoice[]                  @relation("InvoiceProfile")
   invoicesUser             Invoice[]                  @relation("InvoiceProfileUser")
   logs                     Log[]
-  userMemberships          UserMembership[]
   organizationCapabilities OrganizationCapabilities[]
-  settings                 OrganizationSetting[]
   organizationPlugin       OrganizationPlugin[]
   permissions              Permission[]
 }

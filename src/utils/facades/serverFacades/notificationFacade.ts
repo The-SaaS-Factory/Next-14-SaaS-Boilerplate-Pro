@@ -2,11 +2,11 @@ import prisma from "@/lib/db";
 import { getSuperAdminAdmins } from "./securityFacade";
 import { sendMessageToTelegram } from "./telegramFacade";
 import { sendLoopsTransactionalEventToUser } from "./loopsEmailMarketingFacade";
-import { constants } from "@/lib/constants";
+import { constants, saasFeatures } from "@/lib/constants";
 
 const notificationLoopsId = process.env.NOTIFICATION_LOOPS_ID;
 
-export const sendInternalNotificatoin = async (
+export const sendInternalNotification = async (
   id: number,
   content: string,
   image?: string
@@ -59,7 +59,7 @@ export const notifyToSuperAdmin = async (message: string) => {
 
   await Promise.all(
     admins?.map((admin: any) => {
-      sendInternalNotificatoin(admin.id, message);
+      sendInternalNotification(admin.id, message);
       if (admin.email)
         sendNotificationViaEmail(
           admin.email,
@@ -72,7 +72,9 @@ export const notifyToSuperAdmin = async (message: string) => {
     })
   );
 
-  sendMessageToTelegram(message);
+  if (saasFeatures.telegramNotification) {
+    sendMessageToTelegram(message);
+  }
 };
 
 export const sendNotificationViaEmail = async (
