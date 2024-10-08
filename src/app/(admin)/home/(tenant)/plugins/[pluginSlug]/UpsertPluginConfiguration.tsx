@@ -56,7 +56,7 @@ export const UpsertPluginConfiguration = () => {
   return (
     <div className="grid my-7 grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
       {/* <div className="px-4 sm:px-0">
-        <h2 className="text-base font-semibold leading-7 text-gray-900">
+        <h2 className="text-base font-semibold leading-7 text-primary">
           {plugin.plugin?.description}
         </h2>
         <p className="mt-1 text-sm leading-6 text-gray-600"></p>

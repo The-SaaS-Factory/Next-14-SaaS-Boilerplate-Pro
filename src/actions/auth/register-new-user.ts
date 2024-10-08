@@ -30,7 +30,7 @@ export const registerNewUser = async (payload) => {
     },
   });
 
-  const newpRofile = {
+  const newOrganizationPayload = {
     ...user,
     profileName: payload.name,
     address: payload.businessAddress,
@@ -39,7 +39,7 @@ export const registerNewUser = async (payload) => {
 
   if (businessName) {
     //Assign permission of agency to the user
-    await createOrganization(newpRofile);
+    await createOrganization(newOrganizationPayload);
   }
 
   return user;

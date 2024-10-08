@@ -2,7 +2,6 @@ import { ReactNode, Suspense } from "react";
 import { getUserNotificationsUnreadCount } from "@/actions/global/notificationsModule/get-user-notifications";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import TenantAdminHeader from "../ui/TenantAdminHeader";
-import TenantAdminSidebar from "../ui/TenantAdminSidebar";
 import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
 import { redirect } from "next/navigation";
@@ -10,6 +9,7 @@ import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
 import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/settings/components/CompleteOnBoarding";
 import { UpdateClientCache } from "../core/UpdateClientCache";
+import OrganizationAdminSidebar from "../ui/TenantAdminSidebar";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -28,7 +28,7 @@ export default async function OrganizationLayout({
     <Suspense fallback={<FullLoader />}>
       <main className="relative bg-main  text-primary">
         <HeroPattern />
-        <TenantAdminSidebar org={organization} />{" "}
+        <OrganizationAdminSidebar org={organization} />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader

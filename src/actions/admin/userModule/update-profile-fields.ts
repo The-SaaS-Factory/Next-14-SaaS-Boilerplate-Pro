@@ -3,12 +3,14 @@ import prisma from "@/lib/db";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 interface Field {
-  name: string;
-  value: string | number | boolean;
+  settingName: string;
+  settingValue: string | number | boolean;
 }
 
 export const updateProfileFields = async (fields: Field[]) => {
   const { organization } = await getMembership();
+
+  console.log(fields);
 
   return await Promise.all(
     fields.map(async (field: Field) => {
@@ -17,7 +19,7 @@ export const updateProfileFields = async (fields: Field[]) => {
           id: organization.id,
         },
         data: {
-          [field.name]: field.value,
+          [field.settingName]: field.settingValue,
         },
       });
     })

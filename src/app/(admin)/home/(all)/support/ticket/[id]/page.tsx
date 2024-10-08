@@ -18,7 +18,7 @@ const ViewTicket = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
-        <PageName name={"Ver detalles"} />
+        <PageName name={"View details"} />
         <ViewSupportTicketDetailsPage user={userDB} ticket={ticket} />
       </Suspense>
     </div>

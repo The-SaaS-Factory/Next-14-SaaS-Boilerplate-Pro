@@ -454,7 +454,7 @@ model AdminCurrencies {
 model SupportTicket {
   id             Int                     @id @default(autoincrement())
   subject        String
-  departament    SupportDepartamentType  @default(SALES)
+  department     SupportDepartmentType  @default(SALES)
   status         SupportTicketStatusType @default(OPEN)
   organizationId Int?
   organization   Organization?           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
@@ -491,7 +491,7 @@ model SupportTicketMessageContent {
   @@index([messageId])
 }
 
-enum SupportDepartamentType {
+enum SupportDepartmentType {
   BILLING
   SALES
   SUPPORT

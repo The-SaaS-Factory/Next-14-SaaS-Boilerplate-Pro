@@ -77,7 +77,7 @@ const UserList = async ({
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm  text">
-                          <div className="mt-1  text flex flex-col">
+                          <div className="mt-1  text-primary flex flex-col">
                             
                           </div>
                         </td>

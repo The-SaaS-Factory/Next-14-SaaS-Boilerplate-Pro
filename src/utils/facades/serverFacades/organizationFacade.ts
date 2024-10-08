@@ -80,8 +80,6 @@ export const createOrganization = async (
     },
   });
 
-  await updateUserProfileActive(org.id);
-
   checkMarketingActionsOnRegister(newProfileMembership.organization.id);
 
   return newProfileMembership;

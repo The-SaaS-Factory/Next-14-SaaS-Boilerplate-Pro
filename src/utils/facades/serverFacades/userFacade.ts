@@ -10,6 +10,8 @@ import { cache } from "react";
 export const getMembership = cache(async () => {
   const session = await getServerSession(authOptions);
 
+  console.log(session);
+
   if (!session) redirect("/login");
 
   const membership: IUserMembership = await prisma.userMembership.findFirst({
@@ -30,11 +32,7 @@ export const getMembership = cache(async () => {
           permissions: true,
           subscription: {
             include: {
-              plan: {
-                select: {
-                  name: true,
-                },
-              },
+              plan: true,
             },
           },
         },

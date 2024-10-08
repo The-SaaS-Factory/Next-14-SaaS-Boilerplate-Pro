@@ -19,10 +19,10 @@ export default function HeroLanding() {
                     <Rocket className="mr-1 h-3 w-3" />
                     Connect & Grow
                   </Button>
-                  <h1 className="text-3xl text-gray-900 font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                  <h1 className="text-3xl text-primary font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                     Your main H1 title here
                   </h1>
-                  <p className="max-w-[600px]  text md:text-xl dark:text-gray-400">
+                  <p className="max-w-[600px]  text-primary md:text-xl dark:text-gray-400">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Laborum aliquam totam ullam amet repudiandae quisquam ipsa
                     officia voluptatibus non consequuntur ab placeat, quas

@@ -60,7 +60,7 @@ export const MultiTentantProfileButton = ({
           />
           <span className="hidden lg:flex space-x-1 relative lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text "
+              className="ml-4 text-sm font-semibold leading-6 text-primary "
               aria-hidden="true"
             >
               {organization?.name}
@@ -145,7 +145,7 @@ export const MultiTentantProfileButton = ({
                     <LogOut className="w-6 h-6  text" />
                     <button
                       className={classNames(
-                        " bg-main-hover px-3   leading-6 text text-left w-full"
+                        " bg-main-hover px-3   leading-6 text-primary text-left w-full"
                       )}
                       onClick={() => signOut()}
                     >

@@ -168,7 +168,7 @@ export default function LoginPage() {
                     className={classNames(
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
-                        : "border-transparent  text hover:border-gray-300 hover:text-gray-700",
+                        : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
                       "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium"
                     )}
                   >
@@ -199,7 +199,7 @@ export default function LoginPage() {
             <div>
               {action === "LOGIN" ? (
                 <>
-                  <h2 className="text-2xl font-bold text-gray-900 mt-6 text-center">
+                  <h2 className="text-2xl font-bold text-primary mt-6 text-center">
                     Login to {constants.appName}
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
@@ -253,7 +253,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold text-gray-900 mt-6">
+                  <h2 className="text-2xl font-bold text-primary mt-6">
                     Create a new account
                   </h2>
 

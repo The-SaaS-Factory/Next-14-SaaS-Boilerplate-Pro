@@ -101,7 +101,7 @@ export default function Example() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-3 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-gray-900">
+                <h3 className="text-sm font-semibold leading-6 text-primary">
                   Soluciones
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -109,7 +109,7 @@ export default function Example() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                        className="text-sm leading-6 text-gray-600 hover:text-primary"
                       >
                         {item.name}
                       </a>
@@ -118,7 +118,7 @@ export default function Example() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-gray-900">
+                <h3 className="text-sm font-semibold leading-6 text-primary">
                   Ayuda
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -126,7 +126,7 @@ export default function Example() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                        className="text-sm leading-6 text-gray-600 hover:text-primary"
                       >
                         {item.name}
                       </a>
@@ -143,7 +143,7 @@ export default function Example() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                  className="text-sm leading-6 text-gray-600 hover:text-primary"
                 >
                   {item.name}
                 </a>

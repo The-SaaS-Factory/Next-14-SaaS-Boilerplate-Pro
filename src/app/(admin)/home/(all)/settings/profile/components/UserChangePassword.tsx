@@ -1,5 +1,6 @@
 "use client";
 import { updateProfilePassword } from "@/actions/auth/update-pasword";
+import { Button } from "@/components/ui/button";
 import { User } from "@prisma/client";
 import { TextInput } from "@tremor/react";
 import { useForm } from "react-hook-form";
@@ -45,7 +46,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
                 htmlFor="current-password"
                 className="block text-sm font-medium leading-6 text"
               >
-                Contraseña actual
+                Current password
               </label>
               <div className="mt-2">
                 <TextInput
@@ -64,7 +65,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
               htmlFor="new-password"
               className="block text-sm font-medium leading-6 text"
             >
-              Nueva Contraseña
+              New password
             </label>
             <div className="mt-2">
               <TextInput
@@ -82,7 +83,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
               htmlFor="confirmPassword"
               className="block text-sm font-medium leading-6 text"
             >
-              Confirma la nueva contraseña
+              Confirm the new password
             </label>
             <div className="mt-2">
               <TextInput
@@ -97,9 +98,9 @@ export const UserChangePassword = ({ user }: { user: User }) => {
         </div>
 
         <div className="mt-8 flex">
-          <button type="submit" className="btn-main">
-            Cambiar
-          </button>
+          <Button type="submit"  >
+            Update
+          </Button>
         </div>
       </form>
     </div>

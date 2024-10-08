@@ -14,14 +14,18 @@ import { Navigation } from "./Navigation";
 import Image from "next/image";
 import { IOrganization } from "@/interfaces/saasTypes";
 import { constants } from "@/lib/constants";
+import { useMembership } from "@/utils/hooks/useMembership";
+import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
 
-const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
+const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
       isSidebarMenuOpen,
     })
   );
+
+  const { userMembership } = useMembership();
 
   const { tenantNavigation } = useNavigation();
 
@@ -162,20 +166,21 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
                   <Navigation navigation={tenantNavigation} />
                 </ul>
               </li>
-
-              <li className="mt-auto">
-                <Link
-                  onClick={() => toggleSidebarMenu()}
-                  href="/home/support"
-                  className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
-                >
-                  <LifebuoyIcon
-                    className="h-6 w-6 shrink-0 text-primary "
-                    aria-hidden="true"
-                  />
-                  Support
-                </Link>
-              </li>
+              {isOrganizationAdmin(userMembership) && (
+                <li className="mt-auto">
+                  <Link
+                    onClick={() => toggleSidebarMenu()}
+                    href="/home/support"
+                    className="group -mx-4 flex gap-x-3 rounded-md p-2  font-semibold leading-6   "
+                  >
+                    <LifebuoyIcon
+                      className="h-6 w-6 shrink-0 text-primary "
+                      aria-hidden="true"
+                    />
+                    Support
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
@@ -184,4 +189,4 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
   );
 };
 
-export default TenantAdminSidebar;
+export default OrganizationAdminSidebar;

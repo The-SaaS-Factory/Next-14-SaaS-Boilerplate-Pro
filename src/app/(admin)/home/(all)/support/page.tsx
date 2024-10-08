@@ -40,7 +40,7 @@ const AdminSupportPage = ({
           <NewTicketSupportForm />
         </SlideOver>
       </div>
-      <Search placeholder={"Buscar ticket por ID"} />
+      <Search placeholder={"Search ticket by ID"} />
       <Suspense
         key={query + Math.random}
         fallback={<TableLoaderSkeleton count={10} />}

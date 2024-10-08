@@ -27,7 +27,7 @@ export const SuperAdminProfileButton = () => {
           />
           <span className="hidden lg:flex lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text-gray-900"
+              className="ml-4 text-sm font-semibold leading-6 text-primary"
               aria-hidden="true"
             >
               {session?.user?.name}
@@ -60,7 +60,7 @@ export const SuperAdminProfileButton = () => {
 
               <button
                 className={classNames(
-                  " bg-main-hover flex space-x-3 items-center px-3 py-1 text-sm leading-6 text text-left w-full"
+                  " bg-main-hover flex space-x-3 items-center px-3 py-1 text-sm leading-6 text-primary text-left w-full"
                 )}
                 onClick={() =>
                   signOut({

@@ -5,7 +5,7 @@ export default function CTAMain() {
     <>
       <div className="bg-indigo-100">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
             ¿Listo para unirte
             <br />a la comunidad de  Rconstants.appName?
           </h2>
@@ -18,7 +18,7 @@ export default function CTAMain() {
             </Link>
             <Link
               href="/home"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold leading-6 text-primary"
             >
               Acceder a mi cuenta <span aria-hidden="true">→</span>
             </Link>

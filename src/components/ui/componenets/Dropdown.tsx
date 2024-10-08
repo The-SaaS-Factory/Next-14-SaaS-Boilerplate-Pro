@@ -11,9 +11,9 @@ interface Props {
 
 const variants = {
   default:
-    "inline-flex w-full items-center justify-start whitespace-nowrap gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
+    "inline-flex w-full items-center justify-start whitespace-nowrap gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
   ghost:
-    "inline-flex w-full items-center justify-start whitespace-nowrap gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50/40 dark:text-white dark:hover:bg-gray-50/10",
+    "inline-flex w-full items-center justify-start whitespace-nowrap gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-primary hover:bg-gray-50/40 dark:text-white dark:hover:bg-gray-50/10",
 };
 
 export default function Dropdown({

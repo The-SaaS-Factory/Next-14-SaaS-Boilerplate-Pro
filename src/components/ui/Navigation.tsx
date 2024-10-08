@@ -174,7 +174,7 @@ function NavigationGroup({
 
           <motion.h2
             layout="position"
-            className="text-primary text-lg font-semibold text-zinc-900 dark:text-white"
+            className="text-primary   font-semibold text-zinc-900 dark:text-white"
           >
             {group.sectionName}
           </motion.h2>
