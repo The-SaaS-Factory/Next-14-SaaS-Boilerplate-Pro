@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { propagateCapabilitiesOnAsociateWithPlanNewCapabilitie } from "@/utils/facades/serverFacades/membershipFacade";
+import { propagateCapabilitiesOnAssociateWithPlanNewCapability } from "@/utils/facades/serverFacades/membershipFacade";
 import { revalidatePath } from "next/cache";
 export const connectCapabilitieWithPlan = async (args: any) => {
   const oldConection = await prisma.planCapabilities.findFirst({
@@ -12,7 +12,7 @@ export const connectCapabilitieWithPlan = async (args: any) => {
 
   //For all users and organizations with membership with this plan, propagate the new capabilities
   !oldConection &&
-    propagateCapabilitiesOnAsociateWithPlanNewCapabilitie(args.planId);
+    propagateCapabilitiesOnAssociateWithPlanNewCapability(args.planId);
 
   await prisma.planCapabilities.upsert({
     where: {

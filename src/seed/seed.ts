@@ -13,13 +13,13 @@ async function main() {
     await tx.adminCurrencies.deleteMany();
     await tx.paymentMethod.deleteMany();
     await tx.plan.deleteMany();
-    await tx.capabilitie.deleteMany();
+    await tx.capability.deleteMany();
     await tx.planCapabilities.deleteMany();
     await tx.superAdminSetting.deleteMany();
     await tx.plan.createMany({
       data: plans,
     });
-    await tx.capabilitie.createMany({
+    await tx.capability.createMany({
       data: capabilities,
     });
     await tx.paymentMethod.createMany({

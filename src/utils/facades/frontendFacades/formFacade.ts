@@ -3,6 +3,7 @@ import { Field } from "@/components/core/NewForm";
 import { SuperAdminSetting } from "@/interfaces/superAdminModule";
 import { constants } from "@/lib/constants";
 import { saveImage } from "@/utils/facades/serverFacades/mediaFacade";
+
 const url =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api/utils/media"
@@ -18,8 +19,6 @@ export const parseSettingDataOnSubmit = async (data: any, fields: any) => {
 
       if (fieldValue !== undefined) {
         if (field.type === "image") {
-          //  console.log(JSON.stringify(fieldValue[0].data_url));
-          // return;
           if (
             fieldValue &&
             fieldValue.length > 0 &&

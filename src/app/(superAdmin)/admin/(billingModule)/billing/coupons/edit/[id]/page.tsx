@@ -21,7 +21,7 @@ const SuperAdminBillingModuleEditPlanPage = async ({
   return (
     <div>
       <PageName
-        name={"Edit Capabilitie"}
+        name={"Edit  Capability"}
         isSubPage={true}
         breadcrumbs={[
           {

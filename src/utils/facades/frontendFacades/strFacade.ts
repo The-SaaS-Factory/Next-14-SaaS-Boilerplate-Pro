@@ -1,4 +1,3 @@
- 
 import crypto from "crypto";
 
 export function generateRandomString(length: number) {
@@ -14,8 +13,6 @@ export function generateRandomString(length: number) {
   return result;
 }
 
-
-
 export function convertToSlug(text: string) {
   return text
     .toLowerCase()
@@ -26,11 +23,10 @@ export function convertToSlug(text: string) {
 interface Translation {
   [key: string]: string | Translation;
 }
- 
 
 export const generateRandomNumber = () => {
-  const min = 1000000000;  
-  const max = 9999999999;  
+  const min = 1000000000;
+  const max = 9999999999;
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
@@ -51,14 +47,13 @@ export const isValidJSON = (str: string) => {
   return true;
 };
 
-
 export function formatTimestampToDateString(
-  timestep: string | Date | number,
+  timestamp: string | Date | number,
   includeMinutes?: boolean
 ) {
   try {
-    if(timestep instanceof Date) timestep = timestep.getTime();
-    const date = new Date(Number(timestep));
+    if (timestamp instanceof Date) timestamp = timestamp.getTime();
+    const date = new Date(Number(timestamp));
     if (!isNaN(date.getTime())) {
       let payload: any = {
         day: "2-digit",
@@ -73,7 +68,7 @@ export function formatTimestampToDateString(
 
       return date.toLocaleDateString("pt-BR", payload);
     } else {
-      return timestep;
+      return timestamp;
     }
   } catch (error) {
     console.error("Error parsing date:", error);
@@ -85,24 +80,11 @@ export function slugify(text: string) {
   return text
     ? text
         .toLowerCase()
-        .replace(/[^\w\s-]/g, "") // Eliminar caracteres especiales
-        .replace(/\s+/g, "-") // Reemplazar espacios con guiones
-        .replace(/--+/g, "-") // Reemplazar múltiples guiones con uno solo
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/--+/g, "-")
         .trim()
-    : ""; // Eliminar espacios en blanco al principio y al final
-}
-
-export function getDayName(dayNumber: number) {
-  const days = [
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-    "Domingo",
-  ];
-  return days[dayNumber];
+    : "";
 }
 
 export function classNames(...classes: string[]) {

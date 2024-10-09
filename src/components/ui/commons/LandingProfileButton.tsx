@@ -1,6 +1,6 @@
 "use client";
 import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react";
-import { classNames } from "@/utils/facades/serverFacades/strFacade";
+import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronDownIcon,

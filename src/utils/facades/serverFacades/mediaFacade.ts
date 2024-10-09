@@ -1,7 +1,7 @@
 "use server";
 
 import { imageKitFacade } from "./imagekitFacade";
-import { generateRandomString } from "./strFacade";
+import { generateRandomString } from "../frontendFacades/strFacade";
 
 export const saveImage = async (image: string) => {
 

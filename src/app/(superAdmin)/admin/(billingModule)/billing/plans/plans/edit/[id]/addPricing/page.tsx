@@ -6,6 +6,7 @@ import Link from "next/link";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import UpsertPlanPricing from "../../../ui/UpsertPlanPricing";
 import { getPlanDetails } from "@/actions/superAdmin/superAdminBillingModule/get-plan-details";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Plan New Pricing",
@@ -26,9 +27,9 @@ const PlanNewPricing = async ({
         <PageName name={"New Plan Price"} isSubPage={true} />
         <div className="flex items-center py-2 lg:px-7 ">
           <Link href={`/admin/billing/plans/plans/edit/${plan?.id}`}>
-            <button className="btn-icon ">
+            <Button variant="outline">
               <ArrowLeftCircleIcon className="w-6 h-6" /> Atrás
-            </button>
+            </Button>
           </Link>
         </div>
         <UpsertPlanPricing

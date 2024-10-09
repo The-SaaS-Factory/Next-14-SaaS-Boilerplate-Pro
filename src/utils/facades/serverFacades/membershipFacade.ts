@@ -85,7 +85,7 @@ const createMembership = async ({
   });
 };
 
-export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
+export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
   planId = 0
 ) => {
   const users = await  prisma.subscription.findMany({
@@ -172,7 +172,7 @@ export const getUserCapabilitiesNames = async (organizationId: number) => {
   return capabilitieNames;
 };
 
-export const getUserCapabilitieLimitAvailable = async (
+export const getUserCapabilityLimitAvailable = async (
   organizationId: number,
   capabilityName: string
 ) => {
@@ -210,7 +210,7 @@ export const getUserCapabilitieLimitAvailable = async (
   return planCapability?.count > userCapabilities.count;
 };
 
-export const registerCapabilitieUsage = async (
+export const registerCapabilityUsage = async (
   organizationId: number,
   capabilityName: string
 ) => {

@@ -1,5 +1,5 @@
 import { updateMembership } from "./membershipFacade";
-import { calculateMonthsFromDays } from "./strFacade";
+import { calculateMonthsFromDays } from "../frontendFacades/strFacade";
 import { getSuperAdminSetting } from "./superAdminFacade";
 import prisma from "@/lib/db";
 import {
@@ -7,7 +7,9 @@ import {
   storeContactInLoopsAudience,
 } from "./loopsEmailMarketingFacade";
 
-export const checkMarketingActionsOnRegister = async (organizationId: number) => {
+export const checkMarketingActionsOnRegister = async (
+  organizationId: number
+) => {
   activateFreeTrial(organizationId);
   sendWelcomeEmail(organizationId);
   storeContactInEmailProvider(organizationId);

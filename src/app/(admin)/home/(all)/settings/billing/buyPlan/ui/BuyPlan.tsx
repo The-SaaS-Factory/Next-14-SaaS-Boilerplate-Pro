@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { classNames } from "@/utils/facades/serverFacades/strFacade";
+import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import Image from "next/image";
 import Link from "next/link";
 import { AdminCurrencies, PaymentMethod } from "@prisma/client";

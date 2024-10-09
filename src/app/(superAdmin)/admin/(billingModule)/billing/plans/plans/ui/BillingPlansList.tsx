@@ -11,6 +11,7 @@ import {
   getBadgeClass,
   getStatusName,
 } from "@/utils/facades/frontendFacades/visualFacade";
+import { Button } from "@/components/ui/button";
 
 const BillingPlansList = async () => {
   const { data } = await getAllPlans();
@@ -85,12 +86,11 @@ const BillingPlansList = async () => {
                             {plan.PlanCapabilities?.length}
                           </td>
                           <td className="flex space-x-3   py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <Link
-                              href={`plans/edit/${plan.id}`}
-                              className="btn-icon"
-                            >
-                              <PencilIcon className="w-6 h-6" />
-                              <span className="sr-only">,</span>
+                            <Link href={`plans/edit/${plan.id}`}>
+                              <Button variant="outline">
+                                <PencilIcon className="w-6 h-6" />
+                                <span className="sr-only">,</span>
+                              </Button>
                             </Link>
                             <DeleteModel
                               modelId={plan.id}

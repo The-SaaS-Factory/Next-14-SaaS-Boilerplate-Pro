@@ -19,7 +19,7 @@ export default async function SuperAdminLayout({
   }
 
   return (
-    <main className="relative  text-primary">
+    <main className="relative bg-main   text-primary">
       <Suspense fallback={<FullLoader />}>
         <HeroPattern />
         <SuperAdminSidebar />

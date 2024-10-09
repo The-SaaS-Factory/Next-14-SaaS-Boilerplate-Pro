@@ -9,7 +9,7 @@ const UpsertCapabilitie = ({
   values?: any;
 }) => {
   const formInfo = {
-    name: "Manage Capabilitie",
+    name: "Manage  Capability",
     description: "Create a new plan capabilitie",
   };
 

@@ -24,7 +24,7 @@ type RegisterInput = {
   businessName: string;
 };
 
-import { classNames } from "@/utils/facades/serverFacades/strFacade";
+import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 

@@ -6,7 +6,7 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { classNames } from "@/utils/facades/serverFacades/strFacade";
+import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import { useCallback, useEffect, useState } from "react";
 import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";

@@ -4,7 +4,7 @@ import { Card, Flex } from "@tremor/react";
 import {
   formatTimestampToDateString,
   isValidJSON,
-} from "@/utils/facades/serverFacades/strFacade";
+} from "@/utils/facades/frontendFacades/strFacade";
 import AddMessageToSupportTicket from "./AddMessageToSupportTicket";
 import CloseTicket from "./CloseTicket";
 import Image from "next/image";

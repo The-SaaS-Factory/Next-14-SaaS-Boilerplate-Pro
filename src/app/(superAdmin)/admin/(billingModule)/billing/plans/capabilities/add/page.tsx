@@ -5,7 +5,7 @@ import UpsertCapabilitie from "../ui/UpsertCapabilitie";
 const page = () => {
   return (
     <div>
-      <PageName isSubPage={true} name={"New Capabilitie"} />
+      <PageName isSubPage={true} name={"New  Capability"} />
       <UpsertCapabilitie />
     </div>
   );

@@ -323,7 +323,7 @@ model Plan {
   pricing          Pricing[]
 }
 
-model Capabilitie {
+model Capability {
   id               Int                        @id @default(autoincrement())
   name             String
   title            String?
@@ -340,7 +340,7 @@ model PlanCapabilities {
   count         Int
   name          String?
   plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
-  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+  capabilitie   Capability @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
 
   @@index([planId, capabilitieId])
 }
@@ -351,7 +351,7 @@ model OrganizationCapabilities {
   organizationId Int
   count          Int
   user           Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  capabilitie    Capabilitie  @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+  capabilitie    Capability  @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, capabilitieId])
 }

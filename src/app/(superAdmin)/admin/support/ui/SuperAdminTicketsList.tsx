@@ -2,7 +2,7 @@ import { getAllSupportTicket } from "@/actions/global/supportModule/superAdmin/g
 import NotFound from "@/components/layouts/errors/NotFound";
 import Pagination from "@/components/ui/commons/Pagination";
 import UserCard from "@/components/ui/commons/UserCard";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import {
   Table,
   TableBody,

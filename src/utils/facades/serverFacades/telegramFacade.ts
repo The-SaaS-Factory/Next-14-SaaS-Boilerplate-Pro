@@ -1,7 +1,6 @@
 import { getSuperAdminSetting } from "./superAdminFacade";
 
 export const sendMessageToTelegram = async (message: string) => {
-  //With Api web
   const telegramGroupToken: string | null = await getSuperAdminSetting(
     "TELEGRAM_GROUP_TOKEN"
   );

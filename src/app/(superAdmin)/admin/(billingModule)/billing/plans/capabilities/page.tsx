@@ -14,7 +14,7 @@ const SuperAdminBillingPlanCapabilitiePage = () => {
         name={"Capabilities"}
         isSubPage={true}
         btn1={{
-          name: "Add Capabilitie  ",
+          name: "Add Capability  ",
           href: "capabilities/add",
         }}
       />

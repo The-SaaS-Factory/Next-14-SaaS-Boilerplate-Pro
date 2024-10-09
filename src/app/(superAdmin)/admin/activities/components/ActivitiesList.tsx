@@ -3,7 +3,7 @@
 import NotFound from "@/components/layouts/errors/NotFound";
 import { Suspense, useEffect, useState } from "react";
 import PageLoader from "@/components/ui/loaders/PageLoader";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,

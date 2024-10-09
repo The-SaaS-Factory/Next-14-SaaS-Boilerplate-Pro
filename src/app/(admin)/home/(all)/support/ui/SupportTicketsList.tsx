@@ -3,7 +3,7 @@ import NotFound from "@/components/layouts/errors/NotFound";
 import { Button } from "@/components/ui/button";
 import Pagination from "@/components/ui/commons/Pagination";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import {
   Table,
   TableBody,
