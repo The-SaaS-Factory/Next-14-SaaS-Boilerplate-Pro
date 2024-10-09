@@ -330,30 +330,30 @@ model Capability {
   description      String?                    @db.Text
   type             String                     @default("LIMIT")
   PlanCapabilities PlanCapabilities[]
-  UserCapabilities OrganizationCapabilities[]
+  OrganizationCapabilities OrganizationCapabilities[]
 }
 
 model PlanCapabilities {
   id            Int         @id @default(autoincrement())
-  capabilitieId Int
+  capabilityId Int
   planId        Int
   count         Int
   name          String?
   plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
-  capabilitie   Capability @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+  capabilitie   Capability @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
 
-  @@index([planId, capabilitieId])
+  @@index([planId, capabilityId])
 }
 
 model OrganizationCapabilities {
   id             Int          @id @default(autoincrement())
-  capabilitieId  Int
+  capabilityId  Int
   organizationId Int
   count          Int
   user           Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  capabilitie    Capability  @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+  capability    Capability  @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
 
-  @@index([organizationId, capabilitieId])
+  @@index([organizationId, capabilityId])
 }
 
 model Pricing {

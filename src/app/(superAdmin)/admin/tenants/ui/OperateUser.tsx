@@ -4,7 +4,6 @@ import { deleteUser } from "@/actions/superAdmin/superAdminUsersModule/delete-us
 import { toast } from "sonner";
 
 function OperateUser({ userId }: { userId: number }) {
-    
   const handleDeleteUser = async () => {
     await deleteUser(userId).then(() => {
       toast.success("User deleted successfully");

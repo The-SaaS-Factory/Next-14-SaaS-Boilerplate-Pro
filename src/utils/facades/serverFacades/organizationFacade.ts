@@ -3,6 +3,8 @@ import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
 import { UserMembershipRole } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { notifyToSuperAdmin } from "./notificationFacade";
+import { constants } from "@/lib/constants";
 
 export const createOrganization = async (
   user: {
@@ -80,6 +82,7 @@ export const createOrganization = async (
   });
 
   checkMarketingActionsOnRegister(newProfileMembership.organization.id);
+  notifyToSuperAdmin(`New ${constants.tanantModelName} created`);
 
   return newProfileMembership;
 };

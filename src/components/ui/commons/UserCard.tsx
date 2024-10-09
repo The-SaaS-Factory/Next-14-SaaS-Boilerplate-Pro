@@ -15,7 +15,9 @@ const UserCard = ({ user }: { user: any }) => (
         />
       </div>
       <div className="ml-4">
-        <div className="font-medium  ">{user.name}</div>
+        <div className="font-medium  ">
+          ({user.id}) {user.name}
+        </div>
         <div className="mt-1  text">
           {!isDemoMode ? user.email : "In demo mode, email is hidden, :)"}
         </div>

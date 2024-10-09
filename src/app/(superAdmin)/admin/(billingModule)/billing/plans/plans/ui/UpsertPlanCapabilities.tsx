@@ -16,10 +16,10 @@ const UpsertPlanCapabilities = ({
   //States
   const [newDataForCapabilitie, setDataForCapabilitie] = useState(0);
 
-  const saveCapabilitieForPlan = (capabilitieId: any, capabilitieName: any) => {
+  const saveCapabilitieForPlan = (capabilityId: any, capabilitieName: any) => {
     if (planOnEdit) {
       const payload = {
-        capabilitieId: parseInt(capabilitieId),
+        capabilityId: parseInt(capabilityId),
         planId: parseInt(planOnEdit.id),
         count: newDataForCapabilitie,
         name: capabilitieName,
@@ -67,8 +67,8 @@ const UpsertPlanCapabilities = ({
                             {capabilitie.type === "LIMIT" ||
                             capabilitie.type === "AMOUNT"
                               ? planOnEdit.PlanCapabilities?.find(
-                                  (c: { capabilitieId: number }) =>
-                                    c.capabilitieId == capabilitie.id
+                                  (c: { capabilityId: number }) =>
+                                    c.capabilityId == capabilitie.id
                                 )?.count ?? "Not set"
                               : ""}
                           </span>
@@ -76,8 +76,8 @@ const UpsertPlanCapabilities = ({
                             {" "}
                             {capabilitie.type === "PERMISSION"
                               ? planOnEdit.PlanCapabilities?.find(
-                                  (c: { capabilitieId: number }) =>
-                                    c.capabilitieId == capabilitie.id
+                                  (c: { capabilityId: number }) =>
+                                    c.capabilityId == capabilitie.id
                                 )?.count ?? null
                                 ? "Yes"
                                 : "No"

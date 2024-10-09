@@ -217,7 +217,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
           </div>
 
           {Object.keys(data).length === 0 ? (
-            <NotFound message="Sin datos que mostrar"></NotFound>
+            <NotFound message="No data found"></NotFound>
           ) : (
             <div className="w-full overflow-x-auto">
               <Table className="mt-6">

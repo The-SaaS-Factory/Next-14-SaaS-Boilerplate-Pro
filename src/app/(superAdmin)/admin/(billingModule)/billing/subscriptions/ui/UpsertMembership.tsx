@@ -14,7 +14,7 @@ const UpsertMembership = async ({
 }) => {
   const formInfo = {
     name: "Manage membership",
-    description: "Manage membership",
+    description: "Manage a tenant's membership manually",
   };
 
   const fields = [
@@ -61,7 +61,7 @@ const UpsertMembership = async ({
     },
     {
       name: "currencyId",
-      label: "Moneda",
+      label: "Currency",
       type: "select",
       required: true,
       forceInteger: true,

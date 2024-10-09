@@ -36,8 +36,8 @@ export const useNavigation = () => {
           current: true,
         },
         {
-          name: "Agencias",
-          href: "/admin/agencias",
+          name: "Tenants",
+          href: "/admin/tenants",
           icon: UsersIcon,
           current: false,
         },
@@ -55,7 +55,7 @@ export const useNavigation = () => {
           current: false,
         },
         {
-          name: "Subscripciones",
+          name: "Subscriptions",
           href: "/admin/billing/subscriptions",
           icon: BuildingLibraryIcon,
           current: false,
@@ -63,12 +63,12 @@ export const useNavigation = () => {
       ],
     },
     {
-      sectionName: "Actividades",
+      sectionName: "Activities",
       href: "/admin/activities/",
       icon: PresentationChartBarIcon,
       items: [
         {
-          name: "Facturas",
+          name: "Activities",
           href: "/admin/activities/",
           icon: PresentationChartBarIcon,
           current: false,

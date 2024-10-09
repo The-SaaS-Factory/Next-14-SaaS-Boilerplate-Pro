@@ -14,7 +14,7 @@ export const getAllPlans = async () => {
             capabilitie: true,
           },
           orderBy: {
-            capabilitieId: "asc",
+            capabilityId: "asc",
           },
         },
       },

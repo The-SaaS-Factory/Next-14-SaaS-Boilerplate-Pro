@@ -11,7 +11,7 @@ export const getPlanByName = async (name: string) => {
           capabilitie: true,
         },
         orderBy: {
-          capabilitieId: "asc",
+          capabilityId: "asc",
         },
       },
     },

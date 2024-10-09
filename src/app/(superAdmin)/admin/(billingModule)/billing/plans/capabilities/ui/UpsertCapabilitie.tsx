@@ -2,10 +2,10 @@ import NewForm, { Field } from "@/components/core/NewForm";
 import { upsertCapabilitie } from "@/actions/superAdmin/superAdminBillingModule/upsert-capabilitie";
 
 const UpsertCapabilitie = ({
-  capabilitieId,
+  capabilityId,
   values,
 }: {
-  capabilitieId?: number;
+  capabilityId?: number;
   values?: any;
 }) => {
   const formInfo = {
@@ -59,7 +59,7 @@ const UpsertCapabilitie = ({
         values={values ?? []}
         info={formInfo}
         fields={fields}
-        modelToUpdate={capabilitieId}
+        modelToUpdate={capabilityId}
         onSubmit={upsertCapabilitie}
       />
       <div className="max-w-lg px-10 mx-auto">

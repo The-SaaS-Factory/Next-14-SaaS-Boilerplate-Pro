@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -16,6 +16,8 @@ import { IOrganization } from "@/interfaces/saasTypes";
 import { constants } from "@/lib/constants";
 import { useMembership } from "@/utils/hooks/useMembership";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { useSubscription } from "@/utils/hooks/useSubscription";
+import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
 const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
@@ -25,9 +27,15 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
     })
   );
 
-  const { userMembership } = useMembership();
+  const { userMembership, organization } = useMembership();
 
   const { tenantNavigation } = useNavigation();
+
+  const canAccessToSupportModule = checkOrganizationCapability({
+    capabilityName: "Support via ticket",
+    organizationCapabilities: organization?.organizationCapabilities,
+    subscription: organization?.subscription,
+  });
 
   return (
     <div>
@@ -166,21 +174,22 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                   <Navigation navigation={tenantNavigation} />
                 </ul>
               </li>
-              {isOrganizationAdmin(userMembership) && (
-                <li className="mt-auto">
-                  <Link
-                    onClick={() => toggleSidebarMenu()}
-                    href="/home/support"
-                    className="group -mx-4 flex gap-x-3 rounded-md p-2  font-semibold leading-6   "
-                  >
-                    <LifebuoyIcon
-                      className="h-6 w-6 shrink-0 text-primary "
-                      aria-hidden="true"
-                    />
-                    Support
-                  </Link>
-                </li>
-              )}
+              {isOrganizationAdmin(userMembership) &&
+                canAccessToSupportModule && (
+                  <li className="mt-auto">
+                    <Link
+                      onClick={() => toggleSidebarMenu()}
+                      href="/home/support"
+                      className="group -mx-4 flex gap-x-3 rounded-md p-2  font-semibold leading-6   "
+                    >
+                      <LifebuoyIcon
+                        className="h-6 w-6 shrink-0 text-primary "
+                        aria-hidden="true"
+                      />
+                      Support
+                    </Link>
+                  </li>
+                )}
             </ul>
           </nav>
         </div>

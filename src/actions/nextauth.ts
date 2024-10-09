@@ -53,8 +53,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log(url, baseUrl);
-
       if (url.startsWith(baseUrl) && !url.includes("login")) {
         return url;
       }

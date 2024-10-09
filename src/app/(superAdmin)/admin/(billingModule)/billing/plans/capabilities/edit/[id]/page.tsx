@@ -22,7 +22,7 @@ const SuperAdminBillingModuleEditPlanPage = async ({
     <div>
       <PageName name={"Edit  Capability"} isSubPage={true} />
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
-        <UpsertCapabilitie capabilitieId={Number(params.id)} values={values} />
+        <UpsertCapabilitie capabilityId={Number(params.id)} values={values} />
       </Suspense>
     </div>
   );

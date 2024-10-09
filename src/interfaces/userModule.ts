@@ -36,7 +36,7 @@ export type UserMembershipPlanCapabilitieType = {
   id: number;
   name: string;
   type: string;
-  capabilitieId: string;
+  capabilityId: string;
   count: string | number;
   capabilitie: PlanCapabilitieType;
 };

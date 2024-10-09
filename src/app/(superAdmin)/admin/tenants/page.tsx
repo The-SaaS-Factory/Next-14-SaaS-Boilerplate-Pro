@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-import UserList from "./ui/UserList";
 import PageName from "@/components/ui/commons/PageName";
 import Search from "@/components/ui/commons/Search";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import { Metadata } from "next";
+import TenantList from "./ui/TenantList";
 
 export const metadata: Metadata = {
-  title: "Users"
+  title: "Tenants",
 };
 const SuperAdminUserModulePage = ({
   searchParams,
@@ -22,12 +22,12 @@ const SuperAdminUserModulePage = ({
   return (
     <main>
       <PageName name={"Dashboard"} />
-      <Search placeholder="Search for a user" />
+      <Search placeholder="Search for a Tenants" />
       <Suspense
         key={query + Math.random}
         fallback={<TableLoaderSkeleton count={10} />}
       >
-        <UserList query={query} currentPage={currentPage} />
+        <TenantList query={query} currentPage={currentPage} />
       </Suspense>
     </main>
   );

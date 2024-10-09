@@ -31,26 +31,26 @@ export const planCapabilities = [
   //Plan 1
   {
     planId: 1,
-    capabilitieId: 1,
+    capabilityId: 1,
     count: 1,
     name: "",
   },
   //Plan 2
   {
     planId: 2,
-    capabilitieId: 3,
+    capabilityId: 3,
     count: 1,
     name: "",
   },
   {
     planId: 2,
-    capabilitieId: 2,
+    capabilityId: 2,
     count: 1,
     name: "",
   },
   {
     planId: 2,
-    capabilitieId: 1,
+    capabilityId: 1,
     count: 5,
     name: "",
   },

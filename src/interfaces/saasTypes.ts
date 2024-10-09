@@ -69,7 +69,7 @@ export interface IUserMembership {
   isActive?: boolean;
   user?: User;
   organization?: IOrganization;
-  settings: UserMembershipSetting[];
+  settings?: UserMembershipSetting[];
 }
 
 export interface IUser {

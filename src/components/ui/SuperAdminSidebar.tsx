@@ -151,7 +151,7 @@ const SuperAdminSidebar = () => {
               <li className="mt-auto">
                 <Link
                   onClick={() => toggleSidebarMenu()}
-                  href="/home/support"
+                  href="/admin/support"
                   className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
                 >
                   <LifebuoyIcon

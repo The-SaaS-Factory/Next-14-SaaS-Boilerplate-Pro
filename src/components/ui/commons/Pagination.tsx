@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Button } from "../button";
 
 interface IPagination {
   totalPages: number;
@@ -40,9 +41,9 @@ export default function Pagination({
             currentPage - 1 === 0 ? `pointer-events-none opacity-50` : ""
           }
         >
-          <button className="btn-icon">
+          <Button variant="outline">
             <ChevronLeftIcon className="text-primary h-5 w-5" />
-          </button>
+          </Button>
         </Link>
         <Link
           href={createPageURL(currentPage + 1)}
@@ -50,9 +51,9 @@ export default function Pagination({
             currentPage >= totalPages ? `pointer-events-none opacity-50` : ""
           }
         >
-          <button className="btn-icon">
+          <Button variant="outline">
             <ChevronRightIcon className="text-primary h-5 w-5" />
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

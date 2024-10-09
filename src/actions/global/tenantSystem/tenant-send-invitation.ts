@@ -6,6 +6,10 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { hash } from "bcrypt";
 import { constants } from "@/lib/constants";
 import { UserMembershipRole } from "@prisma/client";
+import {
+  checkCapabilityLimit,
+  registerCapabilityUsage,
+} from "@/utils/facades/serverFacades/membershipFacade";
 const sendInvitationEmailId = process.env.AGENCY_SEND_INVITE_ID;
 
 export interface PayloadInviteMember {
@@ -17,6 +21,15 @@ export interface PayloadInviteMember {
 
 export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
   const { organization } = await getMembership();
+
+  const canAddMember = await checkCapabilityLimit(
+    organization.id,
+    "members in the organization"
+  );
+
+  if (!canAddMember) {
+    throw new Error("You can't add more members, upgrade your subscription ");
+  }
 
   let user;
   user = await prisma.user.findFirst({
@@ -65,13 +78,16 @@ export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
     });
 
     if (haveMembership) {
-      throw Error("Este usuario ya es miembro de la agencia");
+      throw Error(
+        `This user is already is ${constants.tanantModelName} member `
+      );
     }
 
     await prisma.userMembership.create({
       data: {
         organizationId: organization.id,
         userId: user.id,
+        role: payload.role,
       },
     });
 
@@ -87,4 +103,6 @@ export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
       },
     });
   }
+
+  registerCapabilityUsage(organization.id, "members in the organization");
 };

@@ -30,7 +30,16 @@ export const getMembership = cache(async () => {
           permissions: true,
           subscription: {
             include: {
-              plan: true,
+              plan: {
+                include: {
+                  PlanCapabilities: true,
+                },
+              },
+            },
+          },
+          organizationCapabilities: {
+            include: {
+              capability: true,
             },
           },
         },
@@ -65,6 +74,7 @@ export const getMembership = cache(async () => {
       status: membership.organization.status,
       permissions: membership.organization.permissions,
       subscription: membership.organization.subscription,
+      capabilities: membership.organization.organizationCapabilities,
     },
   };
 
