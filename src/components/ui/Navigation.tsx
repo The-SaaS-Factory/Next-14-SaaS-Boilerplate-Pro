@@ -8,7 +8,7 @@ import React, {
   useRef,
 } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { Tag } from "./commons/Tag";
@@ -125,7 +125,10 @@ function ActivePageMarker({
 }) {
   let itemHeight = remToPx(2);
   let offset = remToPx(0.25);
-  let activePageIndex = group.items.findIndex((link) => link.href === pathname);
+  const searchParams = useSearchParams();
+  const paramsInSearch = searchParams.toString();
+  const fullPath = pathname + (paramsInSearch && "?") + paramsInSearch;
+  let activePageIndex = group.items.findIndex((link) => link.href === fullPath);
   let top = offset + activePageIndex * itemHeight;
 
   return (
@@ -139,6 +142,8 @@ function ActivePageMarker({
     />
   );
 }
+ 
+
 
 function NavigationGroup({
   group,

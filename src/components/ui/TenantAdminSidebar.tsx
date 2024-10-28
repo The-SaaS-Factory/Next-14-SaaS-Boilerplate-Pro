@@ -81,7 +81,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                     <button
                       type="button"
                       className="-m-2.5 p-2.5"
-                      onClick={() => toggleSidebarMenu()}
+                      onClick={toggleSidebarMenu}
                     >
                       <span className="sr-only">Close sidebar</span>
                       <XMarkIcon
@@ -109,7 +109,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                       <li className="mt-auto -mx-2">
                         {/*                      
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/home/support"
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
                         >
@@ -120,7 +120,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                           {t("support")}
                         </Link> */}
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/home/settings/profile
 "
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
@@ -178,7 +178,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                 canAccessToSupportModule && (
                   <li className="mt-auto">
                     <Link
-                      onClick={() => toggleSidebarMenu()}
+                      onClick={toggleSidebarMenu}
                       href="/home/support"
                       className="group -mx-4 flex gap-x-3 rounded-md p-2  font-semibold leading-6   "
                     >

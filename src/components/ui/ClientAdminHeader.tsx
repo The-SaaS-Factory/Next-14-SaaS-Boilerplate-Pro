@@ -36,7 +36,7 @@ const ClientAdminHeader = ({
           <button
             type="button"
             className="-m-2.5 p-2.5   lg:hidden"
-            onClick={() => toggleSidebarMenu()}
+            onClick={toggleSidebarMenu}
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6 " aria-hidden="true" />

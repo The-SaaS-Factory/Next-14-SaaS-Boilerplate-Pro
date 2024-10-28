@@ -12,9 +12,7 @@ const SuperAdminHeader = ({
   notificationsCount: number;
   organization: any;
 }) => {
-  const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
-    toggleSidebarMenu,
-  }));
+  const { toggleSidebarMenu } = useSidebarState();
 
   const { darkThemeSelector } = useDarkTheme();
 
@@ -32,7 +30,7 @@ const SuperAdminHeader = ({
           <button
             type="button"
             className="  p-4   lg:hidden"
-            onClick={() => toggleSidebarMenu()}
+            onClick={toggleSidebarMenu}
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-7 w-7 " aria-hidden="true" />

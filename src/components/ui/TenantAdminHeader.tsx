@@ -59,7 +59,7 @@ const TenantAdminHeader = ({
           <Button
             variant="outline"
             className="  first-line:  lg:hidden"
-            onClick={() => toggleSidebarMenu()}
+            onClick={toggleSidebarMenu}
             size="icon"
           >
             <span className="sr-only">Open sidebar</span>
