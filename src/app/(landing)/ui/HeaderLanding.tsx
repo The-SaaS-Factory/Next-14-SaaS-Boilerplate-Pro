@@ -10,24 +10,52 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
 
   const MenuItemsPC = () => (
     <>
-      <Link href="/link1" className="hover:text-gray-300 text-gray-50">
+      <Link href="/link1" className="hover:text-gray-700 text-gray-500 font-semibold">
         Link 1
       </Link>
-      <Link href="/prices" className="hover:text-gray-300 text-gray-50">
+      <Link href="/prices" className="hover:text-gray-700 text-gray-500 font-semibold">
         Prices
       </Link>
-      <Link href={"/login"}>
-        <Button variant="outline">Iniciar Sesión</Button>
-      </Link>
-      <Link href={"/login"}>
-        <Button>Registrarse</Button>
-      </Link>
+      {session.status === "authenticated" ? (
+        <Link
+          href="/home"
+          className="hover:text-gray-300 rounded-full text-gray-50"
+        >
+          <Image
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full bg-gray-50"
+            src={"/assets/img/avatar.png"}
+            alt=""
+          />
+        </Link>
+      ) : (
+        <>
+          {session.status !== "loading" && (
+            <>
+              <Link href={"/login"}>
+                <Button variant="outline">
+                  Log in
+                </Button>
+              </Link>
+              <Link href={"/login"}>
+                <Button>
+                  Sing Up
+                </Button>
+              </Link>
+            </>
+          )}
+        </>
+      )}
     </>
   );
 
@@ -35,7 +63,7 @@ export const HeaderLanding = () => {
     <header className="fixed   top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="">
-          <span>{constants.appName}</span>
+          <span className="font-bold">{constants.appName}</span>
         </Link>
         <nav className=" hidden md:flex space-x-4 items-center">
           <MenuItemsPC />

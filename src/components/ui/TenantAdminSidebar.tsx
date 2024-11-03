@@ -11,12 +11,10 @@ import { useSidebarState } from "@/states/ui/sidebarState";
 import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
-import Image from "next/image";
 import { IOrganization } from "@/interfaces/saasTypes";
 import { constants } from "@/lib/constants";
 import { useMembership } from "@/utils/hooks/useMembership";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
-import { useSubscription } from "@/utils/hooks/useSubscription";
 import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
 const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
@@ -95,7 +93,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-main text-primary px-6 pb-4">
                   <div className="flex  my-2 shrink-0 items-center">
                     <Link href="/" className=" ">
-                      <span className="font-bold text-2xl">{org.name}</span>
+                      <span className="font-bold text-2xl">{constants.appName}</span>
                     </Link>
                   </div>
                   <div className="relative"></div>
@@ -151,20 +149,7 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
           {" "}
           <div className="flex h-16 shrink-0 items-center">
             <Link href="/" className="">
-              <Image
-                width={80}
-                height={80}
-                src={constants.logoUrl}
-                alt="Logo dark"
-                className="hidden dark:block"
-              />
-              <Image
-                width={80}
-                height={80}
-                src={constants.logoUrl}
-                alt="Logo light"
-                className="block dark:hidden"
-              />
+              <span className="font-bold text-2xl">{constants.appName}</span>
             </Link>
           </div>
           <nav className="flex flex-1 flex-col">

@@ -5,6 +5,7 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
+import { Icon } from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [
@@ -18,6 +19,25 @@ export const useNavigation = () => {
           href: "/home/admin/dashboard",
           icon: HomeIcon,
           current: true,
+        },
+      ],
+    },
+    {
+      sectionName: "Section Example",
+      href: "/home/admin/section",
+      icon: DocumentTextIcon,
+      items: [
+        {
+          name: "Section Example Page 1",
+          href: "/home/admin/section",
+          icon: DocumentTextIcon,
+          current: false,
+        },
+        {
+          name: "Section Example Page 2",
+          href: "/home/admin/section2",
+          icon: BuildingLibraryIcon,
+          current: false,
         },
       ],
     },

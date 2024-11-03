@@ -104,7 +104,7 @@ export default function SearchHeader({
                   )}
                   value={query}
                   onChange={(ev) => setQuery(ev.currentTarget.value)}
-                  placeholder="Buscar página o funcionalidad"
+                  placeholder=" Search page or funcionality"
                   onKeyDown={(event) => {
                     if (event.key === "Escape") {
                       setOpen(false);
