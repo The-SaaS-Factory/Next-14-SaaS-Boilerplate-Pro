@@ -104,7 +104,7 @@ const SupportTicketsList = async ({
                     </TableCell>
                     <TableCell className="text-center text-primary">
                       <Link href={`/home/support/ticket/${item.id}`}>
-                        <Button variant="secondary" >View</Button>
+                        <Button variant="secondary">View</Button>
                       </Link>
                     </TableCell>
                   </TableRow>

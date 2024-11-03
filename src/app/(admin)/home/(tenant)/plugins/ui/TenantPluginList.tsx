@@ -10,7 +10,6 @@ import { PluginCard } from "./PluginCard";
 const TenantPluginList = async ({
   query,
   currentPage,
-  
 }: {
   query: string;
   currentPage: number;

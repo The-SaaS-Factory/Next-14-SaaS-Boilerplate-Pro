@@ -37,7 +37,7 @@ type PageParams = {
 const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
   //States
   const [currencySelected, setCurrencySelected] = useState<any>(
-    currencies.find((currency: AdminCurrencies) => currency.main)
+    currencies.find((currency: AdminCurrencies) => currency.main),
   );
 
   const [selectMethodModal, setSelectMethodModal] = useState(false);
@@ -108,7 +108,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
 
   const { payWithStripe } = usePaymentMethods(
     currencySelected.id,
-    paymentMethods
+    paymentMethods,
   );
 
   return (
@@ -128,8 +128,8 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
             onValueChange={(value) => {
               setCurrencySelected(
                 currencies.find(
-                  (currency: AdminCurrencies) => currency.code === value
-                )
+                  (currency: AdminCurrencies) => currency.code === value,
+                ),
               );
             }}
             icon={CurrencyDollarIcon}
@@ -179,7 +179,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 frequency.value === option.value
                                   ? "bg-indigo-600 text-white"
                                   : " text",
-                                "cursor-pointer rounded-full px-2.5 py-1"
+                                "cursor-pointer rounded-full px-2.5 py-1",
                               )
                             }
                           >
@@ -200,7 +200,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                     ?.filter(
                       (pricing: IPricing) =>
                         pricing.frequency === frequency.value &&
-                        plan.status === "ACTIVE"
+                        plan.status === "ACTIVE",
                     )
                     .map((tier: any) => (
                       <div key={plan.id} className="col-span-1">
@@ -224,7 +224,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                             <span className="text-4xl font-bold tracking-tight mega-title">
                               {parsePriceInLocalCurrency(
                                 handleConvertCurrency(tier.price),
-                                currencySelected.code
+                                currencySelected.code,
                               )}
                             </span>
                             <span className="text-sm font-semibold leading-6 text-gray-600">
@@ -273,7 +273,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                     )}{" "}
                                   </li>
                                 );
-                              }
+                              },
                             )}
                           </ul>
 
@@ -287,7 +287,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                   tier.mostPopular
                                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                                 )}
                               ></button>
                             )}
@@ -305,7 +305,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 tier.mostPopular
                                   ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                   : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                               )}
                             >
                               Buy Plan

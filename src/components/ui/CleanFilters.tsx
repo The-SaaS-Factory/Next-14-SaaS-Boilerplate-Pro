@@ -56,7 +56,7 @@ export const CleanFilters: React.FC = () => {
                   &times;
                 </button>
               </div>
-            ))
+            )),
           )}
           <button
             type="button"

@@ -51,7 +51,7 @@ const SettingsTabs = ({
         label: "Portal",
         icon: CreditCardIcon,
       },
-    ].filter((item) => item)
+    ].filter((item) => item),
   );
 
   useEffect(() => {

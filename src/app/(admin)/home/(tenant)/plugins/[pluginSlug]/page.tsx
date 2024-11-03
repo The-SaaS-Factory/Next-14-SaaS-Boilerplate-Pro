@@ -31,7 +31,7 @@ const TenantViewPluginDetails = async ({
         />
 
         <div>
-          <UpsertPluginConfiguration  />
+          <UpsertPluginConfiguration />
         </div>
       </Suspense>
     </div>

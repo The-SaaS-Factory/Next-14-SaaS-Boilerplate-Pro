@@ -15,9 +15,8 @@ export const createOrganization = async (
     address?: string;
     phone?: string;
   },
-  isMainTenant?: boolean
+  isMainTenant?: boolean,
 ) => {
-  
   const userDB = await prisma.user.findFirst({
     where: {
       email: user.email,

@@ -1,11 +1,11 @@
 "use server";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
 
 export const updateTenantPluginConfiguration = async (
   profilePluginId: number,
-  configuration: string
+  configuration: string,
 ) => {
   const { organization } = await getMembership();
 

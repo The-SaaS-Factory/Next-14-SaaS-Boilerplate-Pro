@@ -21,7 +21,7 @@ const HighlightText = ({ text, highlight, className }: Props) => {
         </span>
       ) : (
         part
-      )
+      ),
     );
   };
 

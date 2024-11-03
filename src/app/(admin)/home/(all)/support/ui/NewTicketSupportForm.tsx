@@ -48,7 +48,10 @@ const NewTicketSupportForm = () => {
     },
   ];
   const { toggleSideOver } = useSideOverState(
-    ({ toggleSideOver, isSideOverOpen }) => ({ toggleSideOver, isSideOverOpen })
+    ({ toggleSideOver, isSideOverOpen }) => ({
+      toggleSideOver,
+      isSideOverOpen,
+    }),
   );
 
   const handleSendForm = async (data: any) => {

@@ -110,7 +110,7 @@ export const parseDataOnSubmit = async (data: any, fields: any) => {
       } else if (field.type === "gallery") {
         if (fieldValue && fieldValue.length > 0) {
           const imagesWithOutInBase64 = fieldValue.filter(
-            (f: any) => !f.data_url
+            (f: any) => !f.data_url,
           );
           const imagesInBase64 = fieldValue
             .filter((f: any) => f.data_url)
@@ -131,10 +131,10 @@ export const parseDataOnSubmit = async (data: any, fields: any) => {
                 if (response) {
                   //Add image on update without data_url
                   const imagesUpdate = fieldValue.filter(
-                    (f: any) => !f.data_url
+                    (f: any) => !f.data_url,
                   );
                   payload[fieldName] = JSON.stringify(
-                    response.concat(imagesUpdate)
+                    response.concat(imagesUpdate),
                   );
                 } else {
                   payload[fieldName] = JSON.stringify(imagesWithOutInBase64);

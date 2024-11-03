@@ -53,7 +53,7 @@ export const createPlanInvoice = async ({
   if (payload.paymentMethodName === "Stripe") {
     stripePriceId = price.settings.find(
       (setting: PricingSetting) =>
-        setting.settingName === "stripePriceId_" + currency.code.toLowerCase()
+        setting.settingName === "stripePriceId_" + currency.code.toLowerCase(),
     )?.settingValue;
 
     if (!stripePriceId) {

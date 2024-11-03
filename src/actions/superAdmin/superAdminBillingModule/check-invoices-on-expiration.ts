@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 import { sendLoopsTransactionalEventToUser } from "@/utils/facades/serverFacades/loopsEmailMarketingFacade";
 import {
   notifyToSuperAdmin,
-   sendInternalNotification,
+  sendInternalNotification,
 } from "@/utils/facades/serverFacades/notificationFacade";
 import { getSuperAdminSetting } from "@/utils/facades/serverFacades/superAdminFacade";
 import { InvoiceStatus } from "@prisma/client";
@@ -13,8 +13,8 @@ export const checkInvoicesOnExpiration = async () => {
     const invoicesWithExpirationDateInThisWeek = await prisma.invoice.findMany({
       where: {
         dueAt: {
-          lte: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),  
-          gte: new Date(),  
+          lte: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+          gte: new Date(),
         },
         notifiedAt: null,
         paidAt: null,
@@ -47,7 +47,7 @@ export const checkInvoicesOnExpiration = async () => {
             status: InvoiceStatus.EXPIRED,
           },
         });
-      })
+      }),
     );
 
     //Check if invoices for due in this week,  and notify the user
@@ -64,19 +64,19 @@ export const checkInvoicesOnExpiration = async () => {
 
         if (!invoice.organization?.id) return;
 
-         sendInternalNotification(
+        sendInternalNotification(
           invoice.organization.id,
-          `Hola ${invoice.organization.name}, tienes una factura pendiente por pagar.`
+          `Hola ${invoice.organization.name}, tienes una factura pendiente por pagar.`,
         );
 
         notifyToSuperAdmin(
-          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.organization.name} para notificarle?. A trabajar!!!`
+          `La factura con id ${invoice.id} vence esta semana, ya contactaron al usuario ${invoice.organization.name} para notificarle?. A trabajar!!!`,
         );
 
         if (!invoice.organization?.email) return;
 
         const transactionaId = await getSuperAdminSetting(
-          "LOOPS_INVOICE_NOTIFIED_TRANSACTIONAL_ID"
+          "LOOPS_INVOICE_NOTIFIED_TRANSACTIONAL_ID",
         );
 
         if (!transactionaId) return;
@@ -89,7 +89,7 @@ export const checkInvoicesOnExpiration = async () => {
             invoiceId: invoice.id,
           },
         });
-      })
+      }),
     );
 
     await prisma.cronJobs.create({

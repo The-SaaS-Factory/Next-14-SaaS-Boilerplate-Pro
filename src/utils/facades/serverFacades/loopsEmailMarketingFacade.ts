@@ -4,7 +4,7 @@ const loopsApiKey = process.env.LOOPS_API_KEY;
 export async function storeContactInLoopsAudience(
   email: string,
   name: string,
-  userGroup: string
+  userGroup: string,
 ) {
   if (loopsEnabled === "true") {
     try {
@@ -62,10 +62,9 @@ type loopPayload = {
   dataVariables: Object;
 };
 export async function sendLoopsTransactionalEventToUser(payload: loopPayload) {
-
   if (loopsEnabled === "true") {
     try {
-      const apiKey =  loopsApiKey;
+      const apiKey = loopsApiKey;
       const url = "https://app.loops.so/api/v1/transactional";
 
       const options = {

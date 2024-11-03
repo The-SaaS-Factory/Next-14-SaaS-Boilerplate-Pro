@@ -42,7 +42,7 @@ export const saveProfileSettings = async (settings: any) => {
         } catch (error) {
           console.log(error);
         }
-      })
+      }),
     ).catch((err) => {
       console.log(err);
     });

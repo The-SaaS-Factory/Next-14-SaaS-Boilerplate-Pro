@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
- 
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+
 import { revalidatePath } from "next/cache";
 
 const scope = "superAdmin:billing:upsert";
@@ -14,10 +14,11 @@ export const upsertMembership = async ({
   modelId?: number;
   payload: any;
 }) => {
-const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   checkPermission(permissions, scope);
-  
+
   try {
     await prisma.subscription.upsert({
       where: {
@@ -45,7 +46,10 @@ const { userMembership } = await getMembership(); const permissions = userMember
           },
         },
         startDate: payload.startDate as Date,
-        endDateFreeTrial: payload.endDateFreeTrial  === '' ? null : payload.endDateFreeTrial as Date,
+        endDateFreeTrial:
+          payload.endDateFreeTrial === ""
+            ? null
+            : (payload.endDateFreeTrial as Date),
         endDate: payload.endDate as Date,
       },
       create: {
@@ -70,7 +74,10 @@ const { userMembership } = await getMembership(); const permissions = userMember
           },
         },
         startDate: payload.startDate as Date,
-        endDateFreeTrial: payload.endDateFreeTrial  === '' ? null : payload.endDateFreeTrial as Date,
+        endDateFreeTrial:
+          payload.endDateFreeTrial === ""
+            ? null
+            : (payload.endDateFreeTrial as Date),
         endDate: payload.endDate as Date,
       },
     });

@@ -7,16 +7,17 @@ import {
 import prisma from "@/lib/db";
 import { InvoiceItem } from "@prisma/client";
 import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
- 
+
 import { revalidatePath } from "next/cache";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 const scope = "superAdmin:billing:upsert";
 
 export const makeInvoicePaid = async (
   invoiceId: number,
-  gateway = "manualAdmin"
+  gateway = "manualAdmin",
 ) => {
-const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   if (gateway === "manualAdmin") {
     //Is from Admin
@@ -51,7 +52,7 @@ const { userMembership } = await getMembership(); const permissions = userMember
       } else {
         return await processInvoiceItemInPayment(invoiceItem, invoice);
       }
-    })
+    }),
   )
     .then(async () => {
       await updateInvoice(invoice.id, payload);
@@ -60,6 +61,6 @@ const { userMembership } = await getMembership(); const permissions = userMember
       throw new Error(error.message);
     });
 
-    revalidatePath("admin/billing/invoices");
-    revalidatePath(`admin/billing/invoices/${invoiceId}`);
+  revalidatePath("admin/billing/invoices");
+  revalidatePath(`admin/billing/invoices/${invoiceId}`);
 };

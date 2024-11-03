@@ -89,7 +89,7 @@ const createMembership = async ({
 };
 
 export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
-  planId = 0
+  planId = 0,
 ) => {
   const users = await prisma.subscription.findMany({
     where: {
@@ -101,14 +101,14 @@ export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
   users.map((membership: any) => {
     propagateCapabilitiesFromPlanToOrganization(
       planId,
-      membership.id as number
+      membership.id as number,
     );
   });
 };
 
 export const propagateCapabilitiesFromPlanToOrganization = async (
   planId: number,
-  organizationId: number
+  organizationId: number,
 ) => {
   const capabilities = await prisma.planCapabilities.findMany({
     where: {
@@ -147,12 +147,12 @@ export const propagateCapabilitiesFromPlanToOrganization = async (
           },
         });
       }
-    })
+    }),
   );
 };
 
 export const getOrganizationCapabilitiesNames = async (
-  organizationId: number
+  organizationId: number,
 ) => {
   const capabilities = await prisma.organizationCapabilities.findMany({
     where: {
@@ -189,12 +189,12 @@ export const checkCapabilityPermission = cache(
     console.log(capabilities);
 
     return capabilities?.includes(capabilityName) ?? false;
-  }
+  },
 );
 
 export const checkCapabilityLimit = async (
   organizationId: number,
-  capabilityName: string
+  capabilityName: string,
 ) => {
   const organizationCapabilities =
     await prisma.organizationCapabilities.findFirst({
@@ -233,7 +233,7 @@ export const checkCapabilityLimit = async (
 
 export const registerCapabilityUsage = async (
   organizationId: number,
-  capabilityName: string
+  capabilityName: string,
 ) => {
   const organizationCapability =
     await prisma.organizationCapabilities.findFirst({
@@ -269,7 +269,7 @@ export const checkOrganizationCapabilityInServer = ({
   if (!organizationCapabilities) return false;
 
   const organizationCapability = organizationCapabilities.find(
-    (o) => o.name === capabilityName
+    (o) => o.name === capabilityName,
   );
 
   if (!organizationCapability) return false;

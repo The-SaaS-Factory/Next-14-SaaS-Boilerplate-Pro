@@ -46,8 +46,8 @@ export default function ProjectsLanding() {
                 <Link href={`/pr/project1`}>
                   {" "}
                   <Image
-                  width={3603}
-                  height={2402}
+                    width={3603}
+                    height={2402}
                     src={post.imageUrl}
                     alt=""
                     className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
@@ -77,8 +77,8 @@ export default function ProjectsLanding() {
                 </div>
                 <div className="relative mt-8 flex items-center gap-x-4">
                   <Image
-                   width={256}
-                   height={256}
+                    width={256}
+                    height={256}
                     src={post.author.imageUrl}
                     alt=""
                     className="h-10 w-10 rounded-full bg-gray-100"

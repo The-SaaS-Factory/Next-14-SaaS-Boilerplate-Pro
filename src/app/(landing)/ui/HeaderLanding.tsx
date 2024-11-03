@@ -19,10 +19,16 @@ export const HeaderLanding = () => {
 
   const MenuItemsPC = () => (
     <>
-      <Link href="/link1" className="hover:text-gray-700 text-gray-500 font-semibold">
+      <Link
+        href="/link1"
+        className="hover:text-gray-700 text-gray-500 font-semibold"
+      >
         Link 1
       </Link>
-      <Link href="/prices" className="hover:text-gray-700 text-gray-500 font-semibold">
+      <Link
+        href="/prices"
+        className="hover:text-gray-700 text-gray-500 font-semibold"
+      >
         Prices
       </Link>
       {session.status === "authenticated" ? (
@@ -43,14 +49,10 @@ export const HeaderLanding = () => {
           {session.status !== "loading" && (
             <>
               <Link href={"/login"}>
-                <Button variant="outline">
-                  Log in
-                </Button>
+                <Button variant="outline">Log in</Button>
               </Link>
               <Link href={"/login"}>
-                <Button>
-                  Sing Up
-                </Button>
+                <Button>Sing Up</Button>
               </Link>
             </>
           )}

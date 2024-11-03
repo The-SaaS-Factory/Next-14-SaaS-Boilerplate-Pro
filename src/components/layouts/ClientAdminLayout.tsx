@@ -1,7 +1,6 @@
 import { HeaderLanding } from "@/app/(landing)/ui/HeaderLanding";
 import { ReactNode, Suspense } from "react";
 
-
 export default async function ClientAdminLayout({
   children,
 }: {
@@ -9,7 +8,6 @@ export default async function ClientAdminLayout({
 }) {
   return (
     <main className="relative text-primary">
-     
       <div className="lg:pl-72 h-screen overflow-y-auto relative bg-main">
         <Suspense fallback={null}>
           <HeaderLanding />

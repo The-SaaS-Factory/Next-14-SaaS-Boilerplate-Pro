@@ -1,5 +1,4 @@
-npx  
-
+npx
 
 https://viajespinar.vercel.app/
 

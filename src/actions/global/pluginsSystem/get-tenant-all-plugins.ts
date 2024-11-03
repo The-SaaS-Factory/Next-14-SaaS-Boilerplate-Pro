@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { Status } from "@prisma/client";
 
 export const getTenantAllPlugins = async ({
@@ -74,7 +74,7 @@ export const getTenantAllPlugins = async ({
 
   // Crear un conjunto (Set) de los IDs de los plugins instalados para una búsqueda más rápida
   const installedPluginIds = new Set(
-    pluginsInstalleds.map((plugin) => plugin.pluginId)
+    pluginsInstalleds.map((plugin) => plugin.pluginId),
   );
 
   const dataWithInstalled = data.map((plugin) => ({

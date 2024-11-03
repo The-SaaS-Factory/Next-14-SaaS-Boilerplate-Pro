@@ -36,7 +36,7 @@ export const imageKitFacade = async (base64Img: string, imageName: string) => {
           } else {
             resolve({ error: null, result: result });
           }
-        }
+        },
       );
     });
   } catch (error) {

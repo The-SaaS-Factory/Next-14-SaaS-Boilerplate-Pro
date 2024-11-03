@@ -1,6 +1,6 @@
 export const parsePriceInLocalCurrency = (
   price: number,
-  currencyCode: string
+  currencyCode: string,
 ) => {
   let PESOUYU = new Intl.NumberFormat("es-UY", {
     style: "currency",
@@ -59,7 +59,7 @@ export const parseNameFrequency = (frequency: string) => {
 
 export const traslateData = (
   string: string | object | null,
-  locale: string
+  locale: string,
 ) => {
   let traduction: string | object | null = string;
 

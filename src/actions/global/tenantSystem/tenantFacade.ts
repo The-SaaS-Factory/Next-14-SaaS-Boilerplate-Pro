@@ -1,6 +1,6 @@
 export const isTenantAdmin = (membershipPermissions) => {
   const result = membershipPermissions.some(
-    (permission) => permission.name === "agency:admin"
+    (permission) => permission.name === "agency:admin",
   );
   console.log(result);
 

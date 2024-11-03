@@ -3,7 +3,7 @@ import { CouponDuration } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
 import { checkPermission } from "../../../../utils/facades/serverFacades/securityFacade";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 const scope = "superAdmin:billing:upsert";
 export const upsertCoupon = async ({
   modelId,
@@ -12,7 +12,8 @@ export const upsertCoupon = async ({
   modelId?: number;
   payload: any;
 }) => {
- const { userMembership } = await getMembership(); const permissions  = userMembership.permissions.map((p) => p.name);
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
   checkPermission(permissions, scope);
 
   try {

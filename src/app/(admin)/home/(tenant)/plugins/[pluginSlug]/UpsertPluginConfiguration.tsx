@@ -26,7 +26,6 @@ export const UpsertPluginConfiguration = () => {
   //   loadDynamicComponent();
   // }, [componentName]);
 
-
   // const handleSavePluginConfiguration = async (data: any) => {
   //   console.log(data);
 

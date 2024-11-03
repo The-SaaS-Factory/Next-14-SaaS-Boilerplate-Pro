@@ -13,7 +13,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
     await updateProfilePassword(
       data.currentPassword,
       data.newPassword,
-      data.confirmPassword
+      data.confirmPassword,
     )
       .then((r) => {
         if (r === "ok") {
@@ -98,9 +98,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
         </div>
 
         <div className="mt-8 flex">
-          <Button type="submit"  >
-            Update
-          </Button>
+          <Button type="submit">Update</Button>
         </div>
       </form>
     </div>

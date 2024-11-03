@@ -117,7 +117,7 @@ export default function BlogLanding() {
               </div>
               <div className="relative mt-8 flex items-center gap-x-4">
                 <Image
-                 width={256}
+                  width={256}
                   height={256}
                   src={post.author.imageUrl}
                   alt=""

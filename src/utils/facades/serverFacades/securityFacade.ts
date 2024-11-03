@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 
 export const checkPermission = (
   userPermissions: string[],
-  permissionName: string
+  permissionName: string,
 ) => {
   !userPermissions.includes(permissionName) &&
     !userPermissions.includes("superAdmin:totalAccess") &&
@@ -12,7 +12,7 @@ export const checkPermission = (
 
 export const hasPermission = (
   userPermissions: string[],
-  permissionName: string
+  permissionName: string,
 ) => {
   return (
     userPermissions.includes(permissionName) ||
@@ -39,7 +39,7 @@ export const getSuperAdminAdmins = async () => {
 };
 
 export const isOrganizationAdmin = (
-  userMembership: IUserMembership
+  userMembership: IUserMembership,
 ): boolean => {
   if (!userMembership) return false;
 
@@ -49,7 +49,7 @@ export const isOrganizationAdmin = (
 
 export const isSuperAdmin = (userMembership: IUserMembership): boolean => {
   const userPermissions = new Set(
-    userMembership.permissions.map((p) => p.name)
+    userMembership.permissions.map((p) => p.name),
   );
 
   return userPermissions.has("superAdmin:administration:read");

@@ -4,10 +4,9 @@ import prisma from "@/lib/db";
 
 export const storeAffiliateForUser = async (
   userId: number,
-  affiliateId: number
+  affiliateId: number,
 ): Promise<any> => {
   try {
-
     //Check if user already has an affiliate
     const userAffiliate = await prisma.referral.findFirst({
       where: {
@@ -16,7 +15,7 @@ export const storeAffiliateForUser = async (
     });
 
     if (userAffiliate) {
-      return 'already-affiliate'
+      return "already-affiliate";
     }
 
     await prisma.referral.create({
@@ -26,7 +25,7 @@ export const storeAffiliateForUser = async (
       },
     });
 
-    return 'success'
+    return "success";
   } catch (error: any) {
     throw new Error(error);
   }

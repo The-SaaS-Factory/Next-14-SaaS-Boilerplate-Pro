@@ -50,7 +50,7 @@ export const payToAffiliate = async (invoice: Invoice) => {
     //This user refered another user, but he doesn't have the 35% cashback for affiliates capability for his plan, then,
     //we need to pay with default affiliate system
     const defaultPorcent = await getSuperAdminSetting(
-      "AFFILIATE_SYSTEM_DEFAULT_COMMISSION"
+      "AFFILIATE_SYSTEM_DEFAULT_COMMISSION",
     );
 
     if (defaultPorcent) {

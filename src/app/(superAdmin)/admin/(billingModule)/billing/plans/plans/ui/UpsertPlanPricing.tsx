@@ -33,7 +33,7 @@ const UpsertPlanPricing = async ({
       label: "Price",
       type: "number",
       required: true,
-      note:"If you change the price,  you should also change the price in Stripe",
+      note: "If you change the price,  you should also change the price in Stripe",
     },
     {
       name: "frequency",
@@ -62,7 +62,7 @@ const UpsertPlanPricing = async ({
       required: true,
     },
   ];
- 
+
   return (
     <>
       <NewForm

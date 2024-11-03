@@ -67,7 +67,7 @@ const PaymentMethodsSection = async () => {
                         </div>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>

@@ -24,7 +24,7 @@ export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
 
   const canAddMember = await checkCapabilityLimit(
     organization.id,
-    "members in the organization"
+    "members in the organization",
   );
 
   if (!canAddMember) {
@@ -79,7 +79,7 @@ export const tenantSendInvitation = async (payload: PayloadInviteMember) => {
 
     if (haveMembership) {
       throw Error(
-        `This user is already is ${constants.tanantModelName} member `
+        `This user is already is ${constants.tanantModelName} member `,
       );
     }
 

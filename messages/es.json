@@ -30,8 +30,8 @@
     },
     "pages": {
       "products": {
-          "products": "Productos",
-          "addProduct": "Adicionar producto"
+        "products": "Productos",
+        "addProduct": "Adicionar producto"
       },
       "dashboard": {
         "title": "Tablero",

@@ -18,13 +18,13 @@ export async function getSiteData(domain: string) {
     {
       revalidate: 900,
       tags: [`${domain}-metadata`],
-    }
+    },
   )();
 }
 
 export async function getPostsForSite(domain: string) {
   console.log(domain);
-  
+
   // const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
   //   ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")
   //   : null;

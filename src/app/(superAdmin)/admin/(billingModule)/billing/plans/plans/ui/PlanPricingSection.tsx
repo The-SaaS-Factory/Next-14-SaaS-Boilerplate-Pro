@@ -35,7 +35,7 @@ const PlanPricingSection = async ({
                   className="ml-4"
                   href={`/admin/billing/plans/plans/edit/${plan.id}/addPricing`}
                 >
-                  <Button >
+                  <Button>
                     <PlusCircleIcon className="w-6 h-6" />
                     Add Pricing
                   </Button>

@@ -7,7 +7,7 @@ import { hash } from "bcrypt";
 export const updateProfilePassword = async (
   oldPassword,
   newPassword,
-  confirmPassword
+  confirmPassword,
 ) => {
   const session = await getServerSession();
 
@@ -21,8 +21,7 @@ export const updateProfilePassword = async (
     throw new Error("Error al autentificar al usuario actual");
   }
 
-  console.log(newPassword,confirmPassword);
-  
+  console.log(newPassword, confirmPassword);
 
   if (newPassword !== confirmPassword) {
     throw new Error("Las contraseñas no coinciden");

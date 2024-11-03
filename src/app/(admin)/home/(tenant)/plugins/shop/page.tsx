@@ -23,10 +23,7 @@ const TenantPluginsActivesPage = ({
     <div>
       <PageName name={"Tienda de herramientas"} isSubPage={true} />
       <Search placeholder="Buscar plugin por nombre" />
-      <TenantPluginList
-        query={query}
-        currentPage={currentPage}
-      />
+      <TenantPluginList query={query} currentPage={currentPage} />
     </div>
   );
 };

@@ -6,9 +6,9 @@ import { revalidatePath } from "next/cache";
 
 export const disconnectProductWithStripe = async (
   modelName: string,
-  modelId: number
+  modelId: number,
 ) => {
-  let model:   | Plan | null = null;
+  let model: Plan | null = null;
   if (modelName === "Plan") {
     model = await prisma.plan.findUnique({
       where: {

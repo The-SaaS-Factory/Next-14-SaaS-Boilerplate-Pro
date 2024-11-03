@@ -22,6 +22,6 @@ export const updateProfileFields = async (fields: Field[]) => {
           [field.settingName]: field.settingValue,
         },
       });
-    })
+    }),
   );
 };

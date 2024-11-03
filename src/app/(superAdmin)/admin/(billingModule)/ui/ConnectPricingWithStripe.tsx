@@ -19,7 +19,7 @@ const ConnectPricingWithStripe = ({
   const checkConnected = (currencyCode: string) => {
     const setting = settings?.find(
       (setting) =>
-        setting.settingName === "stripePriceId_" + currencyCode.toLowerCase()
+        setting.settingName === "stripePriceId_" + currencyCode.toLowerCase(),
     );
     return setting;
   };

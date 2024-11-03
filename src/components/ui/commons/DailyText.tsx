@@ -4,12 +4,12 @@ export default function DailyText() {
       <div className="mx-auto max-w-7xl sm:px-6  ">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-xl">
-            Cita del dia 
+            Cita del dia
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
             Jehová es mi pastor; nada me faltará. En lugares de delicados pastos
             me hará descansar; Junto a aguas de reposo me pastoreará. Confortará
-            mi alma; Me guiará por sendas de justicia por amor de su nombre. 
+            mi alma; Me guiará por sendas de justicia por amor de su nombre.
           </p>
           <svg
             viewBox="0 0 1024 1024"

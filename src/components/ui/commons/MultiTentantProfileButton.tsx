@@ -145,7 +145,7 @@ export const MultiTentantProfileButton = ({
                     <LogOut className="w-6 h-6  text" />
                     <button
                       className={classNames(
-                        " bg-main-hover px-3   leading-6 text-primary text-left w-full"
+                        " bg-main-hover px-3   leading-6 text-primary text-left w-full",
                       )}
                       onClick={() => signOut()}
                     >

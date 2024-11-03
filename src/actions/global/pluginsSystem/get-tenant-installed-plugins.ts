@@ -14,7 +14,7 @@ export const getTenantInstalledPlugins = async ({
   };
 }) => {
   const { organization } = await getMembership();
-  
+
   const id = organization.id;
 
   const limit = args.limit;

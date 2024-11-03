@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import ReactConfetti from "react-confetti";
 
 export default function Welcome() {
-
   useEffect(() => {
     setTimeout(() => {
       window.location.replace("/home");
@@ -13,10 +12,7 @@ export default function Welcome() {
 
   return (
     <div className="bg-black  isolate pt-14">
-      <ReactConfetti
-        width={1000}
-        height={1000}
-      />
+      <ReactConfetti width={1000} height={1000} />
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"

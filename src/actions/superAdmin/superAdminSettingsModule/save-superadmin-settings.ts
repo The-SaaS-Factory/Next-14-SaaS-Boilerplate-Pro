@@ -38,7 +38,7 @@ export const saveSuperAdminSettings = async (settings: SettingType[]) => {
         } catch (error) {
           console.log(error);
         }
-      })
+      }),
     ).catch((err) => {
       console.log(err);
     });

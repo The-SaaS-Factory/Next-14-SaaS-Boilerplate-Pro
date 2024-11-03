@@ -1,6 +1,11 @@
 "use client";
 import Tabs from "@/components/core/Tabs";
-import { CodeBracketIcon, CreditCardIcon, FaceSmileIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import {
+  CodeBracketIcon,
+  CreditCardIcon,
+  FaceSmileIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 import React from "react";
 
 const SuperAdminSettingsTabs = () => {

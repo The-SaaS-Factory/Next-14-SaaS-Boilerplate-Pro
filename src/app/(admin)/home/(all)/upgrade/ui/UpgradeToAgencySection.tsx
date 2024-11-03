@@ -67,7 +67,10 @@ export default function UpgradeToAgencySection() {
                 className="h-full w-full object-cover object-center"
               />
             </div>
-            <Link href="/home/settings/billing/buyPlan" className="flex items-center mx-auto btn-icon animate-bounce">
+            <Link
+              href="/home/settings/billing/buyPlan"
+              className="flex items-center mx-auto btn-icon animate-bounce"
+            >
               <span>¡Hazte agencia!</span>
               <ArrowRightCircleIcon className="h-6 w-6" aria-hidden="true" />
             </Link>

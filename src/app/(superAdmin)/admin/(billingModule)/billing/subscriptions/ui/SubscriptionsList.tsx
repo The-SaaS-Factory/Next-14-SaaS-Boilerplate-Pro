@@ -100,7 +100,6 @@ const SubscriptionsList = async ({
               </TableBody>
             </Table>
             <div className="flex mt-7 justify-between">
-             
               <Pagination
                 offset={offset}
                 dataLength={data.length}

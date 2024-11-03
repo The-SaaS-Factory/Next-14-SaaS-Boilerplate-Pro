@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import { revalidatePath } from "next/cache";
 
 export const applyCouponToInvoice = async ({
@@ -37,9 +37,8 @@ export const applyCouponToInvoice = async ({
       },
     });
 
-  
     console.log(coupon);
-    
+
     if (!coupon) {
       throw new Error("Coupon not found, or not active");
     }
@@ -49,7 +48,7 @@ export const applyCouponToInvoice = async ({
       const connection = coupon.settings.find(
         (setting) =>
           setting.name ===
-          "stripeCouponId_" + invoice.Currency.code.toLowerCase()
+          "stripeCouponId_" + invoice.Currency.code.toLowerCase(),
       );
 
       if (!connection && invoice.Currency.code.toLowerCase() !== "cup") {
@@ -61,7 +60,7 @@ export const applyCouponToInvoice = async ({
       where: {
         referredBy: {
           some: {
-            id: organization.id
+            id: organization.id,
           },
         },
       },
@@ -71,7 +70,9 @@ export const applyCouponToInvoice = async ({
     if (
       coupon.organization &&
       coupon.organization.id !== organization.id &&
-      organizationsFromUser.map((organization) => organization.id).includes(organization.id)
+      organizationsFromUser
+        .map((organization) => organization.id)
+        .includes(organization.id)
     ) {
       throw new Error("Coupon not valid for this user");
     }

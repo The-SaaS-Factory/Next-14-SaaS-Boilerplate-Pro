@@ -19,7 +19,10 @@ export default function SlideOver({
   children: ReactNode;
 }) {
   const { toggleSideOver, isSideOverOpen } = useSideOverState(
-    ({ toggleSideOver, isSideOverOpen }) => ({ toggleSideOver, isSideOverOpen })
+    ({ toggleSideOver, isSideOverOpen }) => ({
+      toggleSideOver,
+      isSideOverOpen,
+    }),
   );
 
   return (

@@ -28,7 +28,6 @@ export default async function ClientLayout({
 }: {
   children: ReactNode;
 }) {
-
   return (
     <main className="relative text-primary">
       <div className="lg:pl-72 h-screen overflow-y-auto relative bg-main">

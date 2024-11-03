@@ -4,11 +4,14 @@ import prisma from "@/lib/db";
 
 export async function getPermissionsForProfile(
   organizationId: number,
-  permission: string
+  permission: string,
 ) {
   try {
     const _permission = await prisma.permission.findFirst({
-      where: { organizations: { some: { id: organizationId } }, name: permission },
+      where: {
+        organizations: { some: { id: organizationId } },
+        name: permission,
+      },
     });
 
     if (_permission) return true;

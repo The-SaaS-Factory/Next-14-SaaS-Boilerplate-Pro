@@ -49,7 +49,7 @@ export const isValidJSON = (str: string) => {
 
 export function formatTimestampToDateString(
   timestamp: string | Date | number,
-  includeMinutes?: boolean
+  includeMinutes?: boolean,
 ) {
   try {
     if (timestamp instanceof Date) timestamp = timestamp.getTime();

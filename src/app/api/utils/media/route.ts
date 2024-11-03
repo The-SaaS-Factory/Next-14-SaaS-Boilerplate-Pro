@@ -10,12 +10,11 @@ export async function POST(request: Request) {
   if (!image.startsWith("data") && Array.isArray(JSON.parse(image))) {
     const images = JSON.parse(image);
 
-
     const imagesGenerate: any = await Promise.all(
       images.map(async (img: any) => {
         const imageGenerate: any = await imageKitFacade(
           img,
-          generateRandomString(7)
+          generateRandomString(7),
         );
 
         if (imageGenerate.error) {
@@ -27,9 +26,8 @@ export async function POST(request: Request) {
           url: imageGenerate.result.url as string,
           thumbnailUrl: imageGenerate.result.thumbnailUrl,
         };
-      })
+      }),
     );
-    
 
     if (imagesGenerate) {
       return NextResponse.json(imagesGenerate, { status: 200 });
@@ -39,7 +37,7 @@ export async function POST(request: Request) {
   } else {
     const imageGenerate: any = await imageKitFacade(
       image,
-      generateRandomString(7)
+      generateRandomString(7),
     );
 
     if (imageGenerate.error) {

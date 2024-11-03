@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     });
 
     const duplicateValues = Object.keys(recordCounts).filter(
-      (value) => recordCounts[value] > 1
+      (value) => recordCounts[value] > 1,
     );
 
     // Step 2: For each duplicate value, find and delete duplicates
@@ -59,7 +59,7 @@ export async function GET(request: Request) {
 
     return new NextResponse(
       "Duplicates fixed in SuperAdminSettings, Permissions, and Capabilities",
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error fixing duplicates:", error);

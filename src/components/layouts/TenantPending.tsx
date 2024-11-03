@@ -38,7 +38,9 @@ export default function TenantPending() {
               Tu cuenta está pendiente de aprobación por parte del
               administrador. Por favor, espera mientras revisamos tus datos.
             </p>
-            <button className="mt-7 btn-main" onClick={handleLogout}>Cerrar sesión</button>
+            <button className="mt-7 btn-main" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
           </div>
         </DialogPanel>
       </div>

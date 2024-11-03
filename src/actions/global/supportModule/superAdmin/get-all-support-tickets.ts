@@ -2,9 +2,9 @@
 
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
-import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
- 
-const  scope = "superAdmin:support:read";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+
+const scope = "superAdmin:support:read";
 
 export const getAllSupportTicket = async ({
   args,
@@ -17,9 +17,12 @@ export const getAllSupportTicket = async ({
 }) => {
   const { offset, limit } = args;
 
-const { userMembership } = await getMembership();
+  const { userMembership } = await getMembership();
 
-  checkPermission(userMembership.permissions.map((p) => p.name), scope);
+  checkPermission(
+    userMembership.permissions.map((p) => p.name),
+    scope,
+  );
 
   let whereSearch: any = {};
 

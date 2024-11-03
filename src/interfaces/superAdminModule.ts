@@ -1,5 +1,4 @@
 export type SuperAdminSetting = {
-    settingName: string;
-    settingValue: string;
-  };
-  
+  settingName: string;
+  settingValue: string;
+};

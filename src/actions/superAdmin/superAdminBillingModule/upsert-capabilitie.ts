@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { checkPermission } from "@/utils/facades/serverFacades/securityFacade";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
- 
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
+
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 const scope = "superAdmin:billing:upsert";
@@ -13,12 +13,13 @@ export const upsertCapabilitie = async ({
   modelId?: number;
   payload: Prisma.CapabilitieCreateInput | Prisma.CapabilitieUpdateInput;
 }) => {
-const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   checkPermission(permissions, scope);
 
   try {
-    await  prisma.capability.upsert({
+    await prisma.capability.upsert({
       where: {
         id: modelId ? modelId : 0,
       },

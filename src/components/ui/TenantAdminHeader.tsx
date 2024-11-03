@@ -79,7 +79,10 @@ const TenantAdminHeader = ({
                       <div className="flex items-center space-x-2">
                         <SearchIcon className="h-5 w-5 stroke-current" />
 
-                        <span className="font-normal"> Search page or funcionality</span>
+                        <span className="font-normal">
+                          {" "}
+                          Search page or funcionality
+                        </span>
                       </div>
                       <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
                         <kbd className="font-sans">Ctrl </kbd>

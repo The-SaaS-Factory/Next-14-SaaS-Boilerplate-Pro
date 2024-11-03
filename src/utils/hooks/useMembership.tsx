@@ -25,7 +25,7 @@ export const useMembership = () => {
           localStorage.setItem("organization", JSON.stringify(organization));
           localStorage.setItem(
             "userMembership",
-            JSON.stringify(userMembership)
+            JSON.stringify(userMembership),
           );
 
           setOrganizationData(organization);
@@ -47,7 +47,7 @@ export const useMembership = () => {
     if (!organizationCapabilities) return false;
 
     const organizationCapability = organizationCapabilities.find(
-      (o) => o.capability.name === capabilityName
+      (o) => o.capability.name === capabilityName,
     );
 
     if (!organizationCapability) return false;

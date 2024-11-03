@@ -78,7 +78,7 @@ const TenantList = async ({
                             <div className=" ">
                               {tenant.subscription.plan.name ?? "-"} / until{" "}
                               {formatTimestampToDateString(
-                                tenant.subscription.endDate
+                                tenant.subscription.endDate,
                               )}
                             </div>
                           )}

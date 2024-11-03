@@ -6,8 +6,6 @@ import Link from "next/link";
 import Slider from "react-slick";
 import { sliderSettings } from "@/lib/constants";
 
-
-
 const clients = [
   {
     href: "https://hicseo.com/",

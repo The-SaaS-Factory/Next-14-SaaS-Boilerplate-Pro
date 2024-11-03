@@ -45,9 +45,8 @@ export const connectCouponWithStripe = async ({
       const stripeCoupon = await stripeCreateCoupon(couponPayload).catch(
         (error) => {
           console.log(error);
-        }
+        },
       );
-
 
       if (stripeCoupon) {
         const couponSetting = await prisma.couponSettings.findFirst({

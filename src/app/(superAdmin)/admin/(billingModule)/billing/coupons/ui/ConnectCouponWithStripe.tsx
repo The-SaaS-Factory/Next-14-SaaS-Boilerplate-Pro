@@ -15,10 +15,9 @@ const ConnectCouponWithStripe = ({
   settings?: CouponSettings[] | null;
 }) => {
   const checkConnected = (currencyCode: string) => {
-    
     const setting = settings?.find(
       (setting) =>
-        setting.name === "stripeCouponId_" + currencyCode.toLowerCase()
+        setting.name === "stripeCouponId_" + currencyCode.toLowerCase(),
     );
     return setting;
   };

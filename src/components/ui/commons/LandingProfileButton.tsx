@@ -54,7 +54,7 @@ export const LandingProfileButton = () => {
               <Link
                 href={"/home/orders/actives"}
                 className={classNames(
-                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text"
+                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text",
                 )}
               >
                 <ClipboardDocumentIcon className="w-5 h-5" />
@@ -64,7 +64,7 @@ export const LandingProfileButton = () => {
               <Link
                 href={"/home/settings/profile"}
                 className={classNames(
-                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text"
+                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text",
                 )}
               >
                 <UserIcon className="w-5 h-5" />
@@ -74,7 +74,7 @@ export const LandingProfileButton = () => {
               <Link
                 href={"/home/contacts"}
                 className={classNames(
-                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text"
+                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text",
                 )}
               >
                 <UsersIcon className="w-5 h-5" />
@@ -84,7 +84,7 @@ export const LandingProfileButton = () => {
               <Link
                 href={"/home/favorites"}
                 className={classNames(
-                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text"
+                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text",
                 )}
               >
                 <HeartIcon className="w-5 h-5" />
@@ -92,7 +92,7 @@ export const LandingProfileButton = () => {
               </Link>
               <button
                 className={classNames(
-                  " bg-main-hover flex space-x-3 items-center px-3 py-1 text-sm leading-6 text-primary text-left w-full"
+                  " bg-main-hover flex space-x-3 items-center px-3 py-1 text-sm leading-6 text-primary text-left w-full",
                 )}
                 onClick={() =>
                   signOut({

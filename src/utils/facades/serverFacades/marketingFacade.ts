@@ -8,7 +8,7 @@ import {
 } from "./loopsEmailMarketingFacade";
 
 export const checkMarketingActionsOnRegister = async (
-  organizationId: number
+  organizationId: number,
 ) => {
   activateFreeTrial(organizationId);
   sendWelcomeEmail(organizationId);
@@ -24,14 +24,14 @@ const storeContactInEmailProvider = async (id: number) => {
     storeContactInLoopsAudience(
       user.email as string,
       user.name as string,
-      "userRegistered"
+      "userRegistered",
     );
   }
 };
 
 const activateFreeTrial = async (organizationId: number) => {
   const freeTrial: string | null = await getSuperAdminSetting(
-    "MARKETING_FREE_TRIAL"
+    "MARKETING_FREE_TRIAL",
   );
 
   if (freeTrial && freeTrial == "true") {
@@ -63,9 +63,8 @@ const activateFreeTrial = async (organizationId: number) => {
 };
 
 export const sendWelcomeEmail = async (id: number) => {
-  const loopActived: string | null = await getSuperAdminSetting(
-    "LOOPS_ENABLED"
-  );
+  const loopActived: string | null =
+    await getSuperAdminSetting("LOOPS_ENABLED");
 
   if (loopActived == "true") {
     const loopId: string | null = await getSuperAdminSetting("LOOPS_API_KEY");
@@ -76,11 +75,11 @@ export const sendWelcomeEmail = async (id: number) => {
       });
       //Check email for user
       const welcomeEmailForUserEnabled = await getSuperAdminSetting(
-        "MARKETING_WELCOME_EMAIL_FOR_USERS_ENABLED"
+        "MARKETING_WELCOME_EMAIL_FOR_USERS_ENABLED",
       );
 
       const welcomeEmailForUser = await getSuperAdminSetting(
-        "MARKETING_WELCOME_EMAIL_USER_TRANSACTIONALID"
+        "MARKETING_WELCOME_EMAIL_USER_TRANSACTIONALID",
       );
 
       if (

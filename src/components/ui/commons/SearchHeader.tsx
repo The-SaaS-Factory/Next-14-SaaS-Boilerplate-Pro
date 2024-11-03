@@ -47,7 +47,7 @@ export default function SearchHeader({
     group.items.map((item) => ({
       ...item,
       groupName: group.sectionName,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function SearchHeader({
                   data-autofocus
                   className={clsx(
                     "flex-auto appearance-none bg-main pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
-                    "pr-4"
+                    "pr-4",
                   )}
                   value={query}
                   onChange={(ev) => setQuery(ev.currentTarget.value)}
@@ -117,7 +117,7 @@ export default function SearchHeader({
                 {query !== "" &&
                   allItems
                     .filter((item) =>
-                      item.name.toLowerCase().includes(query.toLowerCase())
+                      item.name.toLowerCase().includes(query.toLowerCase()),
                     )
                     .slice(0, 5)
                     .map((item) => (

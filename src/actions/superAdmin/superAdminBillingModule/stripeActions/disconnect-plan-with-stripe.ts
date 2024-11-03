@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 export const disconnectStripePlanWithLocalPlan = async (
   localPlanId: number,
-  currencyCode: string
+  currencyCode: string,
 ) => {
   await prisma.pricingSetting.deleteMany({
     where: {

@@ -13,7 +13,7 @@ const PlanActive = ({
 }) => {
   const getUserCountCapabilitie = (capabilityId: number) => {
     const capabilitie = usedCapabilities?.find(
-      (c: any) => c.capabilityId === capabilityId
+      (c: any) => c.capabilityId === capabilityId,
     );
     return capabilitie ? capabilitie.count : 0;
   };
@@ -45,7 +45,7 @@ const PlanActive = ({
                       <ProgressBar
                         value={getPorcent(
                           getUserCountCapabilitie(capabilitie.capabilityId),
-                          capabilitie.count
+                          capabilitie.count,
                         )}
                         color="sky"
                         className="mt-3"

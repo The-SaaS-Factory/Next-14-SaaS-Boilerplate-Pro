@@ -41,7 +41,7 @@ const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
                 <p className="text-sm text-neutral-700">
                   Día del Evento:{" "}
                   {new Date(
-                    (changes.new as any).dateEvent
+                    (changes.new as any).dateEvent,
                   ).toLocaleDateString()}
                 </p>
               </div>

@@ -20,7 +20,7 @@ const OrganizationAdminSidebar = () => {
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
       isSidebarMenuOpen,
-    })
+    }),
   );
 
   const { userMembership, checkOrganizationCapability } = useMembership();

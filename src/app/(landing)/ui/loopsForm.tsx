@@ -78,7 +78,7 @@ export default function SignUpFormReact() {
 
     // build body
     const formBody = `userGroup=${encodeURIComponent(
-      formStyles.userGroup
+      formStyles.userGroup,
     )}&email=${encodeURIComponent(email)}&mailingLists=`;
 
     // API request to add user to newsletter
@@ -107,7 +107,7 @@ export default function SignUpFormReact() {
         // check for cloudflare error
         if (error.message === "Failed to fetch") {
           setErrorMessage(
-            "Too many signups, please try again in a little while"
+            "Too many signups, please try again in a little while",
           );
         } else if (error.message) {
           setErrorMessage(error.message);

@@ -14,23 +14,21 @@ export const getAllCoupons = async ({
   const limit = args.limit;
   const offset = args.offset;
   let whereSearch = {};
-  
+
   let findId: string | number =
-  typeof args.search === "string"
-    ? args.search.replace(/\D/g, "")
-    : args.search;
+    typeof args.search === "string"
+      ? args.search.replace(/\D/g, "")
+      : args.search;
 
-if (typeof findId === "string" && findId !== "") {
-  findId = parseInt(findId);
-}
-  
-
+  if (typeof findId === "string" && findId !== "") {
+    findId = parseInt(findId);
+  }
 
   if (args.search) {
     whereSearch = {
       OR: [
         {
-          id: findId
+          id: findId,
         },
         {
           name: {
@@ -58,7 +56,7 @@ if (typeof findId === "string" && findId !== "") {
       invoices: {
         where: {
           status: InvoiceStatus.PAID,
-        }
+        },
       },
       settings: true,
     },

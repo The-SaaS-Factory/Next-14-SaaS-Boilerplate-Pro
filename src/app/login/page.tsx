@@ -124,7 +124,7 @@ export default function LoginPage() {
           setLoading(false);
           if (result.error) {
             toast.error(
-              "Credenciais inválidas ou registro pendente de aprovação"
+              "Credenciais inválidas ou registro pendente de aprovação",
             );
             return;
           }
@@ -169,7 +169,7 @@ export default function LoginPage() {
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
                         : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
-                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium"
+                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium",
                     )}
                   >
                     <tab.icon
@@ -178,7 +178,7 @@ export default function LoginPage() {
                         tab.action === action
                           ? "text-indigo-500"
                           : "text-gray-400 group-hover: text",
-                        "h-5 w-5 mr-2"
+                        "h-5 w-5 mr-2",
                       )}
                     />
                     {tab.name}
