@@ -72,21 +72,7 @@ export const stripeWebhook = async (requestBody: any) => {
     return `Webhook Error: ${err.message}`;
   }
 };
-
-export function capitalizarPalabras(str) {
-  // Dividir el string en palabras individuales
-  let palabras = str.split(" ");
-
-  // Iterar sobre cada palabra y capitalizar la primera letra
-  for (let i = 0; i < palabras.length; i++) {
-    palabras[i] =
-      palabras[i].charAt(0).toUpperCase() + palabras[i].slice(1).toLowerCase();
-  }
-
-  // Unir las palabras nuevamente en un solo string
-  return palabras.join(" ");
-}
-
+ 
 export const stripeGetClientByCustomerId = async (customerId: string) => {
   const client = await prisma.stripeCustomer.findFirst({
     where: {

@@ -1,11 +1,11 @@
 "use client";
-import { Bell, Users } from "lucide-react";
+import { Bell,   } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+//import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMembership } from "@/utils/hooks/useMembership";
 import { useEffect, useState } from "react";
-import { getStripeStats } from "@/actions/superAdmin/superAdminBillingModule/stripeActions/get-stripe-stats";
+//import { getStripeStats } from "@/actions/superAdmin/superAdminBillingModule/stripeActions/get-stripe-stats";
 import FullLoader from "@/components/ui/loaders/FullLoader";
 
 type StripeData = {
@@ -16,23 +16,20 @@ type StripeData = {
 };
 export default function Dashboard() {
   const { userMembership } = useMembership();
-  const [isLoading, setIsLoading] = useState(false);
-  const [stripeStats, setStripeStats] = useState<StripeData>();
+  //const [isLoading, setIsLoading] = useState(false);
+  //const [stripeStats, setStripeStats] = useState<StripeData>([]);
 
-  const getStats = async () => {
-    await getStripeStats().then((data) => setStripeStats(data));
-    setIsLoading(false);
-  };
+  // const getStats = async () => {
+  //   await getStripeStats().then((data) => setStripeStats(data));
+  //   setIsLoading(false);
+  // };
 
-  useEffect(() => {
-    setIsLoading(true);
-    getStats();
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  // //  getStats();
+  // }, []);
 
-  if (isLoading) {
-    return <FullLoader />;
-  }
-
+  
   return (
     <div className="flex flex-col gap-8 p-8">
       <header className="flex items-center justify-between">
@@ -54,7 +51,7 @@ export default function Dashboard() {
           </Avatar>
         </div>
       </header>
-
+{/* 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -144,7 +141,7 @@ export default function Dashboard() {
             </p>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
     </div>
   );
 }

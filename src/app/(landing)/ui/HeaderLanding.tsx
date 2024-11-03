@@ -10,9 +10,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
 
   const MenuItemsPC = () => (
     <>
@@ -22,12 +25,33 @@ export const HeaderLanding = () => {
       <Link href="/prices" className="hover:text-gray-300 text-gray-50">
         Prices
       </Link>
-      <Link href={"/login"}>
-        <Button variant="outline">Iniciar Sesión</Button>
-      </Link>
-      <Link href={"/login"}>
-        <Button>Registrarse</Button>
-      </Link>
+      {session.status === "authenticated" ? (
+        <Link
+          href="/home"
+          className="hover:text-gray-300 rounded-full text-gray-50"
+        >
+          <Image
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full bg-gray-50"
+            src={"/assets/img/avatar.png"}
+            alt=""
+          />
+        </Link>
+      ) : (
+        <>
+          {session.status !== "loading" && (
+            <>
+              <Link href={"/login"}>
+                <Button variant="outline">Iniciar Sesión</Button>
+              </Link>
+              <Link href={"/login"}>
+                <Button>Registrarse</Button>
+              </Link>
+            </>
+          )}
+        </>
+      )}
     </>
   );
 
