@@ -33,7 +33,7 @@
 }
 
 .bg-primary {
-  @apply bg-black/80;
+  @apply bg-[#4437cd];
 }
 
 .text-primary-foreground {

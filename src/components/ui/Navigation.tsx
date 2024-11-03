@@ -56,7 +56,7 @@ function NavLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={clsx(
-        "flex justify-between gap-2 py-1 pr-3 text-base transition",
+        "flex justify-between gap-2 py-1 pr-3 text-primary  transition",
         isAnchorLink ? "pl-7" : "pl-4",
         active
           ? "text-zinc-900 dark:text-white"
@@ -134,7 +134,7 @@ function ActivePageMarker({
   return (
     <motion.div
       layout
-      className="absolute left-2 h-6 w-px bg-[#4437cd]"
+      className="absolute left-2 h-6 w-px bg-primary"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -160,8 +160,6 @@ function NavigationGroup({
   );
 
   const pathName = usePathname();
-  // let seg = pathName.split("/");
-  // let pathNameWithoutLand = "/" + seg.slice(2).join("/");
 
   let isActiveGroup =
     group.items.findIndex((link) => link.href === pathName) !== -1;

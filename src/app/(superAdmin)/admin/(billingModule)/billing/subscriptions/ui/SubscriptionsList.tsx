@@ -16,6 +16,7 @@ import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import Link from "next/link";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import UserCard from "@/components/ui/commons/UserCard";
+import { Button } from "@/components/ui/button";
 
 const SubscriptionsList = async ({
   query,
@@ -35,6 +36,8 @@ const SubscriptionsList = async ({
       offset,
     },
   });
+
+  console.log(data);
 
   return (
     <div>
@@ -70,10 +73,10 @@ const SubscriptionsList = async ({
                 {data?.map((item: MembershipType, index: number) => (
                   <TableRow key={`userS-${item.id + index}`}>
                     <TableCell className="text-left items-center">
-                      <UserCard user={item.user} />
+                      <UserCard user={item.organization} />
                     </TableCell>
                     <TableCell className="text-center text">
-                      {item.plan.name}
+                      {item.plan?.name}
                     </TableCell>
 
                     <TableCell className="text-center text">
@@ -83,12 +86,11 @@ const SubscriptionsList = async ({
                       {formatTimestampToDateString(item.endDate)}{" "}
                     </TableCell>
                     <TableCell className="text-center flex text">
-                      <Link
-                        href={`subscriptions/edit/${item.id}`}
-                        className="btn-icon"
-                      >
-                        <PencilIcon className="w-6 h-6" />
-                        <span className="sr-only">,</span>
+                      <Link href={`subscriptions/edit/${item.id}`}>
+                        <Button variant="outline">
+                          <PencilIcon className="w-6 h-6" />
+                          <span className="sr-only">,</span>
+                        </Button>
                       </Link>
                       {/* <DeleteModel
                         modelId={plan.id}
