@@ -43,10 +43,6 @@ export const useMembership = () => {
     const subscription = organizationData?.subscription;
     const organizationCapabilities = organizationData?.capabilities;
 
-    console.log(organizationCapabilities);
-    
-    
-
     if (!subscription) return false;
     if (!organizationCapabilities) return false;
 

@@ -11,7 +11,6 @@ import React, {
 } from "react";
 import { type StoreApi, createStore, useStore } from "zustand";
 
-
 export interface Section {
   id: string;
   title: string;

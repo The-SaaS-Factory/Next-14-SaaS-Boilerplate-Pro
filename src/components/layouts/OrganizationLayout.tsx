@@ -4,26 +4,19 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import TenantAdminHeader from "../ui/TenantAdminHeader";
 import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
-import { redirect } from "next/navigation";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
 import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/settings/components/CompleteOnBoarding";
 import { UpdateClientCache } from "../core/UpdateClientCache";
 import OrganizationAdminSidebar from "../ui/TenantAdminSidebar";
+import { RedirectSuperAdmin } from "../core/RedirectSuperAdmin";
 export default async function OrganizationLayout({
   children,
 }: {
   children: ReactNode;
 }) {
   const notificationsCount = await getUserNotificationsUnreadCount();
-
   const { organization, userMembership } = await getMembership();
-
-  if (isSuperAdmin(userMembership)) {
-    redirect("/admin");
-  }
-
-  
 
   return (
     <Suspense fallback={<FullLoader />}>
@@ -52,6 +45,7 @@ export default async function OrganizationLayout({
         organization={organization}
         userMembership={userMembership}
       />
+      <RedirectSuperAdmin redirect={isSuperAdmin(userMembership)} />
     </Suspense>
   );
 }

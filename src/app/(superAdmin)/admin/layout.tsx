@@ -4,7 +4,7 @@ import SessionWrapper from "@/components/core/SessionWrapper";
 import SuperAdminLayout from "@/components/layouts/SuperAdminLayout";
 import { SectionProvider } from "@/components/ui/SectionProvider";
 
-const SuperAdminRoot = ({ children }: { children: ReactNode }) => {
+const SuperAdminRoot = async ({ children }: { children: ReactNode }) => {
   return (
     <main>
       <SectionProvider sections={[]}>

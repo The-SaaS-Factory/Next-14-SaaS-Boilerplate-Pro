@@ -45,8 +45,8 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
   const [planSelected, setPlanSelected] = useState<any>(null);
   const [pricing, setPricing] = useState<any>({
     frequencies: [
-      { value: "month", label: "Mensual", priceSuffix: "/mes" },
-      { value: "year", label: "Anual", priceSuffix: "/año" },
+      { value: "month", label: "Monthly", priceSuffix: "/month" },
+      { value: "year", label: "Yearly", priceSuffix: "/year" },
     ],
   });
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
@@ -121,9 +121,9 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
         currencySelected={currencySelected}
       />
       <div className="bg-transparent">
-        <div className="flex mx-auto justify-center py-7">
+        <div className="flex mx-auto w-14 justify-center py-7">
           <Select
-            className=" w-full mx-auto max-w-7  "
+            className=" w-full mx-auto    "
             defaultValue={currencySelected?.code ?? "usd"}
             onValueChange={(value) => {
               setCurrencySelected(
@@ -149,7 +149,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                 Prices
               </h2>
               <p className="mt-2 mega-title">
-                Membership plans {constants.appName}
+                Membership plans in {constants.appName}
               </p>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center"></p>
