@@ -2,7 +2,7 @@
 import { createSupportTickets } from "@/actions/global/supportModule/create-support-ticket";
 import NewForm from "@/components/core/NewForm";
 import { useSideOverState } from "@/states/ui/slideOverState";
-import { SupportDepartamentType } from "@prisma/client";
+import { SupportDepartmentType } from "@prisma/client";
 
 import React from "react";
 
@@ -15,22 +15,22 @@ const NewTicketSupportForm = () => {
       required: true,
     },
     {
-      name: "departament",
-      label: "Departamento",
+      name: "department",
+      label: "Department",
       type: "select",
       required: true,
       options: [
         {
           optionName: "Billing",
-          optionValue: SupportDepartamentType.BILLING,
+          optionValue: SupportDepartmentType.BILLING,
         },
         {
           optionName: "Sales",
-          optionValue: SupportDepartamentType.SALES,
+          optionValue: SupportDepartmentType.SALES,
         },
         {
           optionName: "Support",
-          optionValue: SupportDepartamentType.SUPPORT,
+          optionValue: SupportDepartmentType.SUPPORT,
         },
       ],
     },

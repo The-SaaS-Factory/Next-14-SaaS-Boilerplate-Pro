@@ -4,14 +4,13 @@ import { Card, Flex } from "@tremor/react";
 import {
   formatTimestampToDateString,
   isValidJSON,
-} from "@/utils/facades/serverFacades/strFacade";
-import UserCard from "@/components/ui/commons/UserCard";
+} from "@/utils/facades/frontendFacades/strFacade";
 import AddMessageToSupportTicket from "./AddMessageToSupportTicket";
 import CloseTicket from "./CloseTicket";
 import Image from "next/image";
 import Link from "next/link";
 import { showTicketStatus } from "@/app/(superAdmin)/admin/support/ui/SuperAdminTicketsList";
- 
+import OrganizationCard from "@/components/ui/commons/OrganizationCard";
 
 const ViewSupportTicketDetailsPage = ({
   ticket,
@@ -26,17 +25,21 @@ const ViewSupportTicketDetailsPage = ({
       <Card className="mr-3">
         <div className="flex flex-col justify-between space-y-3 lg:space-y-0 lg:flex-row">
           <div className="flex justify-between">
-            <span className="subtitle">{"Asunto"}: {ticket.subject}</span>
-            <span className="subtitle ml-3">{"Ticket"} ID: {ticket.id}</span>
+            <span className="subtitle">
+              {"Subject"}: {ticket.subject}
+            </span>
+            <span className="subtitle ml-3">
+              {"Ticket"} ID: {ticket.id}
+            </span>
           </div>
           <div className="flex justify-between items-center space-x-3">
             <span className="subtitle">
-      Estado: {showTicketStatus(ticket.status)}
+              Status: {showTicketStatus(ticket.status)}
             </span>
             {ticket.status !== "CLOSED" && <CloseTicket ticketId={ticket.id} />}
           </div>
           <span className="subtitle">
-       Fecha: {formatTimestampToDateString(ticket.createdAt)}
+            Date: {formatTimestampToDateString(ticket.createdAt)}
           </span>
         </div>
         <div className="mt-3">
@@ -53,7 +56,11 @@ const ViewSupportTicketDetailsPage = ({
                   }`}
                 >
                   <div className="flex flex-col lg:flex-row">
-                    <UserCard user={message.user ?? message.Organization} />{" "}
+                    <OrganizationCard
+                      organization={
+                        message.organization ?? message.Organization
+                      }
+                    />{" "}
                     <span>
                       {formatTimestampToDateString(message.createdAt, true)}
                     </span>

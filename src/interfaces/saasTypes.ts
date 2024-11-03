@@ -10,7 +10,6 @@ import {
   Plan,
   Referral,
   StripeCustomer,
-  Subscription,
   SupportTicket,
   SupportTicketMessage,
   User,
@@ -70,7 +69,7 @@ export interface IUserMembership {
   isActive?: boolean;
   user?: User;
   organization?: IOrganization;
-  settings: UserMembershipSetting[];
+  settings?: UserMembershipSetting[];
 }
 
 export interface IUser {

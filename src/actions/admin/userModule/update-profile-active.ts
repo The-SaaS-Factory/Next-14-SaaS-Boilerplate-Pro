@@ -5,6 +5,8 @@ import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 
 export const updateUserProfileActive = async (organizationId: number) => {
+  console.log(organizationId);
+
   const session = await getServerSession(authOptions);
 
   const user = await prisma.user.findFirst({
@@ -22,10 +24,16 @@ export const updateUserProfileActive = async (organizationId: number) => {
     },
   });
 
+  const userMembership = await prisma.userMembership.findFirst({
+    where: {
+      organizationId: organizationId,
+      userId: user.id,
+    },
+  });
+
   return await prisma.userMembership.update({
     where: {
-      id: organizationId,
-      userId: user.id,
+      id: userMembership.id,
     },
     data: {
       isActive: true,

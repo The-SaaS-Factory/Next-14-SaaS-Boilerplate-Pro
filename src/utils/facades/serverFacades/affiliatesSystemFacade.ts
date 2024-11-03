@@ -3,8 +3,6 @@ import prisma from "@/lib/db";
 import { getSuperAdminSetting } from "./superAdminFacade";
 import { getUserCapabilitiesNames } from "./membershipFacade";
 
-//An invoice can have many invoice items, because it, we need to process all of them to pay to affiliate
-
 export const payToAffiliate = async (invoice: Invoice) => {
   if (!invoice.organizationId) return;
 

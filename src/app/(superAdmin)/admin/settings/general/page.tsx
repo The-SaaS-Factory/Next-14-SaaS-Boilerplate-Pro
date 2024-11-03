@@ -5,10 +5,9 @@ import { saveSuperAdminSettings } from "@/actions/superAdmin/superAdminSettingsM
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GeneralSettings"
+  title: "GeneralSettings",
 };
 const SuperAdminSettingsModuleGeneralPage = async () => {
-
   const { data: getSettings } = await getAllSuperAdminSettings();
   const formInfo = {
     name: "GeneralSettings",
@@ -78,7 +77,6 @@ const SuperAdminSettingsModuleGeneralPage = async () => {
     },
   ];
 
- 
   return (
     <div>
       <NewForm

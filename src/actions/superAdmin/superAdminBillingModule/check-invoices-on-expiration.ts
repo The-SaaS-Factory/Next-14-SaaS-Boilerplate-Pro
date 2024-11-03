@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 import { sendLoopsTransactionalEventToUser } from "@/utils/facades/serverFacades/loopsEmailMarketingFacade";
 import {
   notifyToSuperAdmin,
-  sendInternalNotificatoin,
+   sendInternalNotification,
 } from "@/utils/facades/serverFacades/notificationFacade";
 import { getSuperAdminSetting } from "@/utils/facades/serverFacades/superAdminFacade";
 import { InvoiceStatus } from "@prisma/client";
@@ -64,7 +64,7 @@ export const checkInvoicesOnExpiration = async () => {
 
         if (!invoice.organization?.id) return;
 
-        sendInternalNotificatoin(
+         sendInternalNotification(
           invoice.organization.id,
           `Hola ${invoice.organization.name}, tienes una factura pendiente por pagar.`
         );

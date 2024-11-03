@@ -3,6 +3,7 @@ import React from "react";
 import ButtonFunction from "../componenets/ButtonFunction";
 import Link from "next/link";
 import { ChevronRightIcon } from "lucide-react";
+import { Button } from "../button";
 type Btn = {
   name: string;
   href?: string;
@@ -80,14 +81,16 @@ const PageName = ({
                 (btn1.fn ? (
                   <btn1.fn />
                 ) : (
-                  <Link href={btn1.href as string} className="btn-icon ">
+                  <Link href={btn1.href as string}>
                     {" "}
-                    {btn1.icon &&
-                      React.createElement(btn1.icon, {
-                        className: "h-5 w-5 text-primary",
-                        "aria-hidden": "true",
-                      })}
-                    <span>{btn1.name}</span>
+                    <Button>
+                      {btn1.icon &&
+                        React.createElement(btn1.icon, {
+                          className: "h-5 w-5 text-primary",
+                          "aria-hidden": "true",
+                        })}
+                      <span>{btn1.name}</span>
+                    </Button>
                   </Link>
                 ))}
               {btn2 &&
@@ -101,14 +104,16 @@ const PageName = ({
                     }}
                   />
                 ) : (
-                  <Link href={btn2.href as string} className="btn-icon ">
-                    {" "}
-                    {btn2.icon &&
-                      React.createElement(btn2.icon, {
-                        className: "h-5 w-5 text-primary",
-                        "aria-hidden": "true",
-                      })}
-                    <span>{btn2.name}</span>
+                  <Link href={btn2.href as string}>
+                    <Button>
+                      {" "}
+                      {btn2.icon &&
+                        React.createElement(btn2.icon, {
+                          className: "h-5 w-5 text-primary",
+                          "aria-hidden": "true",
+                        })}
+                      <span>{btn2.name}</span>
+                    </Button>
                   </Link>
                 ))}
             </div>

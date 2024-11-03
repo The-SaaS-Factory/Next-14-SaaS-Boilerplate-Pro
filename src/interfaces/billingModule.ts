@@ -84,7 +84,7 @@ export interface IPricing {
 
 export interface PlanCapabilityType {
   id: number;
-  capabilitieId: number;
+  capabilityId: number;
   planId: number;
   count: number;
   name: string | null;

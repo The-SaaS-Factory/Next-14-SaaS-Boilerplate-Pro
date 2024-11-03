@@ -1,6 +1,6 @@
 export const constants = {
   multiTenant: true,
-  tanantModelName: "Workspace",
+  tanantModelName: "Organization",
   appUrl:
     process.env.NODE_ENV === "production"
       ? "https://next14pro.thesaasfactory.dev"

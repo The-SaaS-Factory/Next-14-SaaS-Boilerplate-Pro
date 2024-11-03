@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PencilIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import DeleteModel from "@/components/core/DeleteModel";
 import { deleteCurrency } from "@/actions/superAdmin/superAdminBillingModule/delete-currency";
+import { Button } from "@/components/ui/button";
 
 const CurrenciesSettingsSection = async () => {
   const currencies = await getAllCurrencies();
@@ -28,10 +29,10 @@ const CurrenciesSettingsSection = async () => {
                   className="ml-3"
                   href="/admin/settings/billing/addCurrency"
                 >
-                  <button className="btn-icon">
+                  <Button variant="outline">
                     <PlusCircleIcon className="w-6 h-6" />
                     Add currency
-                  </button>
+                  </Button>
                 </Link>
               </div>
               <div>
@@ -44,13 +45,13 @@ const CurrenciesSettingsSection = async () => {
                       <span className="text-sm text-primary">
                         {currency.name}
                       </span>
-                      <div className="flex space-x-3">
+                      <div className="flex items-center space-x-3">
                         <Link
                           href={`/admin/settings/billing/editCurrency/${currency.id}`}
                         >
-                          <button className="btn-icon">
+                          <Button variant="outline">
                             <PencilIcon className="w-6 h-6" />
-                          </button>
+                          </Button>
                         </Link>
 
                         <DeleteModel

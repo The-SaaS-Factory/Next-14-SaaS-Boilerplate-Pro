@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { sendInternalNotificatoin } from "@/utils/facades/serverFacades/notificationFacade";
+import {  sendInternalNotification } from "@/utils/facades/serverFacades/notificationFacade";
  import { getMembership} from "@/utils/facades/serverFacades/userFacade";
 
 import { PublicationContentType } from "@prisma/client";
@@ -66,7 +66,7 @@ export const addMessageSupportTicket = async (args: any) => {
       }
 
       if (ticket.userId !== id) {
-        sendInternalNotificatoin(
+         sendInternalNotification(
           id,
           `You have a new message in your ticket #${ticket.id}`
         );

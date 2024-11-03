@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { classNames } from "@/utils/facades/serverFacades/strFacade";
+import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import Image from "next/image";
 import Link from "next/link";
 import { AdminCurrencies, PaymentMethod } from "@prisma/client";
@@ -445,7 +445,7 @@ export function SelectPaymentMethod({
                       <br />
                       <button
                         type="button"
-                        className="mt-7 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+                        className="mt-7 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
                         onClick={() => setOpen()}
                         ref={cancelButtonRef}
                       >

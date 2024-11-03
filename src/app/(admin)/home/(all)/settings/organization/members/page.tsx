@@ -17,9 +17,12 @@ import { ViewMember } from "./components/ViewMember";
 import { UserMembershipRole } from "@prisma/client";
 
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const AgentesPage = () => {
   const [members, setMembers] = useState([]);
+  console.log(members);
+  
   const { register, setValue, watch } = useForm();
 
   const getMembers = async () => {
@@ -76,7 +79,7 @@ const AgentesPage = () => {
 
   return (
     <div>
-      <PageName name="Agentes" />
+      <PageName name={constants.tanantModelName + " members"} />
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
         <div className="col-span-1">
           <ul role="list" className="divide-y divide-gray-100">
@@ -86,15 +89,17 @@ const AgentesPage = () => {
                 className="relative flex justify-between gap-x-6 py-5"
               >
                 <div className="flex min-w-0 gap-x-4">
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     alt=""
                     src={person.user.avatar ?? "/assets/img/avatar.png"}
-                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                    className="h-12 w-12 flex-none rounded-full bg-main"
                   />
                   <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                    <p className="text-sm font-semibold leading-6 text-primary">
                       <a href={person.href}>
-                        <span className="absolute inset-x-0 -top-px bottom-0" />
+                        <span className="absolute inset-x-0 -top-px bottom-0 " />
                         {person.user.name}
                       </a>
                     </p>
@@ -110,7 +115,7 @@ const AgentesPage = () => {
                 </div>
                 <div className="flex z-0 shrink-0 items-center gap-x-4">
                   <div className="  sm:flex sm:flex-col sm:items-end">
-                    <p className="text-sm leading-6 text-gray-900">
+                    <p className="text-sm leading-6 text-primary">
                       {person.role}
                     </p>
                   </div>

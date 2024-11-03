@@ -25,7 +25,7 @@ export const returnUnauthorized = () => {
 };
 
 export const getSuperAdminAdmins = async () => {
-  const organizations = await prisma.organization.findMany({
+  const organizations = await prisma.userMembership.findMany({
     where: {
       permissions: {
         some: {

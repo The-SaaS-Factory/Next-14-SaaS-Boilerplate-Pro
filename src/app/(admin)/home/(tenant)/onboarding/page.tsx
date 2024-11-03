@@ -24,12 +24,12 @@ export default function Component() {
     event.preventDefault();
     await updateProfileFields([
       {
-        name: "isTOSAccepted",
-        value: agreed,
+        settingName: "isTOSAccepted",
+        settingValue: agreed,
       },
       {
-        name: "name",
-        value: projectName,
+        settingName: "name",
+        settingValue: projectName,
       },
     ])
       .then(async () => {
@@ -48,12 +48,12 @@ export default function Component() {
       {/* Confetti */}
       <div className="max-w-xl w-full p-8 bg-white rounded-3xl shadow-lg">
         <div className="flex items-center mb-8">
-          <h1 className="text-2xl mx-auto font-semibold text-gray-900">
+          <h1 className="text-2xl mx-auto font-semibold text-primary">
             {constants.appName}
           </h1>
         </div>
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome!</h2>
+          <h2 className="text-3xl font-bold text-primary mb-2">Welcome!</h2>
           <p className="text-gray-600">
             For the best experience, we recommend setting at least an
             integration. This is necessary so that we can generate reports for

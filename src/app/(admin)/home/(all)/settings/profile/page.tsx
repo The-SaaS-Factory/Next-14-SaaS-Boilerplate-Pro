@@ -4,10 +4,8 @@ import { getUserById } from "@/actions/auth/get-user-by-email";
 
 const AdminSettingsModuleProfilePage = async () => {
   const { user } = await getMembership();
-  console.log(user);
 
   const fullUser = await getUserById(user.id);
-  console.log(fullUser);
 
   return (
     <div>

@@ -32,7 +32,7 @@ export default function AgencyCTA() {
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <h2
             id="sale-heading"
-            className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+            className="text-4xl font-bold tracking-tight text-primary sm:text-5xl lg:text-6xl"
           >
             La solución perfecta para las agencias: Organización y ganancias
           </h2>

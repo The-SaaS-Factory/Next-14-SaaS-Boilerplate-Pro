@@ -1,4 +1,4 @@
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import { BellAlertIcon } from "@heroicons/react/24/outline";
 import { Notification } from "@prisma/client";
 

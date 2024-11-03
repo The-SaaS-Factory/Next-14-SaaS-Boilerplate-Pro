@@ -304,7 +304,7 @@ const NewForm = ({
                   } `}
                   key={index}
                 >
-                  <label htmlFor={field.name} className="   ">
+                  <label htmlFor={field.name} className="text-primary">
                     {field.label}
                   </label>
                   {field.type === "text" && (
@@ -321,7 +321,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  ">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -342,7 +342,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -362,7 +362,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -382,7 +382,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -660,7 +660,7 @@ const NewForm = ({
 
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -697,7 +697,7 @@ const NewForm = ({
                                         }}
                                         {...dragPropsAvatar}
                                         type="button"
-                                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                       >
                                         Change
                                       </button>
@@ -736,7 +736,7 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -766,7 +766,7 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
 
@@ -910,7 +910,7 @@ const NewForm = ({
                                       }}
                                       {...dragPropsAvatar}
                                       type="button"
-                                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                     >
                                       {t("Add")}
                                     </button>
@@ -924,7 +924,7 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm text-secundary">{field.note}</p>
+                          <p className="text-sm  text-secondary ">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -1316,7 +1316,7 @@ export function MapSelector({
                       Select Address
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-secundary">
+                      <p className="text-sm  text-secondary ">
                         {latLng && (
                           <input
                             type="text"
@@ -1355,7 +1355,7 @@ export function MapSelector({
 
                                   <div className="  absolute top-1 left-1 w-full  ">
                                     <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                      <MapPinIcon className="h-5 w-5 text-secundary" />
+                                      <MapPinIcon className="h-5 w-5  text-secondary " />
                                       <p>{address}</p>
                                     </div>
                                   </div>
@@ -1379,7 +1379,7 @@ export function MapSelector({
 
                               <div className="  absolute top-1 left-1 w-full  ">
                                 <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                  <MapPinIcon className="h-5 w-5 text-secundary" />
+                                  <MapPinIcon className="h-5 w-5  text-secondary " />
                                   <p>{address}</p>
                                 </div>
                               </div>

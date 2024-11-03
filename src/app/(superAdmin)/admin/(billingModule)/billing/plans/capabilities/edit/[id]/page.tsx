@@ -6,7 +6,7 @@ import UpsertCapabilitie from "../../ui/UpsertCapabilitie";
 import { getCapabilitieDetails } from "@/actions/superAdmin/superAdminBillingModule/get-capabilitie-details";
 
 export const metadata: Metadata = {
-  title: "Edit Capabilitie",
+  title: "Edit  Capability",
 };
 
 const SuperAdminBillingModuleEditPlanPage = async ({
@@ -20,9 +20,9 @@ const SuperAdminBillingModuleEditPlanPage = async ({
 
   return (
     <div>
-      <PageName name={"Edit Capabilitie"} isSubPage={true} />
+      <PageName name={"Edit  Capability"} isSubPage={true} />
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
-        <UpsertCapabilitie capabilitieId={Number(params.id)} values={values} />
+        <UpsertCapabilitie capabilityId={Number(params.id)} values={values} />
       </Suspense>
     </div>
   );

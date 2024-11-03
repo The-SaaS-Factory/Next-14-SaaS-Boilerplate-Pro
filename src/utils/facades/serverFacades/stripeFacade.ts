@@ -12,7 +12,7 @@ import { getPricingByStripePricingId } from "./paymentFacade";
 import { InvoiceStatus, StripeCustomer } from "@prisma/client";
 import {
   notifyToSuperAdmin,
-  sendInternalNotificatoin,
+   sendInternalNotification,
 } from "./notificationFacade";
 
 const makeStripeClient = async () => {
@@ -131,14 +131,14 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
       };
 
       //Notifica al usaurio
-      sendInternalNotificatoin(
+       sendInternalNotification(
         invoice.userId,
         `Tu factura #${invoice.id} ha sido pagada con éxito`,
         null
       );
 
       //Notifica al admin
-      notifyToSuperAdmin("Nueva factura pagada, #" + invoice.id);
+      notifyToSuperAdmin(`New Invoice paid, # ${invoice.id}"`);
 
       await updateInvoice(invoice.id, payload);
 

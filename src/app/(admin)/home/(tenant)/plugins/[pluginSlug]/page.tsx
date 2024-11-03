@@ -7,7 +7,7 @@ import { UpsertPluginConfiguration } from "./UpsertPluginConfiguration";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Ver detalles de la factura ",
+  title: "View details de la factura ",
 };
 
 const TenantViewPluginDetails = async ({

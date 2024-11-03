@@ -1,7 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
+import { cache } from "react";
 const getCurrentMembership = async (organizationId: number) => {
-  return await  prisma.subscription.findFirst({
+  return await prisma.subscription.findFirst({
     where: {
       organizationId,
     },
@@ -35,7 +36,7 @@ export const updateMembership = async ({
     currencyId,
   });
 
-  propagateCapabilitiesFromPlanToUser(planId, organizationId);
+  propagateCapabilitiesFromPlanToOrganization(planId, organizationId);
 
   return membership;
 };
@@ -68,7 +69,7 @@ const createMembership = async ({
     ? new Date(currentMemberShip.endDate)
     : new Date();
 
-  return await  prisma.subscription.upsert({
+  return await prisma.subscription.upsert({
     where: {
       id: currentMemberShip ? currentMemberShip.id : 0,
     },
@@ -85,10 +86,10 @@ const createMembership = async ({
   });
 };
 
-export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
+export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
   planId = 0
 ) => {
-  const users = await  prisma.subscription.findMany({
+  const users = await prisma.subscription.findMany({
     where: {
       planId: planId,
     },
@@ -96,11 +97,14 @@ export const propagateCapabilitiesOnAsociateWithPlanNewCapabilitie = async (
   });
 
   users.map((membership: any) => {
-    propagateCapabilitiesFromPlanToUser(planId, membership.id as number);
+    propagateCapabilitiesFromPlanToOrganization(
+      planId,
+      membership.id as number
+    );
   });
 };
 
-export const propagateCapabilitiesFromPlanToUser = async (
+export const propagateCapabilitiesFromPlanToOrganization = async (
   planId: number,
   organizationId: number
 ) => {
@@ -115,27 +119,26 @@ export const propagateCapabilitiesFromPlanToUser = async (
 
   Promise.all(
     capabilities.map(async (c: any) => {
-      const userCapabilicitie = await prisma.organizationCapabilities.findFirst(
-        {
+      const organizationCapacity =
+        await prisma.organizationCapabilities.findFirst({
           where: {
             organizationId: organizationId,
-            capabilitieId: c.capabilitie.id,
+            capabilityId: c.capabilitie.id,
           },
-        }
-      );
+        });
 
-      if (!userCapabilicitie) {
+      if (!organizationCapacity) {
         await prisma.organizationCapabilities.create({
           data: {
             organizationId: organizationId,
-            capabilitieId: c.capabilitie.id,
+            capabilityId: c.capabilitie.id,
             count: c.capabilitie.type === "LIMIT" ? 0 : c.count,
           },
         });
       } else {
         await prisma.organizationCapabilities.update({
           where: {
-            id: userCapabilicitie.id,
+            id: organizationCapacity.id,
           },
           data: {
             count: c.capabilitie.type === "LIMIT" ? 0 : c.count,
@@ -146,113 +149,188 @@ export const propagateCapabilitiesFromPlanToUser = async (
   );
 };
 
-export const getUserCapabilitiesNames = async (organizationId: number) => {
-  const membership = await  prisma.subscription.findFirst({
+export const getOrganizationCapabilitiesNames = async (
+  organizationId: number
+) => {
+  const capabilities = await prisma.organizationCapabilities.findMany({
     where: {
       organizationId,
     },
     include: {
-      plan: {
-        include: {
-          PlanCapabilities: {
-            include: {
-              capabilitie: true,
-            },
-          },
+      capability: {
+        select: {
+          name: true,
+          type: true,
         },
       },
     },
   });
 
-  //35% cashback for affiliates
-  const capabilitieNames = membership?.plan?.PlanCapabilities.map(
-    (planCapability) => planCapability.capabilitie.name
-  );
+  // Verifica si membership y capability existen antes de mapear
+  const capabilityNames = capabilities
+    ?.filter((capa) => {
+      console.log(capa);
 
-  return capabilitieNames;
+      if (capa.capability.type === "PERMISSION") {
+        return (capa.count = 1);
+      } else {
+      }
+    })
+    .map((capability) => capability?.capability.name);
+
+  return capabilityNames || [];
 };
 
-export const getUserCapabilitieLimitAvailable = async (
+export const checkCapabilityPermission = cache(
+  async (organizationId: number, capabilityName: string) => {
+    const capabilities = await getOrganizationCapabilitiesNames(organizationId);
+    console.log(capabilities);
+
+    return capabilities?.includes(capabilityName) ?? false;
+  }
+);
+
+export const checkCapabilityLimit = async (
   organizationId: number,
   capabilityName: string
 ) => {
-  const userCapabilities = await prisma.organizationCapabilities.findFirst({
-    where: {
-      organizationId,
-      capabilitie: {
-        name: capabilityName,
+  const organizationCapabilities =
+    await prisma.organizationCapabilities.findFirst({
+      where: {
+        organizationId,
+        capability: {
+          name: capabilityName,
+        },
       },
-    },
-    include: {
-      capabilitie: true,
-    },
-  });
+      include: {
+        capability: true,
+      },
+    });
 
-  if (!userCapabilities) return false;
+  if (!organizationCapabilities) return false;
 
-  const userMembership = await  prisma.subscription.findFirst({
+  const subscription = await prisma.subscription.findFirst({
     where: {
       organizationId,
     },
   });
 
-  if (!userMembership) return false;
+  if (!subscription) return false;
 
   const planCapability = await prisma.planCapabilities.findFirst({
     where: {
-      planId: userMembership?.planId,
-      capabilitieId: userCapabilities?.capabilitie.id,
+      planId: subscription?.planId,
+      capabilityId: organizationCapabilities?.capability.id,
     },
   });
 
   if (!planCapability) return false;
 
-  return planCapability?.count > userCapabilities.count;
+  return planCapability?.count > organizationCapabilities.count;
 };
 
-export const registerCapabilitieUsage = async (
+export const registerCapabilityUsage = async (
   organizationId: number,
   capabilityName: string
 ) => {
-  const userCapabilities = await prisma.organizationCapabilities.findFirst({
-    where: {
-      organizationId,
-      capabilitie: {
-        name: capabilityName,
+  const organizationCapability =
+    await prisma.organizationCapabilities.findFirst({
+      where: {
+        organizationId,
+        capability: {
+          name: capabilityName,
+        },
       },
-    },
-    include: {
-      capabilitie: true,
-    },
-  });
-
-  if (!userCapabilities) return false;
-
-  const userMembership = await  prisma.subscription.findFirst({
-    where: {
-      organizationId,
-    },
-  });
-
-  if (!userMembership) return false;
-
-  const planCapability = await prisma.planCapabilities.findFirst({
-    where: {
-      planId: userMembership?.planId,
-      capabilitieId: userCapabilities?.capabilitie.id,
-    },
-  });
-
-  if (!planCapability) return false;
+      include: {
+        capability: true,
+      },
+    });
 
   await prisma.organizationCapabilities.update({
     where: {
-      id: userCapabilities.id,
+      id: organizationCapability.id,
     },
     data: {
-      count: userCapabilities.count + 1,
+      count: organizationCapability.count + 1,
     },
   });
 
   return true;
+};
+
+// export const checkOrganizationCapability = async (
+//   organizationId: number,
+//   capabilityName: string
+// ) => {
+//   const organizationCapability =
+//     await prisma.organizationCapabilities.findFirst({
+//       where: {
+//         organizationId,
+//         capability: {
+//           name: capabilityName,
+//         },
+//       },
+//       include: {
+//         capability: true,
+//       },
+//     });
+
+//   if (!organizationCapability) return false;
+
+//   if (organizationCapability.capability.type === "PERMISSION") {
+//     return organizationCapability.count === 1;
+//   } else if (organizationCapability.capability.type === "LIMIT") {
+//     const subscription = await prisma.subscription.findFirst({
+//       where: {
+//         organizationId,
+//       },
+//     });
+
+//     if (!subscription) return false;
+
+//     const planCapability = await prisma.planCapabilities.findFirst({
+//       where: {
+//         planId: subscription.planId,
+//         capabilityId: organizationCapability.capability.id,
+//       },
+//     });
+
+//     if (!planCapability) return false;
+
+//     return organizationCapability.count < planCapability.count;
+//   }
+
+//   return false;
+// };
+export const checkOrganizationCapability = ({
+  capabilityName,
+  organizationCapabilities,
+  subscription,
+}) => {
+  if (!subscription) return false;
+  if (!organizationCapabilities) return false;
+
+  const organizationCapability = organizationCapabilities.find(
+    (o) => o.name === capabilityName
+  );
+
+  if (!organizationCapability) return false;
+
+  if (organizationCapability.capability.type === "PERMISSION") {
+    return organizationCapability.count === 1;
+  } else if (organizationCapability.capability.type === "LIMIT") {
+    // Usamos `await` para resolver la promesa devuelta por `find`
+    const planCapability = subscription.plan.planCapabilities.find((p) => {
+      return (
+        p.planId === subscription.planId &&
+        p.capabilityId === organizationCapability.capability.id
+      );
+    });
+
+    if (!planCapability) return false;
+
+    return organizationCapability.count < planCapability.count;
+  }
+
+  return false;
 };

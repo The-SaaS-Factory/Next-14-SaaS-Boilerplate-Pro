@@ -42,7 +42,7 @@ export const PluginCard = ({ plugin }: { plugin: any }) => {
           className="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10"
         />
         <div className="flex flex-col">
-          <div className="text-sm font-medium leading-6 text-gray-900">
+          <div className="text-sm font-medium leading-6 text-primary">
             {plugin.name}
           </div>
           <div className="text-sm font-medium leading-6  text">

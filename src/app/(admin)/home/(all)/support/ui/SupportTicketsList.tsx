@@ -1,8 +1,9 @@
 import { getUserSupportTickets } from "@/actions/global/supportModule/admin/get-user-support-tickets";
 import NotFound from "@/components/layouts/errors/NotFound";
+import { Button } from "@/components/ui/button";
 import Pagination from "@/components/ui/commons/Pagination";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import {
   Table,
   TableBody,
@@ -74,7 +75,7 @@ const SupportTicketsList = async ({
                   <TableHeaderCell className="text-left">
                     Subject
                   </TableHeaderCell>
-                  <TableHeaderCell className="text-center">
+                  <TableHeaderCell className="text-left">
                     Department
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
@@ -89,24 +90,21 @@ const SupportTicketsList = async ({
               <TableBody>
                 {data?.map((item: any, index: number) => (
                   <TableRow key={`userInvoice-${index}`}>
-                    <TableCell className="text-left text">
+                    <TableCell className="text-left text-primary">
                       {item.subject} - (ID-{item.id})
                     </TableCell>
-                    <TableCell className="text-left space-x-3  ">
-                      <span className="uppercase">{item.departament}</span>
+                    <TableCell className=" space-x-3  ">
+                      <span className="uppercase">{item.department}</span>
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text-center text-primary">
                       {showTicketStatus(item.status)}
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text-center text-primary">
                       {formatTimestampToDateString(item.createdAt)}
                     </TableCell>
-                    <TableCell className="text-center text">
-                      <Link
-                        href={`/home/support/ticket/${item.id}`}
-                        className="btn-main"
-                      >
-                        See
+                    <TableCell className="text-center text-primary">
+                      <Link href={`/home/support/ticket/${item.id}`}>
+                        <Button variant="secondary" >View</Button>
                       </Link>
                     </TableCell>
                   </TableRow>

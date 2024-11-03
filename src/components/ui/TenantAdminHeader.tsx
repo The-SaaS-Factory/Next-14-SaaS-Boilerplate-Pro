@@ -50,7 +50,7 @@ const TenantAdminHeader = ({
     <>
       <div className=" relative    w-full flex    z-50   ">
         <div
-          className="lg:fixed  w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
+          className="lg:fixed mt-3 lg:mt-0 w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
            bg-opacity-25 transition-opacity 
          items-center gap-x-4 border-b text-primary
           border-gray-300 bg-transparent  dark:border-gray-600 px-4 
@@ -59,14 +59,14 @@ const TenantAdminHeader = ({
           <Button
             variant="outline"
             className="  first-line:  lg:hidden"
-            onClick={() => toggleSidebarMenu()}
+            onClick={toggleSidebarMenu}
             size="icon"
           >
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-7 w-7 " aria-hidden="true" />
           </Button>
 
-          <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+          <div className="flex pt-3 lg:pt-0 flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="relative p-3 pl-7 flex-1">
               <div className=" hidden lg:flex space-x-3">
                 <div>
@@ -121,7 +121,7 @@ const TenantAdminHeader = ({
                   <Bell className="h-4 w-4" />
                 </Button>
                 {notificationsCount > 0 && (
-                  <span className=" h-5 w-5 top-0 -mt-1 text-center -pt-7 absolute right-0  text-white rounded-full">
+                  <span className=" h-5 w-5 top-0 -mt-1 text-center -pt-7 shadow-md shadow-red-500 absolute right-0 bg-red-500 text-white rounded-full">
                     <p className="-mt-1 p-1">{notificationsCount}</p>
                   </span>
                 )}

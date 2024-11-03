@@ -1,5 +1,5 @@
 import { imageKitFacade } from "@/utils/facades/serverFacades/imagekitFacade";
-import { generateRandomString } from "@/utils/facades/serverFacades/strFacade";
+import { generateRandomString } from "@/utils/facades/frontendFacades/strFacade";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

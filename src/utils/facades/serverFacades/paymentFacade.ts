@@ -7,7 +7,7 @@ import { getAdminSettingValue, getSuperAdminSetting } from "./superAdminFacade";
 import { updateMembership } from "./membershipFacade";
 import {
   notifyToSuperAdmin,
-  sendInternalNotificatoin,
+   sendInternalNotification,
 } from "./notificationFacade";
 import prisma from "@/lib/db";
 import { ICoupon, InvoiceItemType } from "@/interfaces/billingModule";
@@ -127,7 +127,7 @@ export const stripeEventPaymentFailed = async (eventData: any) => {
   );
 
   if (setting && setting.userId) {
-    sendInternalNotificatoin(
+     sendInternalNotification(
       setting.userId,
       "Payment failed",
       eventData.last_payment_error.message

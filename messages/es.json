@@ -58,7 +58,7 @@
         "date": "Fecha",
         "view": "Ver",
         "notInvoiceFound": "No se encontraron facturas",
-        "viewInvoiceDetails": "Ver detalles de la factura"
+        "viewInvoiceDetails": "View details de la factura"
       },
       "plans": {
         "monthly": "Mensual",
@@ -116,7 +116,7 @@
         "sendTicket": "Enviar ticket",
         "newTicket": "Nuevo ticket",
         "searchTicketByID": "Buscar ticket por ID",
-        "viewTicketDetails": "Ver detalles del ticket",
+        "viewTicketDetails": "View details del ticket",
         "subject": "Asunto",
         "status": "Estado",
         "date": "Fecha",

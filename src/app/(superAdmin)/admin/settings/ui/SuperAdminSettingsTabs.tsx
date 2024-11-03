@@ -12,7 +12,7 @@ const SuperAdminSettingsTabs = () => {
     },
     {
       path: "/admin/settings/integrations",
-      label: "Integraciones",
+      label: "Integrations",
       icon: CodeBracketIcon,
     },
     {
@@ -22,7 +22,7 @@ const SuperAdminSettingsTabs = () => {
     },
     {
       path: "/admin/settings/billing",
-      label: "Facturación",
+      label: "Billing",
       icon: CreditCardIcon,
     },
   ];

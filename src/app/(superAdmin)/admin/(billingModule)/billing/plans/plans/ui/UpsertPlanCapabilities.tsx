@@ -1,6 +1,7 @@
 "use client";
 import { connectCapabilitieWithPlan } from "@/actions/superAdmin/superAdminBillingModule/connect-capabilitie-with-plan";
-import { Capabilitie } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Capability } from "@prisma/client";
 import { Select, SelectItem, TextInput } from "@tremor/react";
 import React, { useState } from "react";
 import { toast } from "sonner";
@@ -10,28 +11,26 @@ const UpsertPlanCapabilities = ({
   capabilities,
 }: {
   planOnEdit: any;
-  capabilities: Capabilitie[];
+  capabilities: Capability[];
 }) => {
   //States
   const [newDataForCapabilitie, setDataForCapabilitie] = useState(0);
 
-  const saveCapabilitieForPlan = (capabilitieId: any, capabilitieName: any) => {
+  const saveCapabilitieForPlan = (capabilityId: any, capabilitieName: any) => {
     if (planOnEdit) {
       const payload = {
-        capabilitieId: parseInt(capabilitieId),
+        capabilityId: parseInt(capabilityId),
         planId: parseInt(planOnEdit.id),
         count: newDataForCapabilitie,
         name: capabilitieName,
       };
 
       connectCapabilitieWithPlan(payload)
-        .then(() => toast.success("Capabilitie saved"))
+        .then(() => toast.success(" Capability saved"))
         .catch((e) => toast.error(e.message));
     }
   };
 
- 
-  
   return (
     <div>
       {planOnEdit && (
@@ -68,8 +67,8 @@ const UpsertPlanCapabilities = ({
                             {capabilitie.type === "LIMIT" ||
                             capabilitie.type === "AMOUNT"
                               ? planOnEdit.PlanCapabilities?.find(
-                                  (c: { capabilitieId: number }) =>
-                                    c.capabilitieId == capabilitie.id
+                                  (c: { capabilityId: number }) =>
+                                    c.capabilityId == capabilitie.id
                                 )?.count ?? "Not set"
                               : ""}
                           </span>
@@ -77,15 +76,15 @@ const UpsertPlanCapabilities = ({
                             {" "}
                             {capabilitie.type === "PERMISSION"
                               ? planOnEdit.PlanCapabilities?.find(
-                                  (c: { capabilitieId: number }) =>
-                                    c.capabilitieId == capabilitie.id
+                                  (c: { capabilityId: number }) =>
+                                    c.capabilityId == capabilitie.id
                                 )?.count ?? null
                                 ? "Yes"
                                 : "No"
                               : ""}
                           </span>
                         </label>
-                        <div className="flex space-x-3 rounded-md      sm:max-w-md">
+                        <div className="flex space-x-3 rounded-md   my-3   sm:max-w-md">
                           {capabilitie.type === "LIMIT" ||
                           capabilitie.type === "AMOUNT" ? (
                             <TextInput
@@ -93,31 +92,28 @@ const UpsertPlanCapabilities = ({
                                 setDataForCapabilitie(parseInt(value))
                               }
                               min={0}
-                              className="input-text"
                             />
                           ) : (
                             <Select
                               onValueChange={(value: string) =>
                                 setDataForCapabilitie(parseInt(value))
                               }
-                              className="input-text"
                             >
                               <SelectItem value="">-Change-</SelectItem>
                               <SelectItem value="1">Yes </SelectItem>
                               <SelectItem value="0">No</SelectItem>
                             </Select>
                           )}
-                          <button
+                          <Button
                             onClick={() =>
                               saveCapabilitieForPlan(
                                 capabilitie.id,
                                 capabilitie.name
                               )
                             }
-                            className="btn-main"
                           >
                             Save
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     ))}

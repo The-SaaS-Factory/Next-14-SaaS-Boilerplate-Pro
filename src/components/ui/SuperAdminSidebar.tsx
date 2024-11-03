@@ -14,12 +14,7 @@ import { Navigation } from "./Navigation";
 import { useNavigation } from "../layouts/useNavigation";
 
 const SuperAdminSidebar = () => {
-  const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
-    ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
-      toggleSidebarMenu,
-      isSidebarMenuOpen,
-    })
-  );
+  const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState();
 
   const { superAdminNavigation } = useNavigation();
 
@@ -67,7 +62,7 @@ const SuperAdminSidebar = () => {
                     <button
                       type="button"
                       className="-m-2.5 p-2.5"
-                      onClick={() => toggleSidebarMenu()}
+                      onClick={toggleSidebarMenu}
                     >
                       <span className="sr-only">Close sidebar</span>
                       <XMarkIcon
@@ -95,7 +90,7 @@ const SuperAdminSidebar = () => {
                       <li className="mt-auto -mx-2">
                         {/*                      
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/home/support"
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
                         >
@@ -106,7 +101,7 @@ const SuperAdminSidebar = () => {
                           {t("support")}
                         </Link> */}
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/admin/settings/general"
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
                         >
@@ -150,8 +145,8 @@ const SuperAdminSidebar = () => {
 
               <li className="mt-auto">
                 <Link
-                  onClick={() => toggleSidebarMenu()}
-                  href="/home/support"
+                  onClick={toggleSidebarMenu}
+                  href="/admin/support"
                   className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
                 >
                   <LifebuoyIcon
@@ -161,7 +156,7 @@ const SuperAdminSidebar = () => {
                   Support
                 </Link>
                 <Link
-                  onClick={() => toggleSidebarMenu()}
+                  onClick={toggleSidebarMenu}
                   href="/admin/settings/general"
                   className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
                 >

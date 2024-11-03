@@ -1,8 +1,10 @@
 "use server";
 
+import { SettingType } from "@/interfaces/billingModule";
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
-export const saveSuperAdminSettings = async (settings: any) => {
+
+export const saveSuperAdminSettings = async (settings: SettingType[]) => {
   try {
     await Promise.all(
       settings.map(async (setting: any) => {
@@ -37,8 +39,7 @@ export const saveSuperAdminSettings = async (settings: any) => {
           console.log(error);
         }
       })
-    )
-    .catch((err) => {
+    ).catch((err) => {
       console.log(err);
     });
 

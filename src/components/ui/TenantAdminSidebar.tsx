@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -12,9 +12,14 @@ import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
 import Image from "next/image";
-import { IOrganization  } from "@/interfaces/saasTypes";
+import { IOrganization } from "@/interfaces/saasTypes";
+import { constants } from "@/lib/constants";
+import { useMembership } from "@/utils/hooks/useMembership";
+import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
+import { useSubscription } from "@/utils/hooks/useSubscription";
+import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
-const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
+const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
@@ -22,7 +27,15 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
     })
   );
 
+  const { userMembership, organization } = useMembership();
+
   const { tenantNavigation } = useNavigation();
+
+  const canAccessToSupportModule = checkOrganizationCapability({
+    capabilityName: "Support via ticket",
+    organizationCapabilities: organization?.organizationCapabilities,
+    subscription: organization?.subscription,
+  });
 
   return (
     <div>
@@ -68,7 +81,7 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
                     <button
                       type="button"
                       className="-m-2.5 p-2.5"
-                      onClick={() => toggleSidebarMenu()}
+                      onClick={toggleSidebarMenu}
                     >
                       <span className="sr-only">Close sidebar</span>
                       <XMarkIcon
@@ -96,7 +109,7 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
                       <li className="mt-auto -mx-2">
                         {/*                      
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/home/support"
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
                         >
@@ -107,7 +120,7 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
                           {t("support")}
                         </Link> */}
                         <Link
-                          onClick={() => toggleSidebarMenu()}
+                          onClick={toggleSidebarMenu}
                           href="/home/settings/profile
 "
                           className="bg-main group flex gap-x-3 rounded-md p-2  text-primary"
@@ -141,15 +154,15 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
               <Image
                 width={80}
                 height={80}
-                src="/assets/img/Nvar-logo-black.png"
-                alt="Logo oscuro"
+                src={constants.logoUrl}
+                alt="Logo dark"
                 className="hidden dark:block"
               />
               <Image
                 width={80}
                 height={80}
-                src="/assets/img/Nvar-logo-white.png"
-                alt="Logo claro"
+                src={constants.logoUrl}
+                alt="Logo light"
                 className="block dark:hidden"
               />
             </Link>
@@ -161,20 +174,22 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
                   <Navigation navigation={tenantNavigation} />
                 </ul>
               </li>
-
-              <li className="mt-auto">
-                <Link
-                  onClick={() => toggleSidebarMenu()}
-                  href="/home/support"
-                  className="group -mx-4 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6   hover:bg-gray-50 hover:text-indigo-600"
-                >
-                  <LifebuoyIcon
-                    className="h-6 w-6 shrink-0 text-primary "
-                    aria-hidden="true"
-                  />
-                  Support
-                </Link>
-              </li>
+              {isOrganizationAdmin(userMembership) &&
+                canAccessToSupportModule && (
+                  <li className="mt-auto">
+                    <Link
+                      onClick={toggleSidebarMenu}
+                      href="/home/support"
+                      className="group -mx-4 flex gap-x-3 rounded-md p-2  font-semibold leading-6   "
+                    >
+                      <LifebuoyIcon
+                        className="h-6 w-6 shrink-0 text-primary "
+                        aria-hidden="true"
+                      />
+                      Support
+                    </Link>
+                  </li>
+                )}
             </ul>
           </nav>
         </div>
@@ -183,4 +198,4 @@ const TenantAdminSidebar = ({ org }: { org: IOrganization }) => {
   );
 };
 
-export default TenantAdminSidebar;
+export default OrganizationAdminSidebar;

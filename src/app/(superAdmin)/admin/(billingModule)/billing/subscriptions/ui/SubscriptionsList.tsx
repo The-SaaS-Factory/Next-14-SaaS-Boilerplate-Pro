@@ -10,7 +10,7 @@ import {
   TableBody,
 } from "@tremor/react";
 import { MembershipType } from "@/interfaces/billingModule";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import { Suspense } from "react";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import Link from "next/link";

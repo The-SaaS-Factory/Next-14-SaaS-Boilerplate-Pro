@@ -7,6 +7,7 @@ import { getAllCurrencies } from "@/actions/superAdmin/superAdminBillingModule/g
 import ConnectPricingWithStripe from "../../../../ui/ConnectPricingWithStripe";
 import PlanStripeContection from "./PlanStripeContection";
 import { IPricing } from "@/interfaces/billingModule";
+import { Button } from "@/components/ui/button";
 
 const PlanPricingSection = async ({
   plan,
@@ -34,10 +35,10 @@ const PlanPricingSection = async ({
                   className="ml-4"
                   href={`/admin/billing/plans/plans/edit/${plan.id}/addPricing`}
                 >
-                  <button className="btn-icon">
+                  <Button >
                     <PlusCircleIcon className="w-6 h-6" />
                     Add Pricing
-                  </button>
+                  </Button>
                 </Link>
               </div>
               <div>
@@ -45,7 +46,7 @@ const PlanPricingSection = async ({
                   <div
                     key={`currency-${index}`}
                     className="flex flex-col space-y-3   bg-main rounded-md shadow-md p-4 mt-4"
-                  >  
+                  >
                     <div className="flex w-full justify-between">
                       <span className="text-lg text-primary">
                         ${pricing.price.toFixed(2)} (ID: {pricing.id})

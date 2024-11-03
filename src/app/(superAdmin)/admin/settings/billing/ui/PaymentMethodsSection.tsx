@@ -4,9 +4,9 @@ import DeleteModel from "@/components/core/DeleteModel";
 import { getPaymentMethods } from "@/actions/superAdmin/superAdminBillingModule/get-all-payment-methods";
 import { PaymentMethod } from "@prisma/client";
 import { deletePaymentMethod } from "@/actions/superAdmin/superAdminBillingModule/delete-payment-methods";
+import { Button } from "@/components/ui/button";
 
-const 
-PaymentMethodsSection = async () => {
+const PaymentMethodsSection = async () => {
   const paymentMethods = await getPaymentMethods();
   return (
     <div className="space-y-12">
@@ -23,50 +23,52 @@ PaymentMethodsSection = async () => {
             <div className="lg:col-span-2 flex flex-col w-full max-w-md pt-7">
               <div className="flex justify-between">
                 <h2 className="text-subtitle">
-                 Payment Methods Added
+                  Payment Methods Added
                   <span className="text-sm">({paymentMethods?.length})</span>
                 </h2>
                 <Link
                   className="ml-3"
                   href="/admin/settings/billing/addPaymentMethod"
                 >
-                  <button className="btn-icon">
+                  <Button variant="outline">
                     <PlusCircleIcon className="w-6 h-6" />
                     Add Payment Method
-                  </button>
+                  </Button>
                 </Link>
               </div>
               <div>
-                {paymentMethods?.map((payment: PaymentMethod, index: number) => (
-                  <div
-                    key={`currency-${index}`}
-                    className="flex flex-row justify-between items-center bg-main rounded-md shadow-md p-4 mt-4"
-                  >
-                    <div className="flex w-full justify-between">
-                      <span className="text-sm text-primary">
-                        {payment.name}
-                      </span>
-                     
-                      <span className="text-sm text-primary">
-                        Estado: {payment.status}
-                      </span>
-                      <div className="flex space-x-3">
-                        <Link
-                          href={`/admin/settings/billing/editPaymentMethod/${payment.id}`}
-                        >
-                          <button className="btn-icon">
-                            <PencilIcon className="w-6 h-6" />
-                          </button>
-                        </Link>
+                {paymentMethods?.map(
+                  (payment: PaymentMethod, index: number) => (
+                    <div
+                      key={`currency-${index}`}
+                      className="flex flex-row justify-between items-center bg-main rounded-md shadow-md p-4 mt-4"
+                    >
+                      <div className="flex w-full justify-between">
+                        <span className="text-sm text-primary">
+                          {payment.name}
+                        </span>
 
-                        <DeleteModel
-                          modelId={payment.id}
-                          deleteAction={deletePaymentMethod}
-                        />
+                        <span className="text-sm text-primary">
+                          Estado: {payment.status}
+                        </span>
+                        <div className="flex space-x-3">
+                          <Link
+                            href={`/admin/settings/billing/editPaymentMethod/${payment.id}`}
+                          >
+                            <Button variant="outline">
+                              <PencilIcon className="w-6 h-6" />
+                            </Button>
+                          </Link>
+
+                          <DeleteModel
+                            modelId={payment.id}
+                            deleteAction={deletePaymentMethod}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </div>
           </div>

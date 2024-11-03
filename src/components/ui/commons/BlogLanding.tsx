@@ -80,7 +80,7 @@ export default function BlogLanding() {
     <div className="bg-white  ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
             Publicaciones
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
@@ -105,7 +105,7 @@ export default function BlogLanding() {
                 </Link>
               </div>
               <div className="group relative">
-                <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                <h3 className="mt-3 text-lg font-semibold leading-6 text-primary group-hover:text-gray-600">
                   <Link href={post.category.href + "/" + post.href}>
                     <span className="absolute inset-0" />
                     {post.title}
@@ -124,7 +124,7 @@ export default function BlogLanding() {
                   className="h-10 w-10 rounded-full bg-gray-50"
                 />
                 <div className="text-sm leading-6">
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-primary">
                     <Link href={`/p/jhon`}>
                       <span className="absolute inset-0" />
                       {post.author.name}

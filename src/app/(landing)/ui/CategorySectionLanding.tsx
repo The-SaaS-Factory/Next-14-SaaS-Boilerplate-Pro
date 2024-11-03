@@ -8,7 +8,7 @@ export const CategorySectionLandingPage = () => {
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2
             id="category-heading"
-            className="text-2xl font-bold tracking-tight text-gray-900"
+            className="text-2xl font-bold tracking-tight text-primary"
           >
             Principales categorías
           </h2>

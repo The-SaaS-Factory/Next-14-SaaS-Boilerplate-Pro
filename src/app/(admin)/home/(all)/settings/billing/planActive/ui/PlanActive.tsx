@@ -11,9 +11,9 @@ const PlanActive = ({
   planCapabilities: PlanCapabilitieType[];
   usedCapabilities: any[];
 }) => {
-  const getUserCountCapabilitie = (capabilitieId: number) => {
+  const getUserCountCapabilitie = (capabilityId: number) => {
     const capabilitie = usedCapabilities?.find(
-      (c: any) => c.capabilitieId === capabilitieId
+      (c: any) => c.capabilityId === capabilityId
     );
     return capabilitie ? capabilitie.count : 0;
   };
@@ -38,13 +38,13 @@ const PlanActive = ({
                       <Text>{capabilitie.capabilitie?.name}</Text>
                       <Flex>
                         <Text>
-                          {getUserCountCapabilitie(capabilitie.capabilitieId)}
+                          {getUserCountCapabilitie(capabilitie.capabilityId)}
                         </Text>
                         <Text>max {capabilitie.count}</Text>
                       </Flex>
                       <ProgressBar
                         value={getPorcent(
-                          getUserCountCapabilitie(capabilitie.capabilitieId),
+                          getUserCountCapabilitie(capabilitie.capabilityId),
                           capabilitie.count
                         )}
                         color="sky"

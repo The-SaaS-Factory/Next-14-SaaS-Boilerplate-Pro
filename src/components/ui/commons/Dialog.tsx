@@ -62,7 +62,7 @@ export const CustomDialog = ({
             <div className="flex rounded-xl  h-[85%] flex-col overflow-y-auto bg-main   ">
               <div className="relative  flex-1 px-4 sm:px-6">
                 <div className="flex p-3 border-gray-200 border-b-2 items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-primary">
                     {title}
                   </h2>
                   <button>

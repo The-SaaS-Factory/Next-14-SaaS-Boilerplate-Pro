@@ -14,8 +14,6 @@ export const upsertPlan = async ({
   payload: Prisma.PlanCreateInput | Prisma.PlanUpdateInput;
 }) => {
 const { userMembership } = await getMembership(); const permissions = userMembership.permissions .map((p) => p.name);
-  
-  
 
   checkPermission(permissions, scope);
   try {

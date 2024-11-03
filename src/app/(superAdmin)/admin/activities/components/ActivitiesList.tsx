@@ -3,7 +3,7 @@
 import NotFound from "@/components/layouts/errors/NotFound";
 import { Suspense, useEffect, useState } from "react";
 import PageLoader from "@/components/ui/loaders/PageLoader";
-import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
+import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -167,7 +167,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                             handleSearchParams("profile", [item.id]);
                           }
                         }}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-gray-900 dark:focus:text-gray-100 dark:text-white"
+                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-primary dark:focus:text-gray-100 dark:text-white"
                       >
                         <div
                           className={`py-1 px-0.5 h-4 w-1 bg-indigo-600 rounded-xl transition-all ${
@@ -195,7 +195,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       <button
                         type="button"
                         onClick={() => handleSearchParams("action", [key])}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-gray-900 dark:focus:text-gray-100 dark:text-white"
+                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-primary dark:focus:text-gray-100 dark:text-white"
                       >
                         <div
                           className={`py-1 px-0.5 h-4 w-1 bg-indigo-600 rounded-xl transition-all ${
@@ -217,7 +217,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
           </div>
 
           {Object.keys(data).length === 0 ? (
-            <NotFound message="Sin datos que mostrar"></NotFound>
+            <NotFound message="No data found"></NotFound>
           ) : (
             <div className="w-full overflow-x-auto">
               <Table className="mt-6">

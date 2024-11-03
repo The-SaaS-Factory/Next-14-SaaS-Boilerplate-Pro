@@ -2,8 +2,9 @@
 import prisma from "@/lib/db";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
 import { UserMembershipRole } from "@prisma/client";
-import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 import { revalidatePath } from "next/cache";
+import { notifyToSuperAdmin } from "./notificationFacade";
+import { constants } from "@/lib/constants";
 
 export const createOrganization = async (
   user: {
@@ -80,9 +81,8 @@ export const createOrganization = async (
     },
   });
 
-  await updateUserProfileActive(org.id);
-
   checkMarketingActionsOnRegister(newProfileMembership.organization.id);
+  notifyToSuperAdmin(`New ${constants.tanantModelName} created`);
 
   return newProfileMembership;
 };

@@ -12,13 +12,13 @@ export const createSupportTickets = async (args: any) => {
       try {
         const { organization } = await getMembership();
         const id = organization.id;
-        
+
         let dataForTicket = {};
         let dataForFirstMessage = {};
         const payload = args.payload;
 
         dataForTicket = {
-          user: {
+          organization: {
             connect: {
               id,
             },
@@ -32,7 +32,7 @@ export const createSupportTickets = async (args: any) => {
           data: {
             ...dataForTicket,
             subject: payload.subject,
-            departament: payload.departament,
+            department: payload.department,
           },
         });
 
