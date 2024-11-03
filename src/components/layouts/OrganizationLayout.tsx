@@ -23,11 +23,13 @@ export default async function OrganizationLayout({
     redirect("/admin");
   }
 
+  
+
   return (
     <Suspense fallback={<FullLoader />}>
       <main className="relative bg-main  text-primary">
         <HeroPattern />
-        <OrganizationAdminSidebar org={organization} />{" "}
+        <OrganizationAdminSidebar />{" "}
         <div className="lg:pl-72 h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader

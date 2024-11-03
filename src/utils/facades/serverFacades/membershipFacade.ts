@@ -1,6 +1,8 @@
 "use server";
+
 import prisma from "@/lib/db";
 import { cache } from "react";
+
 const getCurrentMembership = async (organizationId: number) => {
   return await prisma.subscription.findFirst({
     where: {
@@ -258,51 +260,7 @@ export const registerCapabilityUsage = async (
   return true;
 };
 
-// export const checkOrganizationCapability = async (
-//   organizationId: number,
-//   capabilityName: string
-// ) => {
-//   const organizationCapability =
-//     await prisma.organizationCapabilities.findFirst({
-//       where: {
-//         organizationId,
-//         capability: {
-//           name: capabilityName,
-//         },
-//       },
-//       include: {
-//         capability: true,
-//       },
-//     });
-
-//   if (!organizationCapability) return false;
-
-//   if (organizationCapability.capability.type === "PERMISSION") {
-//     return organizationCapability.count === 1;
-//   } else if (organizationCapability.capability.type === "LIMIT") {
-//     const subscription = await prisma.subscription.findFirst({
-//       where: {
-//         organizationId,
-//       },
-//     });
-
-//     if (!subscription) return false;
-
-//     const planCapability = await prisma.planCapabilities.findFirst({
-//       where: {
-//         planId: subscription.planId,
-//         capabilityId: organizationCapability.capability.id,
-//       },
-//     });
-
-//     if (!planCapability) return false;
-
-//     return organizationCapability.count < planCapability.count;
-//   }
-
-//   return false;
-// };
-export const checkOrganizationCapability = ({
+export const checkOrganizationCapabilityInServer = ({
   capabilityName,
   organizationCapabilities,
   subscription,

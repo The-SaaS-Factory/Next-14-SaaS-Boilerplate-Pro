@@ -17,11 +17,13 @@ export const createOrganization = async (
   },
   isMainTenant?: boolean
 ) => {
+  
   const userDB = await prisma.user.findFirst({
     where: {
       email: user.email,
     },
   });
+
   const permissions = await prisma.permission.findMany({
     where: {
       name: {

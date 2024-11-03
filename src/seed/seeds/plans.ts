@@ -18,8 +18,8 @@ export const capabilities = [
 
 export const plans = [
   {
-    name: "Free Plan",
-    description: "It's free, forever!",
+    name: "Basic Plan",
+    description: "Basic plan",
   },
   {
     name: "Pro Plan",
@@ -32,6 +32,12 @@ export const planCapabilities = [
   {
     planId: 1,
     capabilityId: 1,
+    count: 1,
+    name: "",
+  },
+  {
+    planId: 1,
+    capabilityId: 2,
     count: 1,
     name: "",
   },

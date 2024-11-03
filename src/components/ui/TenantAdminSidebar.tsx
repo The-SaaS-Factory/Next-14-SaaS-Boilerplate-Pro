@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -11,13 +11,11 @@ import { useSidebarState } from "@/states/ui/sidebarState";
 import Link from "next/link";
 import { useNavigation } from "../layouts/useNavigation";
 import { Navigation } from "./Navigation";
-import { IOrganization } from "@/interfaces/saasTypes";
 import { constants } from "@/lib/constants";
 import { useMembership } from "@/utils/hooks/useMembership";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
-import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
-const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
+const OrganizationAdminSidebar = () => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
@@ -25,14 +23,12 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
     })
   );
 
-  const { userMembership, organization } = useMembership();
+  const { userMembership, checkOrganizationCapability } = useMembership();
 
   const { tenantNavigation } = useNavigation();
 
   const canAccessToSupportModule = checkOrganizationCapability({
     capabilityName: "Support via ticket",
-    organizationCapabilities: organization?.organizationCapabilities,
-    subscription: organization?.subscription,
   });
 
   return (
@@ -93,7 +89,9 @@ const OrganizationAdminSidebar = ({ org }: { org: IOrganization }) => {
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-main text-primary px-6 pb-4">
                   <div className="flex  my-2 shrink-0 items-center">
                     <Link href="/" className=" ">
-                      <span className="font-bold text-2xl">{constants.appName}</span>
+                      <span className="font-bold text-2xl">
+                        {constants.appName}
+                      </span>
                     </Link>
                   </div>
                   <div className="relative"></div>

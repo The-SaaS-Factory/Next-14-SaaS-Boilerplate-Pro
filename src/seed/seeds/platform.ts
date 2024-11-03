@@ -61,7 +61,15 @@ export const settings = [
     settingValue: "https://ik.imagekit.io/cluzstudio",
   },
   {
-    settingName: "NOVU_SUPER_ADMIN_TEMPLATE_ID",
-    settingValue: "superadmin-new-organization-created",
+    settingName: "MARKETING_FREE_TRIAL",
+    settingValue: "true",
+  },
+  {
+    settingName: "MARKETING_FREE_DAYS",
+    settingValue: "14",
+  },
+  {
+    settingName: "MARKETING_FREE_TRIAL_PLAN",
+    settingValue: "1",
   },
 ];
