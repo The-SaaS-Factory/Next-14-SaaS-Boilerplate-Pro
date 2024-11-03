@@ -8,7 +8,7 @@ export default function LocaleLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <head>
         <link rel="icon" href="/assets/favicon.ico" sizes="any" />
       </head>

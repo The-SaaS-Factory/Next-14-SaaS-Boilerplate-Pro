@@ -3,11 +3,16 @@ import React from "react";
 import { Card, Flex, ProgressBar, Text } from "@tremor/react";
 import { PlanCapabilitieType } from "@/interfaces/userModule";
 import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ISubscription } from "@/interfaces/saasTypes";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const PlanActive = ({
+  subscription,
   planCapabilities,
   usedCapabilities,
 }: {
+  subscription: ISubscription;
   planCapabilities: PlanCapabilitieType[];
   usedCapabilities: any[];
 }) => {
@@ -25,6 +30,21 @@ const PlanActive = ({
   return (
     <div>
       <Card className="my-7">
+        <div className="flex items-center space-x-3 my-3">
+          <span>Your current plan is:</span>
+          <span className="font-bold"> {subscription?.plan?.name}</span>
+          <Link href={"/home/settings/billing/buyPlan"}>
+            <Button variant="secondary" className="w-full">
+              Upgrade
+              <span className="relative ml-3 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+              </span>
+            </Button>
+          </Link>
+        </div>
+        <hr />
+        <br />
         {planCapabilities?.filter((c: any) => c.capabilitie?.type === "LIMIT")
           .length > 0 && (
           <div>

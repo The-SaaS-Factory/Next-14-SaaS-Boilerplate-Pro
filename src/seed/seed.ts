@@ -3,13 +3,14 @@ import { organizationPermissions, permissions } from "./seeds/permissions";
 import { settings } from "./seeds/platform";
 import { currencies } from "./seeds/currenciess";
 import { paymentsMethods } from "./seeds/pricing";
-import { capabilities, planCapabilities, plans } from "./seeds/plans";
+import { capabilities, planCapabilities, plans, pricing } from "./seeds/plans";
 
 const prisma = new PrismaClient();
 
 async function main() {
   prisma.$transaction(async (tx: PrismaClient) => {
     await tx.permission.deleteMany();
+    await tx.pricing.deleteMany();
     await tx.adminCurrencies.deleteMany();
     await tx.paymentMethod.deleteMany();
     await tx.plan.deleteMany();
@@ -21,6 +22,9 @@ async function main() {
     });
     await tx.capability.createMany({
       data: capabilities,
+    });
+    await tx.pricing.createMany({
+      data: pricing,
     });
     await tx.paymentMethod.createMany({
       data: paymentsMethods,

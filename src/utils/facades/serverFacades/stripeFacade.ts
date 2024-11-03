@@ -14,6 +14,7 @@ import {
   notifyToSuperAdmin,
   sendInternalNotification,
 } from "./notificationFacade";
+import { constants } from "@/lib/constants";
 
 const makeStripeClient = async () => {
   const stripeMode = await getSuperAdminSetting("STRIPE_MODE");
@@ -335,7 +336,7 @@ const getUrlsForRedirect = async (
   modelName: string = "PLAN",
   invoiceId: number | string,
 ) => {
-  const domain = await getSuperAdminSetting("PLATFORM_FRONTEND_URL");
+  const domain = constants.appUrl;
 
   if (modelName === "PLAN") {
     return {

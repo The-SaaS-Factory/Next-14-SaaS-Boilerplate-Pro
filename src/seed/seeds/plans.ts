@@ -1,3 +1,5 @@
+import { frequencyType } from "@prisma/client";
+
 export const capabilities = [
   {
     name: "Support via email",
@@ -24,6 +26,33 @@ export const plans = [
   {
     name: "Pro Plan",
     description: "Professional Plan",
+  },
+];
+
+export const pricing = [
+  {
+    frequency: frequencyType.MONTHLY,
+    price: 10,
+    status: "ACTIVE",
+    planId: 1,
+  },
+  {
+    frequency: frequencyType.YEARLY,
+    price: 100,
+    status: "ACTIVE",
+    planId: 1,
+  },
+  {
+    frequency: frequencyType.MONTHLY,
+    price: 20,
+    status: "ACTIVE",
+    planId: 2,
+  },
+  {
+    frequency: frequencyType.YEARLY,
+    price: 200,
+    status: "ACTIVE",
+    planId: 2,
   },
 ];
 

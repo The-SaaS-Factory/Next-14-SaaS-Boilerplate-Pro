@@ -111,6 +111,8 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
     paymentMethods,
   );
 
+  console.log(plans);
+
   return (
     <div>
       <SelectPaymentMethod
@@ -259,17 +261,21 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                           </button>
                                         )}{" "}
                                         <div className="flex flex-col">
-                                          <span>{capa.capabilitie.title}</span>
+                                          <span>{capa.capabilitie.name}</span>
                                           <p className="text-sm  text">
                                             {capa.capabilitie.description}
                                           </p>
                                         </div>
                                       </div>
                                     ) : (
-                                      <div>
-                                        - {capa.capabilitie.title}{" "}
-                                        {capa.type === "LIMIT" && "/ month"}
-                                      </div>
+                                      <li className="items-center flex space-x-3 p-1 text">
+                                        <CheckBadgeIcon className="text-green-500 h-5 w-5" />{" "}
+                                        <span>
+                                          {capa.count} {capa.capabilitie.name}{" "}
+                                          {capa.capabilitie.type === "LIMIT" &&
+                                            "/ month"}
+                                        </span>
+                                      </li>
                                     )}{" "}
                                   </li>
                                 );

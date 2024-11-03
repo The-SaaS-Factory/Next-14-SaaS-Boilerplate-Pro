@@ -47,6 +47,7 @@ const AdminPlanActive = ({
   return (
     <div>
       <PlanActive
+        subscription={organization?.subscription}
         planCapabilities={planCapabilities}
         usedCapabilities={capacitiesUsed}
       />

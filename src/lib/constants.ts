@@ -2,9 +2,9 @@ export const constants = {
   multiTenant: true,
   tanantModelName: "Organization",
   appUrl:
-    process.env.NODE_ENV === "production"
-      ? "https://next14pro.thesaasfactory.dev"
-      : "https://localhost:3000",
+    process.env.NEXT_PUBLIC_APP_URL || process.env.NODE_ENV === "production"
+      ? "https://changeThisUrlIfYouAreNotUsingVercel.com"
+      : "http://localhost:3000",
   appName: "SaaS Boilerplate Pro",
   appNameAbb: "EC",
   logoUrl: "/assets/img/logo-next-14.jpg",

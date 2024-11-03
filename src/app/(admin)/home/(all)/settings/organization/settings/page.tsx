@@ -7,8 +7,10 @@ export const metadata: Metadata = {
   title: "Settings",
 };
 export default async function Page() {
-  const { organization } = await getMembership();
-  const settings = await getProfileSettings(organization.id);
+  const settings = await getProfileSettings();
+
+  console.log(settings);
+  
 
   return (
     <>

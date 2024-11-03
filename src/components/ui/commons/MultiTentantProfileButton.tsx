@@ -113,7 +113,7 @@ export const MultiTentantProfileButton = ({
                     )}
                   </MenuItem>
                   <Link
-                    href={"http://localhost:3000/home/settings/billing/buyPlan"}
+                    href={"/home/settings/billing/buyPlan"}
                   >
                     <Button variant="secondary" className="w-full">
                       Upgrade
@@ -134,7 +134,7 @@ export const MultiTentantProfileButton = ({
                       href={"/home/settings/profile"}
                       className={classNames("block px-3  leading-6 text")}
                     >
-                      Profile settings
+                      Account settings
                     </Link>
                   </div>
                 )}
