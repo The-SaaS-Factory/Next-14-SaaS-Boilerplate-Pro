@@ -10,7 +10,7 @@ export const upsertCapabilitie = async ({
   payload,
 }: {
   modelId?: number;
-  payload:  any; //fix this type
+  payload: any; //fix this type
 }) => {
   const { userMembership } = await getMembership();
   const permissions = userMembership.permissions.map((p) => p.name);

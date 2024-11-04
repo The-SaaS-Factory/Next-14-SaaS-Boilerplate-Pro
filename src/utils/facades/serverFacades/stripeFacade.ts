@@ -263,7 +263,6 @@ export async function getStripeMetrics() {
           (subscriptions.data.length + canceledSubscriptions.data.length)) *
         100;
 
-
   const MRR = subscriptions.data.reduce((acc, subscription) => {
     const planAmount = subscription.items.data[0]?.plan.amount / 100; // Verifica que el plan exista
     return acc + (planAmount || 0); // Suma el monto o 0 si no existe el plan

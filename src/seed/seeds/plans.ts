@@ -2,19 +2,19 @@ import { frequencyType } from "@prisma/client";
 
 export const capabilities = [
   {
-    id:1,
+    id: 1,
     name: "Support via email",
     description: "24/7 support via email",
     type: "PERMISSION",
   },
   {
-    id:2,
+    id: 2,
     name: "Support via ticket",
     description: "24/7 support via tickets",
     type: "PERMISSION",
   },
   {
-    id:3,
+    id: 3,
     name: "Members in the organization",
     description: "You can invite only 5 members in the organization",
     type: "LIMIT",

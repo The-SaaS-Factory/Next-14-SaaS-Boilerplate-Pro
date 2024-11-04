@@ -62,7 +62,7 @@ const SuperAdminHeader = ({
 
               {/* Profile dropdown */}
               <Link href="/home" className="btn-main">
-                 Leave administration
+                Leave administration
               </Link>
             </div>
           </div>

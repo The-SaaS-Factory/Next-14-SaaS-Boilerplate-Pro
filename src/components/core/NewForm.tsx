@@ -215,7 +215,6 @@ const NewForm = ({
                   ? parsedValue
                   : values[fieldName];
             } else {
-
               setValue(fieldName, values[fieldName]);
             }
           }

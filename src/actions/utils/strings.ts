@@ -15,13 +15,11 @@ export function parseStringToArray(val) {
     try {
       const unescapedString = val.replace(/\\"/g, '"');
 
-
       return JSON.parse(unescapedString);
     } catch (error) {
       console.error("Error parsing string to array:", error);
     }
   }
-
 
   // Si no cumple con el formato o falla la conversión, devolver el valor original
   return val;

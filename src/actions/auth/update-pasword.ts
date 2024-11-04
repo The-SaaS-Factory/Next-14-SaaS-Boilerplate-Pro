@@ -21,7 +21,6 @@ export const updateProfilePassword = async (
     throw new Error("Error al autentificar al usuario actual");
   }
 
-
   if (newPassword !== confirmPassword) {
     throw new Error("Las contraseñas no coinciden");
   }
