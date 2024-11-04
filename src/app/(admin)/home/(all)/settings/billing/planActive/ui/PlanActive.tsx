@@ -90,15 +90,15 @@ const PlanActive = ({
               >
                 {capa.capabilitie.type === "PERMISSION" ? (
                   capa.count == 1 ? (
-                    <button className="btn-icon  mr-2">
+                    <Button variant="ghost" className="   mr-2">
                       {" "}
                       <CheckBadgeIcon className="text-green-500 h-5 w-5" />
-                    </button>
+                    </Button>
                   ) : (
-                    <button className="btn-icon  mr-2">
+                    <Button variant="ghost" className="   mr-2">
                       {" "}
                       <XMarkIcon className="text-red-500 h-5 w-5" />
-                    </button>
+                    </Button>
                   )
                 ) : (
                   capa.count
