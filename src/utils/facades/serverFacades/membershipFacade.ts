@@ -168,14 +168,10 @@ export const getOrganizationCapabilitiesNames = async (
     },
   });
 
-  // Verifica si membership y capability existen antes de mapear
   const capabilityNames = capabilities
     ?.filter((capa) => {
-      console.log(capa);
-
       if (capa.capability.type === "PERMISSION") {
         return (capa.count = 1);
-      } else {
       }
     })
     .map((capability) => capability?.capability.name);
@@ -186,7 +182,6 @@ export const getOrganizationCapabilitiesNames = async (
 export const checkCapabilityPermission = cache(
   async (organizationId: number, capabilityName: string) => {
     const capabilities = await getOrganizationCapabilitiesNames(organizationId);
-    console.log(capabilities);
 
     return capabilities?.includes(capabilityName) ?? false;
   },

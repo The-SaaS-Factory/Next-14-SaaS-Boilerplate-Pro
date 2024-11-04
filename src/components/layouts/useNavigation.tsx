@@ -5,7 +5,6 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
-import { Icon } from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [

@@ -1,7 +1,7 @@
 import React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
-import HotJar from "@/components/marketing/Hotjat";
+//import HotJar from "@/components/marketing/Hotjat";
 
 export default function LocaleLayout({
   children,

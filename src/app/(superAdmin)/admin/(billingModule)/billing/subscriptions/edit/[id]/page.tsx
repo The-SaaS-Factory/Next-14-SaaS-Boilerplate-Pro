@@ -20,7 +20,6 @@ const EditMembership = async ({
   };
 }) => {
   const membership = await getMembershipDetails(Number(params.id));
-  console.log(membership);
 
   const plans = await getAllPlans();
   const currencies = await getAllCurrencies();

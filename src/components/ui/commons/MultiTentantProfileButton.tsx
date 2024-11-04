@@ -38,7 +38,7 @@ export const MultiTentantProfileButton = ({
 
   useEffect(() => {
     getAllUserOrganizations();
-  }, []);
+  }, [getAllUserOrganizations, setOrganizations, userMembership, organization]);
 
   const handleChangeProfile = async (organizationId: number) => {
     await updateUserProfileActive(organizationId).then(() => {

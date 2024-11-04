@@ -180,8 +180,6 @@ const NewForm = ({
       for (const fieldName in values) {
         const field = fields.find((f: any) => f.name === fieldName);
 
-        console.log(field);
-
         if (field) {
           if (typeof values[fieldName] === "object") {
             if (Array.isArray(values[fieldName])) {
@@ -217,7 +215,6 @@ const NewForm = ({
                   ? parsedValue
                   : values[fieldName];
             } else {
-              console.log(values[fieldName]);
 
               setValue(fieldName, values[fieldName]);
             }

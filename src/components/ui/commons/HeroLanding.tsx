@@ -14,7 +14,6 @@ const HeroLanding = () => {
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
-        onSwiper={(swiper) => console.log(swiper)}
         className="h-[400px] w-full flex bg-gray-500 justify-center items-center  "
       >
         <SwiperSlide className="mx-auto h-full w-full justify-center items-center ">

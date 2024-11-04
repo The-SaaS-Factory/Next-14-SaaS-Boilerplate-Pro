@@ -3,7 +3,6 @@ import { Fragment, ReactNode } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useSideOverState } from "@/states/ui/slideOverState";
-import ButtonFunction from "../ui/componenets/ButtonFunction";
 import { Button } from "../ui/button";
 
 interface IButton {

@@ -1,6 +1,5 @@
 import NotFound from "@/components/layouts/errors/NotFound";
 import Pagination from "@/components/ui/commons/Pagination";
-import OperateUser from "./OperateUser";
 import UserCard from "@/components/ui/commons/UserCard";
 import { getAllTenantBySearch } from "@/actions/global/tenantSystem/get-all-tenants";
 import { IOrganization } from "@/interfaces/saasTypes";
