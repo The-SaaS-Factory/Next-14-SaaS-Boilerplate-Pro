@@ -15,7 +15,7 @@ datasource db {
 //   url      = env("DATABASE_URL")
 // }
 
-// ------------------------------------SaaS Core--------------------------------------------
+// ------------------------------------SaaS  Core------------------------------------------
 model User {
   id              Int              @id @default(autoincrement())
   name            String
