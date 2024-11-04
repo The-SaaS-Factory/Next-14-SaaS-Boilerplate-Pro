@@ -10,7 +10,6 @@ export default async function Page() {
   const settings = await getProfileSettings();
 
   console.log(settings);
-  
 
   return (
     <>

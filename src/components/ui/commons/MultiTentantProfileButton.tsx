@@ -112,9 +112,7 @@ export const MultiTentantProfileButton = ({
                       </div>
                     )}
                   </MenuItem>
-                  <Link
-                    href={"/home/settings/billing/buyPlan"}
-                  >
+                  <Link href={"/home/settings/billing/buyPlan"}>
                     <Button variant="secondary" className="w-full">
                       Upgrade
                       <span className="relative ml-3 flex h-3 w-3">

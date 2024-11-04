@@ -39,7 +39,7 @@ export const getAllSuscriptions = async ({
           email: true,
         },
       },
-      plan: true
+      plan: true,
     },
   });
 

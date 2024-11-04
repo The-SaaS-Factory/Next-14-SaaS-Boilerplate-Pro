@@ -1,21 +1,23 @@
-MIT License
+Software License Agreement
 
-Copyright (c) 2023 The SaaS Factory
+1. Grant of License
+This License Agreement ("Agreement") grants you a non-exclusive, unlimited license to use, modify, and adapt the software (the "Software") for any purpose, including personal, educational, and commercial projects, in accordance with the terms below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+2. Permitted Use and Modifications
+You may:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Install, use, and operate the Software on any number of devices.
+Edit, modify, and adapt the Software in any way you choose.
+Incorporate the Software into other projects or applications, whether personal, open-source, or commercial, without any restrictions.
+3. Restriction on Resale as a Boilerplate
+While this Agreement grants you extensive rights, it imposes one key restriction:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Resale as a Standalone Boilerplate: You may not resell, redistribute, or offer the Software as a standalone boilerplate, template, or any form of ready-made development framework intended to be reused by others as a foundational template.
+4. Ownership and Copyright
+All original copyright notices in the Software must remain intact. This Agreement does not transfer ownership of the Software, and the original copyright holder retains all rights not expressly granted herein.
+
+5. Limitation of Liability
+The Software is provided "as is," without any warranty of any kind. In no event shall the original author be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from or in connection with the Software or the use of the Software.
+
+6. Termination
+Any violation of the terms of this Agreement will result in the immediate termination of your rights under this license.
