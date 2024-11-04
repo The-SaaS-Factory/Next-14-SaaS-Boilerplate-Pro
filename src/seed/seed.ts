@@ -8,40 +8,42 @@ import { capabilities, planCapabilities, plans, pricing } from "./seeds/plans";
 const prisma = new PrismaClient();
 
 async function main() {
-  prisma.$transaction(async (tx: PrismaClient) => {
+  await prisma.$transaction(async (tx: PrismaClient) => {
     await tx.permission.deleteMany();
     await tx.pricing.deleteMany();
+    await tx.planCapabilities.deleteMany();
     await tx.adminCurrencies.deleteMany();
     await tx.paymentMethod.deleteMany();
     await tx.plan.deleteMany();
     await tx.capability.deleteMany();
-    await tx.planCapabilities.deleteMany();
     await tx.superAdminSetting.deleteMany();
-    await tx.plan.createMany({
+  });
+  await prisma.$transaction(async (tx2: PrismaClient) => {
+    await tx2.plan.createMany({
       data: plans,
     });
-    await tx.capability.createMany({
+    await tx2.capability.createMany({
       data: capabilities,
     });
-    await tx.pricing.createMany({
+    await tx2.pricing.createMany({
       data: pricing,
     });
-    await tx.paymentMethod.createMany({
+    await tx2.paymentMethod.createMany({
       data: paymentsMethods,
     });
-    await tx.adminCurrencies.createMany({
+    await tx2.adminCurrencies.createMany({
       data: currencies,
     });
-    await tx.superAdminSetting.createMany({
+    await tx2.superAdminSetting.createMany({
       data: settings,
     });
-    await tx.permission.createMany({
+    await tx2.permission.createMany({
       data: permissions,
     });
-    await tx.permission.createMany({
+    await tx2.permission.createMany({
       data: organizationPermissions,
     });
-    await tx.planCapabilities.createMany({
+    await tx2.planCapabilities.createMany({
       data: planCapabilities,
     });
   });
