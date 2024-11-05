@@ -1,11 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
-import Image from "next/image";
-
 import FeaturesBoilerplatePro from "./ui/FeaturesBoilerplatePro";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
-import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -129,7 +124,7 @@ export default function Home() {
             }}
           />
         </div>
-        
+
         <FeaturesBoilerplatePro />
       </div>
     </>

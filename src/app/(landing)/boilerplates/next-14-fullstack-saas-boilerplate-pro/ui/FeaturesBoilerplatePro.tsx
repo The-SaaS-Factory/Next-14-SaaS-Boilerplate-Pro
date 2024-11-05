@@ -1,5 +1,5 @@
 import {
-    ArrowRightCircleIcon,
+  ArrowRightCircleIcon,
   BoltIcon,
   CheckCircleIcon,
   CloudArrowUpIcon,
@@ -11,7 +11,6 @@ import {
   ServerStackIcon,
 } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/solid";
- 
 
 import Image from "next/image";
 
@@ -77,8 +76,7 @@ const features3 = [
   },
   {
     name: "Prisma",
-    description:
-      "Prisma is one of the best current ORMs to manage databases.",
+    description: "Prisma is one of the best current ORMs to manage databases.",
     icon: ServerStackIcon,
   },
   {
@@ -168,7 +166,7 @@ export default function FeaturesBoilerplatePro() {
               </div>
             </div>
             <Image
-               src="/assets/img/boilerplates/pro/screens/stripe.png"
+              src="/assets/img/boilerplates/pro/screens/stripe.png"
               alt="The SaaS Factory Features plans membership"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
               width={2432}
@@ -185,17 +183,19 @@ export default function FeaturesBoilerplatePro() {
               Everything you need
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Launch your idea in a weekend
+              Launch your idea in a weekend
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-800">
-            Imagine that in 10 minutes you have everything ready to go directly to developing the specific module(s) of your business model.
+              Imagine that in 10 minutes you have everything ready to go
+              directly to developing the specific module(s) of your business
+              model.
             </p>
           </div>
         </div>
         <div className="relative overflow-hidden pt-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <Image
-               src="/assets/img/boilerplates/pro/screens/onboarding.png"
+              src="/assets/img/boilerplates/pro/screens/onboarding.png"
               alt="App screenshot"
               className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
               width={2432}
