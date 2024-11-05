@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
   const repoName = boilerplate.githubName;
 
@@ -32,6 +33,9 @@ export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
 
       // Liberar el objeto URL
       window.URL.revokeObjectURL(url);
+      track("download-boilerplate", {
+        name: boilerplate.name,
+      });
     } catch (error) {
       console.error("Error:", error);
     }
@@ -69,7 +73,6 @@ export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
               </Button>
             ) : (
               <div className="flex">
-               
                 <Link href={"/home/settings/billing/buyPlan"}>
                   <Button variant="secondary" className="w-full">
                     Upgrade for download
