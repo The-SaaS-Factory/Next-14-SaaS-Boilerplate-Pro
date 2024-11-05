@@ -47,6 +47,7 @@ export const constants = {
 
 export const saasFeatures = {
   onboarding: false,
+  telegramNotification: false,
 };
 
 export const sliderSettings = {

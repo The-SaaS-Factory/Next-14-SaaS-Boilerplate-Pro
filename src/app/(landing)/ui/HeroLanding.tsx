@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { HeroPattern } from "@/components/ui/commons/HeroPattern";
 import { Rocket } from "lucide-react";
 
 export default function HeroLanding() {

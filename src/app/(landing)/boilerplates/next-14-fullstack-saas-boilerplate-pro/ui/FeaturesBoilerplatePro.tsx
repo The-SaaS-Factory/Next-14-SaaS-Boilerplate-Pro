@@ -8,15 +8,10 @@ import {
   CursorArrowRaysIcon,
   GlobeAltIcon,
   LockClosedIcon,
-  ServerIcon,
   ServerStackIcon,
 } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowPathIcon,
-  Cog6ToothIcon,
-  FingerPrintIcon,
-} from "@heroicons/react/20/solid";
+ 
 
 import Image from "next/image";
 

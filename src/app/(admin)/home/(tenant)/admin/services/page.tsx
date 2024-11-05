@@ -29,8 +29,6 @@ export default function ServicesPage() {
     handleSubmit,
     register,
     setValue,
-    watch,
-    reset,
     formState: { errors },
   } = useForm();
 

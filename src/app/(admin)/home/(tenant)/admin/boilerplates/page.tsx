@@ -7,7 +7,7 @@ import { useMembership } from "@/utils/hooks/useMembership";
 import { constants } from "@/lib/constants";
 
 export default function BoilerplatesPage() {
-  const { organization, checkOrganizationCapability } = useMembership();
+  const { checkOrganizationCapability } = useMembership();
 
   const canDowloadProRepos = checkOrganizationCapability({
     capabilityName: "Download Pro Repositories",

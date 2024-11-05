@@ -1,4 +1,4 @@
-import { AlertCircle, Search, Filter } from "lucide-react";
+import { AlertCircle, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {

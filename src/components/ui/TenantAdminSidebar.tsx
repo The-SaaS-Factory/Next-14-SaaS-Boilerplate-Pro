@@ -23,8 +23,7 @@ const OrganizationAdminSidebar = () => {
     }),
   );
 
-  const { userMembership, checkOrganizationCapability, organization } =
-    useMembership();
+  const { userMembership, checkOrganizationCapability } = useMembership();
 
   const { tenantNavigation } = useNavigation();
 
