@@ -82,7 +82,7 @@ const features3 = [
     icon: ServerStackIcon,
   },
   {
-    name: "Clerk",
+    name: "Next Auth",
     description:
       "Powerful authentication manager allowing you to add social providers and manage organizations, permissions and roles What you avoid doing by using this boilerplate. ",
     icon: ArrowRightCircleIcon,
@@ -92,7 +92,7 @@ const features3 = [
 export default function FeaturesBoilerplatePro() {
   return (
     <>
-      <div className="overflow-hidden bg-white py-24 sm:py-32">
+      <div className="overflow-hidden bg-gray-200 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
@@ -125,7 +125,7 @@ export default function FeaturesBoilerplatePro() {
               </div>
             </div>
             <Image
-              src="https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703716752301_xVVckTVwk.png?updatedAt=1703716824119"
+              src="/assets/img/boilerplates/pro/screens/members.png"
               alt="The SaaS Factory Features"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
               width={2432}
@@ -168,7 +168,7 @@ export default function FeaturesBoilerplatePro() {
               </div>
             </div>
             <Image
-              src="https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703720465815_uSi8i2AMI.png?updatedAt=1703720616191"
+               src="/assets/img/boilerplates/pro/screens/stripe.png"
               alt="The SaaS Factory Features plans membership"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
               width={2432}
@@ -195,7 +195,7 @@ export default function FeaturesBoilerplatePro() {
         <div className="relative overflow-hidden pt-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <Image
-              src="https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703721109176_NE5QpcmxF.png?updatedAt=1703721147856"
+               src="/assets/img/boilerplates/pro/screens/onboarding.png"
               alt="App screenshot"
               className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
               width={2432}
