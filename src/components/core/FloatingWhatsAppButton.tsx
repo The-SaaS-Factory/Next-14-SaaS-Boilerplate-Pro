@@ -44,10 +44,10 @@ const FloatingWhatsAppButton = () => {
         phoneNumber={
           typeof window !== "undefined" ? getPhoneNumber() : "5541999568376"
         }
-        chatMessage={"Hola, en qué podemos ayudarte?"}
-        statusMessage={"Suele responder en menos de 1 minuto"}
+        chatMessage={"Hi there! How can I help you?"}
+        statusMessage={" Usually responds in less than 1 minute"}
         accountName={constants.appName}
-        avatar={constants.logoUrl}
+        avatar={"/assets/img/Saas Factory.png"}
         darkMode={false}
         allowEsc
       />

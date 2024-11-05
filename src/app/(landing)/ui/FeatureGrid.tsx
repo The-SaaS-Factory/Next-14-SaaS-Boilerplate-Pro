@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { constants } from "@/lib/constants";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,10 @@ export default function FeatureGrid() {
         <h2 className="text-center pt-7 text-base/7 font-semibold text-indigo-600">
           The SaaS Factory
         </h2>
-        <p className="mx-auto py-3 mt-2 max-w-lg text-pretty text-center text-4xl font-medium tracking-tight text-gray-950 sm:text-5xl">
+        <p
+          className="mx-auto text-coloride py-3 mt-2 max-w-6xl  
+        text-center text-4xl   tracking-tight font-bold  sm:text-6xl animate-pulse"
+        >
           The best way to create your next SaaS
         </p>
         <div className="grid mt-14  lg:grid-cols-3 gap-8 my-7 ">
@@ -35,62 +39,38 @@ export default function FeatureGrid() {
                   />
                 </div> */}
                 <div className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center px-10">
-                  <hr className="my-7" />
-                  <div className="flex flex-col justify-between    ">
-                    <h3 className="text-subtitle  flex items-center space-x-3">
-                      <span>Next 14 SaaS Boilerplate Free</span>
-                      <Eye className="h-4 w-4" />
-                    </h3>
-                    <span>Clerk - Next 14 - TS - Prisma - Tailwind</span>
-                    <div className="flex justify-around my-3 space-x-1">
-                      <Link
-                        target="_blank"
-                        href={"https://next14.thesaasfactory.dev"}
-                      >
-                        <Button variant="secondary"> Demo</Button>
+                  {constants.boilerplates.map((boilerplate) => (
+                    <div
+                      key={boilerplate.id}
+                      className="flex flex-col justify-between    "
+                    >
+                      <hr className="my-3" />
+                      <Link href={boilerplate.url}>
+                        <h3 className="text-subtitle  flex items-center space-x-3">
+                          <span
+                            className={boilerplate.isPro && "text-coloride"}
+                          >
+                            {boilerplate.name}
+                          </span>
+                          <Eye className="h-6 w-6" />
+                        </h3>
                       </Link>
+                      <span className="my-3">{boilerplate.nameStack}</span>
+                      <div className="flex    space-x-4">
+                        <Link target="_blank" href={boilerplate.urlDemo}>
+                          <Button variant="secondary"> Demo</Button>
+                        </Link>
 
-                      <Link
-                        target="_blank"
-                        href={"https://docs-next14.thesaasfactory.dev/"}
-                      >
-                        <Button variant="secondary"> Doc</Button>
-                      </Link>
+                        <Link target="_blank" href={boilerplate.urlDoc}>
+                          <Button variant="secondary"> Doc</Button>
+                        </Link>
 
-                      <Link href={"/home/admin/boilerplates"}>
-                        <Button variant="default">Download</Button>
-                      </Link>
+                        <Link href={"/home/admin/boilerplates"}>
+                          <Button variant="default">Download</Button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col justify-between mt-7   ">
-                    <Link href={"/s"}>
-                      <h3 className="text-subtitle flex items-center  space-x-2">
-                        <span>Next 14 SaaS Boilerplate </span>
-                        <b className="text-sky-500"> Pro</b>
-                        <Eye className="h-4 w-4" />
-                      </h3>
-                    </Link>
-                    <span>Next Auth - Next 15 - TS - Prisma - Tailwind</span>
-                    <div className="flex justify-around my-3 space-x-1">
-                      <Link
-                        target="_blank"
-                        href={"https://next14pro.thesaasfactory.dev/"}
-                      >
-                        <Button variant="secondary"> Demo</Button>
-                      </Link>
-
-                      <Link
-                        target="_blank"
-                        href={"https://docs-next14-pro.thesaasfactory.dev/"}
-                      >
-                        <Button variant="secondary"> Doc</Button>
-                      </Link>
-
-                      <Link href={"/home/admin/boilerplates"}>
-                        <Button variant="default">Download</Button>
-                      </Link>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -102,7 +82,7 @@ export default function FeatureGrid() {
               className="relative flex  flex-col overflow-hidden r
             ounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]"
             >
-              <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10 sm:pt-10">
+              <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10 ">
                 <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   The Factory Suite
                 </p>
@@ -110,7 +90,7 @@ export default function FeatureGrid() {
                   Manage your own software factory, taking control of your ideas
                   until the start of production.
                 </p>
-                <Link className="mt-3" href={"/home/admin/factory"}>
+                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/home/admin/factory"}>
                   <Button>Start my factory</Button>
                 </Link>
               </div>
@@ -124,15 +104,16 @@ export default function FeatureGrid() {
             </div>
             <br />
             <div className="relative border-t flex h-auto flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-              <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10 sm:pt-10">
+              <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10  ">
                 <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   Custom development service
                 </p>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit
-                  maiores impedit.
+                  We create a technology that allows us to go from 0 to 100 in
+                  your project faster than any other team, tell us about your
+                  project
                 </p>
-                <Link className="mt-3" href={"/home/admin/services"}>
+                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/home/admin/services"}>
                   <Button>Talk wit us</Button>
                 </Link>
               </div>
@@ -157,7 +138,7 @@ export default function FeatureGrid() {
                   Sit quis amet rutrum tellus ullamcorper ultricies libero dolor
                   eget sem sodales gravida.
                 </p>
-                <Link className="mt-3" href={"/marketplace"}>
+                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/marketplace"}>
                   <Button variant="secondary">Access to marketplace</Button>
                 </Link>
                 <div className="flex flex-1 items-center justify-center    pt-14 lg:pb-2">

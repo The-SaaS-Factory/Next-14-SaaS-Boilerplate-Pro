@@ -20,24 +20,28 @@ export const HeaderLanding = () => {
   const MenuItemsPC = () => (
     <>
       <Link
-        href="/link1"
-        className="hover:text-gray-700 text-gray-500 font-semibold"
-      ></Link>
-      <Link
-        href="/link1"
+        href="/home/admin/boilerplates"
         className="hover:text-gray-700 text-gray-500 font-semibold"
       >
-        Link 1
+        Boilerplates
       </Link>
       <Link
-        href="/prices"
-        className="hover:text-gray-700 text-gray-500 font-semibold"
-      ></Link>
-      <Link
-        href="/prices"
+        href="/home/admin/services"
         className="hover:text-gray-700 text-gray-500 font-semibold"
       >
-        Prices
+        Services
+      </Link>
+      <Link
+        href="/marketplace"
+        className="hover:text-gray-700 text-gray-500 font-semibold"
+      >
+        Marketplace
+      </Link>
+      <Link
+        href="/home/admin/facory"
+        className="hover:text-gray-700 text-gray-500 font-semibold"
+      >
+        Factory Suite
       </Link>
       {session.status === "authenticated" ? (
         <Link
@@ -70,17 +74,20 @@ export const HeaderLanding = () => {
   );
 
   return (
-    <header className="fixed   top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
+    <header className="fixed   top-0 left-0 right-0 z-50 bg-blue-200/10 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Image
-          src={"/assets/img/Saas Factoy.png"}
-          width={150}
-          height={80}
-          alt={constants.appName}
-        />
-        <Link href="/" className="">
-          <span className="font-bold">{constants.appName}</span>
-        </Link>
+        <div className="flex items-center space-x-3">
+          <Image
+            src={"/assets/img/logo-thesaasfactory.dev.png"}
+            width={80}
+            height={40}
+            className="h-10 w-auto"
+            alt={constants.appName}
+          />
+          <Link href="/" className="">
+            <span className="font-bold">{constants.appName}</span>
+          </Link>
+        </div>
         <nav className=" hidden md:flex space-x-4 items-center">
           <MenuItemsPC />
         </nav>

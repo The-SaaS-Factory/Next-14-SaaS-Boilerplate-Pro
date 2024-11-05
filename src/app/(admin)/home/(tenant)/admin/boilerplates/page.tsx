@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { BoilerplateCard } from "./ui/BoilerplateCard";
 import { useMembership } from "@/utils/hooks/useMembership";
+import { constants } from "@/lib/constants";
 
 export default function BoilerplatesPage() {
   const { organization, checkOrganizationCapability } = useMembership();
@@ -25,7 +26,7 @@ export default function BoilerplatesPage() {
         <TabsContent value="boilerplates">
           <h2 className="text-2xl font-bold mb-4">Boilerplates</h2>
           <div className="grid md:grid-cols-3  gap-6">
-            {boilerplates.map((boilerplate) => (
+            {constants.boilerplates.map((boilerplate) => (
               <BoilerplateCard
                 canDowloadProRepos={canDowloadProRepos}
                 boilerplate={boilerplate}
@@ -59,24 +60,3 @@ function ComingSoon() {
     </motion.div>
   );
 }
-
-const boilerplates = [
-  {
-    isPro: false,
-    id: 1,
-    name: "Next 14 FullStack SaaS Boilerplate",
-    githubName: "next-14-saas-boilerplate",
-    description:
-      "A complete boilerplate to quickly start projects with Next.js, TypeScript, and Tailwind CSS.",
-    image: "/assets/img/boilerplates/free/cover.webp",
-  },
-  {
-    isPro: true,
-    id: 2,
-    name: "Next 14 FullStack SaaS Boilerplate PRO",
-    githubName: "Next-14-SaaS-Boilerplate-Pro",
-    description:
-      "A complete boilerplate with superpowers to quickly start projects with Next.js, TypeScript, and Tailwind CSS.",
-    image: "/assets/img/boilerplates/pro/1600x800.png",
-  },
-];
