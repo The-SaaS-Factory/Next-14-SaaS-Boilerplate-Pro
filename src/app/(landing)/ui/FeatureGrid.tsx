@@ -43,15 +43,21 @@ export default function FeatureGrid() {
                     </h3>
                     <span>Clerk - Next 14 - TS - Prisma - Tailwind</span>
                     <div className="flex justify-around my-3 space-x-1">
-                      <Link href={"/s"}>
+                      <Link
+                        target="_blank"
+                        href={"https://next14.thesaasfactory.dev"}
+                      >
                         <Button variant="secondary"> Demo</Button>
                       </Link>
 
-                      <Link href={"/s"}>
+                      <Link
+                        target="_blank"
+                        href={"https://docs-next14.thesaasfactory.dev/"}
+                      >
                         <Button variant="secondary"> Doc</Button>
                       </Link>
 
-                      <Link href={"/s"}>
+                      <Link href={"/home/admin/boilerplates"}>
                         <Button variant="default">Download</Button>
                       </Link>
                     </div>
@@ -66,15 +72,21 @@ export default function FeatureGrid() {
                     </Link>
                     <span>Next Auth - Next 15 - TS - Prisma - Tailwind</span>
                     <div className="flex justify-around my-3 space-x-1">
-                      <Link href={"/s"}>
+                      <Link
+                        target="_blank"
+                        href={"https://next14pro.thesaasfactory.dev/"}
+                      >
                         <Button variant="secondary"> Demo</Button>
                       </Link>
 
-                      <Link href={"/s"}>
+                      <Link
+                        target="_blank"
+                        href={"https://docs-next14-pro.thesaasfactory.dev/"}
+                      >
                         <Button variant="secondary"> Doc</Button>
                       </Link>
 
-                      <Link href={"/s"}>
+                      <Link href={"/home/admin/boilerplates"}>
                         <Button variant="default">Download</Button>
                       </Link>
                     </div>
@@ -98,7 +110,7 @@ export default function FeatureGrid() {
                   Manage your own software factory, taking control of your ideas
                   until the start of production.
                 </p>
-                <Link className="mt-3" href={"/"}>
+                <Link className="mt-3" href={"/home/admin/factory"}>
                   <Button>Start my factory</Button>
                 </Link>
               </div>
@@ -120,7 +132,7 @@ export default function FeatureGrid() {
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit
                   maiores impedit.
                 </p>
-                <Link className="mt-3" href={"/"}>
+                <Link className="mt-3" href={"/home/admin/services"}>
                   <Button>Talk wit us</Button>
                 </Link>
               </div>

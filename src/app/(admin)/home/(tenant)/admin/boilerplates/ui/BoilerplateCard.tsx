@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
   const repoName = boilerplate.githubName;
 
@@ -55,15 +56,32 @@ export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">View More</Button>
-        {canDowloadProRepos ? (
+        {!boilerplate.isPro ? (
           <Button onClick={handleDownload} className="ml-2">
-            {" "}
-            Download{" "}
-          </Button>
-        ) : (
-          <Button disabled variant="outline" className="ml-2">
             Download
           </Button>
+        ) : (
+          <>
+            {canDowloadProRepos ? (
+              <Button onClick={handleDownload} className="ml-2">
+                {" "}
+                Download{" "}
+              </Button>
+            ) : (
+              <div className="flex">
+               
+                <Link href={"/home/settings/billing/buyPlan"}>
+                  <Button variant="secondary" className="w-full">
+                    Upgrade for download
+                    <span className="relative ml-3 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </>
         )}
       </CardFooter>
     </Card>

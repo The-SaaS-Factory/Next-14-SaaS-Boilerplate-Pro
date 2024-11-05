@@ -27,7 +27,7 @@ export default function SectionTab() {
             setActiveSection(id);
           }
         },
-        { threshold: 0.5 }
+        { threshold: 0.5 },
       );
       if (ref.current) {
         observer.observe(ref.current);
@@ -43,7 +43,7 @@ export default function SectionTab() {
           setShowNavigation(false);
         }
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     if (cardSectionRef.current) {

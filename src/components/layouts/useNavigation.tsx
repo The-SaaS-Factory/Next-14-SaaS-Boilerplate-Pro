@@ -5,7 +5,13 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
-import { BoltIcon, BoxIcon, Calendar, ShoppingBag } from "lucide-react";
+import {
+  BoltIcon,
+  BoxIcon,
+  Calendar,
+  Factory,
+  ShoppingBag,
+} from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [
@@ -49,13 +55,26 @@ export const useNavigation = () => {
       ],
     },
     {
+      sectionName: "Factory",
+      icon: Factory,
+      href: "/home/admin/factory",
+      items: [
+        {
+          name: "Factory",
+          href: "/home/admin/factory",
+          icon: HomeIcon,
+          current: true,
+        },
+      ],
+    },
+    {
       sectionName: "Marketplace",
       icon: ShoppingBag,
-      href: "/home/admin/marketplace",
+      href: "/marketplace",
       items: [
         {
           name: "Marketplace",
-          href: "/home/admin/marketplace",
+          href: "/marketplace",
           icon: HomeIcon,
           current: true,
         },

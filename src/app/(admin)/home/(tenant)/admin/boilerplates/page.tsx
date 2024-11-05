@@ -4,16 +4,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { BoilerplateCard } from "./ui/BoilerplateCard";
 import { useMembership } from "@/utils/hooks/useMembership";
-import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
 export default function BoilerplatesPage() {
-  const { userMembership, organization } = useMembership();
+  const { organization, checkOrganizationCapability } = useMembership();
 
   const canDowloadProRepos = checkOrganizationCapability({
-    capabilityName: "Support via ticket",
-    organizationCapabilities: organization?.organizationCapabilities,
-    subscription: organization?.subscription,
+    capabilityName: "Download Pro Repositories",
   });
+
+  console.log(canDowloadProRepos);
 
   return (
     <div className="container mx-auto p-4">

@@ -73,7 +73,7 @@ export const stripeWebhook = async (requestBody: any) => {
     return `Webhook Error: ${err.message}`;
   }
 };
- 
+
 export const stripeGetClientByCustomerId = async (customerId: string) => {
   const client = await prisma.stripeCustomer.findFirst({
     where: {

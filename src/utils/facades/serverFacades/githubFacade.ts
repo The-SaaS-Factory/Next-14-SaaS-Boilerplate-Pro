@@ -6,7 +6,7 @@ export async function downloadRepositoryZip(repoName: string) {
 
   if (!GITHUB_TOKEN || !ORG_NAME) {
     throw new Error(
-      "Configura las variables de entorno GITHUB_TOKEN y GITHUB_ORG"
+      "Configura las variables de entorno GITHUB_TOKEN y GITHUB_ORG",
     );
   }
 
@@ -17,12 +17,12 @@ export async function downloadRepositoryZip(repoName: string) {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+json",
       },
-    }
+    },
   );
 
   if (!response.ok) {
     throw new Error(
-      `Error al descargar el repositorio: ${response.statusText}`
+      `Error al descargar el repositorio: ${response.statusText}`,
     );
   }
 

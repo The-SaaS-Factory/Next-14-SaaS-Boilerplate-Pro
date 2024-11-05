@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,79 +18,75 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/app/components/ui/textarea";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { useMembership } from "@/utils/hooks/useMembership";
 
+// Componente principal
 export default function ServicesPage() {
+  const { organization } = useMembership();
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // Función handler para enviar datos del formulario
+  const onSubmit = async (data) => {
+    // Construye el payload usando los datos del formulario
+    const formData = {
+      projectName: data.projectName,
+      budget: data.budget,
+      description: data.description,
+      urgency: data.urgency,
+      stack: data.stack,
+      userId: organization?.id,
+      userName: organization?.name,
+      userEmail: organization?.email,
+    };
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        toast.success("Service request sent successfully");
+      } else {
+        toast.error(`Error: ${result.error}`);
+      }
+    } catch (error: any) {
+      toast.error(`Error: ${error.message}`);
+    }
+    // Enviar el payload a la acción
+    // Aquí puedes llamar a la función que realiza la acción
+    // Aquí podrías realizar la llamada a una acción como enviar a la API
+    // sendAction(payload);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Services and Contracting</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Contracted Services List */}
+        {/* Lista de Servicios Contratados */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Contracted Services</h2>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="border p-2 text-left">Project</th>
-                  <th className="border p-2 text-left">Progress</th>
-                  <th className="border p-2 text-left">Start Date</th>
-                  <th className="border p-2 text-left">Project Days</th>
-                  <th className="border p-2 text-left">Billing</th>
-                  <th className="border p-2 text-left">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border p-2">Project A</td>
-                  <td className="border p-2">75%</td>
-                  <td className="border p-2">2023-05-01</td>
-                  <td className="border p-2">45</td>
-                  <td className="border p-2">$7,500 / $10,000</td>
-                  <td className="border p-2">
-                    <Link
-                      href="/details/project-a"
-                      className="text-blue-500 hover:underline"
-                    >
-                      View details
-                    </Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border p-2">Project B</td>
-                  <td className="border p-2">30%</td>
-                  <td className="border p-2">2023-06-15</td>
-                  <td className="border p-2">20</td>
-                  <td className="border p-2">$3,000 / $8,000</td>
-                  <td className="border p-2">
-                    <Link
-                      href="/details/project-b"
-                      className="text-blue-500 hover:underline"
-                    >
-                      View details
-                    </Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border p-2">Project C</td>
-                  <td className="border p-2">90%</td>
-                  <td className="border p-2">2023-04-01</td>
-                  <td className="border p-2">60</td>
-                  <td className="border p-2">$12,000 / $15,000</td>
-                  <td className="border p-2">
-                    <Link
-                      href="/details/project-c"
-                      className="text-blue-500 hover:underline"
-                    >
-                      View details
-                    </Link>
-                  </td>
-                </tr>
-              </tbody>
+              You not have any services contracted yet.
             </table>
           </div>
         </div>
 
-        {/* New Service Contract Form */}
+        {/* Formulario para Nuevo Servicio */}
         <div>
           <Card className="mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
             <CardHeader>
@@ -104,8 +101,7 @@ export default function ServicesPage() {
             <CardContent>
               <p className="text-white mb-4">
                 Our team of experts ensures that your project is completed to
-                the highest standards, using cutting-edge technologies and best
-                practices in the industry.
+                the highest standards.
               </p>
               <Link
                 href="/why-choose-us"
@@ -117,14 +113,21 @@ export default function ServicesPage() {
           </Card>
 
           <h2 className="text-xl font-semibold mb-4">Contract New Service</h2>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <Label htmlFor="project-name">Project Name</Label>
-              <Input id="project-name" placeholder="Enter project name" />
+              <Label htmlFor="projectName">Project Name</Label>
+              <Input
+                id="projectName"
+                placeholder="Enter project name"
+                {...register("projectName", { required: true })}
+              />
+              {errors.projectName && (
+                <p className="text-red-500">Project Name is required</p>
+              )}
             </div>
             <div>
               <Label htmlFor="budget">Estimated Budget</Label>
-              <Select>
+              <Select onValueChange={(value) => setValue("budget", value)}>
                 <SelectTrigger id="budget">
                   <SelectValue placeholder="Select budget range" />
                 </SelectTrigger>
@@ -134,17 +137,24 @@ export default function ServicesPage() {
                   <SelectItem value="high">More than $10,000</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.budget && (
+                <p className="text-red-500">Budget is required</p>
+              )}
             </div>
             <div>
               <Label htmlFor="description">Project Overview</Label>
               <Textarea
                 id="description"
                 placeholder="Briefly describe your project"
+                {...register("description", { required: true })}
               />
+              {errors.description && (
+                <p className="text-red-500">Description is required</p>
+              )}
             </div>
             <div>
               <Label htmlFor="urgency">Project Urgency</Label>
-              <Select>
+              <Select onValueChange={(value) => setValue("urgency", value)}>
                 <SelectTrigger id="urgency">
                   <SelectValue placeholder="Select urgency level" />
                 </SelectTrigger>
@@ -154,10 +164,20 @@ export default function ServicesPage() {
                   <SelectItem value="high">High</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.urgency && (
+                <p className="text-red-500">Urgency level is required</p>
+              )}
             </div>
             <div>
               <Label htmlFor="stack">Desired Tech Stack</Label>
-              <Input id="stack" placeholder="E.g., React, Node.js, MongoDB" />
+              <Input
+                id="stack"
+                placeholder="E.g., React, Node.js, MongoDB"
+                {...register("stack", { required: true })}
+              />
+              {errors.stack && (
+                <p className="text-red-500">Tech stack is required</p>
+              )}
             </div>
             <Button type="submit">Submit Request</Button>
           </form>

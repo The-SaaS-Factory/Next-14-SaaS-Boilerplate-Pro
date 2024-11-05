@@ -5,7 +5,6 @@ import { Rocket } from "lucide-react";
 export default function HeroLanding() {
   return (
     <div className="flex flex-col max-w-7xl mx-auto    ">
-  
       <main className="flex-1 relative">
         <section className="w-full z-50 py-2 md:py-7 lg:py-24 xl:py-32">
           <div className="container px-4 md:px-6">

@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className="min-h-screen ">
       <HeroPattern />
       <FeatureGrid />
-     {/*  <SectionTab /> */}
+      {/*  <SectionTab /> */}
     </div>
   );
 }
