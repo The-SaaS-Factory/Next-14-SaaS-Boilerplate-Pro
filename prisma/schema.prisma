@@ -11,9 +11,13 @@ generator client {
 
 //Only for development in local
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
 
 // ------------------------------------SaaS  Core------------------------------------------
 model User {
