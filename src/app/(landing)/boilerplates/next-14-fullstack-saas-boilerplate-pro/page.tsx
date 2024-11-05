@@ -59,7 +59,7 @@ export default function Home() {
                     <Button variant="secondary"> Doc</Button>
                   </Link>
 
-                  <Link href={"/home/admin/constants"}>
+                  <Link href={"/home/admin/boilerplates"}>
                     <Button variant="default">Download</Button>
                   </Link>
                 </div>
