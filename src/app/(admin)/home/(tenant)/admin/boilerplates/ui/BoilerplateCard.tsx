@@ -59,7 +59,9 @@ export const BoilerplateCard = ({ boilerplate, canDowloadProRepos }) => {
         </CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">View More</Button>
+        <Link href={boilerplate.url}>
+          <Button variant="outline">View More</Button>
+        </Link>
         {!boilerplate.isPro ? (
           <Button onClick={handleDownload} className="ml-2">
             Download
