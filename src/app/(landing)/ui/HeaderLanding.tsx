@@ -19,10 +19,10 @@ export const HeaderLanding = () => {
 
   const MenuItemsPC = () => (
     <>
-      <Link href="/link1" className="hover:text-gray-300 text-gray-50">
+      <Link href="/link1" className="hover:text-gray-700 text-gray-500 font-semibold">
         Link 1
       </Link>
-      <Link href="/prices" className="hover:text-gray-300 text-gray-50">
+      <Link href="/prices" className="hover:text-gray-700 text-gray-500 font-semibold">
         Prices
       </Link>
       {session.status === "authenticated" ? (
@@ -43,10 +43,14 @@ export const HeaderLanding = () => {
           {session.status !== "loading" && (
             <>
               <Link href={"/login"}>
-                <Button variant="outline">Iniciar Sesión</Button>
+                <Button variant="outline">
+                  Log in
+                </Button>
               </Link>
               <Link href={"/login"}>
-                <Button>Registrarse</Button>
+                <Button>
+                  Sing Up
+                </Button>
               </Link>
             </>
           )}
@@ -59,7 +63,7 @@ export const HeaderLanding = () => {
     <header className="fixed   top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="">
-          <span>{constants.appName}</span>
+          <span className="font-bold">{constants.appName}</span>
         </Link>
         <nav className=" hidden md:flex space-x-4 items-center">
           <MenuItemsPC />

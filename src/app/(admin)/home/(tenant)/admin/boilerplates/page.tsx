@@ -1,18 +1,20 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
+import { BoilerplateCard } from "./ui/BoilerplateCard";
+import { useMembership } from "@/utils/hooks/useMembership";
+import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
 export default function BoilerplatesPage() {
+  const { userMembership, organization } = useMembership();
+
+  const canDowloadProRepos = checkOrganizationCapability({
+    capabilityName: "Support via ticket",
+    organizationCapabilities: organization?.organizationCapabilities,
+    subscription: organization?.subscription,
+  });
+
   return (
     <div className="container mx-auto p-4">
       <Tabs defaultValue="boilerplates" className="w-full">
@@ -25,25 +27,11 @@ export default function BoilerplatesPage() {
           <h2 className="text-2xl font-bold mb-4">Boilerplates</h2>
           <div className="grid md:grid-cols-3  gap-6">
             {boilerplates.map((boilerplate) => (
-              <Card key={boilerplate.id} className="flex flex-col">
-                <CardHeader>
-                  <Image
-                    src={boilerplate.image}
-                    alt={boilerplate.name}
-                    width={400}
-                    height={200}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <CardTitle>{boilerplate.name}</CardTitle>
-                  <CardDescription>{boilerplate.description}</CardDescription>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <Button variant="outline">View More</Button>
-                  <Button>Download</Button>
-                </CardFooter>
-              </Card>
+              <BoilerplateCard
+                canDowloadProRepos={canDowloadProRepos}
+                boilerplate={boilerplate}
+                key={boilerplate.id}
+              />
             ))}
           </div>
         </TabsContent>
@@ -75,17 +63,21 @@ function ComingSoon() {
 
 const boilerplates = [
   {
+    isPro: false,
     id: 1,
-    name: "Next.js Starter Kit",
+    name: "Next 14 FullStack SaaS Boilerplate",
+    githubName: "next-14-saas-boilerplate",
     description:
       "A complete boilerplate to quickly start projects with Next.js, TypeScript, and Tailwind CSS.",
-    image: "/assets/img/bg2.jpg",
+    image: "/assets/img/boilerplates/free/cover.webp",
   },
   {
+    isPro: true,
     id: 2,
-    name: "React Native Boilerplate",
+    name: "Next 14 FullStack SaaS Boilerplate PRO",
+    githubName: "Next-14-SaaS-Boilerplate-Pro",
     description:
-      "Initial template for mobile applications with React Native, including navigation and global state management.",
-    image: "/assets/img/bg1.jpg",
+      "A complete boilerplate with superpowers to quickly start projects with Next.js, TypeScript, and Tailwind CSS.",
+    image: "/assets/img/boilerplates/pro/1600x800.png",
   },
 ];
