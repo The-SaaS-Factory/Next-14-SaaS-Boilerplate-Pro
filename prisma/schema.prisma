@@ -10,10 +10,12 @@ generator client {
 // }
 
 //Only for development in local
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 // datasource db {
 //   provider = "mysql"
 //   url      = env("DATABASE_URL")
