@@ -3,7 +3,7 @@ export const constants = {
   tanantModelName: "Organization",
   appUrl:
     process.env.NODE_ENV === "production"
-      ? "https://next14pro.thesaasfactory.dev"
+      ? "https://thesaasfactory.dev"
       : "https://localhost:3000",
   appName: "The SaaS Factory",
   appNameAbb: "TSF",
