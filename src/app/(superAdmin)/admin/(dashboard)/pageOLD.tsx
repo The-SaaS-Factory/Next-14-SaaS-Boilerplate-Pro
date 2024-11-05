@@ -22,13 +22,12 @@ import {
 
 import { Area, AreaChart } from "recharts";
 
-import {   CardFooter } from "@/components/ui/card";
+import { CardFooter } from "@/components/ui/card";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
 
 const data = [
   { name: "Ene", solicitudes: 40 },

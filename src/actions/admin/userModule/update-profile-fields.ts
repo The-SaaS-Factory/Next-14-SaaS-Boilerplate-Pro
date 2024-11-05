@@ -10,8 +10,6 @@ interface Field {
 export const updateProfileFields = async (fields: Field[]) => {
   const { organization } = await getMembership();
 
-  console.log(fields);
-
   return await Promise.all(
     fields.map(async (field: Field) => {
       await prisma.organization.update({
@@ -22,6 +20,6 @@ export const updateProfileFields = async (fields: Field[]) => {
           [field.settingName]: field.settingValue,
         },
       });
-    })
+    }),
   );
 };

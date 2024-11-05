@@ -1,19 +1,18 @@
 "use server";
- 
+
 import { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const getSupportTicketById = async (ticketId: number): Promise<any> => {
   if (!ticketId) throw new Error("Ticket id is required");
 
-    
-   const {organization} = await getMembership();
+  const { organization } = await getMembership();
 
   let whereOwner: Prisma.SupportTicketWhereInput;
 
   whereOwner = {
-      organizationId: organization.id,
+    organizationId: organization.id,
   };
 
   const ticket = await prisma.supportTicket.findFirst({

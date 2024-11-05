@@ -25,6 +25,6 @@ export const useUbicationState = create<State & Actions>()(
     {
       name: "ubication-storage", // Nombre clave en localStorage
       getStorage: () => localStorage, // Especifica el almacenamiento
-    }
-  )
+    },
+  ),
 );

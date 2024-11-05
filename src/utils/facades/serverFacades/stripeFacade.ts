@@ -12,16 +12,17 @@ import { getPricingByStripePricingId } from "./paymentFacade";
 import { InvoiceStatus, StripeCustomer } from "@prisma/client";
 import {
   notifyToSuperAdmin,
-   sendInternalNotification,
+  sendInternalNotification,
 } from "./notificationFacade";
+import { constants } from "@/lib/constants";
 
 const makeStripeClient = async () => {
   const stripeMode = await getSuperAdminSetting("STRIPE_MODE");
   const STRIPE_CLIENT_SECRET_PRODUCTION = await getSuperAdminSetting(
-    "STRIPE_CLIENT_SECRET_PRODUCTION"
+    "STRIPE_CLIENT_SECRET_PRODUCTION",
   );
   const STRIPE_CLIENT_SECRET_SANDBOX = await getSuperAdminSetting(
-    "STRIPE_CLIENT_SECRET_SANDBOX"
+    "STRIPE_CLIENT_SECRET_SANDBOX",
   );
 
   const stripeSectret =
@@ -91,7 +92,7 @@ export const stripeEventInvoicePaid = async (eventData: any) => {
         const pricing = await getPricingByStripePricingId(priceId);
 
         await invoiceItemPaid({ stripePriceId: priceId, pricing, eventData });
-      })
+      }),
     );
 
     return "ok";
@@ -131,10 +132,10 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
       };
 
       //Notifica al usaurio
-       sendInternalNotification(
+      sendInternalNotification(
         invoice.userId,
         `Tu factura #${invoice.id} ha sido pagada con éxito`,
-        null
+        null,
       );
 
       //Notifica al admin
@@ -152,7 +153,7 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
             } else {
               await processInvoiceItemInPayment(item, invoice);
             }
-          })
+          }),
         );
       } else {
         //
@@ -164,7 +165,7 @@ export const stripeEventCheckoutCompleted = async (eventData: any) => {
 };
 
 export const stripeCreateProduct = async (
-  productPayload: Stripe.ProductCreateParams
+  productPayload: Stripe.ProductCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 
@@ -181,7 +182,7 @@ export const stripeCreateProduct = async (
 
 export const stripeCreatePlan = async (
   productId: string,
-  planPayload: Stripe.PlanCreateParams
+  planPayload: Stripe.PlanCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 
@@ -194,7 +195,7 @@ export const stripeCreatePlan = async (
 };
 
 export const stripeCreateCoupon = async (
-  couponPayload: Stripe.CouponCreateParams
+  couponPayload: Stripe.CouponCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 
@@ -261,8 +262,6 @@ export async function getStripeMetrics() {
       : (canceledSubscriptions.data.length /
           (subscriptions.data.length + canceledSubscriptions.data.length)) *
         100;
-
-  console.log(churnRate);
 
   const MRR = subscriptions.data.reduce((acc, subscription) => {
     const planAmount = subscription.items.data[0]?.plan.amount / 100; // Verifica que el plan exista
@@ -333,9 +332,9 @@ export const stripeCreateCheckoutSession = async ({
 
 const getUrlsForRedirect = async (
   modelName: string = "PLAN",
-  invoiceId: number | string
+  invoiceId: number | string,
 ) => {
-  const domain = await getSuperAdminSetting("PLATFORM_FRONTEND_URL");
+  const domain = constants.appUrl;
 
   if (modelName === "PLAN") {
     return {
@@ -367,13 +366,13 @@ export const createStripeCustomer = async (customerPayload: {
   if (!customer) throw new Error("Error creating customer");
   const customerInBd = saveStripeCustomerId(
     customerPayload.organizationId,
-    customer.id
+    customer.id,
   );
   return customerInBd;
 };
 
 export const stripeCreateSuscription = async (
-  subscriptionPayload: Stripe.SubscriptionCreateParams
+  subscriptionPayload: Stripe.SubscriptionCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 
@@ -381,7 +380,7 @@ export const stripeCreateSuscription = async (
 };
 
 export const stripeCreateInvoice = async (
-  invoicePayload: Stripe.InvoiceCreateParams
+  invoicePayload: Stripe.InvoiceCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 
@@ -389,7 +388,7 @@ export const stripeCreateInvoice = async (
 };
 
 export const stripeCreateInvoiceItem = async (
-  invoiceItemPayload: Stripe.InvoiceItemCreateParams
+  invoiceItemPayload: Stripe.InvoiceItemCreateParams,
 ) => {
   const stripe = await makeStripeClient();
 

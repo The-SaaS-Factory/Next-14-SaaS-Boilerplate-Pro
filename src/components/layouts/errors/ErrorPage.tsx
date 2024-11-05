@@ -35,7 +35,10 @@ export default function ErrorPage({
             >
               <span aria-hidden="true">&larr;</span> Atrás to home
             </Link>
-            <button className="btn-main mt-3 w-32 mx-auto" onClick={() => reset()}>
+            <button
+              className="btn-main mt-3 w-32 mx-auto"
+              onClick={() => reset()}
+            >
               Try again
             </button>
           </div>

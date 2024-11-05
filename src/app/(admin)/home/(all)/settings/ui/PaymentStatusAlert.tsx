@@ -13,19 +13,19 @@ const PaymentStatusAlert = ({ status }: { status: string | undefined }) => {
     if (!status) return;
     if (status === "unpaid") {
       toast.error(
-        "Your payment has not been processed. Please try again later."
+        "Your payment has not been processed. Please try again later.",
       );
     }
 
     if (status === "pending") {
       toast.info(
-        "Your payment is pending. Please wait for the payment to be processed."
+        "Your payment is pending. Please wait for the payment to be processed.",
       );
     }
 
     if (status === "success") {
       toast.success(
-        "Tu pago ha sido procesado con éxito. Gracias por tu compra."
+        "Tu pago ha sido procesado con éxito. Gracias por tu compra.",
       );
     }
 
@@ -35,7 +35,7 @@ const PaymentStatusAlert = ({ status }: { status: string | undefined }) => {
 
     if (status === "error") {
       toast.error(
-        "An error occurred while processing your payment. Please try again later."
+        "An error occurred while processing your payment. Please try again later.",
       );
     }
 

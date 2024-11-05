@@ -37,7 +37,7 @@ type PageParams = {
 const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
   //States
   const [currencySelected, setCurrencySelected] = useState<any>(
-    currencies.find((currency: AdminCurrencies) => currency.main)
+    currencies.find((currency: AdminCurrencies) => currency.main),
   );
 
   const [selectMethodModal, setSelectMethodModal] = useState(false);
@@ -45,8 +45,8 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
   const [planSelected, setPlanSelected] = useState<any>(null);
   const [pricing, setPricing] = useState<any>({
     frequencies: [
-      { value: "month", label: "Mensual", priceSuffix: "/mes" },
-      { value: "year", label: "Anual", priceSuffix: "/año" },
+      { value: "month", label: "Monthly", priceSuffix: "/month" },
+      { value: "year", label: "Yearly", priceSuffix: "/year" },
     ],
   });
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
@@ -108,8 +108,10 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
 
   const { payWithStripe } = usePaymentMethods(
     currencySelected.id,
-    paymentMethods
+    paymentMethods,
   );
+
+  console.log(plans);
 
   return (
     <div>
@@ -121,15 +123,15 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
         currencySelected={currencySelected}
       />
       <div className="bg-transparent">
-        <div className="flex mx-auto justify-center py-7">
+        <div className="flex mx-auto w-14 justify-center py-7">
           <Select
-            className=" w-full mx-auto max-w-7  "
+            className=" w-full mx-auto    "
             defaultValue={currencySelected?.code ?? "usd"}
             onValueChange={(value) => {
               setCurrencySelected(
                 currencies.find(
-                  (currency: AdminCurrencies) => currency.code === value
-                )
+                  (currency: AdminCurrencies) => currency.code === value,
+                ),
               );
             }}
             icon={CurrencyDollarIcon}
@@ -149,7 +151,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                 Prices
               </h2>
               <p className="mt-2 mega-title">
-                Membership plans {constants.appName}
+                Membership plans in {constants.appName}
               </p>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center"></p>
@@ -179,7 +181,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 frequency.value === option.value
                                   ? "bg-indigo-600 text-white"
                                   : " text",
-                                "cursor-pointer rounded-full px-2.5 py-1"
+                                "cursor-pointer rounded-full px-2.5 py-1",
                               )
                             }
                           >
@@ -200,7 +202,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                     ?.filter(
                       (pricing: IPricing) =>
                         pricing.frequency === frequency.value &&
-                        plan.status === "ACTIVE"
+                        plan.status === "ACTIVE",
                     )
                     .map((tier: any) => (
                       <div key={plan.id} className="col-span-1">
@@ -224,7 +226,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                             <span className="text-4xl font-bold tracking-tight mega-title">
                               {parsePriceInLocalCurrency(
                                 handleConvertCurrency(tier.price),
-                                currencySelected.code
+                                currencySelected.code,
                               )}
                             </span>
                             <span className="text-sm font-semibold leading-6 text-gray-600">
@@ -259,21 +261,25 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                           </button>
                                         )}{" "}
                                         <div className="flex flex-col">
-                                          <span>{capa.capabilitie.title}</span>
+                                          <span>{capa.capabilitie.name}</span>
                                           <p className="text-sm  text">
                                             {capa.capabilitie.description}
                                           </p>
                                         </div>
                                       </div>
                                     ) : (
-                                      <div>
-                                        - {capa.capabilitie.title}{" "}
-                                        {capa.type === "LIMIT" && "/ month"}
-                                      </div>
+                                      <li className="items-center flex space-x-3 p-1 text">
+                                        <CheckBadgeIcon className="text-green-500 h-5 w-5" />{" "}
+                                        <span>
+                                          {capa.count} {capa.capabilitie.name}{" "}
+                                          {capa.capabilitie.type === "LIMIT" &&
+                                            "/ month"}
+                                        </span>
+                                      </li>
                                     )}{" "}
                                   </li>
                                 );
-                              }
+                              },
                             )}
                           </ul>
 
@@ -287,7 +293,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                   tier.mostPopular
                                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                                 )}
                               ></button>
                             )}
@@ -305,7 +311,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 tier.mostPopular
                                   ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                   : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                               )}
                             >
                               Buy Plan

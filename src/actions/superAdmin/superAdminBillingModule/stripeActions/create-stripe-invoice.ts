@@ -24,7 +24,8 @@ export const createStripeInvoice = async (invoiceId: number) => {
 
     if (!invoice) throw new Error("Invoice not found");
 
-    if (!invoice.organization?.id) throw new Error("Client Reference Id not found");
+    if (!invoice.organization?.id)
+      throw new Error("Client Reference Id not found");
 
     const client = await getClientCustomer(invoice.organization.id);
 
@@ -60,7 +61,7 @@ export const createStripeInvoice = async (invoiceId: number) => {
         await stripeCreateInvoiceItem(payload).catch((err) => {
           console.log(err);
         });
-      })
+      }),
     )
       .then(async () => {})
       .catch((err) => {

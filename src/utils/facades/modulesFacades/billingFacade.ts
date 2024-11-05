@@ -7,14 +7,14 @@ export const getPriceRange = (pricings: Pricing[], currencyCode: string) => {
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
 
-  if(minPrice === maxPrice) return parsePriceInLocalCurrency(minPrice, currencyCode);
+  if (minPrice === maxPrice)
+    return parsePriceInLocalCurrency(minPrice, currencyCode);
 
   return `${parsePriceInLocalCurrency(
     minPrice,
-    currencyCode
+    currencyCode,
   )} - ${parsePriceInLocalCurrency(maxPrice, currencyCode)}`;
 };
-
 
 export const getMonthCountByFrecuency = (frequency: frequencyType) => {
   let months = 0;

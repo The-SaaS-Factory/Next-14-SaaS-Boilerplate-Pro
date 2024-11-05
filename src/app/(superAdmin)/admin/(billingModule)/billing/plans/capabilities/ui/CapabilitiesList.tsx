@@ -2,7 +2,7 @@ import NotFound from "@/components/layouts/errors/NotFound";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
-import {  Capability } from "@prisma/client";
+import { Capability } from "@prisma/client";
 import { getAllCapabilities } from "@/actions/superAdmin/superAdminBillingModule/get-all-capabilities";
 import DeleteModel from "@/components/core/DeleteModel";
 import { deleteCapabilitie } from "@/actions/superAdmin/superAdminBillingModule/delete-capacitie";
@@ -46,7 +46,7 @@ const CapabilitiesList = async () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y    divide-gray-200 bg-main text-primary">
-                      {data?.map((capabilitie:  Capability) => (
+                      {data?.map((capabilitie: Capability) => (
                         <tr key={capabilitie.id}>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                             <div className=" ">{capabilitie.name}</div>

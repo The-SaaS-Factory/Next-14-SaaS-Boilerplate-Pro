@@ -180,8 +180,6 @@ const NewForm = ({
       for (const fieldName in values) {
         const field = fields.find((f: any) => f.name === fieldName);
 
-        console.log(field);
-
         if (field) {
           if (typeof values[fieldName] === "object") {
             if (Array.isArray(values[fieldName])) {
@@ -217,8 +215,6 @@ const NewForm = ({
                   ? parsedValue
                   : values[fieldName];
             } else {
-              console.log(values[fieldName]);
-
               setValue(fieldName, values[fieldName]);
             }
           }
@@ -342,7 +338,9 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -362,7 +360,9 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -382,7 +382,9 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -428,7 +430,7 @@ const NewForm = ({
                           (watch(field.name) === "true" ? true : false)
                             ? "bg-indigo-600"
                             : "bg-gray-200",
-                          "relative inline-flex h-6 w-11   flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                          "relative inline-flex h-6 w-11   flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2",
                         )}
                       >
                         <span
@@ -437,7 +439,7 @@ const NewForm = ({
                             (watch(field.name) === "true" ? true : false)
                               ? "translate-x-5"
                               : "translate-x-0",
-                            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out text"
+                            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out text",
                           )}
                         />
                       </Switch>
@@ -459,7 +461,7 @@ const NewForm = ({
                               >
                                 {option.optionName}
                               </SelectItem>
-                            )
+                            ),
                           )}
                         </Select>
                       </div>
@@ -522,9 +524,9 @@ const NewForm = ({
                                 c.name ===
                                 watch(
                                   fields.find(
-                                    (f) => f.type === "ubication-state"
-                                  )?.name
-                                )
+                                    (f) => f.type === "ubication-state",
+                                  )?.name,
+                                ),
                             )
                             ?.municipalities?.map(
                               (option: any, index: number) => (
@@ -534,7 +536,7 @@ const NewForm = ({
                                 >
                                   {option.name}
                                 </SearchSelectItem>
-                              )
+                              ),
                             )}
                         </SearchSelect>
                       </div>
@@ -556,7 +558,7 @@ const NewForm = ({
                               >
                                 {option.optionName}
                               </SearchSelectItem>
-                            )
+                            ),
                           )}
                         </SearchSelect>
                       </div>
@@ -585,7 +587,7 @@ const NewForm = ({
                                   {option.optionName}
                                 </MultiSelectItem>
                               );
-                            }
+                            },
                           )}
                         </MultiSelect>
                         {/* <select
@@ -660,7 +662,9 @@ const NewForm = ({
 
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </>
@@ -736,7 +740,9 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </>
@@ -766,15 +772,17 @@ const NewForm = ({
                       </div>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
 
                       <MapSelector
                         openModal={
-                          mapSelectorsOpen[
+                          (mapSelectorsOpen[
                             field.name as keyof typeof mapSelectorsOpen
-                          ] ?? false
+                          ] ?? false)
                             ? true
                             : false
                         }
@@ -802,7 +810,7 @@ const NewForm = ({
                           items.forEach((newImage: any) => {
                             // Check if the new image already exists in the current list
                             const existingImageIndex = updatedImages.findIndex(
-                              (img: any) => img.data_url === newImage.data_url
+                              (img: any) => img.data_url === newImage.data_url,
                             );
 
                             if (existingImageIndex !== -1) {
@@ -883,7 +891,7 @@ const NewForm = ({
                                           onClick={(e) => {
                                             e.preventDefault();
                                             const currentImages = watch(
-                                              field.name
+                                              field.name,
                                             );
                                             const updatedImages =
                                               currentImages.slice(); // Create a copy of the current images
@@ -924,7 +932,9 @@ const NewForm = ({
                       </ImageUploading>
                       {field.note && (
                         <div className="italic ">
-                          <p className="text-sm  text-secondary ">{field.note}</p>
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
                         </div>
                       )}
                     </>
@@ -1063,7 +1073,7 @@ const ListFeatureField: React.FC<ListFeatureFieldProps> = ({
   const handleFieldChangeOnEdit = (
     fieldName: string,
     value: string,
-    index: number
+    index: number,
   ) => {
     setItems((prevItems) => {
       const updatedItems = [...prevItems];

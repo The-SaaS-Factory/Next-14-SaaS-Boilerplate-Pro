@@ -33,6 +33,6 @@ export const useCurrencyState = create<State & Actions>()(
     {
       name: "currency-storage", // Nombre clave en localStorage
       getStorage: () => localStorage, // Especifica el almacenamiento
-    }
-  )
+    },
+  ),
 );

@@ -12,7 +12,7 @@ import {
 
 import { constants } from "@/lib/constants";
 import useSuperAdmin from "@/utils/hooks/useSuperAdmin";
-import { Users } from "lucide-react";
+import { UserIcon, Users } from "lucide-react";
 import { IOrganization } from "@/interfaces/saasTypes";
 
 const SettingsTabs = ({
@@ -28,8 +28,8 @@ const SettingsTabs = ({
     [
       {
         path: "/home/settings/profile",
-        label: "Profile",
-        icon: UsersIcon,
+        label: "Account",
+        icon: UserIcon,
       },
       isOrganizationAdmin && {
         path: "/home/settings/organization/settings",
@@ -51,7 +51,7 @@ const SettingsTabs = ({
         label: "Portal",
         icon: CreditCardIcon,
       },
-    ].filter((item) => item)
+    ].filter((item) => item),
   );
 
   useEffect(() => {

@@ -4,11 +4,11 @@
 /* SaaS Boilerplate styles */
 
 .container {
-  @apply max-w-7xl mx-auto
+  @apply max-w-7xl mx-auto;
 }
 
 .g-main {
-  @apply bg-gradient-to-r from-cyan-50 via-slate-100 to-blue-50
+  @apply bg-gradient-to-r from-cyan-50 via-slate-100 to-blue-50;
 }
 
 /* End SaaS Boilerplate styles */
@@ -24,7 +24,7 @@
   @apply text-xl text-gray-600 dark:text-gray-400;
 }
 
-.text-secondary  {
+.text-secondary {
   @apply text-base  text-gray-500 dark:text-gray-400;
 }
 
@@ -32,10 +32,8 @@
   @apply border-sky-500;
 }
 
-
-
 .bg-primary {
-  @apply bg-black/80;
+  @apply bg-[#4437cd];
 }
 
 .text-primary-foreground {
@@ -104,7 +102,6 @@
 .bg-main {
   @apply bg-gradient-to-bl bg-opacity-25 from-gray-50 via-slate-50 to-gray-100 dark:bg-gradient-to-bl dark:from-[#161616] dark:via-[#1b1b1b] dark:to-[#161616];
 }
- 
 
 .bg-main-hover {
   @apply hover:bg-gradient-to-bl hover:from-slate-100 hover:via-gray-200 hover:to-gray-300 hover:dark:from-gray-700 hover:dark:via-gray-800 hover:dark:to-gray-700;

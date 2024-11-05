@@ -38,7 +38,7 @@ export const MultiTentantProfileButton = ({
 
   useEffect(() => {
     getAllUserOrganizations();
-  }, []);
+  }, [getAllUserOrganizations, setOrganizations, userMembership, organization]);
 
   const handleChangeProfile = async (organizationId: number) => {
     await updateUserProfileActive(organizationId).then(() => {
@@ -112,9 +112,7 @@ export const MultiTentantProfileButton = ({
                       </div>
                     )}
                   </MenuItem>
-                  <Link
-                    href={"http://localhost:3000/home/settings/billing/buyPlan"}
-                  >
+                  <Link href={"/home/settings/billing/buyPlan"}>
                     <Button variant="secondary" className="w-full">
                       Upgrade
                       <span className="relative ml-3 flex h-3 w-3">
@@ -134,7 +132,7 @@ export const MultiTentantProfileButton = ({
                       href={"/home/settings/profile"}
                       className={classNames("block px-3  leading-6 text")}
                     >
-                      Profile settings
+                      Account settings
                     </Link>
                   </div>
                 )}
@@ -145,7 +143,7 @@ export const MultiTentantProfileButton = ({
                     <LogOut className="w-6 h-6  text" />
                     <button
                       className={classNames(
-                        " bg-main-hover px-3   leading-6 text-primary text-left w-full"
+                        " bg-main-hover px-3   leading-6 text-primary text-left w-full",
                       )}
                       onClick={() => signOut()}
                     >

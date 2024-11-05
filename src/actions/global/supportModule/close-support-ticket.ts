@@ -13,7 +13,5 @@ export const closeSupportTicket = async (ticketId: number) => {
     },
   });
 
-  
-
   revalidatePath("/support/ticket" + ticketId);
 };

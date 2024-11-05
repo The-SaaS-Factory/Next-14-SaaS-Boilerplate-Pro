@@ -1,6 +1,5 @@
 import NotFound from "@/components/layouts/errors/NotFound";
 import Pagination from "@/components/ui/commons/Pagination";
-import OperateUser from "./OperateUser";
 import UserCard from "@/components/ui/commons/UserCard";
 import { getAllTenantBySearch } from "@/actions/global/tenantSystem/get-all-tenants";
 import { IOrganization } from "@/interfaces/saasTypes";
@@ -78,7 +77,7 @@ const TenantList = async ({
                             <div className=" ">
                               {tenant.subscription.plan.name ?? "-"} / until{" "}
                               {formatTimestampToDateString(
-                                tenant.subscription.endDate
+                                tenant.subscription.endDate,
                               )}
                             </div>
                           )}

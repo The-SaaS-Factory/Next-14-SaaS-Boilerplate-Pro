@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
- 
+
 const MembershipActivateBanner = ({
   membershipName,
   membershipEndDate,
@@ -8,16 +8,11 @@ const MembershipActivateBanner = ({
   membershipName: string;
   membershipEndDate: string;
 }) => {
-
- 
   return (
     <div className="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
       {membershipName && (
         <>
-          <div
-            className="9"
-            aria-hidden="true"
-          >
+          <div className="9" aria-hidden="true">
             <div
               className="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-[#ff80b5] to-[#9089fc] opacity-30"
               style={{
@@ -41,12 +36,12 @@ const MembershipActivateBanner = ({
           <div className="flex items-center space-x-2">
             <p className="title">
               <span>
-               Felicitaciones
+                Felicitaciones
                 <strong className="font-semibold pr-1">
                   {" "}
                   {membershipName}
                 </strong>
-                 Plan
+                Plan
                 <svg
                   viewBox="0 0 2 2"
                   className="mx-2 inline h-0.5 w-0.5 fill-current"

@@ -12,7 +12,7 @@ export const deletePaymentMethod = async (paymentMethodId: number) => {
 
   checkPermission(
     userMembership.permissions.map((p) => p.name),
-    scope
+    scope,
   );
 
   await prisma.paymentMethod.delete({

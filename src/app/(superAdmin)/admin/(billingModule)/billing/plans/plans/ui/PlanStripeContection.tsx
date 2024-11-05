@@ -5,7 +5,6 @@ import React from "react";
 import { toast } from "sonner";
 
 const PlanStripeContection = ({ plan }: { plan: PlanType }) => {
-  
   const handleStripeConectionWithPlan = async () => {
     const promise = () =>
       new Promise((resolve, reject) =>
@@ -18,7 +17,7 @@ const PlanStripeContection = ({ plan }: { plan: PlanType }) => {
           })
           .catch((e) => {
             reject(e.message);
-          })
+          }),
       );
 
     toast.promise(promise, {

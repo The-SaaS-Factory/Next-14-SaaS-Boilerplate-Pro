@@ -1,6 +1,8 @@
 "use server";
+
 import prisma from "@/lib/db";
 import { cache } from "react";
+
 const getCurrentMembership = async (organizationId: number) => {
   return await prisma.subscription.findFirst({
     where: {
@@ -87,7 +89,7 @@ const createMembership = async ({
 };
 
 export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
-  planId = 0
+  planId = 0,
 ) => {
   const users = await prisma.subscription.findMany({
     where: {
@@ -99,14 +101,14 @@ export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
   users.map((membership: any) => {
     propagateCapabilitiesFromPlanToOrganization(
       planId,
-      membership.id as number
+      membership.id as number,
     );
   });
 };
 
 export const propagateCapabilitiesFromPlanToOrganization = async (
   planId: number,
-  organizationId: number
+  organizationId: number,
 ) => {
   const capabilities = await prisma.planCapabilities.findMany({
     where: {
@@ -145,12 +147,12 @@ export const propagateCapabilitiesFromPlanToOrganization = async (
           },
         });
       }
-    })
+    }),
   );
 };
 
 export const getOrganizationCapabilitiesNames = async (
-  organizationId: number
+  organizationId: number,
 ) => {
   const capabilities = await prisma.organizationCapabilities.findMany({
     where: {
@@ -166,14 +168,10 @@ export const getOrganizationCapabilitiesNames = async (
     },
   });
 
-  // Verifica si membership y capability existen antes de mapear
   const capabilityNames = capabilities
     ?.filter((capa) => {
-      console.log(capa);
-
       if (capa.capability.type === "PERMISSION") {
         return (capa.count = 1);
-      } else {
       }
     })
     .map((capability) => capability?.capability.name);
@@ -184,15 +182,14 @@ export const getOrganizationCapabilitiesNames = async (
 export const checkCapabilityPermission = cache(
   async (organizationId: number, capabilityName: string) => {
     const capabilities = await getOrganizationCapabilitiesNames(organizationId);
-    console.log(capabilities);
 
     return capabilities?.includes(capabilityName) ?? false;
-  }
+  },
 );
 
 export const checkCapabilityLimit = async (
   organizationId: number,
-  capabilityName: string
+  capabilityName: string,
 ) => {
   const organizationCapabilities =
     await prisma.organizationCapabilities.findFirst({
@@ -231,7 +228,7 @@ export const checkCapabilityLimit = async (
 
 export const registerCapabilityUsage = async (
   organizationId: number,
-  capabilityName: string
+  capabilityName: string,
 ) => {
   const organizationCapability =
     await prisma.organizationCapabilities.findFirst({
@@ -258,51 +255,7 @@ export const registerCapabilityUsage = async (
   return true;
 };
 
-// export const checkOrganizationCapability = async (
-//   organizationId: number,
-//   capabilityName: string
-// ) => {
-//   const organizationCapability =
-//     await prisma.organizationCapabilities.findFirst({
-//       where: {
-//         organizationId,
-//         capability: {
-//           name: capabilityName,
-//         },
-//       },
-//       include: {
-//         capability: true,
-//       },
-//     });
-
-//   if (!organizationCapability) return false;
-
-//   if (organizationCapability.capability.type === "PERMISSION") {
-//     return organizationCapability.count === 1;
-//   } else if (organizationCapability.capability.type === "LIMIT") {
-//     const subscription = await prisma.subscription.findFirst({
-//       where: {
-//         organizationId,
-//       },
-//     });
-
-//     if (!subscription) return false;
-
-//     const planCapability = await prisma.planCapabilities.findFirst({
-//       where: {
-//         planId: subscription.planId,
-//         capabilityId: organizationCapability.capability.id,
-//       },
-//     });
-
-//     if (!planCapability) return false;
-
-//     return organizationCapability.count < planCapability.count;
-//   }
-
-//   return false;
-// };
-export const checkOrganizationCapability = ({
+export const checkOrganizationCapabilityInServer = ({
   capabilityName,
   organizationCapabilities,
   subscription,
@@ -311,7 +264,7 @@ export const checkOrganizationCapability = ({
   if (!organizationCapabilities) return false;
 
   const organizationCapability = organizationCapabilities.find(
-    (o) => o.name === capabilityName
+    (o) => o.name === capabilityName,
   );
 
   if (!organizationCapability) return false;

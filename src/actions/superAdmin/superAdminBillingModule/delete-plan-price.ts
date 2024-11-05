@@ -8,9 +8,10 @@ const scope = "superAdmin:billing:upsert";
 
 export const deletePlanPrice = async (
   planId: number | undefined,
-  priceId: number | undefined
+  priceId: number | undefined,
 ) => {
- const { userMembership } = await getMembership(); const permissions  = userMembership.permissions.map((p) => p.name);
+  const { userMembership } = await getMembership();
+  const permissions = userMembership.permissions.map((p) => p.name);
 
   checkPermission(permissions, scope);
 

@@ -114,11 +114,11 @@ const SuperAdminTicketsList = async ({
               <span className="font-medium">{totalCount}</span> resultados
             </div>
             <Pagination
-                offset={offset}
-                dataLength={data.length}
-                totalCount={totalCount}
-                totalPages={totalPages}
-              />
+              offset={offset}
+              dataLength={data.length}
+              totalCount={totalCount}
+              totalPages={totalPages}
+            />
           </div>
         </div>
       )}

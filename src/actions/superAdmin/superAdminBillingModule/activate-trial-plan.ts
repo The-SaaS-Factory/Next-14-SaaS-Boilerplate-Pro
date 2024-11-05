@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
 import { updateMembership } from "@/utils/facades/serverFacades/membershipFacade";
-import { getMembership  } from "@/utils/facades/serverFacades/userFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export type PlanInvoiceType = {
   currencyId: number;
@@ -18,7 +18,7 @@ export const activateTrialPlan = async ({
   pricingId: number;
   currencyId: number;
 }) => {
-  const {  organization } = await getMembership();
+  const { organization } = await getMembership();
   const plan = await prisma.plan.findFirst({
     where: {
       id: planId,

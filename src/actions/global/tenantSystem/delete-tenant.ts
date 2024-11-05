@@ -12,13 +12,11 @@ export const deleteTenant = async (modelId: number) => {
 
   checkPermission(permissions, tenantModuleScope);
 
-  const tenant = await prisma.organization.delete({
+  await prisma.organization.delete({
     where: {
       id: modelId,
     },
   });
-
-  console.log(tenant);
 
   revalidatePath("admin/agencias");
 };

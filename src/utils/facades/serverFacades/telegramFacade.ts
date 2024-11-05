@@ -2,14 +2,13 @@ import { getSuperAdminSetting } from "./superAdminFacade";
 
 export const sendMessageToTelegram = async (message: string) => {
   const telegramGroupToken: string | null = await getSuperAdminSetting(
-    "TELEGRAM_GROUP_TOKEN"
+    "TELEGRAM_GROUP_TOKEN",
   );
 
   if (!telegramGroupToken) return;
 
-  const telegramGroupId: string | null = await getSuperAdminSetting(
-    "TELEGRAM_GROUP_ID"
-  );
+  const telegramGroupId: string | null =
+    await getSuperAdminSetting("TELEGRAM_GROUP_ID");
 
   if (!telegramGroupId) return;
 

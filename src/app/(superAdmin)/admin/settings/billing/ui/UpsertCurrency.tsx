@@ -1,6 +1,6 @@
 import NewForm from "@/components/core/NewForm";
 import { upsertCurrency } from "@/actions/superAdmin/superAdminBillingModule/upsert-currencies";
- 
+
 const UpsertCurrency = ({
   planId,
   values,
@@ -53,7 +53,6 @@ const UpsertCurrency = ({
 
   return (
     <>
-      
       <NewForm
         values={values ?? []}
         info={formInfo}

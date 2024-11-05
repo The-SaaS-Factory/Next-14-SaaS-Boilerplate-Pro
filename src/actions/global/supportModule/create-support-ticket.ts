@@ -57,7 +57,7 @@ export const createSupportTickets = async (args: any) => {
                 content: data,
                 type: PublicationContentType.GALLERY,
               };
-            })
+            }),
           );
         }
 
@@ -82,7 +82,7 @@ export const createSupportTickets = async (args: any) => {
     {
       maxWait: 5000,
       timeout: 10000,
-    }
+    },
   );
 
   revalidatePath("/home/support");

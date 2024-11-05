@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 const usePaymentMethods = (
   currencyId: number,
-  paymentMethods: PaymentMethod[]
+  paymentMethods: PaymentMethod[],
 ) => {
   const [hasPaymentMethods, setHasPaymentMethods] = useState(false);
   const [paymentMethosAvailables, setPaymentMethosAvailables] = useState<
@@ -59,7 +59,7 @@ const usePaymentMethods = (
     if (model === "INVOICE") {
       window.open(
         `https://wa.me/+5541999568376?text=Hola,%20quisiera%20pagar%20mi%20factura%20con%20el%20id%20${modelId}`,
-        "_blank"
+        "_blank",
       );
     } else if (model === "PLAN") {
       await createPlanInvoice({
@@ -72,7 +72,7 @@ const usePaymentMethods = (
         .then((data) => {
           window.open(
             `https://wa.me/+5541999568376?text=Hola,%20quisiera%20pagar%20mi%20factura%20con%20el%20id%20${data.id}`,
-            "_blank"
+            "_blank",
           );
         })
         .catch((error) => {
@@ -86,7 +86,7 @@ const usePaymentMethods = (
     if (model === "INVOICE") {
       window.open(
         `https://wa.me/+5541999568376?text=Hola,%20quisiera%20pagar%20mi%20factura%20con%20el%20id%20${modelId}`,
-        "_blank"
+        "_blank",
       );
     } else if (model === "PLAN") {
       await createPlanInvoice({
@@ -99,7 +99,7 @@ const usePaymentMethods = (
         .then((data) => {
           window.open(
             `https://wa.me/+5541999568376?text=Hola,%20quisiera%20pagar%20mi%20factura%20con%20el%20id%20${data.id}`,
-            "_blank"
+            "_blank",
           );
         })
         .catch((error) => {

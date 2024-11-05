@@ -9,7 +9,7 @@ import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 export const createCheckoutSession = async (
   invoiceId: number,
-  modelName: string
+  modelName: string,
 ) => {
   if (!invoiceId) throw new Error("Invoice Id not found");
   let stripeModeSubscription = false;

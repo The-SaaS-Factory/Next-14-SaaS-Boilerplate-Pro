@@ -62,10 +62,7 @@ const UpsertCapabilitie = ({
         modelToUpdate={capabilityId}
         onSubmit={upsertCapabilitie}
       />
-      <div className="max-w-lg px-10 mx-auto">
-
-      
-      </div>
+      <div className="max-w-lg px-10 mx-auto"></div>
     </>
   );
 };

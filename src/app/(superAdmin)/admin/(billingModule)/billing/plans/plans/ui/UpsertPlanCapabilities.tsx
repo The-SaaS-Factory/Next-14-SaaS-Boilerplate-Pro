@@ -66,19 +66,19 @@ const UpsertPlanCapabilities = ({
                             {" "}
                             {capabilitie.type === "LIMIT" ||
                             capabilitie.type === "AMOUNT"
-                              ? planOnEdit.PlanCapabilities?.find(
+                              ? (planOnEdit.PlanCapabilities?.find(
                                   (c: { capabilityId: number }) =>
-                                    c.capabilityId == capabilitie.id
-                                )?.count ?? "Not set"
+                                    c.capabilityId == capabilitie.id,
+                                )?.count ?? "Not set")
                               : ""}
                           </span>
                           <span className="text-sky-500 ml-1 font-medium">
                             {" "}
                             {capabilitie.type === "PERMISSION"
-                              ? planOnEdit.PlanCapabilities?.find(
+                              ? (planOnEdit.PlanCapabilities?.find(
                                   (c: { capabilityId: number }) =>
-                                    c.capabilityId == capabilitie.id
-                                )?.count ?? null
+                                    c.capabilityId == capabilitie.id,
+                                )?.count ?? null)
                                 ? "Yes"
                                 : "No"
                               : ""}
@@ -108,7 +108,7 @@ const UpsertPlanCapabilities = ({
                             onClick={() =>
                               saveCapabilitieForPlan(
                                 capabilitie.id,
-                                capabilitie.name
+                                capabilitie.name,
                               )
                             }
                           >

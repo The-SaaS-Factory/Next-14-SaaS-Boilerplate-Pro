@@ -22,7 +22,7 @@ import Image from "next/image";
 const AgentesPage = () => {
   const [members, setMembers] = useState([]);
   console.log(members);
-  
+
   const { register, setValue, watch } = useForm();
 
   const getMembers = async () => {

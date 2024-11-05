@@ -9,10 +9,6 @@ export const settings = [
       "https://ik.imagekit.io/cluzstudio/a7dE9Mk_lxXXFZ9Le?updatedAt=1693562567818",
   },
   {
-    settingName: "PLATFORM_FRONTEND_URL",
-    settingValue: "https://85e0-45-230-102-63.ngrok-free.app/",
-  },
-  {
     settingName: "PLATFORM_LOGO",
     settingValue:
       "https://ik.imagekit.io/cluzstudio/a7dE9Mk_lxXXFZ9Le?updatedAt=1693562567818",
@@ -61,7 +57,15 @@ export const settings = [
     settingValue: "https://ik.imagekit.io/cluzstudio",
   },
   {
-    settingName: "NOVU_SUPER_ADMIN_TEMPLATE_ID",
-    settingValue: "superadmin-new-organization-created",
+    settingName: "MARKETING_FREE_TRIAL",
+    settingValue: "true",
+  },
+  {
+    settingName: "MARKETING_FREE_DAYS",
+    settingValue: "14",
+  },
+  {
+    settingName: "MARKETING_FREE_TRIAL_PLAN",
+    settingValue: "1",
   },
 ];

@@ -8,14 +8,6 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${constants.appUrl}/buscar`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${constants.appUrl}/login`,
-      lastModified: new Date(),
-    },
   ];
 
   return platformUrls;

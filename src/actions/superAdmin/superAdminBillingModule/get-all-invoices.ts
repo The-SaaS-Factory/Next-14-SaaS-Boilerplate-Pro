@@ -15,9 +15,9 @@ export const getAllInvoices = async ({
   let whereSearch = {};
 
   let findId: string | number =
-  typeof args.search === "string"
-    ? args.search.replace(/\D/g, "")
-    : args.search;
+    typeof args.search === "string"
+      ? args.search.replace(/\D/g, "")
+      : args.search;
 
   if (typeof findId === "string" && findId !== "") {
     findId = parseInt(findId);
@@ -27,7 +27,7 @@ export const getAllInvoices = async ({
     whereSearch = {
       OR: [
         {
-          id:  findId
+          id: findId,
         },
         {
           Organization: {
@@ -37,7 +37,7 @@ export const getAllInvoices = async ({
           },
         },
         {
-           user: {
+          user: {
             name: {
               contains: args.search,
             },
@@ -54,7 +54,7 @@ export const getAllInvoices = async ({
       ...whereSearch,
     },
     include: {
-       organization: {
+      organization: {
         select: {
           id: true,
           name: true,

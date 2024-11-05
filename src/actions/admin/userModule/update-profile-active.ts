@@ -5,8 +5,6 @@ import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 
 export const updateUserProfileActive = async (organizationId: number) => {
-  console.log(organizationId);
-
   const session = await getServerSession(authOptions);
 
   const user = await prisma.user.findFirst({

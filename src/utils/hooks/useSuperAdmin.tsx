@@ -3,11 +3,11 @@ import { useState } from "react";
 
 export const checkModulePermission = (
   permissions: string[],
-  module: string
+  module: string,
 ) => {
   if (permissions && permissions.length > 0) {
     const modulePermissions = permissions.filter((permission) =>
-      permission.startsWith(module)
+      permission.startsWith(module),
     );
     if (modulePermissions.length > 0) {
       return true;
@@ -19,7 +19,7 @@ export const checkModulePermission = (
 export const hasSuperAdminPermission = (permissions: string[]) => {
   if (permissions && permissions.length > 0) {
     const superAdminPermissions = permissions.filter((permission) =>
-      permission.startsWith("superAdmin")
+      permission.startsWith("superAdmin"),
     );
     if (superAdminPermissions.length > 0) {
       return true;
@@ -44,7 +44,7 @@ const useSuperAdmin = (profile, moduleName?: string) => {
       ) {
         if (moduleName) {
           setHasModulePermission(
-            checkModulePermission(profile.permissions as string[], moduleName)
+            checkModulePermission(profile.permissions as string[], moduleName),
           );
         }
         setTimeout(() => {

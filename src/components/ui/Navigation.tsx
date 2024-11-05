@@ -56,11 +56,11 @@ function NavLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={clsx(
-        "flex justify-between gap-2 py-1 pr-3 text-base transition",
+        "flex justify-between gap-2 py-1 pr-3 text-primary  transition",
         isAnchorLink ? "pl-7" : "pl-4",
         active
           ? "text-zinc-900 dark:text-white"
-          : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+          : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white",
       )}
     >
       <span className="truncate">{children}</span>
@@ -84,7 +84,7 @@ function VisibleSectionHighlight({
       useSectionStore((s) => s.sections),
       useSectionStore((s) => s.visibleSections),
     ],
-    useIsInsideMobileNavigation()
+    useIsInsideMobileNavigation(),
   );
 
   const pathName = usePathname();
@@ -93,8 +93,8 @@ function VisibleSectionHighlight({
   let firstVisibleSectionIndex = Math.max(
     0,
     [{ id: "_top" }, ...sections].findIndex(
-      (section) => section.id === visibleSections[0]
-    )
+      (section) => section.id === visibleSections[0],
+    ),
   );
   let itemHeight = remToPx(2);
   let height = isPresent
@@ -134,7 +134,7 @@ function ActivePageMarker({
   return (
     <motion.div
       layout
-      className="absolute left-2 h-6 w-px bg-[#4437cd]"
+      className="absolute left-2 h-6 w-px bg-primary"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -142,8 +142,6 @@ function ActivePageMarker({
     />
   );
 }
- 
-
 
 function NavigationGroup({
   group,
@@ -158,12 +156,10 @@ function NavigationGroup({
   let isInsideMobileNavigation = useIsInsideMobileNavigation();
   let [pathname, sections] = useInitialValue(
     [usePathname(), useSectionStore((s) => s.sections)],
-    isInsideMobileNavigation
+    isInsideMobileNavigation,
   );
 
   const pathName = usePathname();
-  // let seg = pathName.split("/");
-  // let pathNameWithoutLand = "/" + seg.slice(2).join("/");
 
   let isActiveGroup =
     group.items.findIndex((link) => link.href === pathName) !== -1;

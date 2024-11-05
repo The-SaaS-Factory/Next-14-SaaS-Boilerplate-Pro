@@ -16,8 +16,6 @@ export const createInvoiceItemToInvoice = async ({
 }: {
   payload: CreateInvoiceItem;
 }) => {
-
-
   //Create Invoice Item
   const payloadInvoiceItem: Prisma.InvoiceItemCreateInput = {
     Invoice: {

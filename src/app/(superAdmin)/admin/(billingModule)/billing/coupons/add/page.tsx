@@ -11,7 +11,7 @@ const SuperAdminBillingCouponModuleAddPage = () => {
   return (
     <div>
       <PageName
-      name="New Coupon"
+        name="New Coupon"
         breadcrumbs={[
           {
             name: "Coupons",

@@ -78,7 +78,7 @@ export const connectPricingWithStripe = async ({
 
       const stripePrice = await stripeCreatePlan(
         stripeProductId,
-        planPayload
+        planPayload,
       ).catch((error) => {
         console.log(error);
       });

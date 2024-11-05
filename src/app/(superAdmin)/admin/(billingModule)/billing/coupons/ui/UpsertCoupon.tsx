@@ -58,7 +58,7 @@ const UpsertCoupon = async ({
         users.data.length > 0
           ? users.data?.map((user) => ({
               optionValue: user.id as number,
-              optionName: user.name  + " - " + user.id,
+              optionName: user.name + " - " + user.id,
             }))
           : [],
     },

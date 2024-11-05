@@ -46,7 +46,7 @@ const ViewSupportTicketDetailsPage = ({
           {ticket.SupportTicketMessage?.map((message: any) => {
             return message.SupportTicketMessageContent.filter(
               (content: any) =>
-                content.type === "TEXT" && content.content !== ""
+                content.type === "TEXT" && content.content !== "",
             ).map((text: any, index: number) => {
               return (
                 <Card
@@ -78,7 +78,7 @@ const ViewSupportTicketDetailsPage = ({
                   <Flex>
                     {message.SupportTicketMessageContent.filter(
                       (content: any) =>
-                        content.type === "GALLERY" && content.content !== ""
+                        content.type === "GALLERY" && content.content !== "",
                     ).map((image: any, index: number) => {
                       return (
                         <div key={`image${index}`}>

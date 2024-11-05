@@ -7,7 +7,7 @@ import { getAdminSettingValue, getSuperAdminSetting } from "./superAdminFacade";
 import { updateMembership } from "./membershipFacade";
 import {
   notifyToSuperAdmin,
-   sendInternalNotification,
+  sendInternalNotification,
 } from "./notificationFacade";
 import prisma from "@/lib/db";
 import { ICoupon, InvoiceItemType } from "@/interfaces/billingModule";
@@ -69,10 +69,8 @@ export const getClientCustomer = async (id: number) => {
 
   if (client) {
     //check if customer exists in stripe
-    
-    const stripeCustomer = await getStripeCustomer(client.customerId);
 
-    
+    const stripeCustomer = await getStripeCustomer(client.customerId);
 
     if (!stripeCustomer) {
       //delete client
@@ -97,7 +95,7 @@ export const getClientCustomer = async (id: number) => {
 };
 
 export const createInvoice = async (
-  invoicePayload: Prisma.InvoiceCreateInput
+  invoicePayload: Prisma.InvoiceCreateInput,
 ) => {
   return await prisma.invoice.create({
     data: {
@@ -108,7 +106,7 @@ export const createInvoice = async (
 
 export const updateInvoice = async (
   invoiceId: number,
-  payload: Prisma.InvoiceUpdateInput
+  payload: Prisma.InvoiceUpdateInput,
 ) => {
   return await prisma.invoice
     .update({
@@ -123,14 +121,14 @@ export const updateInvoice = async (
 export const stripeEventPaymentFailed = async (eventData: any) => {
   const setting: any = getAdminSettingValue(
     "STRIPE_CUSTUMER_IR",
-    eventData.customer
+    eventData.customer,
   );
 
   if (setting && setting.userId) {
-     sendInternalNotification(
+    sendInternalNotification(
       setting.userId,
       "Payment failed",
-      eventData.last_payment_error.message
+      eventData.last_payment_error.message,
     );
 
     // notifyAdmin(
@@ -144,7 +142,7 @@ export const stripeEventPaymentFailed = async (eventData: any) => {
 export const planPaid = async (
   plan: Plan,
   invoice: Invoice,
-  pricing: Pricing
+  pricing: Pricing,
 ) => {
   let months = getMonthCountByFrecuency(pricing.frequency);
 
@@ -229,7 +227,7 @@ export const invoiceItemPaid = async ({
     await processInvoiceItemInPayment(
       invoiceItem,
       invoiceItem.Invoice,
-      pricing
+      pricing,
     );
   } catch (error: any) {
     throw new Error(error.message);
@@ -239,7 +237,7 @@ export const invoiceItemPaid = async ({
 export const processInvoiceItemInPayment = async (
   invoiceItem: InvoiceItem,
   invoice: Invoice,
-  pricing?: Pricing
+  pricing?: Pricing,
 ) => {
   /////////////////////userId - currency ///price/
 
@@ -263,7 +261,7 @@ export const processInvoiceItemInPayment = async (
 
 export const calculateInvoiceTotal = (
   items: InvoiceItemType[],
-  coupons: ICoupon[]
+  coupons: ICoupon[],
 ) => {
   let total = 0;
   items.forEach((item) => {
@@ -302,7 +300,7 @@ export const getInvoiceTotal = (
   items: InvoiceItemType[],
   currencyCode = "USD",
   coupons: ICoupon[],
-  type?: string
+  type?: string,
 ) => {
   const { total } = calculateInvoiceTotal(items, coupons);
   let finalTotal = total;

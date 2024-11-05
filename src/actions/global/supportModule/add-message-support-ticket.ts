@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
-import {  sendInternalNotification } from "@/utils/facades/serverFacades/notificationFacade";
- import { getMembership} from "@/utils/facades/serverFacades/userFacade";
+import { sendInternalNotification } from "@/utils/facades/serverFacades/notificationFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
 import { PublicationContentType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -37,7 +37,7 @@ export const addMessageSupportTicket = async (args: any) => {
               content: data,
               type: PublicationContentType.GALLERY,
             };
-          })
+          }),
         );
       }
 
@@ -66,9 +66,9 @@ export const addMessageSupportTicket = async (args: any) => {
       }
 
       if (ticket.userId !== id) {
-         sendInternalNotification(
+        sendInternalNotification(
           id,
-          `You have a new message in your ticket #${ticket.id}`
+          `You have a new message in your ticket #${ticket.id}`,
         );
 
         await prisma.supportTicket.update({

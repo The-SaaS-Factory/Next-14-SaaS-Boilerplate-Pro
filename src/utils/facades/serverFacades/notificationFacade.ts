@@ -9,7 +9,7 @@ const notificationLoopsId = process.env.NOTIFICATION_LOOPS_ID;
 export const sendInternalNotification = async (
   id: number,
   content: string,
-  image?: string
+  image?: string,
 ): Promise<void> => {
   try {
     const payload = {
@@ -67,9 +67,9 @@ export const notifyToSuperAdmin = async (message: string) => {
           message.substring(0, 20) +
             "... | " +
             "Notification from " +
-            constants.appName
+            constants.appName,
         );
-    })
+    }),
   );
 
   if (saasFeatures.telegramNotification) {
@@ -80,7 +80,7 @@ export const notifyToSuperAdmin = async (message: string) => {
 export const sendNotificationViaEmail = async (
   email: string,
   content: string,
-  subject: string
+  subject: string,
 ): Promise<void> => {
   if (!notificationLoopsId) return;
 

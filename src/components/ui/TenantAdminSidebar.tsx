@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -17,14 +17,15 @@ import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacad
 import { checkOrganizationCapability } from "@/utils/facades/serverFacades/membershipFacade";
 
 const OrganizationAdminSidebar = () => {
+const OrganizationAdminSidebar = () => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
       toggleSidebarMenu,
       isSidebarMenuOpen,
-    })
+    }),
   );
 
-  const { userMembership, organization } = useMembership();
+  const { userMembership, checkOrganizationCapability } = useMembership();
 
   const { tenantNavigation } = useNavigation();
 
@@ -95,6 +96,9 @@ const OrganizationAdminSidebar = () => {
                       <span className="font-bold text-2xl">
                         {constants.appName}
                       </span>
+                      <span className="font-bold text-2xl">
+                        {constants.appName}
+                      </span>
                     </Link>
                   </div>
                   <div className="relative"></div>
@@ -150,6 +154,7 @@ const OrganizationAdminSidebar = () => {
           {" "}
           <div className="flex h-16 shrink-0 items-center">
             <Link href="/" className="">
+              <span className="font-bold text-2xl">{constants.appName}</span>
               <span className="font-bold text-2xl">{constants.appName}</span>
             </Link>
           </div>

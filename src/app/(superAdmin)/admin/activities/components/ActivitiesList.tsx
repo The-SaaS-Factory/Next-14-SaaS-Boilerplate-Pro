@@ -156,7 +156,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                           if (selectedAgencies) {
                             if (selectedAgencies.includes(item.id)) {
                               const copy = selectedAgencies?.filter(
-                                (a) => a !== item.id
+                                (a) => a !== item.id,
                               );
                               handleSearchParams("profile", copy);
                             } else {
@@ -247,7 +247,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       <TableCell className="text-center">
                         <span>
                           {formatTimestampToDateString(
-                            log.createdAt.toLocaleDateString()
+                            log.createdAt.toLocaleDateString(),
                           )}
                         </span>
                       </TableCell>

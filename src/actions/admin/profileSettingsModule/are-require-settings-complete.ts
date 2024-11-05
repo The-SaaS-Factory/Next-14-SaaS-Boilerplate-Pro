@@ -11,7 +11,7 @@ const requiredSettings = [
 ];
 
 export const areRequiredSettingsComplete = async (
-  organizationId: number
+  organizationId: number,
 ): Promise<boolean> => {
   try {
     const settings = await prisma.organizationSetting.findMany({
@@ -19,7 +19,7 @@ export const areRequiredSettingsComplete = async (
     });
 
     const settingsMap = new Map(
-      settings.map((setting) => [setting.settingName, setting.settingValue])
+      settings.map((setting) => [setting.settingName, setting.settingValue]),
     );
 
     const allRequiredComplete = requiredSettings.every((setting) => {

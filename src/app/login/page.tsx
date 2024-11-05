@@ -124,7 +124,7 @@ export default function LoginPage() {
           setLoading(false);
           if (result.error) {
             toast.error(
-              "Credenciais inválidas ou registro pendente de aprovação"
+              "Credenciais inválidas ou registro pendente de aprovação",
             );
             return;
           }
@@ -169,7 +169,7 @@ export default function LoginPage() {
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
                         : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
-                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium"
+                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium",
                     )}
                   >
                     <tab.icon
@@ -178,7 +178,7 @@ export default function LoginPage() {
                         tab.action === action
                           ? "text-indigo-500"
                           : "text-gray-400 group-hover: text",
-                        "h-5 w-5 mr-2"
+                        "h-5 w-5 mr-2",
                       )}
                     />
                     {tab.name}
@@ -238,17 +238,29 @@ export default function LoginPage() {
                     </div>
 
                     <div>
-                      <button type="submit" className="w-full btn-main">
+                      <Button type="submit" className="w-full ">
                         {isLoading ? "Accessing..." : "Login"}
-                      </button>
+                      </Button>
                     </div>
                   </form>
 
                   <hr className="my-7" />
-                  <div className="flex w-full my-3">
-                    <Button className="w-full" onClick={() => signIn("google")}>
-                      Sign in with Google
-                    </Button>
+                  <div className=" flex   justify-center my-3">
+                    <button
+                      onClick={() => signIn("google")}
+                      className="flex gap-0.5 bg-neutral-100 text-neutral-800 text-sm font-bold rounded-xl px-4 py-3 hover:text-white hover:bg-[#4285F4] transition-all"
+                    >
+                      <svg
+                        className="w-5 h-5 mr-2 fill-current"
+                        role="img"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <title>Google</title>
+                        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                      </svg>
+                      Sign-in with Google
+                    </button>
                   </div>
                 </>
               ) : (
@@ -323,16 +335,28 @@ export default function LoginPage() {
                       />
                     </div>
                     <div>
-                      <button type="submit" className="w-full btn-main">
+                      <Button type="submit" className="w-full ">
                         {isLoading ? "Sending..." : "Register"}
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <hr className="my-7" />
-                  <div className="flex w-full my-3">
-                    <Button className="w-full" onClick={() => signIn("google")}>
-                      Sign up with Google
-                    </Button>
+                  <div className="flex  justify-center  my-3">
+                    <button
+                      onClick={() => signIn("google")}
+                      className="flex gap-0.5 bg-neutral-100 text-neutral-800 text-sm font-bold rounded-xl px-4 py-3 hover:text-white hover:bg-[#4285F4] transition-all"
+                    >
+                      <svg
+                        className="w-5 h-5 mr-2 fill-current"
+                        role="img"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <title>Google</title>
+                        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                      </svg>
+                      Sign-up with Google
+                    </button>
                   </div>
                 </>
               )}

@@ -7,9 +7,11 @@ export default function CTAOffer() {
             Great title offer
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, temporibus excepturi aperiam labore quaerat rem assumenda? Aperiam adipisci, accusamus autem fugiat atque possimus architecto vero impedit, omnis, nihil nemo error!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto,
+            temporibus excepturi aperiam labore quaerat rem assumenda? Aperiam
+            adipisci, accusamus autem fugiat atque possimus architecto vero
+            impedit, omnis, nihil nemo error!
           </p>
-           
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import NewForm from "@/components/core/NewForm";
 import { upsertMembership } from "@/actions/superAdmin/superAdminBillingModule/upsert-membership";
+import { getAllPlansPricings } from "@/actions/superAdmin/superAdminBillingModule/get-all-plan-pricing";
 
 const UpsertMembership = async ({
   membershipId,
@@ -12,6 +13,9 @@ const UpsertMembership = async ({
   currencies?: any;
   plans?: any;
 }) => {
+  const pricings = await getAllPlansPricings();
+  console.log(values);
+
   const formInfo = {
     name: "Manage membership",
     description: "Manage a tenant's membership manually",
@@ -19,26 +23,31 @@ const UpsertMembership = async ({
 
   const fields = [
     {
-      name: "userId",
-      label: "User Id",
+      name: "organizationId",
+      label: "Organization Id",
       type: "number",
       required: true,
     },
     {
       name: "planId",
       label: "Plan",
-      type: "select",
+      type: "searchselect",
       required: true,
       forceInteger: true,
       options: plans?.map((plan: any) => ({
         optionName: plan.name,
-        optionValue: plan.id,
+        optionValue: plan.id.toString(),
       })),
     },
     {
       name: "pricingId",
       label: "Price Id",
-      type: "number",
+      type: "searchselect",
+      forceInteger: true,
+      options: pricings?.map((pricing: any) => ({
+        optionName: `${pricing.frequency} - ${pricing.price} / ${pricing.Plan.name}`,
+        optionValue: pricing.id.toString(),
+      })),
       required: true,
     },
     {
@@ -62,7 +71,7 @@ const UpsertMembership = async ({
     {
       name: "currencyId",
       label: "Currency",
-      type: "select",
+      type: "searchselect",
       required: true,
       forceInteger: true,
       options: currencies?.map((currency: any) => ({

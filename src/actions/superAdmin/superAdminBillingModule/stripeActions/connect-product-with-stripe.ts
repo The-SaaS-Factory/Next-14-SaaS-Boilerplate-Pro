@@ -2,7 +2,7 @@
 
 import { stripeCreateProduct } from "@/utils/facades/serverFacades/stripeFacade";
 import prisma from "@/lib/db";
-import { Plan   } from "@prisma/client";
+import { Plan } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const connectProductWithStripe = async (
@@ -10,15 +10,15 @@ export const connectProductWithStripe = async (
   productPayload: {
     id: number;
     name: string;
-  }
+  },
 ) => {
-  let model: | Plan | null = null;
+  let model: Plan | null = null;
 
   const stripeProductId: string | null = await stripeCreateProduct({
     name: productPayload.name,
   });
 
-    if (modelName === "Plan") {
+  if (modelName === "Plan") {
     model = await prisma.plan.findUnique({
       where: {
         id: productPayload.id,

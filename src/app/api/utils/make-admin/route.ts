@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     const permissions = await prisma.permission.findMany({});
 
     const adminPermissions = permissions.filter((permission) =>
-      permission.name.includes("superAdmin")
+      permission.name.includes("superAdmin"),
     );
 
     const userMemberships = await prisma.userMembership.findMany({

@@ -25,7 +25,7 @@ export const useMembership = () => {
           localStorage.setItem("organization", JSON.stringify(organization));
           localStorage.setItem(
             "userMembership",
-            JSON.stringify(userMembership)
+            JSON.stringify(userMembership),
           );
 
           setOrganizationData(organization);
@@ -39,8 +39,41 @@ export const useMembership = () => {
     fetchMembershipData();
   }, []);
 
+  const checkOrganizationCapability = ({ capabilityName }) => {
+    const subscription = organizationData?.subscription;
+    const organizationCapabilities = organizationData?.capabilities;
+
+    if (!subscription) return false;
+    if (!organizationCapabilities) return false;
+
+    const organizationCapability = organizationCapabilities.find(
+      (o) => o.capability.name === capabilityName,
+    );
+
+    if (!organizationCapability) return false;
+
+    if (organizationCapability.capability.type === "PERMISSION") {
+      return organizationCapability.count === 1;
+    } else if (organizationCapability.capability.type === "LIMIT") {
+      // Usamos `await` para resolver la promesa devuelta por `find`
+      const planCapability = subscription.plan.planCapabilities.find((p) => {
+        return (
+          p.planId === subscription.planId &&
+          p.capabilityId === organizationCapability.capability.id
+        );
+      });
+
+      if (!planCapability) return false;
+
+      return organizationCapability.count < planCapability.count;
+    }
+
+    return false;
+  };
+
   return {
     organization: organizationData,
     userMembership: userMembershipData,
+    checkOrganizationCapability,
   };
 };

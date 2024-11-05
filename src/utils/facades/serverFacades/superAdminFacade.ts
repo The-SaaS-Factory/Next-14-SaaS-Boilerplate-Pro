@@ -49,7 +49,7 @@ export const getSuperAdminSetting = async (settingName: string) => {
 
 export const getAdminSettingValue = async (
   settingName: string,
-  value: string
+  value: string,
 ) => {
   const setting = await prisma.organizationSetting.findFirst({
     where: {
@@ -60,4 +60,3 @@ export const getAdminSettingValue = async (
 
   return setting ? setting : null;
 };
-

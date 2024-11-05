@@ -1,10 +1,15 @@
-npx  
+# Welcome to Next 14 SaaS Boilerplate Pro by The SaaS Factory 🎉
 
+Thank you for choosing **Next 14 SaaS Boilerplate Pro by The SaaS Factory**! This boilerplate has been designed to provide you with a solid foundation for building scalable and efficient applications. We hope it saves you time and effort, and serves as a helpful starting point for your project.
 
-https://viajespinar.vercel.app/
+Feel free to explore, modify, and extend the boilerplate to suit your needs. We’re here to support you every step of the way.
 
-El usuario super admin sera: superadmin@gmail.com 123456789
+## 📖 Documentation
 
-Admin de la primera agencia: agencia1@gmail.com 123456789
+For a comprehensive guide to using **Next 14 SaaS Boilerplate Pro by The SaaS Factory**, including setup instructions, usage tips, and customization options, please refer to the [documentation here](https://docs-next14-pro.thesaasfactory.dev/).
 
-Mimebro de la 1re agencia: agente1agencia1@gmail.com 123456789
+## 📧 Support
+
+If you have any questions, feedback, or need assistance, don't hesitate to reach out to us at [support@thesaasfactory.dev](mailto:support@thesaasfactory.dev). We’re here to help!
+
+Happy coding! 🚀

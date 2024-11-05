@@ -69,12 +69,6 @@ const SuperAdminSettingsModuleGeneralPage = async () => {
       type: "text",
       required: false,
     },
-    {
-      name: "PLATFORM_FRONTEND_URL",
-      label: "Frontend URL",
-      type: "text",
-      required: false,
-    },
   ];
 
   return (
