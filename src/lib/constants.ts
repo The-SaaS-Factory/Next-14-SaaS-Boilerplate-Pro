@@ -46,7 +46,7 @@ export const constants = {
 };
 
 export const saasFeatures = {
-  onboarding: false,
+  onboarding: true,
   telegramNotification: false,
 };
 
