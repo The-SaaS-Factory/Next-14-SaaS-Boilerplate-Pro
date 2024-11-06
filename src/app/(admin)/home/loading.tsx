@@ -1,6 +1,9 @@
 import PageLoader from "@/components/ui/loaders/PageLoader";
 
 export default function Loading() {
-  // Or a custom loading skeleton component
-  return <PageLoader />;
+  return (
+    <div className="p-3">
+      <PageLoader />;
+    </div>
+  );
 }

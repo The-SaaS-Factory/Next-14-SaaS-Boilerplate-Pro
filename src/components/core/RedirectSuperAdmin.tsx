@@ -6,5 +6,5 @@ export const RedirectSuperAdmin = ({ redirect }: { redirect: boolean }) => {
   useEffect(() => {
     if (redirect) window.location.href = "/admin";
   }, []);
-  return <div>Redirecting...</div>;
+  return <div> </div>;
 };

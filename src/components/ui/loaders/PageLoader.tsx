@@ -21,7 +21,7 @@ const PageLoader = () => (
           <span className="ml-4 bg-gray-300   rounded-xl h-7  w-14"></span>
         </div>
       </div>
-      <div className="flex space-x-3 ">
+      <div className="  hidden lg:flex space-x-3 ">
         <button className="btn-main w-32 h-10"></button>
       </div>
     </div>
