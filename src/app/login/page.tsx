@@ -140,27 +140,11 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen g-main px-8">
-        <div className="w-full z-10 max-w-md px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
+      <div className="flex items-center justify-center min-h-screen g-main px-4 lg:px-8">
+        <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
-            <div className="sm:hidden">
-              <label htmlFor="tabs" className="sr-only">
-                Select a tab
-              </label>
-              <select
-                id="tabs"
-                name="tabs"
-                defaultValue={tabs.find((tab) => tab.current).name}
-                className="block w-full p-2 rounded-md border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-              >
-                {tabs.map((tab) => (
-                  <option key={tab.name}>{tab.name}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="hidden sm:block border-b border-gray-200">
-              <nav aria-label="Tabs" className="flex space-x-8">
+            <div className="  sm:block border-b border-gray-200">
+              <nav aria-label="Tabs" className="flex space-x-8 mx-auto justify-center">
                 {tabs.map((tab) => (
                   <button
                     key={tab.name}
@@ -169,7 +153,7 @@ export default function LoginPage() {
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
                         : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
-                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium",
+                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm  font-medium",
                     )}
                   >
                     <tab.icon
@@ -178,7 +162,7 @@ export default function LoginPage() {
                         tab.action === action
                           ? "text-indigo-500"
                           : "text-gray-400 group-hover: text",
-                        "h-5 w-5 mr-2",
+                        "h-5 w-5 mr-2 hidden lg:flex ",
                       )}
                     />
                     {tab.name}
