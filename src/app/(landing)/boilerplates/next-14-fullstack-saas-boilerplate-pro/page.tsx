@@ -2,6 +2,7 @@ import FeaturesBoilerplatePro from "./ui/FeaturesBoilerplatePro";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import FeaturesModules from "./ui/FeaturesModules";
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
         </svg>
         <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink-0 lg:pt-8">
-            <h1 className="mt-10 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+            <h1 className="mt-10  text-coloride text-5xl font-semibold tracking-tight   sm:text-7xl">
               Next 14 FullStack SaaS Boilerplate Pro
             </h1>
             <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
@@ -124,6 +125,8 @@ export default function Home() {
             }}
           />
         </div>
+
+        <FeaturesModules />
 
         <FeaturesBoilerplatePro />
       </div>

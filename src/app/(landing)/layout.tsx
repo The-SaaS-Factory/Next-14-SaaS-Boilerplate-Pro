@@ -4,6 +4,7 @@ import FloatingWhatsAppButton from "@/components/core/FloatingWhatsAppButton";
 import SessionWrapper from "@/components/core/SessionWrapper";
 import { constants } from "@/lib/constants";
 import { HeaderLanding } from "./ui/HeaderLanding";
+import FooterLanding from "./ui/FooterLanding";
 
 export const metadata: Metadata = {
   title: constants.appName,
@@ -21,6 +22,7 @@ export default async function RootLayout({
         <SessionWrapper>
           <HeaderLanding />
           {children}
+          <FooterLanding />
           <FloatingWhatsAppButton />
         </SessionWrapper>
       </Suspense>
