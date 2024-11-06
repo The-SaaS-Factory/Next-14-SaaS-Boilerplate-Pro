@@ -79,9 +79,8 @@ export default function FooterLanding() {
           ))}
         </div> */}
         <p className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">
-          &copy; {
-            new Date().getFullYear()
-          } The SaaS factory, Inc. All rights reserved. |{" "} Curitiba, PR - Brasil
+          &copy; {new Date().getFullYear()} The SaaS factory, Inc. All rights
+          reserved. | Curitiba, PR - Brasil
         </p>
       </div>
     </footer>

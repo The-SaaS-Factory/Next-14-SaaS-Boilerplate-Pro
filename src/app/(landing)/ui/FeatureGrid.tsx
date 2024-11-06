@@ -90,7 +90,10 @@ export default function FeatureGrid() {
                   Manage your own software factory, taking control of your ideas
                   until the start of production.
                 </p>
-                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/home/admin/factory"}>
+                <Link
+                  className="mt-3  mx-auto lg:mr-auto  w-full"
+                  href={"/home/admin/factory"}
+                >
                   <Button>Start my factory</Button>
                 </Link>
               </div>
@@ -113,7 +116,10 @@ export default function FeatureGrid() {
                   your project faster than any other team, tell us about your
                   project
                 </p>
-                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/home/admin/services"}>
+                <Link
+                  className="mt-3  mx-auto lg:mr-auto  w-full"
+                  href={"/home/admin/services"}
+                >
                   <Button>Talk wit us</Button>
                 </Link>
               </div>
@@ -138,7 +144,10 @@ export default function FeatureGrid() {
                   Sit quis amet rutrum tellus ullamcorper ultricies libero dolor
                   eget sem sodales gravida.
                 </p>
-                <Link className="mt-3  mx-auto lg:mr-auto  w-full" href={"/marketplace"}>
+                <Link
+                  className="mt-3  mx-auto lg:mr-auto  w-full"
+                  href={"/marketplace"}
+                >
                   <Button variant="secondary">Access to marketplace</Button>
                 </Link>
                 <div className="flex flex-1 items-center justify-center    pt-14 lg:pb-2">

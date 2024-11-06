@@ -38,7 +38,7 @@ export const HeaderLanding = () => {
         Marketplace
       </Link>
       <Link
-        href="/home/admin/facory"
+        href="/home/admin/factory"
         className="hover:text-gray-700 text-gray-500 font-semibold"
       >
         Factory Suite

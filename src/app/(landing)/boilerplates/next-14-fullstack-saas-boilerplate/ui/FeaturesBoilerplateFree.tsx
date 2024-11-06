@@ -1,5 +1,5 @@
 import {
-    ArrowRightCircleIcon,
+  ArrowRightCircleIcon,
   BoltIcon,
   CheckCircleIcon,
   CloudArrowUpIcon,
@@ -11,7 +11,6 @@ import {
   ServerStackIcon,
 } from "@heroicons/react/20/solid";
 import { UsersIcon } from "@heroicons/react/24/solid";
- 
 
 import Image from "next/image";
 
@@ -77,8 +76,7 @@ const features3 = [
   },
   {
     name: "Prisma",
-    description:
-      "Prisma is one of the best current ORMs to manage databases.",
+    description: "Prisma is one of the best current ORMs to manage databases.",
     icon: ServerStackIcon,
   },
   {
@@ -185,10 +183,12 @@ export default function FeaturesBoilerplateFree() {
               Everything you need
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Launch your idea in a weekend
+              Launch your idea in a weekend
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-800">
-            Imagine that in 10 minutes you have everything ready to go directly to developing the specific module(s) of your business model.
+              Imagine that in 10 minutes you have everything ready to go
+              directly to developing the specific module(s) of your business
+              model.
             </p>
           </div>
         </div>

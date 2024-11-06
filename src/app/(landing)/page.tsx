@@ -1,15 +1,15 @@
 import { HeroPattern } from "@/components/ui/commons/HeroPattern";
 import FeatureGrid from "./ui/FeatureGrid";
-import PlansComponent from "../(admin)/home/(all)/settings/billing/buyPlan/ui/BuyPlan";
 import PricingFrontend from "./ui/PricingFrontend";
+import CustomCTAService from "./ui/CustomCTAService";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen relative ">
       <HeroPattern />
       <FeatureGrid />
-      {/*  <SectionTab /> */}
       <PricingFrontend />
+      <CustomCTAService />
     </div>
   );
 }

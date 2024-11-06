@@ -144,7 +144,10 @@ export default function LoginPage() {
         <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
             <div className="  sm:block border-b border-gray-200">
-              <nav aria-label="Tabs" className="flex space-x-8 mx-auto justify-center">
+              <nav
+                aria-label="Tabs"
+                className="flex space-x-8 mx-auto justify-center"
+              >
                 {tabs.map((tab) => (
                   <button
                     key={tab.name}
