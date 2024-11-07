@@ -125,9 +125,7 @@ export default function Home() {
             }}
           />
         </div>
-
         <FeaturesModules />
-
         <FeaturesBoilerplatePro />
       </div>
 
@@ -138,11 +136,11 @@ export default function Home() {
         </p>
         <div className="flex justify-center py-7 space-x-4">
           <Link target="_blank" href={constants.boilerplates[1].urlDemo}>
-            <Button variant="secondary"> Demo</Button>
+            <Button variant="secondary">Demo</Button>
           </Link>
 
           <Link target="_blank" href={constants.boilerplates[1].urlDoc}>
-            <Button variant="secondary"> Doc</Button>
+            <Button variant="secondary">Doc</Button>
           </Link>
 
           <Link href={"/home/admin/boilerplates"}>
