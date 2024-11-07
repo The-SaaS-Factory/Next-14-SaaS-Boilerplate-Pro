@@ -26,27 +26,32 @@ import {
   FileCode,
   User,
 } from "lucide-react";
+import Link from "next/link";
 
 const features = [
   {
     icon: <Building2 className="h-8 w-8" />,
     title: "Multi-tenancy support",
     description: "Create, switch, update organizations and invite members",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/multi-tenancy",
   },
   {
     icon: <CreditCard className="h-8 w-8" />,
     title: "Billing and Subscriptions",
     description: "Manage payments and subscription plans",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/subscriptionsPlansManagement",
   },
   {
     icon: <Users className="h-8 w-8" />,
     title: "Membership plan capabilities",
     description: "Support for various membership levels and features",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/membershipPlanCapabilities",
   },
   {
     icon: <Layers className="h-8 w-8" />,
     title: "Onboarding Module",
     description: "Streamlined user onboarding process",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/onboarding",
   },
   {
     icon: <Home className="h-8 w-8" />,
@@ -57,11 +62,13 @@ const features = [
     icon: <Zap className="h-8 w-8" />,
     title: "Responsive",
     description: "Fully responsive design for all devices",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/responsive",
   },
   {
     icon: <Moon className="h-8 w-8" />,
     title: "Dark Theme",
     description: "Toggle between light and dark modes",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/darktheme",
   },
   {
     icon: <LayoutDashboard className="h-8 w-8" />,
@@ -72,11 +79,24 @@ const features = [
     icon: <Bell className="h-8 w-8" />,
     title: "Notifications Module",
     description: "Keep users informed with real-time notifications",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/notificationModule",
   },
   {
     icon: <SwitchCamera className="h-8 w-8" />,
     title: "Organization Switcher",
     description: "Easily switch between different organizations",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/membershipPlanCapabilities",
+  },
+  {
+    icon: <Building className="h-8 w-8" />,
+    title: "Organization Management",
+    description: "Efficiently manage tenants and their data",
+  },
+  {
+    icon: <Building className="h-8 w-8" />,
+    title: "Organization Profile",
+    description: "Customizable organization profiles",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/organizationProfile",
   },
   {
     icon: <UserCircle className="h-8 w-8" />,
@@ -87,11 +107,13 @@ const features = [
     icon: <TicketCheck className="h-8 w-8" />,
     title: "Ticket Support Module",
     description: "Efficient customer support system",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/ticketSupportModule",
   },
   {
     icon: <Settings className="h-8 w-8" />,
     title: "Settings Module",
     description: "For Super Admins to manage system settings",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/settingsModule",
   },
   {
     icon: <Megaphone className="h-8 w-8" />,
@@ -107,21 +129,18 @@ const features = [
     icon: <Image className="h-8 w-8" />,
     title: "Imagekit Integration",
     description: "Efficient media storage and management",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/imagekitIntegration",
   },
   {
     icon: <FormInput className="h-8 w-8" />,
     title: "Internal CRUD Components",
     description: "Quickly create CRUD operations with built-in components",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/internalComponents",
   },
   {
     icon: <UserCog className="h-8 w-8" />,
     title: "User Management",
     description: "Comprehensive user administration tools",
-  },
-  {
-    icon: <Building className="h-8 w-8" />,
-    title: "Organization Management",
-    description: "Efficiently manage tenants and their data",
   },
   {
     icon: <User className="h-8 w-8" />,
@@ -142,6 +161,7 @@ const features = [
     icon: <ShieldCheck className="h-8 w-8" />,
     title: "Role-based Access Control",
     description: "Granular permissions and access management",
+    link: "https://docs-next14-pro.thesaasfactory.dev/features/roleBasedAccessControl",
   },
   {
     icon: <FileCode className="h-8 w-8" />,
@@ -170,6 +190,17 @@ export default function FeaturesModules() {
                 <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
                   {feature.description}
                 </p>
+                <div className="flex w-full">
+                  <div className="flex   mx-auto ">
+                    {feature.link && (
+                      <Link href={feature.link}>
+                        <span className="text-sm  text-center text-blue-500 dark:text-blue-400 hover:underline">
+                          Learn more
+                        </span>
+                      </Link>
+                    )}
+                  </div>
+                </div>
               </CardContent>
             </Card>
           ))}

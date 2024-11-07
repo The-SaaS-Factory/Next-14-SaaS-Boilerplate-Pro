@@ -130,6 +130,26 @@ export default function Home() {
 
         <FeaturesBoilerplatePro />
       </div>
+
+            <div className="flex w-full">
+      <div className="flex flex-col mt-10 mx-auto px-3 justify-center py-14  ">
+        <p className=" text-coloride text-5xl font-semibold tracking-tight   sm:text-7xl">
+          Next 14 FullStack SaaS Boilerplate Pro
+        </p>
+        <div className="flex justify-center py-7 space-x-4">
+          <Link target="_blank" href={constants.boilerplates[1].urlDemo}>
+            <Button variant="secondary"> Demo</Button>
+          </Link>
+
+          <Link target="_blank" href={constants.boilerplates[1].urlDoc}>
+            <Button variant="secondary"> Doc</Button>
+          </Link>
+
+          <Link href={"/home/admin/boilerplates"}>
+            <Button variant="default">Download</Button>
+          </Link>
+        </div></div>
+      </div>
     </>
   );
 }

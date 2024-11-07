@@ -51,9 +51,9 @@ const features2 = [
 
 const features3 = [
   {
-    name: "GraphQL with Apollo.",
+    name: "Next 14 FullStack",
     description:
-      "The GraphQL-based architecture makes data retrieval efficient, while Apollo Client simplifies application state management, enhancing user experience and reducing server load.",
+      "Using server actions as backend, we make the most of Next.js to create a fast and efficient application.",
     icon: BoltIcon,
   },
   {
