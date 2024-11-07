@@ -5,7 +5,7 @@ export const constants = {
     process.env.NEXT_PUBLIC_APP_URL || process.env.NODE_ENV === "production"
       ? "https://changeThisUrlIfYouAreNotUsingVercel.com"
       : "http://localhost:3000",
-  appName: "SaaS Boilerplate Pro",
+  appName: "Boilerplate Pro",
   appNameAbb: "EC",
   logoUrl: "/assets/img/logo-next-14.jpg",
   supportTel: "5541999568376",
