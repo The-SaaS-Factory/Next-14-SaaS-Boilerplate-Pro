@@ -67,9 +67,9 @@ model Organization {
   settings                 OrganizationSetting[]
   subscription             Subscription?
   email                    String?                    @db.VarChar(255)
-  isTOSAccepted            Boolean                    @default(false)
   name                     String?                    @db.VarChar(255)
   isMainTenant             Boolean                    @default(false)
+  isTOSAccepted            Boolean                    @default(false)
   isOnboardingCompleted    Boolean                    @default(false)
   address                  String?                    @db.VarChar(512)
   phone                    String?                    @db.VarChar(32)
