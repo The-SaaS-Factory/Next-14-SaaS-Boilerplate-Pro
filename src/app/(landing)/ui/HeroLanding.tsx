@@ -4,13 +4,13 @@ import { Rocket } from "lucide-react";
 
 export default function HeroLanding() {
   return (
-    <div className="flex flex-col max-w-7xl mx-auto    ">
+    <div className="flex flex-col max-w-7xl pt-24 lg:pt-0 mx-auto    ">
       <HeroPattern />
       <main className="flex-1 relative">
         <section className="w-full z-50 py-2 md:py-7 lg:py-24 xl:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4">
+              <div className="flex flex-col  px-3 lg:px-0 justify-center space-y-4">
                 <div className="space-y-2">
                   <Button
                     className="inline-flex items-center rounded-full bg-[#E8E7FF] text-[#4B45FF] px-4 py-1 text-sm font-medium"

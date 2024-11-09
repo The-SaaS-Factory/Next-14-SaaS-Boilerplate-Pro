@@ -16,17 +16,22 @@ import Image from "next/image";
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
   const session = useSession();
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   const MenuItemsPC = () => (
     <>
       <Link
-        href="/link1"
+        href="/#"
         className="hover:text-gray-700 text-gray-500 font-semibold"
+        onClick={closeMenu}
       >
         Link 1
       </Link>
       <Link
-        href="/prices"
+        href="/#prices"
+        onClick={closeMenu}
         className="hover:text-gray-700 text-gray-500 font-semibold"
       >
         Prices
@@ -62,7 +67,7 @@ export const HeaderLanding = () => {
   );
 
   return (
-    <header className="fixed   top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
+    <header className="fixed   top-0 left-0 right-0 z-50 bg-blue-200/10  backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="">
           <span className="font-bold">{constants.appName}</span>
