@@ -24,74 +24,73 @@ export const metadata: Metadata = {
     "The best boilerplates to start your next SaaS project. Next js, Tailwind CSS, Prisma, Clerk, NextAuth, TypeScript, and more.",
 };
 
+const features = [
+  {
+    name: "Multi-tenancy support",
+    free: "Create, switch, update organization and invite members (Clerk)",
+    pro: "Create, switch, update organization and invite members (Internal custom system)",
+  },
+
+  {
+    name: "Dashboards",
+    free: "Admin and Super Admin",
+    pro: "Tenant (Organizations) and Super Admin",
+  },
+
+  { name: "Organization Switcher", free: "Clerk", pro: true },
+  { name: "Organization Profile", free: "Clerk", pro: true },
+  { name: "User Profile", free: "Clerk", pro: true },
+  {
+    name: "Billing and Subscriptions",
+    free: "Stripe Invoices and memberships",
+    pro: "Stripe Invoices and memberships (Enhanced)",
+  },
+  {
+    name: "Promotions and Coupons",
+    free: "Stripe",
+    pro: "Stripe (Enhanced)",
+  },
+  {
+    name: "CRUD Components",
+    free: "Internal components for quick CRUD creation (newForm)",
+    pro: "Internal components for quick CRUD creation (newForm)",
+  },
+  { name: "SEO Optimization", free: "SSR (Next 14)", pro: "SSR (Next 14)" },
+  {
+    name: "Organization Management",
+    free: true,
+    pro: true,
+  },
+  { name: "Membership Plan Capabilities Support", free: true, pro: true },
+  { name: "User Onboarding", free: true, pro: true },
+  { name: "Vercel Analytics Integration", free: true, pro: true },
+  { name: "Role-based Access Control", free: true, pro: true },
+  { name: "Marketing Module", free: true, pro: true },
+  { name: "Super Admin Settings Module", free: true, pro: true },
+  { name: "Imagekit Integration for Media Storage", free: true, pro: true },
+  {
+    name: "Social Authentication",
+    free: true,
+    pro: true,
+  },
+  { name: "Notifications Module", free: true, pro: true },
+  { name: "Ticket Support Module", free: true, pro: true },
+  { name: "Responsive Design", free: true, pro: true },
+  { name: "Dark Theme", free: true, pro: true },
+  { name: "Landing Page", free: true, pro: true },
+  { name: "KPIs Module", free: true, pro: false },
+  {
+    name: "Internationalization support",
+    free: "Full support (Frontend components and Dynamic Data)",
+    pro: false,
+  },
+  {
+    name: "Affiliate System",
+    free: "Affiliate Panel and Payments with Commissions",
+    pro: false,
+  },
+];
 export default function BoilerplatesPage() {
-  const features = [
-    {
-      name: "Multi-tenancy support",
-      free: "Create, switch, update organization and invite members (Clerk)",
-      pro: "Create, switch, update organization and invite members (Internal custom system)",
-    },
-
-    {
-      name: "Dashboards",
-      free: "Admin and Super Admin",
-      pro: "Tenant (Organizations) and Super Admin",
-    },
-
-    { name: "Organization Switcher", free: "Clerk", pro: true },
-    { name: "Organization Profile", free: "Clerk", pro: true },
-    { name: "User Profile", free: "Clerk", pro: true },
-    {
-      name: "Billing and Subscriptions",
-      free: "Stripe Invoices and memberships",
-      pro: "Stripe Invoices and memberships (Enhanced)",
-    },
-    {
-      name: "Promotions and Coupons",
-      free: "Stripe",
-      pro: "Stripe (Enhanced)",
-    },
-    {
-      name: "CRUD Components",
-      free: "Internal components for quick CRUD creation (newForm)",
-      pro: "Internal components for quick CRUD creation (newForm)",
-    },
-    { name: "SEO Optimization", free: "SSR (Next 14)", pro: "SSR (Next 14)" },
-    {
-      name: "Organization Management",
-      free: true,
-      pro: true,
-    },
-    { name: "Membership Plan Capabilities Support", free: true, pro: true },
-    { name: "User Onboarding", free: true, pro: true },
-    { name: "Vercel Analytics Integration", free: true, pro: true },
-    { name: "Role-based Access Control", free: true, pro: true },
-    { name: "Marketing Module", free: true, pro: true },
-    { name: "Super Admin Settings Module", free: true, pro: true },
-    { name: "Imagekit Integration for Media Storage", free: true, pro: true },
-    {
-      name: "Social Authentication",
-      free: true,
-      pro: true,
-    },
-    { name: "Notifications Module", free: true, pro: true },
-    { name: "Ticket Support Module", free: true, pro: true },
-    { name: "Responsive Design", free: true, pro: true },
-    { name: "Dark Theme", free: true, pro: true },
-    { name: "Landing Page", free: true, pro: true },
-    { name: "KPIs Module", free: true, pro: false },
-    {
-      name: "Internationalization support",
-      free: "Full support (Frontend components and Dynamic Data)",
-      pro: false,
-    },
-    {
-      name: "Affiliate System",
-      free: "Affiliate Panel and Payments with Commissions",
-      pro: false,
-    },
-  ];
-
   return (
     <div className="w-full space-y-12 py-12">
       {/* Hero Section */}
@@ -101,7 +100,7 @@ export default function BoilerplatesPage() {
             <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
               SaaS Boilerplates
             </h1>
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid  px-3 lg:px-0 gap-6 md:grid-cols-2">
               {/* Free Version */}
               <Card>
                 <CardHeader>
@@ -141,7 +140,7 @@ export default function BoilerplatesPage() {
               </Card>
 
               {/* Pro Version */}
-              <Card className="border-primary">
+              <Card className="border-primary ">
                 <CardHeader>
                   <CardTitle className="flex text-coloride items-center gap-2">
                     Next 14 FullStack SaaS Boilerplate
@@ -188,7 +187,7 @@ export default function BoilerplatesPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="container">
+      <section className="container  px-3 lg:px-0">
         <h2 className="text-2xl font-bold tracking-tight mb-8">
           Feature Comparison
         </h2>

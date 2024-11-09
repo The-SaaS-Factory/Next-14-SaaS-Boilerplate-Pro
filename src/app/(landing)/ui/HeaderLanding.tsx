@@ -17,29 +17,37 @@ export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
   const session = useSession();
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   const MenuItemsPC = () => (
     <>
       <Link
         href="/boilerplates"
         className="hover:text-gray-700 text-gray-500 font-semibold"
+        onClick={closeMenu}
       >
         Boilerplates
       </Link>
       <Link
         href="/home/admin/services"
         className="hover:text-gray-700 text-gray-500 font-semibold"
+        onClick={closeMenu}
       >
         Services
       </Link>
       <Link
         href="/marketplace"
         className="hover:text-gray-700 text-gray-500 font-semibold"
+        onClick={closeMenu}
       >
         Marketplace
       </Link>
       <Link
         href="/home/admin/factory"
         className="hover:text-gray-700 text-gray-500 font-semibold"
+        onClick={closeMenu}
       >
         Factory Suite
       </Link>
@@ -47,6 +55,7 @@ export const HeaderLanding = () => {
         <Link
           href="/home"
           className="hover:text-gray-300 rounded-full text-gray-50"
+          onClick={closeMenu}
         >
           <Image
             width={32}
@@ -60,10 +69,14 @@ export const HeaderLanding = () => {
         <>
           {session.status !== "loading" && (
             <>
-              <Link href={"/login"}>
+              <Link href={"/login"} onClick={closeMenu}>
+                {" "}
+                {/* Añadido */}
                 <Button variant="outline">Log in</Button>
               </Link>
-              <Link href={"/login"}>
+              <Link href={"/login"} onClick={closeMenu}>
+                {" "}
+                {/* Añadido */}
                 <Button>Sing Up</Button>
               </Link>
             </>
@@ -74,7 +87,7 @@ export const HeaderLanding = () => {
   );
 
   return (
-    <header className="fixed   top-0 left-0 right-0 z-50 bg-blue-200/10 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-blue-200/10 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <Link href="/" className="">
@@ -90,7 +103,7 @@ export const HeaderLanding = () => {
             <span className="font-bold">{constants.appName}</span>
           </Link>
         </div>
-        <nav className=" hidden md:flex space-x-4 items-center">
+        <nav className="hidden md:flex space-x-4 items-center">
           <MenuItemsPC />
         </nav>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
