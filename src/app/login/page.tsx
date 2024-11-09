@@ -144,7 +144,10 @@ export default function LoginPage() {
         <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
             <div className="  sm:block border-b border-gray-200">
-              <nav aria-label="Tabs" className="flex space-x-8 mx-auto justify-center">
+              <nav
+                aria-label="Tabs"
+                className="flex space-x-8 mx-auto justify-center"
+              >
                 {tabs.map((tab) => (
                   <button
                     key={tab.name}
@@ -186,6 +189,19 @@ export default function LoginPage() {
                   <h2 className="text-2xl font-bold text-primary mt-6 text-center">
                     Login to {constants.appName}
                   </h2>
+                  {constants.demoMode && (
+                    <div className="flex mt-3 flex-col bg-gray-100 rounded-lg text-gray-600 p-3">
+                      <span className="text-xs">Demo mode Enabled</span>
+                      <div className="flex flex-col">
+                        <span className="text-lg font-medium">
+                          Super Admin Access
+                        </span>
+                        <br />
+                        <span>Email: superadmin@gmail.com</span>
+                        <span>Pass: 123456789</span>
+                      </div>
+                    </div>
+                  )}
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
                       <label

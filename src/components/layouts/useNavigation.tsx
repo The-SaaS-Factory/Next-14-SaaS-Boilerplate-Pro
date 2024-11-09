@@ -79,6 +79,12 @@ export const useNavigation = () => {
           icon: BuildingLibraryIcon,
           current: false,
         },
+        {
+          name: "Coupons",
+          href: "/admin/billing/coupons",
+          icon: BuildingLibraryIcon,
+          current: false,
+        },
       ],
     },
     {
