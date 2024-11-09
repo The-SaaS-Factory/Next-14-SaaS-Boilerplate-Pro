@@ -73,13 +73,15 @@ const TenantList = async ({
                           <UserCard user={tenant} />
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm  text">
-                          {tenant.subscription && (
+                          {tenant.subscription ? (
                             <div className=" ">
                               {tenant.subscription.plan.name ?? "-"} / until{" "}
                               {formatTimestampToDateString(
                                 tenant.subscription.endDate,
                               )}
                             </div>
+                          ) : (
+                            <div className=" ">No subscription</div>
                           )}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm  text">
@@ -100,9 +102,9 @@ const TenantList = async ({
           </div>
           <div className="flex mt-7 justify-between">
             <div className="text-primary">
-              Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-              <span className="font-medium">{offset + data?.length}</span> de{" "}
-              <span className="font-medium">{totalCount}</span> resultados
+              Showing <span className="font-medium">{offset + 1}</span> to{" "}
+              <span className="font-medium">{offset + data?.length}</span> of{" "}
+              <span className="font-medium">{totalCount}</span> results
             </div>
             <Pagination
               offset={offset}

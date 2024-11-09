@@ -29,7 +29,6 @@ export default function DemoBanner() {
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <p className="text-sm/6 text-gray-900">
-        
           Next 14 FullStack SaaS Boilerplate Pro
         </p>
         <a

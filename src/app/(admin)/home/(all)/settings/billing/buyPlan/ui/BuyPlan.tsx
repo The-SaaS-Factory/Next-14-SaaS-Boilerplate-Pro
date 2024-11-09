@@ -35,7 +35,6 @@ type PageParams = {
 };
 
 const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
-  //States
   const [currencySelected, setCurrencySelected] = useState<any>(
     currencies.find((currency: AdminCurrencies) => currency.main),
   );
@@ -97,7 +96,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
       currencyId: currencySelected.id,
     })
       .then(() => {
-        toast.success("Plan de prueba activado con éxito");
+        toast.success("Test plan activated successfully");
         window.location.reload();
         window.location.href = "/home/settings/billing/planActive";
       })
@@ -110,8 +109,6 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
     currencySelected.id,
     paymentMethods,
   );
-
-  console.log(plans);
 
   return (
     <div>

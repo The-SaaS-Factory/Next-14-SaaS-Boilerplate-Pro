@@ -49,7 +49,6 @@ const TenantAdminHeader = ({
   return (
     <>
       <div className=" relative    w-full flex    z-50   ">
-        
         <div
           className="lg:fixed mt-3 lg:mt-0 w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
            bg-opacity-25 transition-opacity 

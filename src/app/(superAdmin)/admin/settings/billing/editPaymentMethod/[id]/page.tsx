@@ -22,7 +22,7 @@ const SuperAdminEditPaymentMethod = async ({
       <div className="flex items-center py-2 lg:px-7 ">
         <Link href="/admin/settings/billing">
           <button className="btn-icon ">
-            <ArrowLeftCircleIcon className="w-6 h-6" /> Atrás
+            <ArrowLeftCircleIcon className="w-6 h-6" /> Back
           </button>
         </Link>
       </div>

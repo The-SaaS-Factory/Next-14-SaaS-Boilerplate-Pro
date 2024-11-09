@@ -1,7 +1,7 @@
 import React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 //import HotJar from "@/components/marketing/Hotjat";
 
 export default function LocaleLayout({
@@ -18,7 +18,7 @@ export default function LocaleLayout({
         {children}
         <Toaster duration={2000} richColors={true} position="top-center" />
         {/* <HotJar /> You cant setting it in constans.hotjarId */}
-        <Analytics />  {/* Vercel Analytics */}
+        <Analytics /> {/* Vercel Analytics */}
       </body>
     </html>
   );

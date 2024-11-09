@@ -13,8 +13,8 @@ const UpsertCoupon = async ({
   const users = await getAllUser({ args: { limit: 5000 } });
 
   const formInfo = {
-    name: "Adicionar Cupón",
-    description: "Adicionar un nuevo cupón al sistema.",
+    name: "Manage Coupon",
+    description: "Create or update a coupon",
   };
 
   const fields = [
@@ -26,31 +26,31 @@ const UpsertCoupon = async ({
     },
     {
       name: "amountOff",
-      label: "Cantidad de descuento fija",
+      label: "Amount off",
       type: "number",
       required: false,
     },
     {
       name: "percentOff",
-      label: "% de descuento",
+      label: "% off",
       type: "number",
       required: false,
     },
     {
       name: "durationInMonths",
-      label: "Meses de duración",
+      label: "Duration in months",
       type: "number",
       required: false,
     },
     {
       name: "maxRedemptions",
-      label: "Usos máximos",
+      label: "Max redemptions",
       type: "number",
       required: false,
     },
     {
       name: "userId",
-      label: "Usuario dueño del cupón",
+      label: "User owner",
       type: "searchselect",
       required: false,
       forceInteger: true,
@@ -64,23 +64,23 @@ const UpsertCoupon = async ({
     },
     {
       name: "status",
-      label: "Estado",
+      label: "Status",
       type: "select",
       required: false,
       options: [
         {
           optionValue: "INACTIVE",
-          optionName: "Inactivo",
+          optionName: "Inactive",
         },
         {
           optionValue: "ACTIVE",
-          optionName: "Activo",
+          optionName: "Active",
         },
       ],
     },
     {
       name: "duration",
-      label: "Duración del cupón",
+      label: "Duration",
       type: "select",
       required: true,
       options: Object.keys(CouponDuration).map((key) => ({

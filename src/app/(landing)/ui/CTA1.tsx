@@ -13,9 +13,9 @@ export default function CTA1() {
           </h2>
           <p className="  mt-6 max-w-xl text-lg leading-8 text-gray-300">
             La rapidez con la que se carga tu WordPress es crucial para asegurar
-            que tu sitio destaque en los primeros resultados de búsqueda de
-            Google. Aprovecha las características de optimización de nuestro
-            hosting de alta velocidad y supérate a la competencia.
+            que tu sitio destaque en los primeros results de búsqueda de Google.
+            Aprovecha las características de optimización de nuestro hosting de
+            alta velocidad y supérate a la competencia.
           </p>
           <div className="mt-10 flex  gap-x-6">
             <BtnBuyService />

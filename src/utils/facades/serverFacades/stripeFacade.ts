@@ -194,6 +194,14 @@ export const stripeCreatePlan = async (
   });
 };
 
+export const stripeCreatePromotionCode = async (
+  promotionCodePayload: Stripe.PromotionCodeCreateParams,
+) => {
+  const stripe = await makeStripeClient();
+
+  return await stripe.promotionCodes.create(promotionCodePayload);
+};
+
 export const stripeCreateCoupon = async (
   couponPayload: Stripe.CouponCreateParams,
 ) => {
@@ -205,17 +213,10 @@ export const stripeCreateCoupon = async (
 export const stripeCreateCustomer = async (customerPayload: any) => {
   try {
     const stripe = await makeStripeClient();
-    // const paymentMethod = await stripCreatePaymentMethod();
-
-    // if (!paymentMethod) throw new Error("Error creating payment method");
 
     return await stripe.customers.create({
       name: customerPayload.name ?? null,
       email: customerPayload.email ?? null,
-      // payment_method: paymentMethod.id,
-      // invoice_settings: {
-      //   default_payment_method: paymentMethod.id,
-      // },
     });
   } catch (error: any) {
     throw new Error(error.message);
@@ -315,6 +316,7 @@ export const stripeCreateCheckoutSession = async ({
       client_reference_id: referenceId,
       mode: mode,
       discounts: coupons,
+      allow_promotion_codes: true,
       metadata: {
         modelId: clientPayload.userId,
       },

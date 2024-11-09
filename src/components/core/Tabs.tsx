@@ -42,7 +42,7 @@ const Tabs = ({
                   className: isActive(tab.path)
                     ? "w-5 h-5 text-primary active-tab hidden lg:block"
                     : "text-primary w-5 h-5 hidden lg:block",
-                  "aria-hidden": "true", 
+                  "aria-hidden": "true",
                 })}
               <Link
                 href={tab.path}
