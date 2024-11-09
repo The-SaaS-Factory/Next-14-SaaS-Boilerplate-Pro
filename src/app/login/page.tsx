@@ -198,7 +198,7 @@ export default function LoginPage() {
                         </span>
                         <br />
                         <span>Email: superadmin@gmail.com</span>
-                        <span>Pass: 123456789</span>
+                        <span>Password: 123456789</span>
                       </div>
                     </div>
                   )}
