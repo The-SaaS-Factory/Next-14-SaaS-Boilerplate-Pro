@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { constants } from "@/lib/constants";
 
 export async function GET(request: Request) {
-  // Validate secret params with nextAuthSecret
+  if (constants.demoMode) {
+    return new NextResponse("Demo mode is active", { status: 400 });
+  }
   const url = new URL(request.url);
   const secret = url.searchParams.get("secret");
   const email = url.searchParams.get("email");
