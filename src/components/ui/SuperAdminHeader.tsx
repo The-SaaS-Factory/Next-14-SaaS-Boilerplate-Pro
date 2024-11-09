@@ -5,6 +5,8 @@ import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
 import useDarkTheme from "@/utils/hooks/useDarkTheme";
+import { Button } from "./button";
+import { signOut } from "next-auth/react";
 
 const SuperAdminHeader = ({
   notificationsCount,
@@ -60,10 +62,9 @@ const SuperAdminHeader = ({
                 aria-hidden="true"
               />
 
-              {/* Profile dropdown */}
-              <Link href="/home" className="btn-main">
+              <Button onClick={() => signOut()} className="btn-main">
                 Leave administration
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
