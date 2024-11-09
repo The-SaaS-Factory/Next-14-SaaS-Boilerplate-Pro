@@ -155,14 +155,13 @@ export default function FeatureGrid() {
                   Buy / Sell SaaS Softwares
                 </h3>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Sit quis amet rutrum tellus ullamcorper ultricies libero dolor
-                  eget sem sodales gravida.
+                  Access the marketplace and buy or sell your software
                 </p>
                 <Link
                   className="mt-3  mx-auto lg:mr-auto  w-full"
                   href={"/marketplace"}
                 >
-                  <Button variant="secondary">Access to marketplace</Button>
+                  <Button>Access to marketplace</Button>
                 </Link>
                 <div className="flex flex-1 items-center justify-center    pt-14 lg:pb-2">
                   <Image
