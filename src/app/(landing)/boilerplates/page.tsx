@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -30,16 +25,6 @@ export const metadata: Metadata = {
 };
 
 export default function BoilerplatesPage() {
-  //   const features = [
-  //     { name: "Authentication", free: "Clerk", pro: "NextAuth" },
-  //     { name: "Multi-tenancy support", free: "Clerk Organizations (Limited to Clerk prices)", pro: "Custom Organization system" },
-  //     { name: "Billing and Subscriptions", free: "Stripe", pro: "Stripe" },
-  //     { name: "Database", free: "Prisma / Mysql - Postgres", pro: "Prisma / Mysql - Postgres" },
-  //     { name: "Styling", free: "Tailwind CSS", pro: "Tailwind CSS / shadcn/ui" },
-  //     { name: "TypeScript", free: true, pro: true },
-  //     { name: "Premium Support", free: false, pro: true },
-  //   ];
-
   const features = [
     {
       name: "Multi-tenancy support",
@@ -56,11 +41,15 @@ export default function BoilerplatesPage() {
     { name: "Organization Switcher", free: "Clerk", pro: true },
     { name: "Organization Profile", free: "Clerk", pro: true },
     { name: "User Profile", free: "Clerk", pro: true },
-
     {
       name: "Billing and Subscriptions",
       free: "Stripe Invoices and memberships",
       pro: "Stripe Invoices and memberships (Enhanced)",
+    },
+    {
+      name: "Promotions and Coupons",
+      free: "Stripe",
+      pro: "Stripe (Enhanced)",
     },
     {
       name: "CRUD Components",

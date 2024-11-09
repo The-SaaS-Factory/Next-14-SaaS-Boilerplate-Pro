@@ -189,6 +189,9 @@ export default function LoginPage() {
                   <h2 className="text-2xl font-bold text-primary mt-6 text-center">
                     Login to {constants.appName}
                   </h2>
+
+              
+
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
                       <label
