@@ -20,7 +20,7 @@ export const HeaderLanding = () => {
   const MenuItemsPC = () => (
     <>
       <Link
-        href="/home/admin/boilerplates"
+        href="/boilerplates"
         className="hover:text-gray-700 text-gray-500 font-semibold"
       >
         Boilerplates

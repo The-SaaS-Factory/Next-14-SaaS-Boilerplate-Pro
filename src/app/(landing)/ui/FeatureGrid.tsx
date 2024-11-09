@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { constants } from "@/lib/constants";
-import { Eye } from "lucide-react";
+import { DownloadIcon, Eye, EyeIcon, FileTextIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,12 +22,17 @@ export default function FeatureGrid() {
             <div className="   rounded-lg bg-white lg:rounded-l-[2rem]"></div>
             <div className="relative flex   flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
               <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
-                  SaaS Boilerplates
-                </p>
+                <Link href={"/boilerplates"}>
+                  <h3
+                    className="mt-2
+                     text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center"
+                  >
+                    SaaS Boilerplates
+                  </h3>
+                </Link>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo.
+                  Build your next saas project in a weekend with our
+                  boilerplates
                 </p>
               </div>
               <div className="relative  pb-7 w-full grow [container-type:inline-size] max-lg:mx-auto max-lg:max-w-sm">
@@ -58,15 +63,24 @@ export default function FeatureGrid() {
                       <span className="my-3">{boilerplate.nameStack}</span>
                       <div className="flex    space-x-4">
                         <Link target="_blank" href={boilerplate.urlDemo}>
-                          <Button variant="secondary"> Demo</Button>
+                          <Button variant="outline" size="sm">
+                            <EyeIcon className="mr-2 h-4 w-4" />
+                            Demo
+                          </Button>
                         </Link>
 
                         <Link target="_blank" href={boilerplate.urlDoc}>
-                          <Button variant="secondary"> Doc</Button>
+                          <Button variant="outline" size="sm">
+                            <FileTextIcon className="mr-2 h-4 w-4" />
+                            Doc
+                          </Button>
                         </Link>
 
                         <Link href={"/home/admin/boilerplates"}>
-                          <Button variant="default">Download</Button>
+                          <Button size="sm">
+                            <DownloadIcon className="mr-2 h-4 w-4" />
+                            Download
+                          </Button>
                         </Link>
                       </div>
                     </div>
@@ -83,9 +97,9 @@ export default function FeatureGrid() {
             ounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]"
             >
               <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10 ">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
+                <h3 className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   The Factory Suite
-                </p>
+                </h3>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                   Manage your own software factory, taking control of your ideas
                   until the start of production.
@@ -108,9 +122,9 @@ export default function FeatureGrid() {
             <br />
             <div className="relative border-t flex h-auto flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
               <div className="px-8 pb-14 flex flex-col pt-8 sm:px-10  ">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
+                <h3 className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   Custom development service
-                </p>
+                </h3>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                   We create a technology that allows us to go from 0 to 100 in
                   your project faster than any other team, tell us about your
@@ -137,9 +151,9 @@ export default function FeatureGrid() {
             <div className="absolute    rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
             <div className="relative flex   flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
               <div className="px-8 flex flex-col pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
+                <h3 className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   Buy / Sell SaaS Softwares
-                </p>
+                </h3>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                   Sit quis amet rutrum tellus ullamcorper ultricies libero dolor
                   eget sem sodales gravida.

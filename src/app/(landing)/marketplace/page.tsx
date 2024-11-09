@@ -8,6 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SaaS Marketplace",
+  description:
+    "A marketplace for SaaS products. Find the best SaaS products for your business.",
+};
 
 export default function Component() {
   const dummyProducts = [

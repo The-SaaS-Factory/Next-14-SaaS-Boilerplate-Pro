@@ -4,7 +4,15 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import FeaturesBoilerplateFree from "./ui/FeaturesBoilerplateFree";
 import Link from "next/link";
 
-export default function Home() {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Next 14 FullStack SaaS Boilerplate",
+  description:
+    " A professional boilerplate for advanced SaaS products. Build your next SaaS product with Next.js, Tailwind CSS, Prisma,  Clerk, TypeScript, and more.",
+};
+
+export default function Next44SaaSBoilerplate() {
   return (
     <>
       <div className="flex bg-gray-50   pt-9">

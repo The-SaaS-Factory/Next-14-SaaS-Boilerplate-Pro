@@ -3,8 +3,16 @@ import Link from "next/link";
 import { constants } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import FeaturesModules from "./ui/FeaturesModules";
+import { DownloadIcon, EyeIcon, FileTextIcon } from "lucide-react";
+import { Metadata } from "next";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Next 14 FullStack SaaS Boilerplate Pro",
+  description:
+    " A professional boilerplate for advanced SaaS products. Build your next SaaS product with Next.js, Tailwind CSS, Prisma,  NextAuth, TypeScript, and more.",
+};
+
+export default function Next14SaaSPro() {
   return (
     <>
       <div className="relative isolate overflow-hidden bg-white">
@@ -53,15 +61,24 @@ export default function Home() {
                     target="_blank"
                     href={constants.boilerplates[1].urlDemo}
                   >
-                    <Button variant="secondary"> Demo</Button>
+                    <Button variant="outline" size="sm">
+                      <EyeIcon className="mr-2 h-4 w-4" />
+                      Demo
+                    </Button>
                   </Link>
 
                   <Link target="_blank" href={constants.boilerplates[1].urlDoc}>
-                    <Button variant="secondary"> Doc</Button>
+                    <Button variant="outline" size="sm">
+                      <FileTextIcon className="mr-2 h-4 w-4" />
+                      Doc
+                    </Button>
                   </Link>
 
                   <Link href={"/home/admin/boilerplates"}>
-                    <Button variant="default">Download</Button>
+                    <Button size="sm">
+                      <DownloadIcon className="mr-2 h-4 w-4" />
+                      Download
+                    </Button>
                   </Link>
                 </div>
               </div>
@@ -129,24 +146,25 @@ export default function Home() {
         <FeaturesBoilerplatePro />
       </div>
 
-            <div className="flex w-full">
-      <div className="flex flex-col mt-10 mx-auto px-3 justify-center py-14  ">
-        <p className=" text-coloride text-5xl font-semibold tracking-tight   sm:text-7xl">
-          Next 14 FullStack SaaS Boilerplate Pro
-        </p>
-        <div className="flex justify-center py-7 space-x-4">
-          <Link target="_blank" href={constants.boilerplates[1].urlDemo}>
-            <Button variant="secondary">Demo</Button>
-          </Link>
+      <div className="flex w-full">
+        <div className="flex flex-col mt-10 mx-auto px-3 justify-center py-14  ">
+          <p className=" text-coloride text-5xl font-semibold tracking-tight   sm:text-7xl">
+            Next 14 FullStack SaaS Boilerplate Pro
+          </p>
+          <div className="flex justify-center py-7 space-x-4">
+            <Link target="_blank" href={constants.boilerplates[1].urlDemo}>
+              <Button variant="secondary">Demo</Button>
+            </Link>
 
-          <Link target="_blank" href={constants.boilerplates[1].urlDoc}>
-            <Button variant="secondary">Doc</Button>
-          </Link>
+            <Link target="_blank" href={constants.boilerplates[1].urlDoc}>
+              <Button variant="secondary">Doc</Button>
+            </Link>
 
-          <Link href={"/home/admin/boilerplates"}>
-            <Button variant="default">Download</Button>
-          </Link>
-        </div></div>
+            <Link href={"/home/admin/boilerplates"}>
+              <Button variant="default">Download</Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );
