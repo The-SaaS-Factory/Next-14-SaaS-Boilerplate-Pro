@@ -148,10 +148,6 @@ export default function LoginPage() {
                 aria-label="Tabs"
                 className="flex space-x-8 mx-auto justify-center"
               >
-              <nav
-                aria-label="Tabs"
-                className="flex space-x-8 mx-auto justify-center"
-              >
                 {tabs.map((tab) => (
                   <button
                     key={tab.name}
@@ -193,8 +189,6 @@ export default function LoginPage() {
                   <h2 className="text-2xl font-bold text-primary mt-6 text-center">
                     Login to {constants.appName}
                   </h2>
-
-              
 
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
