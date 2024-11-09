@@ -30,9 +30,9 @@ export default function Pagination({
   return (
     <div className="flex flex-col">
       <div className="text-primary">
-        Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-        <span className="font-medium">{offset + dataLength}</span> de{" "}
-        <span className="font-medium">{totalCount}</span> resultados
+        Showing <span className="font-medium">{offset + 1}</span> to{" "}
+        <span className="font-medium">{offset + dataLength}</span> of{" "}
+        <span className="font-medium">{totalCount}</span> results
       </div>
       <div className="flex items-center justify-between space-x-3">
         <Link

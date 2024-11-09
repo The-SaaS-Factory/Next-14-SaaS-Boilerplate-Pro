@@ -55,28 +55,28 @@ const CouponsList = async ({
               <TableHead>
                 <TableRow className="">
                   <TableHeaderCell className="text-center">
-                    Nombre / Código
+                    Name / Code
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
                     User
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Estado
+                    Status
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
                     Stripe Conection
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Cantidad de descuento fija
+                    Amount off
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    % de descuento
+                    % off
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Duración en meses / Usos máximos
+                    Duration
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Usos
+                    Invoices
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
                     Actions
@@ -87,15 +87,26 @@ const CouponsList = async ({
               <TableBody>
                 {data?.map((item: any, index: number) => (
                   <TableRow key={`userS-${item.id + index}`}>
-                    <TableCell className="text-center items-center">
-                      <span>
-                        {item.name} /
-                        <span className="text-primary">{item.code}</span>
+                    <TableCell className="text-center flex flex-col items-center">
+                      <span className="font-bold">{item.name}</span>
+                      <span className="text-primary">
+                        Coupon Code for internal invoices: <b> {item.code}</b>
+                      </span>
+                      <span className="text-primary">
+                        Coupon Code for stripe checkoout:{" "}
+                        <b>
+                          {
+                            item.settings.find(
+                              (setting: any) =>
+                                setting.name === "stripeCouponPromotionCode",
+                            )?.value
+                          }
+                        </b>
                       </span>
                     </TableCell>
                     <TableCell className="text-center items-center">
                       <span>
-                        {item.user?.name || "Uso global"} - ({item.user?.id})
+                        {item.user?.name || "Global use"} - ({item.user?.id})
                       </span>
                     </TableCell>
                     <TableCell className="text-center items-center">
@@ -130,7 +141,7 @@ const CouponsList = async ({
                         </div>
                       </Badge>
                       <ul>
-                        <span>Facturas: </span>
+                        <span>Invoices: </span>
                         {item.invoices?.map((invoice) => (
                           <Link
                             key={`invoice-${invoice.id}`}
@@ -151,7 +162,7 @@ const CouponsList = async ({
                         className="btn-icon  "
                       >
                         <PencilSquareIcon className="w-5 h-5  " />
-                        <span>Editar</span>
+                        <span>Edit</span>
                       </Link>
                     </TableCell>
                   </TableRow>

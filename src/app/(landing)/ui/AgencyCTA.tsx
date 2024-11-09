@@ -39,9 +39,9 @@ export default function AgencyCTA() {
           <p className="mx-auto mt-10 max-w-xl text-xl text-gray-600">
             Descubre la solución definitiva diseñada exclusivamente para
             agencias: una combinación impecable de organización y generación de
-            ganancias. Simplifica tus procesos y potencia tus resultados
-            económicos con nuestra propuesta única. ¡Optimiza tu camino hacia el
-            éxito con eficiencia y rentabilidad!
+            ganancias. Simplifica tus procesos y potencia tus results económicos
+            con nuestra propuesta única. ¡Optimiza tu camino hacia el éxito con
+            eficiencia y rentabilidad!
           </p>
         </div>
         <div className="flex mt-10">

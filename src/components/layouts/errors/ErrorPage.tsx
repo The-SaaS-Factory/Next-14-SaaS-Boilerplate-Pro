@@ -33,7 +33,7 @@ export default function ErrorPage({
               href="/home"
               className="text-sm font-semibold leading-7 text-primary"
             >
-              <span aria-hidden="true">&larr;</span> Atrás to home
+              <span aria-hidden="true">&larr;</span> Back to home
             </Link>
             <button
               className="btn-main mt-3 w-32 mx-auto"

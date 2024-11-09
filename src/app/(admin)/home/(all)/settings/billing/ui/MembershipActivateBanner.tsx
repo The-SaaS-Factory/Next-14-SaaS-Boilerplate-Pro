@@ -36,7 +36,7 @@ const MembershipActivateBanner = ({
           <div className="flex items-center space-x-2">
             <p className="title">
               <span>
-                Felicitaciones
+                Congratulations
                 <strong className="font-semibold pr-1">
                   {" "}
                   {membershipName}
@@ -49,14 +49,14 @@ const MembershipActivateBanner = ({
                 >
                   <circle cx={1} cy={1} r={1} />
                 </svg>
-                Activo hasta {membershipEndDate}
+                Active until {membershipEndDate}
               </span>
             </p>
             <Link
               href="/home/settings/billing/buyPlan"
               className="text-primary"
             >
-              <button className="btn-main">Cambiar </button>
+              <button className="btn-main">Change </button>
             </Link>
           </div>
           <div className="flex flex-1 justify-end"></div>

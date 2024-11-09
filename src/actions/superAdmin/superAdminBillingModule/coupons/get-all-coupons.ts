@@ -68,4 +68,3 @@ export const getAllCoupons = async ({
 
   return { data, totalCount, totalPages };
 };
-//

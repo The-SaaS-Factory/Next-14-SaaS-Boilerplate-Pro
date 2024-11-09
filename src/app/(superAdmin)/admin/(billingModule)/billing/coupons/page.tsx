@@ -22,9 +22,9 @@ const SuperAdminBillingCouponsModule = ({
   return (
     <div>
       <PageName
-        name={"Cupones"}
+        name={"Coupons"}
         btn1={{
-          name: "Crear cupón",
+          name: "Add coupon",
           href: "/admin/billing/coupons/add",
         }}
       />

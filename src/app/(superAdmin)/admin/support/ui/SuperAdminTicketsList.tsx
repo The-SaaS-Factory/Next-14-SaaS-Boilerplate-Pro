@@ -109,9 +109,9 @@ const SuperAdminTicketsList = async ({
           </Table>
           <div className="flex mt-7 justify-between">
             <div className="text-primary">
-              Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-              <span className="font-medium">{offset + data.length}</span> de{" "}
-              <span className="font-medium">{totalCount}</span> resultados
+              Showing <span className="font-medium">{offset + 1}</span> to{" "}
+              <span className="font-medium">{offset + data.length}</span> of{" "}
+              <span className="font-medium">{totalCount}</span> results
             </div>
             <Pagination
               offset={offset}

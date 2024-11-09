@@ -1,6 +1,9 @@
 "use server";
 import prisma from "@/lib/db";
-import { stripeCreateCoupon } from "@/utils/facades/serverFacades/stripeFacade";
+import {
+  stripeCreateCoupon,
+  stripeCreatePromotionCode,
+} from "@/utils/facades/serverFacades/stripeFacade";
 import { Coupon } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Stripe from "stripe";
@@ -49,10 +52,22 @@ export const connectCouponWithStripe = async ({
       );
 
       if (stripeCoupon) {
+        //create an promotion code
+        const promoCode = await stripeCreatePromotionCode({
+          coupon: stripeCoupon.id,
+        });
+
         const couponSetting = await prisma.couponSettings.findFirst({
           where: {
             couponId: coupon.id,
             name: "stripeCouponId_" + currencyCode.toLowerCase(),
+          },
+        });
+
+        const promotionalCodeSetting = await prisma.couponSettings.findFirst({
+          where: {
+            couponId: coupon.id,
+            name: "stripeCouponPromotionCode",
           },
         });
 
@@ -67,6 +82,20 @@ export const connectCouponWithStripe = async ({
             couponId: coupon.id,
             name: "stripeCouponId_" + currencyCode.toLowerCase(),
             value: stripeCoupon.id,
+          },
+        });
+
+        await prisma.couponSettings.upsert({
+          where: {
+            id: promotionalCodeSetting?.id ?? 0,
+          },
+          update: {
+            value: promoCode.code,
+          },
+          create: {
+            couponId: coupon.id,
+            name: "stripeCouponPromotionCode",
+            value: promoCode.code,
           },
         });
 

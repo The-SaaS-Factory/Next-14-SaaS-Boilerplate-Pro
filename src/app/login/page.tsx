@@ -148,6 +148,10 @@ export default function LoginPage() {
                 aria-label="Tabs"
                 className="flex space-x-8 mx-auto justify-center"
               >
+              <nav
+                aria-label="Tabs"
+                className="flex space-x-8 mx-auto justify-center"
+              >
                 {tabs.map((tab) => (
                   <button
                     key={tab.name}
