@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "src/app/api/utils/fix/route.ts",
     "src/app/(landing)/ui/loopsForm.tsx"
-  ],
+, "next.config.js"  ],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {

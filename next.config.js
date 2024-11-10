@@ -1,8 +1,8 @@
-/** @type {import('next').NextConfig} */
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/
+});
 
-/** @type {import('next').NextConfig} */
-
-const nextConfig = {
+const nextConfig = withMDX({
   experimental: {
     serverActions: {
       bodySizeLimit: "8mb",
@@ -11,43 +11,15 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "tailwindui.com",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "tailwindui.com",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "images.clerk.dev",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "img.clerk.com",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "ik.imagekit.io",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "www.gravatar.com",
-        port: "",
-      },
+      { protocol: "http", hostname: "tailwindui.com" },
+      { protocol: "https", hostname: "images.clerk.dev" },
+      { protocol: "https", hostname: "img.clerk.com" },
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "ik.imagekit.io" },
+      { protocol: "https", hostname: "www.gravatar.com" },
     ],
   },
-};
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+});
 
 module.exports = nextConfig;
