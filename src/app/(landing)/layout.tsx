@@ -24,6 +24,7 @@ export default async function RootLayout({
           {children}
           <FooterLanding />
           <FloatingWhatsAppButton />
+          <FooterLanding />
         </SessionWrapper>
       </Suspense>
     </main>
