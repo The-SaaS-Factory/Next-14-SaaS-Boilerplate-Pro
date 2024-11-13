@@ -38,20 +38,6 @@ export default async function Blog() {
             <h1 className="mb-8 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
               {constants.appName} Blog
             </h1>
-            <div className="max-w-xl">
-              <p className="mb-6 text-lg text-blue-100">
-                Subscribe to learn about new product features, the latest in
-                technology, solutions, and updates.
-              </p>
-              <div className="flex gap-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-white/95 text-black"
-                />
-                <Button variant="secondary">Subscribe</Button>
-              </div>
-            </div>
           </div>
         </div>
 

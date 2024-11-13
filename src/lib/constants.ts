@@ -20,4 +20,5 @@ export const constants = {
 export const saasFeatures = {
   onboarding: true,
   telegramNotification: true,
+  blogMdx: true,
 };

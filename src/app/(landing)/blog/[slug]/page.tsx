@@ -1,9 +1,12 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { serialize } from "next-mdx-remote/serialize";
 import MdxContent from "./MdxContent";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon } from "lucide-react";
+import ShareBlogPost from "./ui/ShareBlogPost";
+import { constants } from "@/lib/constants";
 
 export async function generateStaticParams() {
   const postsDirectory = path.join(process.cwd(), "src/blog-contents");
@@ -18,9 +21,18 @@ export default async function PostPage({ params }) {
   const filePath = path.join(process.cwd(), "src/blog-contents", `${slug}.mdx`);
   const source = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(source);
+
+  const mdxSource = await serialize(content, {
+    parseFrontmatter: true,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+  });
+
   const article = data;
   return (
-    <article className="prose  mt-14 mx-auto container px-4 py-8 max-w-3xl">
+    <article className="prose mt-14 mx-auto container px-4 py-8 max-w-3xl">
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
         <div className="flex items-center text-muted-foreground mb-4">
@@ -42,7 +54,9 @@ export default async function PostPage({ params }) {
 
       <hr className="my-8" />
 
-      <MdxContent source={content} />
+      <MdxContent source={mdxSource} />
+      <hr className="my-7" />
+      <ShareBlogPost link={`${constants.appUrl}/blog/${slug}`} />
     </article>
   );
 }
