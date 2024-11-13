@@ -12,7 +12,6 @@ import Link from "next/link";
 import { constants } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { saasFeatures } from "../../../lib/constants";
 
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
