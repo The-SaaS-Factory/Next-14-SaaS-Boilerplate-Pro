@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   FileCode,
   User,
+  Files,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -108,6 +109,11 @@ const features = [
     title: "Ticket Support Module",
     description: "Efficient customer support system",
     link: "https://docs-next14-pro.thesaasfactory.dev/features/ticketSupportModule",
+  },
+  {
+    icon: <Files className="h-8 w-8" />,
+    title: "Blog MDX Module",
+    description: "Create and manage blog posts with MDX",
   },
   {
     icon: <Settings className="h-8 w-8" />,

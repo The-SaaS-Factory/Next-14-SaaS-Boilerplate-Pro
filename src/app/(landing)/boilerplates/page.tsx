@@ -89,6 +89,11 @@ const features = [
     free: "Affiliate Panel and Payments with Commissions",
     pro: false,
   },
+  {
+    name: "Blog Module - MDX Version",
+    free: false, 
+    pro: true,
+  },
 ];
 export default function BoilerplatesPage() {
   return (
