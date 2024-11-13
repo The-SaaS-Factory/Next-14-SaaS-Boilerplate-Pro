@@ -2,7 +2,9 @@ export const constants = {
   multiTenant: true,
   tanantModelName: "Organization",
   appUrl:
-    process.env.NEXT_PUBLIC_APP_URL || process.env.NODE_ENV === "production"
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NODE_ENV === "production"
       ? "https://changeThisUrlIfYouAreNotUsingVercel.com"
       : "http://localhost:3000",
   appName: "Boilerplate Pro",
