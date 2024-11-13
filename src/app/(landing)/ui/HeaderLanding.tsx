@@ -12,6 +12,7 @@ import Link from "next/link";
 import { constants } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { saasFeatures } from "../../../lib/constants";
 
 export const HeaderLanding = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,15 @@ export const HeaderLanding = () => {
       >
         Link 1
       </Link>
+      {saasFeatures.blogMdx && (
+        <Link
+          href="/blog"
+          className="hover:text-gray-700 text-gray-500 font-semibold"
+          onClick={closeMenu}
+        >
+          Blog
+        </Link>
+      )}
       <Link
         href="/#prices"
         onClick={closeMenu}
