@@ -11,15 +11,15 @@ generator client {
 
 //Only for development in local
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 // datasource db {
-//   provider = "mysql"
+//   provider = "postgresql"
 //   url      = env("DATABASE_URL")
 // }
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 // ------------------------------------SaaS  Core------------------------------------------
 model User {
@@ -96,6 +96,7 @@ model Organization {
   organizationCapabilities OrganizationCapabilities[]
   organizationPlugin       OrganizationPlugin[]
   permissions              Permission[]
+  projects                 Project[]
 }
 
 enum OrganizationType {
@@ -121,6 +122,53 @@ enum OrganizationStatus {
 }
 
 // ---------------------------------------End SaaS Core-------------------------------------------
+
+//---------------------------------------- Factory -----------------------------------------------
+model Project {
+  id             Int           @id @default(autoincrement())
+  name           String
+  organizationId Int
+  status         ProjectStatus @default(IDEA)
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  description    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  roles          ProjectRole[]
+  features        ProjectFeature[]
+  
+}
+
+model ProjectRole {
+  id        Int          @id @default(autoincrement())
+  name      String
+  features  ProjectFeature[]
+  projectId Int
+  project   Project   @relation(fields: [projectId], references: [id])
+}
+
+model ProjectFeature {
+  id          String       @id @default(cuid())
+  text        String
+  projectId   Int
+  project     Project      @relation(fields: [projectId], references: [id])
+  roleId      Int
+  role        ProjectRole         @relation(fields: [roleId], references: [id])
+  subFeatures ProjectSubFeature[]
+}
+
+model ProjectSubFeature {
+  id        String  @id @default(cuid())
+  text      String
+  featureId String
+  feature   ProjectFeature @relation(fields: [featureId], references: [id])
+}
+
+enum ProjectStatus {
+  IDEA
+  VALIDATION
+  DEVELOPMENT
+  PRODUCTION
+}
 
 // -------------------------------------- Modules ------------------------------------------------
 // -------- Module Log

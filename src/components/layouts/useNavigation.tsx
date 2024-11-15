@@ -51,11 +51,29 @@ export const useNavigation = () => {
     {
       sectionName: "Factory",
       icon: Factory,
-      href: "/home/admin/factory",
+      href: "/home/admin/factory/lobby",
       items: [
         {
-          name: "Factory",
-          href: "/home/admin/factory",
+          name: "Lobby",
+          href: "/home/admin/factory/lobby",
+          icon: HomeIcon,
+          current: true,
+        },
+        {
+          name: "Idea",
+          href: "/home/admin/factory/idea",
+          icon: HomeIcon,
+          current: true,
+        },
+        {
+          name: "Validation",
+          href: "/home/admin/factory/validation",
+          icon: HomeIcon,
+          current: true,
+        },
+        {
+          name: "Production",
+          href: "/home/admin/factory/production",
           icon: HomeIcon,
           current: true,
         },
