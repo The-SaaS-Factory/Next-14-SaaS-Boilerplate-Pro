@@ -4,6 +4,20 @@ import PromoCTA from "./PromoCTA";
 
 const tiers = [
   {
+    name: "Free lifetime",
+    id: "tier-hobby",
+    href: "#",
+    free: true,
+    priceMonthly: "$0",
+    description: " ",
+    features: [
+      "Download Free Repositories",
+      "Access to Factory Suite (Coming soon)",
+      "Sell your SaaS in the marketpalce (Coming soon)",
+    ],
+    featured: false,
+  },
+  {
     name: "Pro yearly",
     id: "tier-hobby",
     href: "#",
@@ -69,7 +83,10 @@ export default function PricingFrontend() {
           Our plans give you access to all the features of our platform, not
           just the saas boilerplates
         </p>
-        <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+        <div
+          className="mx-auto mt-16 grid max-w-2xl   grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-5xl
+         lg:grid-cols-3"
+        >
           {tiers.map((tier, tierIdx) => (
             <div
               key={tier.id}
@@ -80,8 +97,10 @@ export default function PricingFrontend() {
                 tier.featured
                   ? ""
                   : tierIdx === 0
-                    ? "rounded-t-3xl sm:rounded-b-none lg:rounded-bl-3xl lg:rounded-tr-none"
-                    : "sm:rounded-t-none lg:rounded-bl-none lg:rounded-tr-3xl",
+                    ? "rounded-l-3xl  rounded-3xl mr-auto sm:rounded-r-none   "
+                    : tierIdx === 1
+                      ? "sm:rounded-none rounded-3xl lg:h-[95%] sm:rounded-l-2xl sm:rounded-r-none"
+                      : "rounded-r-3xl rounded-3xl",
                 "rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10",
               )}
             >
@@ -142,7 +161,7 @@ export default function PricingFrontend() {
                   "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10",
                 )}
               >
-                Get started today
+                {tier.free ? "Start free trial" : "Get started today"}
               </Link>
             </div>
           ))}
