@@ -27,6 +27,8 @@ type RegisterInput = {
 import { classNames } from "@/utils/facades/frontendFacades/strFacade";
 import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 const tabs = [
   {
@@ -140,10 +142,18 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen g-main px-4 lg:px-8">
+      <div className=" flex flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
+        <Link href="/">
+          <Image
+            src={constants.logoUrl}
+            width={150}
+            height={150}
+            alt={constants.appName}
+          />
+        </Link>
         <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
-            <div className="  sm:block border-b border-gray-200">
+            <div className="sm:block border-b border-gray-200">
               <nav
                 aria-label="Tabs"
                 className="flex space-x-8 mx-auto justify-center"
