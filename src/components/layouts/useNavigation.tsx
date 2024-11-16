@@ -1,3 +1,4 @@
+import { constants, saasFeatures } from "@/lib/constants";
 import {
   DocumentTextIcon,
   HomeIcon,
@@ -38,6 +39,20 @@ export const useNavigation = () => {
           icon: BuildingLibraryIcon,
           current: false,
         },
+      ],
+    },
+    saasFeatures.stripeConnect && {
+      sectionName: "Billing Example",
+      href: "/home/admin/billing/bank-account",
+      icon: BuildingLibraryIcon,
+      items: [
+        {
+          name: "Bank Account",
+          href: "/home/admin/billing/bank-account",
+          icon: BuildingLibraryIcon,
+          current: false,
+        },
+        
       ],
     },
   ].filter(Boolean);

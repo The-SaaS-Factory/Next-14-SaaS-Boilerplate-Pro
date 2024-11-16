@@ -35,6 +35,13 @@ const makeStripeClient = async () => {
   return new Stripe(stripeSectret, { apiVersion: "2023-10-16" });
 };
 
+export const createConnectAccount = async () => {
+  const stripe = await makeStripeClient();
+  return await stripe.accounts.create({
+    type: "express",
+  });
+};
+
 export const stripeWebhook = async (requestBody: any) => {
   const stripe = await makeStripeClient();
   const payload = requestBody;
