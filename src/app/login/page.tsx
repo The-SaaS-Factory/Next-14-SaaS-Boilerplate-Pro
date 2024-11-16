@@ -143,7 +143,7 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className=" flex flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
+      <div className=" flex gradient flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
         <Link href="/">
           <Image
             src={constants.logoUrl}

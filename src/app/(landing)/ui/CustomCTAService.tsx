@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export default function CustomCTAService() {
   return (
-    <section className="w-full z-10 py-12 md:py-24 lg:py-32 bg-gradient-to-r from-indigo-600 via-violet-700 to-violet-900">
+    <section className="w-full  z-10 py-12 md:py-24 lg:py-32 bg-gradient-to-r from-indigo-600 via-violet-700 to-violet-900 bg-animate">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
