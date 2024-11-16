@@ -93,7 +93,7 @@ export const HeaderLanding = () => {
         <div className="flex items-center space-x-3">
           <Link href="/" className="">
             <Image
-              src={"/assets/img/logo-thesaasfactory.dev.png"}
+              src={constants.logoUrl}
               width={80}
               height={40}
               className="h-10 w-auto"
