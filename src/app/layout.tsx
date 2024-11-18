@@ -13,6 +13,7 @@ export default function LocaleLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="saashub-verification" content="bh4n4skpnmef" />
       </head>
       <body>
         {children}
