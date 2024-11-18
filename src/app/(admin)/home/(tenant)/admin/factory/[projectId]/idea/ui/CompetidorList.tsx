@@ -1,28 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { PlusCircle, X, ExternalLink, Info, ChevronUp, ChevronDown } from "lucide-react";
+import { PlusCircle, X, ExternalLink, Info, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Textarea } from "@/app/components/ui/textarea";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/app/components/ui/collapsible";
-
-interface Competitor {
-  id: string;
-  name: string;
-  url: string;
-  notes: string;
-}
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/app/components/ui/collapsible";
+import { ProjectCompetitor } from "@prisma/client";
 
 interface CompetitorListProps {
-  competitors: Competitor[];
-  onAdd: (competitor: Competitor) => void;
+  competitors: ProjectCompetitor[];
+  onAdd: (competitor: any) => void;
   onRemove: (id: string) => void;
-  onUpdate: (competitor: Competitor) => void;
+  onUpdate: (competitor: ProjectCompetitor) => void;
 }
 
-export function CompetitorList({ competitors, onAdd, onRemove, onUpdate }: CompetitorListProps) {
+export function CompetitorList({
+  competitors,
+  onAdd,
+  onRemove,
+  onUpdate,
+}: CompetitorListProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [newName, setNewName] = useState("");
   const [newUrl, setNewUrl] = useState("");
@@ -34,7 +43,7 @@ export function CompetitorList({ competitors, onAdd, onRemove, onUpdate }: Compe
         id: Date.now().toString(),
         name: newName.trim(),
         url: newUrl.trim(),
-        notes: newNotes.trim()
+        description: newNotes.trim(),
       });
       setNewName("");
       setNewUrl("");
@@ -80,7 +89,7 @@ export function CompetitorList({ competitors, onAdd, onRemove, onUpdate }: Compe
           </Button>
         </CollapsibleTrigger>
       </Collapsible>
-      
+
       {isOpen && (
         <Button onClick={handleAdd} className="w-full">
           Save Competitor
@@ -88,8 +97,11 @@ export function CompetitorList({ competitors, onAdd, onRemove, onUpdate }: Compe
       )}
 
       <ul className="space-y-2">
-        {competitors.map((competitor) => (
-          <li key={competitor.id} className="flex items-center justify-between rounded-lg border p-3">
+        {competitors?.map((competitor) => (
+          <li
+            key={competitor.id}
+            className="flex items-center justify-between rounded-lg border p-3"
+          >
             <div className="flex items-center gap-2 flex-1">
               <span className="font-medium">{competitor.name}</span>
               <a
@@ -127,15 +139,24 @@ export function CompetitorList({ competitors, onAdd, onRemove, onUpdate }: Compe
                     <div>
                       <label className="text-sm font-medium">Notes</label>
                       <Textarea
-                        value={competitor.notes}
-                        onChange={(e) => onUpdate({ ...competitor, notes: e.target.value })}
+                        value={competitor.description}
+                        onChange={(e) =>
+                          onUpdate({
+                            ...competitor,
+                            description: e.target.value,
+                          })
+                        }
                         className="mt-1"
                       />
                     </div>
                   </div>
                 </DialogContent>
               </Dialog>
-              <Button variant="ghost" size="sm" onClick={() => onRemove(competitor.id)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onRemove(competitor.id)}
+              >
                 <X className="h-4 w-4" />
               </Button>
             </div>

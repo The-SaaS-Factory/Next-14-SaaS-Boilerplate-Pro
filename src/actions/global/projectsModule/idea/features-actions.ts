@@ -30,9 +30,12 @@ export async function getRolesWithFeatures(projectId: number) {
       acc[role.name] = role.features.map((feature) => ({
         id: feature.id,
         text: feature.text,
+        position: feature.position,
+        description: feature.description,
         subFeatures: feature.subFeatures.map((subFeature) => ({
           id: subFeature.id,
           text: subFeature.text,
+          description: subFeature.description,
         })),
       }));
       return acc;
@@ -47,14 +50,11 @@ export async function getRolesWithFeatures(projectId: number) {
     >,
   );
 }
-
-export async function updateRoleFeatures(
+export async function updateProjectFeatures(
   projectId: number,
   roleName: string,
-  features: any,
+  feature: any,
 ) {
-  console.log('d');
-  
   const { organization } = await getMembership();
 
   const projectOwner = await prisma.project.findFirst({
@@ -69,70 +69,83 @@ export async function updateRoleFeatures(
     where: { name: roleName, projectId },
   });
 
-  console.log(role);
-  
-
   if (!role) {
     throw new Error(`Role "${roleName}" not found`);
   }
 
-  console.log(features);
-  
+  // Validaciones
+  if (typeof feature.id !== "string") {
+    throw new Error(`Invalid feature.id type: ${typeof feature.id}`);
+  }
+  if (!feature.subFeatures.every((sf) => typeof sf.id === "string")) {
+    throw new Error("Invalid subFeature IDs in feature.subFeatures");
+  }
 
-  for (const feature of features) {
-    const updatedFeature = await prisma.projectFeature.upsert({
-      where: { id: feature.id },
+  const description = feature.description || "Default description";
+
+  const updatedFeature = await prisma.projectFeature.upsert({
+    where: { id: feature.id },
+    create: {
+      id: feature.id.trim(),
+      text: feature.text,
+      description,
+      position: feature.position,
+      project: {
+        connect: {
+          id: role.projectId,
+        },
+      },
+      role: {
+        connect: {
+          id: role.id,
+        },
+      },
+    },
+    update: {
+      text: feature.text,
+      description,
+      position: feature.position,
+    },
+  });
+
+  for (const subFeature of feature.subFeatures) {
+    await prisma.projectSubFeature.upsert({
+      where: { id: subFeature.id },
       create: {
-        id: feature.id,
-        text: feature.text,
-        project: {
-          connect: {
-            id: role.projectId,
-          },
-        },
-        role: {
-          connect: {
-            id: role.id,
-          },
-        },
+        id: subFeature.id,
+        text: subFeature.text,
+        featureId: updatedFeature.id,
+        description,
       },
       update: {
-        text: feature.text,
-      },
-    });
-
-    for (const subFeature of feature.subFeatures) {
-      await prisma.projectSubFeature.upsert({
-        where: { id: subFeature.id },
-        create: {
-          id: subFeature.id,
-          text: subFeature.text,
-          featureId: updatedFeature.id,
-        },
-        update: {
-          text: subFeature.text,
-        },
-      });
-    }
-
-    // Elimina subfeatures que ya no están en la lista
-    await prisma.projectSubFeature.deleteMany({
-      where: {
-        featureId: updatedFeature.id,
-        id: {
-          notIn: feature.subFeatures.map((sf) => sf.id),
-        },
+        text: subFeature.text,
+        description: subFeature.description,
       },
     });
   }
 
-  // Elimina features que ya no están en la lista
-  await prisma.projectFeature.deleteMany({
+  await prisma.projectSubFeature.deleteMany({
     where: {
-      roleId: role.id,
+      featureId: updatedFeature.id,
       id: {
-        notIn: features.map((f) => f.id),
+        notIn: feature.subFeatures.map((sf) => sf.id),
       },
     },
   });
 }
+
+export const deleteFeature = async (projectId: number, id: string) => {
+  const { organization } = await getMembership();
+
+  const projectOwner = await prisma.project.findFirst({
+    where: { id: projectId, organizationId: organization.id },
+  });
+
+  if (!projectOwner) {
+    throw new Error("Project not found");
+  }
+
+  return await prisma.projectFeature.delete({
+    where: { id },
+  });
+};

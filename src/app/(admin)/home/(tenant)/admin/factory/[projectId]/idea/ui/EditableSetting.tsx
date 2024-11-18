@@ -5,14 +5,14 @@ import { Pencil } from "lucide-react";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-interface EditableDescriptionProps {
-  description: string;
-  onUpdate: (description: string) => void;
+interface EditablesettingProps {
+  setting: string;
+  onUpdate: (setting: string) => void;
 }
 
-export function EditableDescription({ description, onUpdate }: EditableDescriptionProps) {
+export function EditableSetting({ setting, onUpdate }: EditablesettingProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState(description);
+  const [value, setValue] = useState(setting);
 
   const handleSave = () => {
     onUpdate(value);
@@ -47,7 +47,7 @@ export function EditableDescription({ description, onUpdate }: EditableDescripti
       >
         <Pencil className="h-4 w-4" />
       </Button>
-      <p className="text-gray-600 pr-8">{description}</p>
+      <p className="text-gray-600 pr-8">{setting}</p>
     </div>
   );
 }

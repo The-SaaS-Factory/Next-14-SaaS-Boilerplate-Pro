@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { TabCard } from "@/app/components/ui/TabCard";
-import { EditableDescription } from "./ui/EditableDescription";
-import { EditableList } from "./ui/EditableList";
-import { FeatureList } from "./ui/FeaturesList";
-import { CompetitorList } from "./ui/CompetidorList";
-import { FodaSection } from "./ui/FodaSection";
+import { EditableDescription } from "../[projectId]/idea/ui/EditableSetting";
+import { EditableList } from "../[projectId]/idea/ui/EditableList";
+import { FeatureList } from "../[projectId]/idea/ui/FeaturesList";
+import { CompetitorList } from "../[projectId]/idea/ui/CompetidorList";
+import { FodaSection } from "../[projectId]/idea/ui/SwotSection";
 import PageName from "@/components/ui/commons/PageName";
 import {
   getRolesWithFeatures,
@@ -37,31 +37,10 @@ interface Feature {
 }
 
 export default function FactoryIdea() {
+  //Globals Hooks and states
   const searchParams = useSearchParams();
   const projectId = Number(searchParams.get("projectId"));
-
-  const [description, setDescription] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  );
-  const [planes, setPlanes] = useState([
-    "Plan Básico",
-    "Plan Pro",
-    "Enterprise",
-  ]);
-  const [capacidades, setCapacidades] = useState([
-    "API Access",
-    "Analytics",
-    "Support 24/7",
-  ]);
-  const [competitors, setCompetitors] = useState<Competitor[]>([
-    {
-      id: "1",
-      name: "Empresa A",
-      url: "https://empresaa.com",
-      notes: "Competidor principal en el mercado enterprise",
-    },
-  ]);
-
+  const [competitors, setCompetitors] = useState<Competitor[]>();
   const [fodaData, setFodaData] = useState({
     fortalezas: {
       items: [{ id: "1", text: "Tecnología innovadora" }],
@@ -76,41 +55,21 @@ export default function FactoryIdea() {
       items: [{ id: "4", text: "Nuevos competidores" }],
     },
   });
-
   const [roles, setRoles] = useState([]);
-
   const [features, setFeatures] = useState<any>({});
 
-  // const [features, setFeatures] = useState<RoleFeatures>({
-  //   Todos: [
-  //     {
-  //       id: "1",
-  //       text: "Feature 1",
-  //       subFeatures: [
-  //         { id: "1.1", text: "Sub-feature 1.1" },
-  //         { id: "1.2", text: "Sub-feature 1.2" },
-  //       ],
-  //     },
-  //   ],
-  //   Super4: [],
-  //   Tenant: [],
-  //   CR: [],
-  // });
-
+  //Get data from the server
   const getRoles = async () => {
     const roles = await getAllTenantRoles(projectId);
     setRoles(roles);
   };
+
   const getRolesFeaturesData = async () => {
     const rolesWithFeatures = await getRolesWithFeatures(projectId);
     setFeatures(rolesWithFeatures);
   };
-  useEffect(() => {
-    if (!projectId) return;
-    getRoles();
-    getRolesFeaturesData();
-  }, [projectId]);
 
+  //Local Actions
   const handleAddFeature = (role: string, feature: Feature) => {
     setFeatures((prev) => ({
       ...prev,
@@ -126,8 +85,6 @@ export default function FactoryIdea() {
       ),
     }));
 
-    console.log(features);
-    
     await updateRoleFeatures(projectId, role, updatedFeature);
   };
 
@@ -147,6 +104,15 @@ export default function FactoryIdea() {
       [role]: reorderedFeatures,
     }));
   };
+
+
+  //Use Effects
+  useEffect(() => {
+    if (!projectId) return;
+    getRoles();
+    getRolesFeaturesData();
+  }, [projectId]);
+
 
   if (!projectId) return <div>Project not found</div>;
 
@@ -269,7 +235,7 @@ export default function FactoryIdea() {
                   },
                   {
                     value: "foda",
-                    label: "FODA",
+                    label: "SWOT",
                     content: (
                       <FodaSection data={fodaData} onUpdate={setFodaData} />
                     ),

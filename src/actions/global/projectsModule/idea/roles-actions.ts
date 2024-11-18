@@ -24,10 +24,6 @@ export async function getAllTenantRoles(projectId: number) {
   if (roles.length == 0) {
     const seed = [
       {
-        name: "Todos",
-        projectId: projectId,
-      },
-      {
         name: "Super Admin",
         projectId: projectId,
       },

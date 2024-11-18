@@ -5,6 +5,6 @@ export const metadata: Metadata = {
 };
 
 const SaasFactoryAdminRoot = async ({ children }: { children: ReactNode }) => {
-  return <div>{children}</div>;
+  return <div >{children}</div>;
 };
 export default SaasFactoryAdminRoot;

@@ -36,7 +36,7 @@ export function EditableList({ items, onAdd, onRemove }: EditableListProps) {
         </Button>
       </div>
       <ul className="space-y-2">
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <li key={index} className="flex items-center justify-between rounded-lg border p-2">
             <span>{item}</span>
             <Button variant="ghost" size="sm" onClick={() => onRemove(index)}>
