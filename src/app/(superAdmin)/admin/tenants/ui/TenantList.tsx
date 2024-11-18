@@ -56,6 +56,12 @@ const TenantList = async ({
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold  "
                       >
+                        Registration Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold  "
+                      >
                         Members
                       </th>
                       <th
@@ -83,6 +89,9 @@ const TenantList = async ({
                           ) : (
                             <div className=" ">No subscription</div>
                           )}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
+                          {formatTimestampToDateString(tenant.createdAt)}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm  text">
                           <div className="mt-1  text-primary flex flex-col">
