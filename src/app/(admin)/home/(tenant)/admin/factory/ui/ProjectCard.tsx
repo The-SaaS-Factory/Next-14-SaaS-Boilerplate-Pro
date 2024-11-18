@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, ShoppingBag } from "lucide-react";
+import {   FactoryIcon, MegaphoneIcon, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 const getStatusColor = (status: Project["status"]) => {
@@ -42,12 +42,17 @@ export default function ProjectCard({ project }: { project: Project }) {
       <CardFooter className="flex space-x-3">
         <Link href={`/home/admin/factory/${project.id}/idea`}>
           <Button variant="outline" className="w-full">
-            Admin <ExternalLink className="ml-2 h-4 w-4" />
+            Factory <FactoryIcon className="ml-2 h-4 w-4" />
           </Button>
         </Link>
         <Link href={`/home/admin/factory/${project.id}/idea`}>
           <Button variant="outline" className="w-full">
             Sell <ShoppingBag className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+        <Link href={`/home/admin/factory/${project.id}/idea`}>
+          <Button variant="outline" className="w-full">
+            Publish <MegaphoneIcon className="ml-2 h-4 w-4" />
           </Button>
         </Link>
       </CardFooter>

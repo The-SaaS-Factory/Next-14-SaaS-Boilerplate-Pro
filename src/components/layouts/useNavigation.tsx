@@ -23,33 +23,7 @@ export const useNavigation = () => {
       ],
     },
     {
-      sectionName: "Boilerplates",
-      icon: BoxIcon,
-      href: "/home/admin/boilerplates",
-      items: [
-        {
-          name: "Boilerplates",
-          href: "/home/admin/boilerplates",
-          icon: HomeIcon,
-          current: true,
-        },
-      ],
-    },
-    {
-      sectionName: "Services",
-      icon: Calendar,
-      href: "/home/admin/services",
-      items: [
-        {
-          name: "Services",
-          href: "/home/admin/services",
-          icon: HomeIcon,
-          current: true,
-        },
-      ],
-    },
-    {
-      sectionName: "Factory",
+      sectionName: "My Projects",
       icon: Factory,
       href: "/home/admin/factory/dashboard",
       items: [
@@ -59,37 +33,50 @@ export const useNavigation = () => {
           icon: HomeIcon,
           current: true,
         },
-        {
-          name: "Ideas",
-          href: "/home/admin/factory/idea",
-          icon: HomeIcon,
-          current: true,
-        },
-        {
-          name: "Validations",
-          href: "/home/admin/factory/validation",
-          icon: HomeIcon,
-          current: true,
-        },
-        {
-          name: "Productions",
-          href: "/home/admin/factory/production",
-          icon: HomeIcon,
-          current: true,
-        },
       ],
     },
+    // {
+    //   sectionName: "Community",
+    //   icon: UsersIcon,
+    //   href: "/marketplace",
+    //   items: [
+    //     {
+    //       name: "Marketplace",
+    //       href: "/marketplace",
+    //       icon: HomeIcon,
+    //       current: true,
+    //     },
+    //     {
+    //       name: "Directory",
+    //       href: "/directory",
+    //       icon: HomeIcon,
+    //       current: true,
+    //     },
+    //   ],
+    // },
     {
-      sectionName: "Marketplace",
-      icon: ShoppingBag,
-      href: "/marketplace",
+      sectionName: "Resources",
+      icon: BoxIcon,
+      href: "/home/admin/boilerplates",
       items: [
         {
-          name: "Marketplace",
-          href: "/marketplace",
+          name: "Boilerplates",
+          href: "/home/admin/boilerplates",
           icon: HomeIcon,
           current: true,
         },
+        {
+          name: "Services",
+          href: "/home/admin/services",
+          icon: HomeIcon,
+          current: true,
+        },
+        // {
+        //   name: "Curses",
+        //   href: "/home/admin/curses",
+        //   icon: HomeIcon,
+        //   current: true,
+        // },
       ],
     },
   ].filter(Boolean);

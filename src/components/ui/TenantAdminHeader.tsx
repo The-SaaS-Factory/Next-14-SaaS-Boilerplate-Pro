@@ -103,10 +103,16 @@ const TenantAdminHeader = ({
                 </Link>
               )}
               <Link
-                href="/home/help"
+                href="/marketplace"
                 className="hidden lg:flex items-center gap-x-2 text-primary"
               >
-                Help
+                Marketplace
+              </Link>
+              <Link
+                href="/directory"
+                className="hidden lg:flex items-center gap-x-2 text-primary"
+              >
+                Directory
               </Link>
 
               {/* Separator */}
