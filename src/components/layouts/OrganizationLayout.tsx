@@ -23,7 +23,7 @@ export default async function OrganizationLayout({
       <main className="relative bg-main  text-primary">
         <HeroPattern />
         <OrganizationAdminSidebar />{" "}
-        <div className="lg:pl-72 h-screen overflow-y-auto relative ">
+        <div className="lg:pl-[15%] h-screen overflow-y-auto relative ">
           <Suspense fallback={null}>
             <TenantAdminHeader
               userMembership={userMembership}
@@ -32,7 +32,7 @@ export default async function OrganizationLayout({
             />
           </Suspense>
           <div className="py-3 relative lg:pt-[5%]   ">
-            <div className="mx-auto  px-4 lg:px-8">{children}</div>
+            <div className="px-4 lg:px-2 pt-2">{children}</div>
           </div>
         </div>{" "}
       </main>

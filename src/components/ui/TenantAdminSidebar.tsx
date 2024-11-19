@@ -137,7 +137,7 @@ const OrganizationAdminSidebar = () => {
         </Dialog>
       </Transition.Root>
 
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-[20%] 2xl:w-[14.4%]  lg:flex-col">
+      <div className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-[15%] 2xl:w-[13.4%]  lg:flex-col">
         <div
           className="flex backdrop-blur-lg lg:left-72 xl:left-80
            dark:backdrop-blur-3xl
