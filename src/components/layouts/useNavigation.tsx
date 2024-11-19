@@ -5,7 +5,7 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
-import { BoxIcon, Calendar, Factory, ShoppingBag } from "lucide-react";
+import { BoxIcon, Factory } from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [

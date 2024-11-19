@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 "use client";
-
 import { useState } from "react";
 import { PlusCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,7 @@ interface SwotData {
 
 interface SwotSectionProps {
   data: SwotData;
-  onUpdate: (newData: SwotData) => void;
+  onUpdate: (newData: any) => void;
 }
 
 export function SwotSection({ data, onUpdate }: SwotSectionProps) {

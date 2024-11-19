@@ -25,7 +25,6 @@ import Image from "next/image";
 import { constants } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Factory } from "lucide-react";
 
 const community = [
   {
@@ -331,7 +330,7 @@ export default function HeaderLanding() {
 const LoginSection = ({
   setMobileMenuOpen,
 }: {
-  setMobileMenuOpen: (open: boolean) => void;
+  setMobileMenuOpen: any;
 }) => {
   const session = useSession();
 

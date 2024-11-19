@@ -1,4 +1,4 @@
-import { HeaderLanding } from "@/app/(landing)/ui/HeaderLanding";
+import HeaderLanding from "@/app/(landing)/ui/HeaderLanding";
 import { ReactNode, Suspense } from "react";
 
 export default async function ClientAdminLayout({
