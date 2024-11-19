@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from "@next/third-parties/google";
 import {
   Select,
   SelectContent,
@@ -58,7 +58,9 @@ export default function ServicesPage() {
 
       const result = await response.json();
       if (response.ok) {
-        sendGAEvent('conversion_event_request_quote', 'new service requested', { value: organization?.name })
+        sendGAEvent("conversion_event_request_quote", "new service requested", {
+          value: organization?.name,
+        });
         toast.success("Service request sent successfully");
       } else {
         toast.error(`Error: ${result.error}`);

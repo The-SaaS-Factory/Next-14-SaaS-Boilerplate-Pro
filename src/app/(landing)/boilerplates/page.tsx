@@ -91,7 +91,7 @@ const features = [
   },
   {
     name: "Blog Module - MDX Version",
-    free: false, 
+    free: false,
     pro: true,
   },
 ];

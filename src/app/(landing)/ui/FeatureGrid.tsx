@@ -132,7 +132,7 @@ export default function FeatureGrid() {
                 </p>
                 <div className="flex w-full flex-col">
                   <Link
-                      className="mt-3 flex lg:flex mx-auto lg:mx-0 "
+                    className="mt-3 flex lg:flex mx-auto lg:mx-0 "
                     href={"/home/admin/services"}
                   >
                     <Button>Talk wit us</Button>
