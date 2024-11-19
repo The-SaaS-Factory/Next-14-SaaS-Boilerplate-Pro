@@ -1,11 +1,17 @@
+"use server";
 import fetch from "node-fetch";
-const loopsEnabled = process.env.LOOPS_ENABLED;
-const loopsApiKey = process.env.LOOPS_API_KEY;
+import { getSuperAdminSetting } from "./superAdminFacade";
+
 export async function storeContactInLoopsAudience(
   email: string,
   name: string,
   userGroup: string,
 ) {
+  const loopsEnabled: string | null =
+    await getSuperAdminSetting("LOOPS_ENABLED");
+  const loopsApiKey: string | null =
+    await getSuperAdminSetting("LOOPS_API_KEY");
+
   if (loopsEnabled === "true") {
     try {
       const apiKey = loopsApiKey;
@@ -33,6 +39,11 @@ export async function storeContactInLoopsAudience(
 }
 
 export async function sendLoopsEventToUser(email: string, eventName: string) {
+  const loopsEnabled: string | null =
+    await getSuperAdminSetting("LOOPS_ENABLED");
+  const loopsApiKey: string | null =
+    await getSuperAdminSetting("LOOPS_API_KEY");
+
   if (loopsEnabled === "true") {
     try {
       const apiKey = loopsApiKey;
@@ -62,6 +73,11 @@ type loopPayload = {
   dataVariables: Object;
 };
 export async function sendLoopsTransactionalEventToUser(payload: loopPayload) {
+  const loopsEnabled: string | null =
+    await getSuperAdminSetting("LOOPS_ENABLED");
+  const loopsApiKey: string | null =
+    await getSuperAdminSetting("LOOPS_API_KEY");
+
   if (loopsEnabled === "true") {
     try {
       const apiKey = loopsApiKey;

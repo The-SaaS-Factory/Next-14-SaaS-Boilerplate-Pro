@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut, SettingsIcon, User } from "lucide-react";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
-import { Badge } from "@/app/components/ui/badge";
+import { Badge } from "../badge";
 export const MultiTentantProfileButton = ({
   organization,
   userMembership,

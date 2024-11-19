@@ -29,6 +29,7 @@ import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 const tabs = [
   {
@@ -142,23 +143,23 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className=" flex flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
+      <div className=" flex gradient flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
         <Link href="/">
           <Image
             src={constants.logoUrl}
-            width={150}
-            height={150}
+            width={80}
+            height={80}
             alt={constants.appName}
           />
         </Link>
-        <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
+        <div className="w-full mt-7 z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
           <div className="">
             <div className="sm:block border-b border-gray-200">
               <nav
                 aria-label="Tabs"
                 className="flex space-x-8 mx-auto justify-center"
               >
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                   <button
                     key={tab.name}
                     onClick={() => setAction(tab.action)}
@@ -166,7 +167,7 @@ export default function LoginPage() {
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
                         : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
-                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm  font-medium",
+                      "group relative inline-flex items-center border-b-2 px-4 py-2 text-sm  font-medium",
                     )}
                   >
                     <tab.icon
@@ -179,6 +180,12 @@ export default function LoginPage() {
                       )}
                     />
                     {tab.name}
+                    {index === 1 && (
+                      <Badge className="-mt-6 -mr-3 bg-green-700 animate-pulse absolute right-2 top-1">
+                        {" "}
+                        Free Plan{" "}
+                      </Badge>
+                    )}
                   </button>
                 ))}
               </nav>
@@ -199,19 +206,7 @@ export default function LoginPage() {
                   <h2 className="text-2xl font-bold text-primary mt-6 text-center">
                     Login to {constants.appName}
                   </h2>
-                  {constants.demoMode && (
-                    <div className="flex mt-3 flex-col bg-gray-100 rounded-lg text-gray-600 p-3">
-                      <span className="text-xs">Demo mode Enabled</span>
-                      <div className="flex flex-col">
-                        <span className="text-lg font-medium">
-                          Super Admin Access
-                        </span>
-                        <br />
-                        <span>Email: superadmin@gmail.com</span>
-                        <span>Password: 123456789</span>
-                      </div>
-                    </div>
-                  )}
+
                   <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                     <div>
                       <label

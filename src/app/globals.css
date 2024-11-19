@@ -7,6 +7,10 @@
   @apply max-w-7xl mx-auto;
 }
 
+.text-coloride {
+  @apply font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text;
+}
+
 .g-main {
   @apply bg-gradient-to-r from-cyan-50 via-slate-100 to-blue-50;
 }
@@ -154,6 +158,26 @@
   min-width: 0;
   padding-left: var(--slide-spacing);
   position: relative;
+}
+
+.gradient {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(334deg, #eff1f4, #b3b6f6, #9cd8f6);
+  background-size: 180% 180%;
+  animation: gradient-animation 6s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @tailwind utilities;
