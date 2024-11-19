@@ -102,7 +102,10 @@ export default function HeaderLanding() {
           open={openPopover === "community"}
           onOpenChange={() => handleOpenChange("community")}
         >
-          <PopoverTrigger className="flex items-center gap-x-1 text-sm font-semibold text-gray-900">
+          <PopoverTrigger
+            className="lg:flex  hidden 
+          items-center gap-x-1 text-sm font-semibold text-gray-900"
+          >
             Community
             <ChevronDownIcon
               aria-hidden="true"
@@ -137,7 +140,7 @@ export default function HeaderLanding() {
           open={openPopover === "resources"}
           onOpenChange={() => handleOpenChange("resources")}
         >
-          <PopoverTrigger className="flex items-center gap-x-1 text-sm font-semibold text-gray-900">
+          <PopoverTrigger className="lg:flex  hidden  items-center gap-x-1 text-sm font-semibold text-gray-900">
             Resources
             <ChevronDownIcon
               aria-hidden="true"
@@ -169,13 +172,13 @@ export default function HeaderLanding() {
 
         <Link
           href="/home/admin/factory/dashboard"
-          className="text-sm font-semibold text-gray-900"
+          className="text-sm lg:flex  hidden  font-semibold text-gray-900"
         >
           The Factory
         </Link>
         <Link
           href="/home/admin/services"
-          className="text-sm font-semibold text-gray-900"
+          className="text-sm lg:flex  hidden  font-semibold text-gray-900"
         >
           Services
         </Link>
