@@ -1,5 +1,9 @@
 "use client";
-
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/app/components/ui/popover";
 import { useState } from "react";
 import {
   Dialog,
@@ -7,10 +11,6 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
 } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -64,6 +64,13 @@ const resources = [
 export default function HeaderLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [openPopover, setOpenPopover] = useState(null);
+  const closePopover = () => setOpenPopover(null);
+
+  const handleOpenChange = (popoverName) => {
+    setOpenPopover((current) => (current === popoverName ? null : popoverName));
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-blue-200/10 backdrop-blur-md">
       <nav
@@ -91,118 +98,88 @@ export default function HeaderLanding() {
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
-        <PopoverGroup className="hidden z-50 lg:flex lg:gap-x-12">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
-              Community
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="size-5 flex-none text-gray-400"
-              />
-            </PopoverButton>
+        <Popover
+          open={openPopover === "community"}
+          onOpenChange={() => handleOpenChange("community")}
+        >
+          <PopoverTrigger className="flex items-center gap-x-1 text-sm font-semibold text-gray-900">
+            Community
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="w-5 h-5 flex-none text-gray-400"
+            />
+          </PopoverTrigger>
+          <PopoverContent className="w-screen max-w-md p-4 rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+            {community.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={closePopover}
+                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50"
+              >
+                <div className="flex w-11 h-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <item.icon
+                    aria-hidden="true"
+                    className="w-6 h-6 text-gray-600 group-hover:text-indigo-600"
+                  />
+                </div>
+                <div className="flex-auto">
+                  <span>{item.name}</span>
+                  <p className="mt-1 text-gray-600">{item.description}</p>
+                </div>
+              </Link>
+            ))}
+          </PopoverContent>
+        </Popover>
 
-            <PopoverPanel
-              transition
-              className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="p-4">
-                {community.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
-                  >
-                    <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon
-                        aria-hidden="true"
-                        className="size-6 text-gray-600 group-hover:text-indigo-600"
-                      />
-                    </div>
-                    <div className="flex-auto">
-                      <Link
-                        href={item.href}
-                        className="block font-semibold text-gray-900"
-                      >
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </Link>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </PopoverPanel>
-          </Popover>
-        </PopoverGroup>
-        <PopoverGroup className="hidden z-50 lg:flex lg:gap-x-12">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
-              Resources
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="size-5 flex-none text-gray-400"
-              />
-            </PopoverButton>
+        {/* Resources Popover */}
+        <Popover
+          open={openPopover === "resources"}
+          onOpenChange={() => handleOpenChange("resources")}
+        >
+          <PopoverTrigger className="flex items-center gap-x-1 text-sm font-semibold text-gray-900">
+            Resources
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="w-5 h-5 flex-none text-gray-400"
+            />
+          </PopoverTrigger>
+          <PopoverContent className="w-screen max-w-md p-4 rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+            {resources.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={closePopover}
+                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50"
+              >
+                <div className="flex w-11 h-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <item.icon
+                    aria-hidden="true"
+                    className="w-6 h-6 text-gray-600 group-hover:text-indigo-600"
+                  />
+                </div>
+                <div className="flex-auto">
+                  <span>{item.name}</span>
+                  <p className="mt-1 text-gray-600">{item.description}</p>
+                </div>
+              </Link>
+            ))}
+          </PopoverContent>
+        </Popover>
 
-            <PopoverPanel
-              transition
-              className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="p-4">
-                {resources.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
-                  >
-                    <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon
-                        aria-hidden="true"
-                        className="size-6 text-gray-600 group-hover:text-indigo-600"
-                      />
-                    </div>
-                    <div className="flex-auto">
-                      <Link
-                        href={item.href}
-                        className="block font-semibold text-gray-900"
-                      >
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </Link>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {/* <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                {callsToAction.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
-                  >
-                    <item.icon
-                      aria-hidden="true"
-                      className="size-5 flex-none text-gray-400"
-                    />
-                    {item.name}
-                  </a>
-                ))}
-              </div> */}
-            </PopoverPanel>
-          </Popover>
+        <Link
+          href="/home/admin/factory/dashboard"
+          className="text-sm font-semibold text-gray-900"
+        >
+          The Factory
+        </Link>
+        <Link
+          href="/home/admin/services"
+          className="text-sm font-semibold text-gray-900"
+        >
+          Services
+        </Link>
 
-          <Link
-            href="/home/admin/factory/dashboard"
-            className="text-sm/6 font-semibold text-gray-900"
-          >
-            The Factory
-          </Link>
-          <Link
-            href="/home/admin/services"
-            className="text-sm/6 font-semibold text-gray-900"
-          >
-            Services
-          </Link>
-        </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <LoginSection setMobileMenuOpen={setMobileMenuOpen} />
         </div>
@@ -327,11 +304,7 @@ export default function HeaderLanding() {
   );
 }
 
-const LoginSection = ({
-  setMobileMenuOpen,
-}: {
-  setMobileMenuOpen: any;
-}) => {
+const LoginSection = ({ setMobileMenuOpen }: { setMobileMenuOpen: any }) => {
   const session = useSession();
 
   const closeMenu = () => {

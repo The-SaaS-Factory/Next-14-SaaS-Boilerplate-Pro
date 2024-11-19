@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Search, Filter, X } from "lucide-react";
+import { Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -22,40 +21,10 @@ import {
   SheetTrigger,
   SheetFooter,
 } from "@/components/ui/sheet";
+import Search from "@/app/components/Search";
 
 // Simulated SaaS products data
 const saasProducts = [
-  {
-    id: 1,
-    name: "HealthTrack",
-    industry: "Health",
-    functionality: "CRM",
-    clientSize: "SMEs",
-    tech: "React",
-    pricing: "Subscription",
-    marketTarget: "Latin America",
-    forSale: true,
-  },
-  {
-    id: 2,
-    name: "EduLearn",
-    industry: "Education",
-    functionality: "LMS",
-    clientSize: "Enterprise",
-    tech: "Next.js",
-    pricing: "Freemium",
-    marketTarget: "Europe",
-  },
-  {
-    id: 3,
-    name: "LogiFlow",
-    industry: "Logistics",
-    functionality: "Automation",
-    clientSize: "Startups",
-    tech: "Laravel",
-    pricing: "One-time",
-    marketTarget: "United States",
-  },
   // Add more products as needed
 ];
 
@@ -106,12 +75,7 @@ export default function SaasDirectorySearch() {
     router.push(`?${params.toString()}`);
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("search", searchTerm);
-    router.push(`?${params.toString()}`);
-  };
+ 
 
   const clearAllFilters = () => {
     const params = new URLSearchParams();
@@ -167,54 +131,57 @@ export default function SaasDirectorySearch() {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">SaaS Directory</h1>
-
-      {/* Search Bar and Filter Button */}
-      <form onSubmit={handleSearch} className="flex mb-4">
-        <Input
-          type="text"
-          placeholder="Search SaaS solutions..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow"
-        />
-        <Button type="submit" className="ml-2 hidden md:flex">
-          <Search className="h-4 w-4 mr-2" />
-          Search
-        </Button>
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="outline" className="ml-2 md:hidden">
-              <Filter className="h-4 w-4" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Filters</SheetTitle>
-              <SheetDescription>
-                Apply filters to refine your search
-              </SheetDescription>
-            </SheetHeader>
-            <div className="py-4">
-              <FilterContent inDrawer={true} />
+    <div className="w-full min-h-screen space-y-4 pt-12">
+      {/* Hero Section */}
+      <section className=" relative   g-main overflow-hidden py-20">
+        <div className=" container inset-0   z-0">
+          <div className="relative z-10">
+            <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
+              SaaS Directory
+            </h1>
+            <div className="flex px-7 lg:px-0 lg:w-1/3 mx-auto lg:space-x-0 space-x-3 items-center">
+              <Search />
+              {/* Search Bar and Filter Button */}
+              <div className=" ">
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" className="ml-2 md:hidden">
+                      <Filter className="h-4 w-4" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>Filters</SheetTitle>
+                      <SheetDescription>
+                        Apply filters to refine your search
+                      </SheetDescription>
+                    </SheetHeader>
+                    <div className="py-4">
+                      <FilterContent inDrawer={true} />
+                    </div>
+                    <SheetFooter>
+                      <Button
+                        onClick={() => setIsOpen(false)}
+                        className="w-full"
+                      >
+                        View Results
+                      </Button>
+                    </SheetFooter>
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
-            <SheetFooter>
-              <Button onClick={() => setIsOpen(false)} className="w-full">
-                View Results
-              </Button>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-      </form>
+          </div>
+        </div>
+      </section>
 
       {/* Filters - Desktop */}
-      <div className="hidden md:flex flex-wrap gap-4 mb-4">
+      <div className="hidden max-w-7xl mx-auto md:flex flex-wrap gap-4  4">
         <FilterContent />
       </div>
 
       {/* Active Filters */}
-      <div className="flex flex-wrap items-center gap-2 mb-4">
+      <div className="flex max-w-7xl mx-auto flex-wrap items-center gap-2 mb-4">
         {Object.entries(filters).map(([category, value]) => (
           <Badge key={category} variant="secondary" className="px-2 py-1">
             {value as string}
@@ -234,8 +201,8 @@ export default function SaasDirectorySearch() {
       </div>
 
       {/* Results */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map((product, index) => (
+      <div className="grid max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-6 relative"
@@ -271,6 +238,12 @@ export default function SaasDirectorySearch() {
           </div>
         ))}
       </div>
+
+      {filteredProducts.length === 0 && (
+        <div className="text-center text-gray-500">
+          No products found. Try removing some filters.
+        </div>
+      )}
     </div>
   );
 }

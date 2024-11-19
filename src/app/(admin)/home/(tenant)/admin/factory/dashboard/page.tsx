@@ -25,6 +25,7 @@ import { getAllTenantProjects } from "@/actions/global/projectsModule/get-all-te
 import { Project } from "@prisma/client";
 import { toast } from "sonner";
 import ProjectCard from "../ui/ProjectCard";
+import { track } from "@vercel/analytics";
 
 export default function FactoryLobby() {
   const [projects, setProjects] = useState<Project[]>([] as Project[]);
@@ -38,6 +39,7 @@ export default function FactoryLobby() {
   const handleCreateProject = async () => {
     await createProject(newProject.name, newProject.summary, newProject.status)
       .then(() => {
+        track("new_project_created");
         toast.success("Project created successfully");
         setIsDialogOpen(false);
         getAllProjects();
