@@ -1,5 +1,5 @@
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
 });
 
 const nextConfig = withMDX({
@@ -19,7 +19,7 @@ const nextConfig = withMDX({
       { protocol: "https", hostname: "www.gravatar.com" },
     ],
   },
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 });
 
 module.exports = nextConfig;

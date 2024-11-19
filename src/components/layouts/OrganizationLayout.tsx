@@ -36,16 +36,17 @@ export default async function OrganizationLayout({
           </div>
         </div>{" "}
       </main>
-      {saasFeatures.onboarding && (
-        <CompleteOnBoarding
-          isOnboardingCompleted={organization.isOnboardingCompleted ?? false}
-        />
-      )}
+
       <UpdateClientCache
         organization={organization}
         userMembership={userMembership}
       />
       <RedirectSuperAdmin redirect={isSuperAdmin(userMembership)} />
+      {saasFeatures.onboarding && (
+        <CompleteOnBoarding
+          isOnboardingCompleted={organization.isOnboardingCompleted ?? false}
+        />
+      )}
     </Suspense>
   );
 }

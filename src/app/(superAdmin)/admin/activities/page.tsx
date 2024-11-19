@@ -7,7 +7,7 @@ import PageLoader from "@/components/ui/loaders/PageLoader";
 import Pagination from "@/components/ui/commons/Pagination";
 
 export const metadata: Metadata = {
-  title: "Actividades",
+  title: "Activities",
 };
 
 const ActivitiesPage = async ({
@@ -32,7 +32,7 @@ const ActivitiesPage = async ({
 
   return (
     <div>
-      <PageName name={"Actividades"} />
+      <PageName name={"Activities"} />
 
       <Suspense
         fallback={

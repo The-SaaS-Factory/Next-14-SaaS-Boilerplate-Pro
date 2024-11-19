@@ -86,9 +86,9 @@ const ActivitiesList = ({ data }: { data: any }) => {
           <div className="divide-gray-200">
             <div className="pt-3 flex flex-col space-y-4">
               <div className="flex items-center gap-2">
-                <span className="text-primary">Búsqueda</span>
+                <span className="text-primary">Search</span>
                 <span className="ml-auto lg:block hidden text-2xs font-medium">
-                  Filtros
+                  Filters
                 </span>
               </div>
 
@@ -100,7 +100,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       htmlFor="start-date"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Fecha de Inicio
+                      Start Date
                     </label>
                     <input
                       type="date"
@@ -124,7 +124,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       htmlFor="end-date"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Fecha de Fin
+                      End Date
                     </label>
                     <input
                       type="date"
@@ -223,10 +223,10 @@ const ActivitiesList = ({ data }: { data: any }) => {
               <Table className="mt-6">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-center">Usuario</TableHead>
-                    <TableHead className="text-center">Acción</TableHead>
-                    <TableHead className="text-center">Fecha</TableHead>
-                    <TableHead className="text-center">Acciones</TableHead>
+                    <TableHead className="text-center">User</TableHead>
+                    <TableHead className="text-center">Action</TableHead>
+                    <TableHead className="text-center">Date</TableHead>
+                    <TableHead className="text-center">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
 
@@ -254,7 +254,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
 
                       <TableCell className="text-center flex items-center justify-center">
                         <CustomDialog
-                          dialogTitle="Registro de Cambios"
+                          dialogTitle="Changes registered"
                           icon={
                             <EyeIcon className="size-6 self-center"></EyeIcon>
                           }
