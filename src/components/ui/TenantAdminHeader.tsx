@@ -50,7 +50,7 @@ const TenantAdminHeader = ({
     <>
       <div className=" relative    w-full flex    z-50   ">
         <div
-          className="lg:fixed mt-3 lg:mt-0 w-full lg:w-auto lg:left-[15%] 2xl:left-[13.4%] right-0 top-0  h-14     backdrop-blur-3xl  
+          className="lg:fixed mt-3 lg:mt-0 w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
            bg-opacity-25 transition-opacity 
          items-center gap-x-4 border-b text-primary
           border-gray-300 bg-transparent  dark:border-gray-600 px-4 
@@ -103,16 +103,10 @@ const TenantAdminHeader = ({
                 </Link>
               )}
               <Link
-                href="/marketplace"
+                href="/home/help"
                 className="hidden lg:flex items-center gap-x-2 text-primary"
               >
-                Marketplace
-              </Link>
-              <Link
-                href="/directory"
-                className="hidden lg:flex items-center gap-x-2 text-primary"
-              >
-                Directory
+                Help
               </Link>
 
               {/* Separator */}

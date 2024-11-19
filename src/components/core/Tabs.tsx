@@ -28,7 +28,7 @@ const Tabs = ({
 
   return (
     <div>
-      <div className="flex overflow-auto mb-1 lg:mb-0 border-b-2 w-[100%] py-1 border-gray-300 lg:border-gray-200 ">
+      <div className="flex overflow-auto border-b-2 w-[100%] py-1 border-gray-200 ">
         <div className="flex space-x-2">
           {tabs.map((tab) => (
             <div
@@ -40,8 +40,8 @@ const Tabs = ({
               {tab.icon &&
                 React.createElement(tab.icon, {
                   className: isActive(tab.path)
-                    ? "w-5 h-5 text-primary active-tab  "
-                    : "text-primary w-5 h-5  ",
+                    ? "w-5 h-5 text-primary active-tab hidden lg:block"
+                    : "text-primary w-5 h-5 hidden lg:block",
                   "aria-hidden": "true",
                 })}
               <Link

@@ -3,8 +3,8 @@ import React, { Suspense } from "react";
 import FloatingWhatsAppButton from "@/components/core/FloatingWhatsAppButton";
 import SessionWrapper from "@/components/core/SessionWrapper";
 import { constants } from "@/lib/constants";
+import { HeaderLanding } from "./ui/HeaderLanding";
 import FooterLanding from "./ui/FooterLanding";
-import HeaderLanding from "./ui/HeaderLanding";
 
 export const metadata: Metadata = {
   title: constants.appName,

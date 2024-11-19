@@ -19,18 +19,6 @@ export const capabilities = [
     description: "You can invite only 5 members in the organization",
     type: "LIMIT",
   },
-  {
-    id: 4,
-    name: "Download Pro Repositories",
-    description: "You can download all pro repositories",
-    type: "PERMISSION",
-  },
-  {
-    id: 5,
-    name: "10% discount on all services",
-    description: "You will get 10% discount on all services",
-    type: "PERMISSION",
-  },
 ];
 
 export const plans = [
@@ -88,18 +76,6 @@ export const planCapabilities = [
     name: "",
   },
   //Plan 2
-  {
-    planId: 2,
-    capabilityId: 5,
-    count: 1,
-    name: "",
-  },
-  {
-    planId: 2,
-    capabilityId: 4,
-    count: 1,
-    name: "",
-  },
   {
     planId: 2,
     capabilityId: 3,

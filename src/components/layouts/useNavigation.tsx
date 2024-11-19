@@ -5,7 +5,6 @@ import {
   UsersIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
-import { BoxIcon, Calendar, Factory, ShoppingBag } from "lucide-react";
 
 export const useNavigation = () => {
   const tenantNavigation = [
@@ -23,60 +22,22 @@ export const useNavigation = () => {
       ],
     },
     {
-      sectionName: "My Projects",
-      icon: Factory,
-      href: "/home/admin/factory/dashboard",
+      sectionName: "Section Example",
+      href: "/home/admin/section",
+      icon: DocumentTextIcon,
       items: [
         {
-          name: "Dashboard",
-          href: "/home/admin/factory/dashboard",
-          icon: HomeIcon,
-          current: true,
-        },
-      ],
-    },
-    // {
-    //   sectionName: "Community",
-    //   icon: UsersIcon,
-    //   href: "/marketplace",
-    //   items: [
-    //     {
-    //       name: "Marketplace",
-    //       href: "/marketplace",
-    //       icon: HomeIcon,
-    //       current: true,
-    //     },
-    //     {
-    //       name: "Directory",
-    //       href: "/directory",
-    //       icon: HomeIcon,
-    //       current: true,
-    //     },
-    //   ],
-    // },
-    {
-      sectionName: "Resources",
-      icon: BoxIcon,
-      href: "/home/admin/boilerplates",
-      items: [
-        {
-          name: "Boilerplates",
-          href: "/home/admin/boilerplates",
-          icon: HomeIcon,
-          current: true,
+          name: "Section Example Page 1",
+          href: "/home/admin/section",
+          icon: DocumentTextIcon,
+          current: false,
         },
         {
-          name: "Services",
-          href: "/home/admin/services",
-          icon: HomeIcon,
-          current: true,
+          name: "Section Example Page 2",
+          href: "/home/admin/section2",
+          icon: BuildingLibraryIcon,
+          current: false,
         },
-        // {
-        //   name: "Curses",
-        //   href: "/home/admin/curses",
-        //   icon: HomeIcon,
-        //   current: true,
-        // },
       ],
     },
   ].filter(Boolean);

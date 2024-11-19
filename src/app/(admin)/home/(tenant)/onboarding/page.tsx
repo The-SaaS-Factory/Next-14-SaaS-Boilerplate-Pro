@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { constants } from "@/lib/constants";
 import { updateProfileFields } from "@/actions/admin/userModule/update-profile-fields";
@@ -10,18 +11,9 @@ import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { track } from "@vercel/analytics";
 
 export default function Component() {
-  const [organizationType, setOrganizationType] = useState("");
+  const [projectName, setProjectName] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const navigation = useRouter();
@@ -36,15 +28,12 @@ export default function Component() {
         settingValue: agreed,
       },
       {
-        settingName: "type",
-        settingValue: organizationType,
+        settingName: "name",
+        settingValue: projectName,
       },
     ])
       .then(async () => {
         setShowConfetti(true);
-        track("complete_onboarding", {
-          organizationType,
-        });
         await makeOrganizationOnboardingCompleted();
         setTimeout(() => {
           navigation.push("/home");
@@ -77,21 +66,16 @@ export default function Component() {
               htmlFor="projectName"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              {constants.tanantModelName} type
+              {constants.tanantModelName} name
             </label>
-            <Select
-              onValueChange={(value) => setOrganizationType(value as string)}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a profile type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="Developer">Developer</SelectItem>
-                  <SelectItem value="Entrepreneur">Entrepreneur</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <Input
+              id="projectName"
+              type="text"
+              value={projectName}
+              onChange={(e) => setProjectName(e.target.value)}
+              className="w-full"
+              required
+            />
           </div>
           <div className="flex items-center space-x-2">
             <Checkbox
@@ -109,7 +93,7 @@ export default function Component() {
           <Button
             type="submit"
             className="w-full bg-black text-white hover:bg-gray-800"
-            disabled={!agreed || !organizationType}
+            disabled={!agreed || !projectName}
           >
             Complete Onboarding
           </Button>
