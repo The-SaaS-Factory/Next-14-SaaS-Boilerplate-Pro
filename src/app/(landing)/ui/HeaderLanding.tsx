@@ -15,7 +15,6 @@ import {
 import {
   Bars3Icon,
   BuildingStorefrontIcon,
-  ChartPieIcon,
   NumberedListIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -25,6 +24,7 @@ import Image from "next/image";
 import { constants } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { LifeBuoyIcon } from "lucide-react";
 
 const community = [
   {
@@ -46,7 +46,7 @@ const resources = [
     name: "Boilerplates",
     description: "SaaS Boilerplates",
     href: "/boilerplates",
-    icon: ChartPieIcon,
+    icon: LifeBuoyIcon,
   },
   // {
   //   name: "The Factory",
