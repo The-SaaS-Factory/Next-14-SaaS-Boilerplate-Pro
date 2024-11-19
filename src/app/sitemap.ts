@@ -9,13 +9,16 @@ export default async function sitemap() {
       priority: 1,
     },
     {
-      url: constants.appUrl + "/boilerplates/next-14-fullstack-saas-boilerplate",
+      url:
+        constants.appUrl + "/boilerplates/next-14-fullstack-saas-boilerplate",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: constants.appUrl + "/boilerplates/next-14-fullstack-saas-boilerplate-pro",
+      url:
+        constants.appUrl +
+        "/boilerplates/next-14-fullstack-saas-boilerplate-pro",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,

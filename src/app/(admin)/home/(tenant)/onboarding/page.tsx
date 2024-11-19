@@ -82,7 +82,7 @@ export default function Component() {
             <Select
               onValueChange={(value) => setOrganizationType(value as string)}
             >
-              <SelectTrigger  >
+              <SelectTrigger>
                 <SelectValue placeholder="Select a profile type" />
               </SelectTrigger>
               <SelectContent>

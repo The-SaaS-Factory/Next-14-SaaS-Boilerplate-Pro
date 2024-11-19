@@ -105,10 +105,10 @@ export default function FeatureGrid() {
                   until the start of production.
                 </p>
                 <Link
-                  className="mt-3  mx-auto lg:mr-auto  w-full"
+                  className="mt-3  flex lg:inline mx-auto    lg:mr-auto  w-full"
                   href={"/home/admin/factory"}
                 >
-                  <Button>Start my factory</Button>
+                  <Button className="mx-auto">Start my factory</Button>
                 </Link>
               </div>
               {/* <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
@@ -130,12 +130,14 @@ export default function FeatureGrid() {
                   your project faster than any other team, tell us about your
                   project
                 </p>
-                <Link
-                  className="mt-3  mx-auto lg:mr-auto  w-full"
-                  href={"/home/admin/services"}
-                >
-                  <Button>Talk wit us</Button>
-                </Link>
+                <div className="flex w-full flex-col">
+                  <Link
+                    className="mt-3 flex lg:flex mx-auto lg:mx-0 "
+                    href={"/home/admin/services"}
+                  >
+                    <Button>Talk wit us</Button>
+                  </Link>
+                </div>
               </div>
               {/* <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                 <img
@@ -157,12 +159,16 @@ export default function FeatureGrid() {
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                   Access the marketplace and buy or sell your software
                 </p>
-                <Link
-                  className="mt-3  mx-auto lg:mr-auto  w-full"
-                  href={"/marketplace"}
-                >
-                  <Button>Access to marketplace</Button>
-                </Link>
+                <div className="flex w-full flex-col">
+                  <Link
+                    className="mt-3 flex lg:flex mx-auto lg:mx-0 "
+                    href={"/marketplace"}
+                  >
+                    <Button className="lg:mr-auto">
+                      Access to marketplace
+                    </Button>
+                  </Link>
+                </div>
                 <div className="flex flex-1 items-center justify-center    pt-14 lg:pb-2">
                   <Image
                     width={300}

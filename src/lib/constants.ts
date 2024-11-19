@@ -7,7 +7,7 @@ export const constants = {
       : "https://localhost:3000",
   appName: "The SaaS Factory",
   appNameAbb: "TSF",
-  logoUrl: "/assets/img/logo.webp",
+  logoUrl: "/assets/img/logo-thesaasfactory.dev.png",
   supportTel: "5541999568376",
   logoHUrl: "/assets/img/logoh.webp",
   logoDarkUrl: "/assets/img/logo-next-14-white.png",
