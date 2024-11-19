@@ -1,13 +1,18 @@
 "use client";
 
 import { Download, Presentation } from "lucide-react";
+import { toast } from "sonner";
 
 export const IdeaActions = () => {
+  const handleAction = () => {
+    toast.info("Action not implemented yet");
+  };
   return (
     <div className="  flex lg:ml-4 lg:mt-0">
       <span className="ml-3   sm:block">
         <button
           type="button"
+          onClick={handleAction}
           className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >
           <Download
@@ -20,6 +25,7 @@ export const IdeaActions = () => {
 
       <span className=" ml-3">
         <button
+          onClick={handleAction}
           type="button"
           className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >

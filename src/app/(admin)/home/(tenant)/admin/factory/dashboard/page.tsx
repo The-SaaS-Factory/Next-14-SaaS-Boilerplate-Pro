@@ -59,7 +59,7 @@ export default function FactoryLobby() {
 
   return (
     <div>
-      <PageName name="Projects" />
+      <PageName name="My Projects" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

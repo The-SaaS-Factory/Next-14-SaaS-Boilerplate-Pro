@@ -23,7 +23,7 @@ export const useNavigation = () => {
       ],
     },
     {
-      sectionName: "My Projects",
+      sectionName: "The Factory",
       icon: Factory,
       href: "/home/admin/factory/dashboard",
       items: [
@@ -35,25 +35,6 @@ export const useNavigation = () => {
         },
       ],
     },
-    // {
-    //   sectionName: "Community",
-    //   icon: UsersIcon,
-    //   href: "/marketplace",
-    //   items: [
-    //     {
-    //       name: "Marketplace",
-    //       href: "/marketplace",
-    //       icon: HomeIcon,
-    //       current: true,
-    //     },
-    //     {
-    //       name: "Directory",
-    //       href: "/directory",
-    //       icon: HomeIcon,
-    //       current: true,
-    //     },
-    //   ],
-    // },
     {
       sectionName: "Resources",
       icon: BoxIcon,
@@ -77,6 +58,25 @@ export const useNavigation = () => {
         //   icon: HomeIcon,
         //   current: true,
         // },
+      ],
+    },
+    {
+      sectionName: "Community",
+      icon: UsersIcon,
+      href: "/marketplace",
+      items: [
+        {
+          name: "Marketplace",
+          href: "/marketplace",
+          icon: HomeIcon,
+          current: true,
+        },
+        {
+          name: "Directory",
+          href: "/directory",
+          icon: HomeIcon,
+          current: true,
+        },
       ],
     },
   ].filter(Boolean);

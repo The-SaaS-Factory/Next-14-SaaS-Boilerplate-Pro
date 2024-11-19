@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { IdeaActions } from "./IdeaActions";
-import { ValidationActions } from "./ValidationActions";
 import { GlobalProjectAction } from "./GlobalProjectAction";
 
 export const GetProjectActions = () => {
@@ -12,7 +11,7 @@ export const GetProjectActions = () => {
   return (
     <div className="flex space-x-1">
       {lastSegment === "idea" && <IdeaActions />}
-      {lastSegment === "validation" && <ValidationActions />}
+      {/* {lastSegment === "validation" && <ValidationActions />} */}
       <GlobalProjectAction />
     </div>
   );

@@ -49,12 +49,12 @@ const resources = [
     href: "/boilerplates",
     icon: ChartPieIcon,
   },
-  {
-    name: "The Factory",
-    description: "SaaS Factory",
-    href: "#",
-    icon: Factory,
-  },
+  // {
+  //   name: "The Factory",
+  //   description: "SaaS Factory",
+  //   href: "/home/admin/factory/dashboard",
+  //   icon: Factory,
+  // },
 ];
 
 // const callsToAction = [
@@ -119,13 +119,13 @@ export default function HeaderLanding() {
                       />
                     </div>
                     <div className="flex-auto">
-                      <a
+                      <Link
                         href={item.href}
                         className="block font-semibold text-gray-900"
                       >
                         {item.name}
                         <span className="absolute inset-0" />
-                      </a>
+                      </Link>
                       <p className="mt-1 text-gray-600">{item.description}</p>
                     </div>
                   </div>
@@ -161,13 +161,13 @@ export default function HeaderLanding() {
                       />
                     </div>
                     <div className="flex-auto">
-                      <a
+                      <Link
                         href={item.href}
                         className="block font-semibold text-gray-900"
                       >
                         {item.name}
                         <span className="absolute inset-0" />
-                      </a>
+                      </Link>
                       <p className="mt-1 text-gray-600">{item.description}</p>
                     </div>
                   </div>
@@ -192,6 +192,12 @@ export default function HeaderLanding() {
           </Popover>
 
           <Link
+            href="/home/admin/factory/dashboard"
+            className="text-sm/6 font-semibold text-gray-900"
+          >
+            The Factory
+          </Link>
+          <Link
             href="/home/admin/services"
             className="text-sm/6 font-semibold text-gray-900"
           >
@@ -213,18 +219,16 @@ export default function HeaderLanding() {
          bg-blue-200/10 backdrop-blur-md px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
         >
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">{constants.appName}</span>
-              <Link href="/">
-                <Image
-                  src={"/assets/img/logo-thesaasfactory.dev.png"}
-                  width={80}
-                  height={40}
-                  className="h-10 w-auto"
-                  alt={constants.appName}
-                />
-              </Link>
-            </a>
+            <span className="sr-only">{constants.appName}</span>
+            <Link href="/">
+              <Image
+                src={"/assets/img/logo-thesaasfactory.dev.png"}
+                width={80}
+                height={40}
+                className="h-10 w-auto"
+                alt={constants.appName}
+              />
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -247,9 +251,8 @@ export default function HeaderLanding() {
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
                     {[...community].map((item) => (
-                      <DisclosureButton
+                      <Link
                         key={item.name}
-                        as="a"
                         href={item.href}
                         className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >
@@ -261,7 +264,7 @@ export default function HeaderLanding() {
                           />
                         }
                         <span>{item.name}</span>
-                      </DisclosureButton>
+                      </Link>
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
@@ -289,13 +292,19 @@ export default function HeaderLanding() {
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                {/* <a
-                  href="#"
+                <Link
+                  href="/home/admin/factory/dashboard"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
-                  Features
-                </a>
-                <a
+                  The Factory
+                </Link>
+                <Link
+                  href="/home/admin/services"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Services
+                </Link>
+                {/*  <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >

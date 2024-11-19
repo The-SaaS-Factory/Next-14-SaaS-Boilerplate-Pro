@@ -1,5 +1,4 @@
 import { getProjectDetails } from "@/actions/global/projectsModule/get-project-details";
-import { IdeaActions } from "./Actions/IdeaActions";
 import { GetProjectActions } from "./Actions/GetProjectAction";
 
 export default async function ProjectHeader({
