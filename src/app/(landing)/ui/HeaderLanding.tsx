@@ -71,6 +71,10 @@ export default function HeaderLanding() {
     setOpenPopover((current) => (current === popoverName ? null : popoverName));
   };
 
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-blue-200/10 backdrop-blur-md">
       <nav
@@ -231,6 +235,7 @@ export default function HeaderLanding() {
                   <DisclosurePanel className="mt-2 space-y-2">
                     {[...community].map((item) => (
                       <Link
+                        onClick={closeMenu}
                         key={item.name}
                         href={item.href}
                         className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
@@ -257,17 +262,18 @@ export default function HeaderLanding() {
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
                     {[...resources].map((item) => (
-                      <DisclosureButton
+                      <Link
+                        onClick={closeMenu}
                         key={item.name}
-                        as="a"
                         href={item.href}
                         className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >
                         {
-                          <item.icon className=" flex-none  size-6 text-gray-600 group-hover:text-indigo-600 " />
+                          <item.icon
+                            className="flex-none  size-6 text-gray-600 group-hover:text-indigo-600" />
                         }
                         <span>{item.name}</span>
-                      </DisclosureButton>
+                      </Link>
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
@@ -332,14 +338,14 @@ const LoginSection = ({ setMobileMenuOpen }: { setMobileMenuOpen: any }) => {
       ) : (
         <>
           {session.status !== "loading" && (
-            <>
+            <div className="flex space-x-3">
               <Link href={"/login"} onClick={closeMenu}>
                 <Button variant="outline">Log in</Button>
               </Link>
               <Link href={"/login"} onClick={closeMenu}>
                 <Button>Sing Up</Button>
               </Link>
-            </>
+            </div>
           )}
         </>
       )}
