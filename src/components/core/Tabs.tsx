@@ -45,6 +45,7 @@ const Tabs = ({
                   "aria-hidden": "true",
                 })}
               <Link
+               prefetch={true}
                 href={tab.path}
                 className={isActive(tab.path) ? "active-tab" : "text-primary"}
               >

@@ -43,7 +43,7 @@ const NewTicketSupportForm = () => {
     {
       name: "images",
       label: "Images",
-      type: "gallery",
+      type: "gallery-cloudinary",
       required: true,
     },
   ];

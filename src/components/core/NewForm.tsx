@@ -1,9 +1,16 @@
 "use client";
+
+//**************************************************************************************************/
+// * Disclaimer: This code is not optimized. It is working but it can be improved. Sorry for the mess. :)
+// * Remember, you can contact me on info@thesaasfactory.dev
+//**************************************************************************************************/
+
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Switch } from "@headlessui/react";
 import { toast } from "sonner";
+import { CldUploadButton } from "next-cloudinary";
 import { countries } from "@/lib/countries";
 import {
   ArchiveBoxArrowDownIcon,
@@ -12,6 +19,7 @@ import {
 } from "@heroicons/react/24/outline";
 import ImageUploading from "react-images-uploading";
 import { constants } from "@/lib/constants";
+const cloudinaryPreset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_UPLOAD;
 
 type FormInfo = {
   name: string;
@@ -201,19 +209,14 @@ const NewForm = ({
                 setValue(field.name, values[fieldName]);
               }
             }
+            if (fieldName === "medias" || fieldName === "images") {
+              setValue(fieldName, values[fieldName]);
+            }
           } else {
-            if (field.hasLanguageSupport) {
-              let parsedValue;
-              try {
-                parsedValue = JSON.parse(values[fieldName]);
-              } catch (error) {
-                parsedValue = values[fieldName];
-              }
-
-              const newValues =
-                typeof values[fieldName] === "string"
-                  ? parsedValue
-                  : values[fieldName];
+            if (fieldName === "medias" || fieldName === "images") {
+              setValue(fieldName, values[fieldName]);
+            } else if (field.type === "toggle") {
+              setValue(fieldName, values[fieldName] ? "true" : "false");
             } else {
               setValue(fieldName, values[fieldName]);
             }
@@ -252,6 +255,29 @@ const NewForm = ({
         ? field.label + " (" + keyRaw.split("_")[1] + ")"
         : field.label
       : key;
+  };
+
+  const handleDeleteIamge = (url: any, fieldName) => {
+    const image = watch(fieldName).find((m: { url: any }) => m.url === url);
+    if (!image) return;
+    const images = watch(fieldName).filter(
+      (i: { url: any }) => i.url != image.url,
+    );
+    setValue(fieldName, images);
+  };
+  const handleUploadResource = (data: any, fieldName) => {
+    if (data?.info) {
+      const currentImages = watch(fieldName) || [];
+      const newImage = {
+        url: data.info.secure_url,
+        public_id: data.info.public_id,
+        format: data.info.format ?? data.info.resource_type,
+        name: data.info.original_filename,
+        type: data.info.resource_type,
+      };
+
+      setValue(fieldName, [...currentImages, newImage]);
+    }
   };
 
   return (
@@ -939,6 +965,91 @@ const NewForm = ({
                       )}
                     </>
                   )}
+                  {field.type === "gallery-cloudinary" && (
+                    <>
+                      <div className="col-span-full">
+                        <div className="mt-2 w-full">
+                          <CldUploadButton
+                            className="  flex space-x-3 items-center"
+                            onSuccess={(data) => {
+                              handleUploadResource(data, field.name);
+                            }}
+                            uploadPreset={cloudinaryPreset}
+                          >
+                            <Button variant="outline">
+                              <ArrowUpCircleIcon className="w-5 h-5 mr-1 text-gray-500" />{" "}
+                              <span>Media files</span>
+                            </Button>
+                          </CldUploadButton>
+                          <div className="flex flex-wrap space-x-3">
+                            {Array.isArray(watch(field.name)) &&
+                              watch(field.name)?.map(
+                                (media: any, index: number) => (
+                                  <div
+                                    key={`image${index}`}
+                                    className="relative p-3"
+                                  >
+                                    {media.resource_type === "video" ||
+                                    media.format.includes(
+                                      "mkv",
+                                      "mp4",
+                                      "webm",
+                                      "avi",
+                                      "mov",
+                                    ) ? (
+                                      <Image
+                                        width={80}
+                                        height={80}
+                                        className="rounded-lg w-auto h-32 object-cover object-center"
+                                        alt=""
+                                        src={"/assets/img/video.png"}
+                                      />
+                                    ) : (
+                                      <>
+                                        {media.url && (
+                                          <Image
+                                            width={80}
+                                            height={80}
+                                            className="rounded-lg w-auto h-32 object-cover object-center"
+                                            alt=""
+                                            src={media.url}
+                                          />
+                                        )}
+                                      </>
+                                    )}
+
+                                    <span className="text-xs">
+                                      {media.name
+                                        ? media.name
+                                        : media.public_id}
+                                    </span>
+                                    <div className="flex bg-white top-0  right-1 absolute shadow-lg p-1 rounded-full">
+                                      <button
+                                        onClick={() =>
+                                          handleDeleteIamge(
+                                            media.url,
+                                            field.name,
+                                          )
+                                        }
+                                      >
+                                        <TrashIcon className="w-5 h-5  " />
+                                      </button>
+                                    </div>
+                                  </div>
+                                ),
+                              )}
+                          </div>
+                        </div>
+                      </div>
+                      {field.note && (
+                        <div className="italic ">
+                          <p className="text-sm  text-secondary ">
+                            {field.note}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               ))}
 
@@ -1187,6 +1298,7 @@ import {
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
 import { Button } from "../ui/button";
+import { ArrowUpCircleIcon, TrashIcon } from "lucide-react";
 export function MapSelector({
   openModal,
   address,

@@ -107,7 +107,7 @@ export const parseDataOnSubmit = async (data: any, fields: any) => {
               });
           }
         }
-      } else if (field.type === "gallery") {
+      } else if (field.type === "gallery" || field.type === "gallery-cloudinary") {
         if (fieldValue && fieldValue.length > 0) {
           const imagesWithOutInBase64 = fieldValue.filter(
             (f: any) => !f.data_url,

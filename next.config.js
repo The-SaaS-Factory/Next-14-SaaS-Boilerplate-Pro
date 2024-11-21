@@ -17,6 +17,7 @@ const nextConfig = withMDX({
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "ik.imagekit.io" },
       { protocol: "https", hostname: "www.gravatar.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
