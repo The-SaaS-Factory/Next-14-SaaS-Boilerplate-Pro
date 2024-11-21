@@ -6,15 +6,15 @@ generator client {
 
 //Only for development in local
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 // datasource db {
-//   provider = "mysql"
+//   provider = "postgresql"
 //   url      = env("DATABASE_URL")
 // }
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 // ------------------------------------SaaS  Core------------------------------------------
 model User {
@@ -92,6 +92,41 @@ model Organization {
   organizationPlugin       OrganizationPlugin[]
   permissions              Permission[]
   projects                 Project[]
+  profiles                 Profile[]
+}
+
+model Profile {
+  id             Int              @id @default(autoincrement())
+  name           String
+  slug           String
+  avatar         String?
+  status         Status           @default(ACTIVE)
+  type           ProfileType
+  organizationId Int
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  projects       Project[]
+  settings       ProfileSetting[]
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+
+  @@index([organizationId])
+}
+
+model ProfileSetting {
+  id           Int     @id @default(autoincrement())
+  profileId    Int
+  settingName  String
+  settingValue String
+  profile      Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+enum ProfileType {
+  DIRECTORYPROJECT
+  DIRECTORYTOOLS
+  DIRECTORYDEVELOPER
+  MARKETPLACE
 }
 
 enum OrganizationType {
@@ -132,6 +167,7 @@ model Project {
   features       ProjectFeature[]
   settings       ProjectSetting[]
   competitors    ProjectCompetitor[]
+  profiles       Profile[]
 }
 
 model ProjectCompetitor {

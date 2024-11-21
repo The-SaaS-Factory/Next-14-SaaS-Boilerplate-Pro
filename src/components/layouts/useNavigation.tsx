@@ -4,6 +4,7 @@ import {
   BuildingLibraryIcon,
   UsersIcon,
   PresentationChartBarIcon,
+  NumberedListIcon,
 } from "@heroicons/react/24/outline";
 import { BoxIcon, Factory } from "lucide-react";
 
@@ -63,18 +64,12 @@ export const useNavigation = () => {
     {
       sectionName: "Community",
       icon: UsersIcon,
-      href: "/marketplace",
+      href: "/home/admin/profiles",
       items: [
         {
-          name: "Marketplace",
-          href: "/marketplace",
-          icon: HomeIcon,
-          current: true,
-        },
-        {
-          name: "Directory",
-          href: "/directory",
-          icon: HomeIcon,
+          name: "My profiles",
+          href: "/home/admin/profiles",
+          icon: NumberedListIcon,
           current: true,
         },
       ],

@@ -109,7 +109,7 @@ const TenantAdminHeader = ({
                 Marketplace
               </Link>
               <Link
-                href="/directory"
+                href="/projects"
                 className="hidden lg:flex items-center gap-x-2 text-primary"
               >
                 Directory

@@ -70,18 +70,23 @@ export default function FactoryLobby() {
           <DialogTrigger asChild>
             <Card className="flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
               <CardContent className="flex flex-col items-center justify-center h-full">
-                <Plus className="h-12 w-12 text-gray-400 mb-2" />
-                <p className="text-lg font-semibold"> Create new project</p>
+                <Plus className="h-12 w-12 text mb-2" />
+                <p className="text-lg text font-semibold">
+                  {" "}
+                  Create new project
+                </p>
               </CardContent>
             </Card>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
-                <h2 className="text-lg font-semibold">Create new project</h2>
+                <h2 className="text-lg text font-semibold">
+                  Create new project
+                </h2>
               </DialogTitle>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
+            <div className="grid text gap-4 py-4">
               <div className="grid gap-2">
                 <label htmlFor="name">Name</label>
                 <Input

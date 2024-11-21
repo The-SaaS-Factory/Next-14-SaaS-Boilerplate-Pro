@@ -137,7 +137,7 @@ export default function SaasDirectorySearch() {
         <div className=" container inset-0   z-0">
           <div className="relative z-10">
             <h1 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
-              SaaS Directory
+              SaaS Projects Directory
             </h1>
             <div className="flex px-7 lg:px-0 lg:w-1/3 mx-auto lg:space-x-0 space-x-3 items-center">
               <Search />

@@ -9,8 +9,6 @@ export const updasetProjectSetting = async (
 ) => {
   const { organization } = await getMembership();
   try {
-    console.log(setting);
-    console.log(typeof setting.settingValue);
     const parseSettingValue = (value: string) => {
       if (value === "true") return true;
       if (value === "false") return false;

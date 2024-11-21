@@ -89,6 +89,9 @@ const NewForm = ({
 
     if (!payload) return;
 
+    console.log(payload);
+    
+
     if (!isSettingForm) {
       payload = {
         modelId: modelToUpdate ?? null,
@@ -97,6 +100,14 @@ const NewForm = ({
         },
       };
     }
+
+    if(isSettingForm && modelToUpdate){
+      payload = {
+        projectId: modelToUpdate,
+        setting: payload
+      }
+    }
+
 
     await onSubmit(payload)
       .then(() => {

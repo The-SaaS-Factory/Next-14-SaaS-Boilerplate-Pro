@@ -33,10 +33,23 @@ const community = [
     href: "/marketplace",
     icon: BuildingStorefrontIcon,
   },
+
   {
-    name: "Directory",
-    description: "SaaS Directory",
-    href: "/directory",
+    name: "Projects",
+    description: "SaaS Projects Directory",
+    href: "/projects",
+    icon: NumberedListIcon,
+  },
+  {
+    name: "Developers",
+    description: "SaaS Developers Directory",
+    href: "/developers",
+    icon: NumberedListIcon,
+  },
+  {
+    name: "Tools",
+    description: "SaaS Tools Directory",
+    href: "/tools",
     icon: NumberedListIcon,
   },
 ];
@@ -234,21 +247,23 @@ export default function HeaderLanding() {
                   </DisclosureButton>
                   <DisclosurePanel className="mt-2 space-y-2">
                     {[...community].map((item) => (
-                      <Link
-                        onClick={closeMenu}
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
-                      >
-                        {
-                          <item.icon
-                            className="
-                        flex-none  size-6 text-gray-600 group-hover:text-indigo-600
-                        "
-                          />
-                        }
-                        <span>{item.name}</span>
-                      </Link>
+                      <div className="flex w-full flex-col">
+                        <Link
+                          onClick={closeMenu}
+                          key={item.name}
+                          href={item.href}
+                          className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
+                        >
+                          {
+                            <item.icon
+                              className="
+                          flex-none  size-6 text-gray-600 group-hover:text-indigo-600
+                          "
+                            />
+                          }
+                          <span>{item.name}</span>
+                        </Link>
+                      </div>
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
@@ -269,8 +284,7 @@ export default function HeaderLanding() {
                         className="flex items-center space-x-3 rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
                       >
                         {
-                          <item.icon
-                            className="flex-none  size-6 text-gray-600 group-hover:text-indigo-600" />
+                          <item.icon className="flex-none  size-6 text-gray-600 group-hover:text-indigo-600" />
                         }
                         <span>{item.name}</span>
                       </Link>
