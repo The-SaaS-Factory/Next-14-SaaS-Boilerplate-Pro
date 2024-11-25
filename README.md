@@ -10,6 +10,6 @@ For a comprehensive guide to using **Next 14 SaaS Boilerplate Pro by The SaaS Fa
 
 ## 📧 Support
 
-If you have any questions, feedback, or need assistance, don't hesitate to reach out to us at [support@thesaasfactory.dev](mailto:support@thesaasfactory.dev). We’re here to help!
+If you have any questions, feedback, or need assistance, don't hesitate to reach out to us at [info@thesaasfactory.dev](mailto:info@thesaasfactory.dev). We’re here to help!
 
 Happy coding! 🚀
