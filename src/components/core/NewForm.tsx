@@ -11,7 +11,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Switch } from "@headlessui/react";
 import { toast } from "sonner";
 import { CldUploadButton } from "next-cloudinary";
-import { countries } from "@/lib/countries";
 import {
   ArchiveBoxArrowDownIcon,
   PhotoIcon,
@@ -493,81 +492,7 @@ const NewForm = ({
                       </div>
                     </div>
                   )}
-                  {field.type === "ubication-country-special" && (
-                    <div className="mt-2">
-                      <div className="flex rounded-md shadow-sm">
-                        <SearchSelect
-                          onValueChange={(value) => setValue(field.name, value)}
-                          id={field.name}
-                          value={watch(field.name)?.toString()}
-                        >
-                          {countries?.map((option: any, index: number) => (
-                            <SearchSelectItem
-                              value={option.name}
-                              key={`option-${index}`}
-                            >
-                              {option.name}
-                            </SearchSelectItem>
-                          ))}
-                        </SearchSelect>
-                      </div>
-                    </div>
-                  )}
-                  {field.type === "ubication-state" && (
-                    <div className="mt-2">
-                      <div className="flex rounded-md shadow-sm">
-                        <SearchSelect
-                          onValueChange={(value) => setValue(field.name, value)}
-                          id={field.name}
-                          value={watch(field.name)?.toString()}
-                        >
-                          {countries
-                            ?.find((c) => c.name === "Cuba")
-                            ?.provinces?.map((option: any, index: number) => (
-                              <SearchSelectItem
-                                value={option.name}
-                                key={`option-${index}`}
-                              >
-                                {option.name}
-                              </SearchSelectItem>
-                            ))}
-                        </SearchSelect>
-                      </div>
-                    </div>
-                  )}
-                  {field.type === "ubication-city" && (
-                    <div className="mt-2">
-                      <div className="flex rounded-md shadow-sm">
-                        <SearchSelect
-                          onValueChange={(value) => setValue(field.name, value)}
-                          id={field.name}
-                          value={watch(field.name)?.toString()}
-                        >
-                          {countries
-                            ?.find((c) => c.name === "Cuba")
-                            ?.provinces?.find(
-                              (c) =>
-                                c.name ===
-                                watch(
-                                  fields.find(
-                                    (f) => f.type === "ubication-state",
-                                  )?.name,
-                                ),
-                            )
-                            ?.municipalities?.map(
-                              (option: any, index: number) => (
-                                <SearchSelectItem
-                                  value={option.name}
-                                  key={`option-${index}`}
-                                >
-                                  {option.name}
-                                </SearchSelectItem>
-                              ),
-                            )}
-                        </SearchSelect>
-                      </div>
-                    </div>
-                  )}
+
                   {field.type === "searchselect" && (
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm">
@@ -1025,12 +950,13 @@ const NewForm = ({
                                     </span>
                                     <div className="flex bg-white top-0  right-1 absolute shadow-lg p-1 rounded-full">
                                       <button
-                                        onClick={() =>
+                                        onClick={(e) => {
+                                          e.preventDefault();
                                           handleDeleteIamge(
                                             media.url,
                                             field.name,
-                                          )
-                                        }
+                                          );
+                                        }}
                                       >
                                         <TrashIcon className="w-5 h-5  " />
                                       </button>
@@ -1380,7 +1306,6 @@ export function MapSelector({
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
 
-    // Aquí actualizas la latitud y la longitud en el estado.
     setLatLng({ lat, lng });
 
     //If address Value already has lat and lng, remove it
