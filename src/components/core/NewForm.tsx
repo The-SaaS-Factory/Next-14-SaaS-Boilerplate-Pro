@@ -194,7 +194,7 @@ const NewForm = ({
 
               if (values[fieldName].length > 0) {
                 const images = values[fieldName].map((i: any) => {
-                  return i.image ? i.image : i.id.toString();
+                  return i.image ? i.image : i.id ? i.id.toString() : i;
                 });
                 setValue(field.name, images);
               }
@@ -523,6 +523,7 @@ const NewForm = ({
                           onValueChange={(value) => setValue(field.name, value)}
                           id={field.name}
                           value={watch(field.name)}
+                          required={field.required}
                         >
                           {field.options?.map(
                             (option: FieldSelectOption, index: number) => {
