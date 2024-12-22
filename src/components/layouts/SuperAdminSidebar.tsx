@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Settings } from "lucide-react";
 
-export function SuperAdminSidebar({ profile }: any) {
+export function SuperAdminSidebar() {
   const { superAdminNavigation } = useNavigation();
 
   return (
