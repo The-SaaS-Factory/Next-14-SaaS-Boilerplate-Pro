@@ -14,44 +14,44 @@ const CapabilitiesList = async () => {
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         {data.length === 0 ? (
-          <div className="flex justify-center w-full items-center h-96">
+          <div className="flex h-96 w-full items-center justify-center">
             <NotFound message="No capabilities found" />
           </div>
         ) : (
           <div className=" ">
             <div className="mt-8 flow-root">
-              <div className="  -my-2 overflow-x-auto ">
+              <div className="-my-2 overflow-x-auto">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                  <table className="min-w-full  divide-y divide-gray-300 text-primary">
+                  <table className="text-primary min-w-full divide-y divide-gray-300">
                     <thead>
                       <tr>
                         <th
                           scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold   sm:pl-0"
+                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0"
                         >
                           Name
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold   sm:pl-0"
+                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0"
                         >
                           Type
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold   sm:pl-0"
+                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0"
                         >
                           Description
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y    divide-gray-200 bg-main text-primary">
+                    <tbody className="bg-main text-primary divide-y divide-gray-200">
                       {data?.map((capabilitie: Capability) => (
                         <tr key={capabilitie.id}>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                             <div className=" ">{capabilitie.name}</div>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-5 text-sm  ">
+                          <td className="whitespace-nowrap px-3 py-5 text-sm">
                             <div className=" ">{capabilitie.type}</div>
                           </td>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">

@@ -29,23 +29,23 @@ const NotificationsList = async ({
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         {data.length === 0 ? (
-          <div className="flex justify-center items-center h-96">
+          <div className="flex h-96 items-center justify-center">
             <NotFound message="No notifications found" />
           </div>
         ) : (
           <div className="flex flex-col">
-            <ul role="list" className="flex flex-col  ">
+            <ul role="list" className="flex flex-col">
               {data?.map((notification: Notification) => (
                 <li
                   key={notification.id}
-                  className="overflow-hidden rounded-xl border px-3 border-gray-200"
+                  className="overflow-hidden rounded-xl border border-gray-200 px-3"
                 >
                   <NotificationCard notification={notification} />
                 </li>
               ))}
             </ul>
 
-            <div className="flex mt-7 justify-between">
+            <div className="mt-7 flex justify-between">
               <Pagination
                 offset={offset}
                 dataLength={data.length}

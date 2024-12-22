@@ -13,19 +13,19 @@ const UserPortal = async () => {
   return (
     <div>
       <div className="flex">
-        <div className="flex-1 p-3 bg-gradient-to-br bg-main">
-          <div className="text-xl  flex space-x-3 justify-center font-bold text-center">
+        <div className="bg-main flex-1 bg-gradient-to-br p-3">
+          <div className="flex justify-center space-x-3 text-center text-xl font-bold">
             <span className="text-red-500">
               {!constants.portalStripe &&
                 "Not found Stripe Portal URL, Get the portal URL in Stripe then paste it in .env as  NEXT_PUBLIC_STRIPE_PORTAL"}
             </span>
             <Link
-              className="  flex items-center space-x-3"
+              className="flex items-center space-x-3"
               href={`${constants.portalStripe} `}
             >
-              <Button className="flex flex-items">
+              <Button className="flex-items flex">
                 <span>Stripe Portal</span>
-                <BuildingLibraryIcon className="h-8 w-8 inline-block" />
+                <BuildingLibraryIcon className="inline-block h-8 w-8" />
               </Button>
             </Link>
           </div>

@@ -32,7 +32,7 @@ export default function AgencyCTA() {
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <h2
             id="sale-heading"
-            className="text-4xl font-bold tracking-tight text-primary sm:text-5xl lg:text-6xl"
+            className="text-primary text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
           >
             La solución perfecta para las agencias: Organización y ganancias
           </h2>
@@ -44,7 +44,7 @@ export default function AgencyCTA() {
             eficiencia y rentabilidad!
           </p>
         </div>
-        <div className="flex mt-10">
+        <div className="mt-10 flex">
           <BtnBuyService />
         </div>
       </section>
@@ -52,19 +52,19 @@ export default function AgencyCTA() {
       {/* Testimonials */}
       <section
         aria-labelledby="testimonial-heading"
-        className="relative mx-auto max-w-7xl px-4 py-14 pb-32 sm:px-6 lg:px- 2"
+        className="lg:px- 2 relative mx-auto max-w-7xl px-4 py-14 pb-32 sm:px-6"
       >
         <div className="mx-auto max-w-2xl lg:max-w-none">
-          <div className="  space-y-16 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
+          <div className="space-y-16 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
             <blockquote className="sm:flex lg:block">
               <div className="mt-8 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-10">
-                <div className="p-1 btn-icon  w-10 h-10 text-center flex">
+                <div className="btn-icon flex h-10 w-10 p-1 text-center">
                   <UsersIcon
-                    className="h-7 w-7 text-primary"
+                    className="text-primary h-7 w-7"
                     aria-hidden="true"
                   />
                 </div>
-                <p className="text-lg pt-3 text-gray-600">
+                <p className="pt-3 text-lg text-gray-600">
                   Crea organizaciones (Perfiles) debajo de tu cuenta principal
                   para cada uno de tus clientes. Así podrás gestionar sus
                   servicios de hosting de manera independiente y personalizada.{" "}
@@ -73,13 +73,13 @@ export default function AgencyCTA() {
             </blockquote>
             <blockquote className="sm:flex lg:block">
               <div className="mt-8 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-10">
-                <div className="p-1 btn-icon  w-10 h-10 text-center flex">
+                <div className="btn-icon flex h-10 w-10 p-1 text-center">
                   <CurrencyDollarIcon
-                    className="h-7 w-7 text-primary"
+                    className="text-primary h-7 w-7"
                     aria-hidden="true"
                   />
                 </div>
-                <p className="text-lg pt-3 text-gray-600">
+                <p className="pt-3 text-lg text-gray-600">
                   Recibe ganancias por cada nuevo servicio comprado desde una
                   orgnización (Perfil) creada por ti. Hablamos de un 35% que se
                   suma a tu cuenta principal o se aplica como descuento en las
@@ -89,13 +89,13 @@ export default function AgencyCTA() {
             </blockquote>
             <blockquote className="sm:flex lg:block">
               <div className="mt-8 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-10">
-                <div className="p-1 btn-icon  w-10 h-10 text-center flex">
+                <div className="btn-icon flex h-10 w-10 p-1 text-center">
                   <KeyIcon
-                    className="h-7 w-7 text-primary"
+                    className="text-primary h-7 w-7"
                     aria-hidden="true"
                   />
                 </div>
-                <p className="text-lg pt-3 text-gray-600">
+                <p className="pt-3 text-lg text-gray-600">
                   Cuando creas una organización (Perfil) para un cliente, puedes
                   añadirle miembros para que colaboren en la gestión de los
                   servicios. De esta forma tu cliente puede tener acceso y

@@ -3,21 +3,21 @@ import BtnBuyService from "@/components/ui/commons/BtnBuyService";
 export default function CTA1() {
   return (
     <div className="bg-white py-14" id="wordpress">
-      <div className="mx-auto max-w-7xl  sm:px-6   lg:px-8">
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div
-          className="relative isolate overflow-hidden   bg-no-repeat lg:bg-repeat bg-cover lg:bg-contain  bg-gradient-to-tr from-[#5971c0] to-[#1165b3] px-6 py-20 text-left shadow-2xl sm:rounded-3xl  "
+          className="relative isolate overflow-hidden bg-gradient-to-tr from-[#5971c0] to-[#1165b3] bg-cover bg-no-repeat px-6 py-20 text-left shadow-2xl sm:rounded-3xl lg:bg-contain lg:bg-repeat"
           style={{ backgroundImage: "url(/assets/img/cpanel3.png)" }}
         >
-          <h2 className=" max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Hosting especializado para un WordPress optimizado
           </h2>
-          <p className="  mt-6 max-w-xl text-lg leading-8 text-gray-300">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-gray-300">
             La rapidez con la que se carga tu WordPress es crucial para asegurar
             que tu sitio destaque en los primeros results de búsqueda de Google.
             Aprovecha las características de optimización de nuestro hosting de
             alta velocidad y supérate a la competencia.
           </p>
-          <div className="mt-10 flex  gap-x-6">
+          <div className="mt-10 flex gap-x-6">
             <BtnBuyService />
           </div>
           <svg

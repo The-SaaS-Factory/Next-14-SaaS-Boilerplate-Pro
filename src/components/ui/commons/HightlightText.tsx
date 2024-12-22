@@ -15,7 +15,7 @@ const HighlightText = ({ text, highlight, className }: Props) => {
       part.toLowerCase() === highlight.toLowerCase() ? (
         <span
           key={index}
-          className="text-indigo-600 dark:text-indigo-500 underline"
+          className="text-indigo-600 underline dark:text-indigo-500"
         >
           {part}
         </span>

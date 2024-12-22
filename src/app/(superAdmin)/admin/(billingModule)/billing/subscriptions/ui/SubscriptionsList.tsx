@@ -43,7 +43,7 @@ const SubscriptionsList = async ({
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={4} />}>
         {data.length === 0 ? (
-          <div className="flex justify-center items-center h-96">
+          <div className="flex h-96 items-center justify-center">
             <NotFound message="No subscription found" />
           </div>
         ) : (
@@ -72,23 +72,23 @@ const SubscriptionsList = async ({
               <TableBody>
                 {data?.map((item: MembershipType, index: number) => (
                   <TableRow key={`userS-${item.id + index}`}>
-                    <TableCell className="text-left items-center">
+                    <TableCell className="items-center text-left">
                       <UserCard user={item.organization} />
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       {item.plan?.name}
                     </TableCell>
 
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       {formatTimestampToDateString(item.startDate)}{" "}
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       {formatTimestampToDateString(item.endDate)}{" "}
                     </TableCell>
-                    <TableCell className="text-center flex text">
+                    <TableCell className="text flex text-center">
                       <Link href={`subscriptions/edit/${item.id}`}>
                         <Button variant="outline">
-                          <PencilIcon className="w-6 h-6" />
+                          <PencilIcon className="h-6 w-6" />
                           <span className="sr-only">,</span>
                         </Button>
                       </Link>
@@ -101,7 +101,7 @@ const SubscriptionsList = async ({
                 ))}
               </TableBody>
             </Table>
-            <div className="flex mt-7 justify-between">
+            <div className="mt-7 flex justify-between">
               <Pagination
                 offset={offset}
                 dataLength={data.length}

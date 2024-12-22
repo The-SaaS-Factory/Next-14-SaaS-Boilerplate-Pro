@@ -11,7 +11,7 @@ const OrganizationCard = ({
   };
 }) => (
   <div>
-    <div className="flex flex-col  ">
+    <div className="flex flex-col">
       <div className="flex items-center space-x-2">
         <Image
           width={40}
@@ -20,8 +20,8 @@ const OrganizationCard = ({
           src={organization?.avatar ?? "/assets/img/avatar.png"}
           alt=""
         />
-        <div className="flex  flex-col">
-          <span className="mr-auto text-primary">
+        <div className="flex flex-col">
+          <span className="text-primary mr-auto">
             {organization?.name} - {organization?.id && organization.id}
           </span>
           <span className="text-primary mr-auto">{organization?.email}</span>

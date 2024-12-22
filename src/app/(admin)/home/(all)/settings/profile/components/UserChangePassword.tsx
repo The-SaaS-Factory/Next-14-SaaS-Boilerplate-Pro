@@ -29,7 +29,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
   return (
     <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
       <div>
-        <h2 className="text-base font-semibold leading-7 text">
+        <h2 className="text text-base font-semibold leading-7">
           Change password{" "}
         </h2>
         <p className="mt-1 text-sm leading-6 text-gray-400">Update password</p>
@@ -44,7 +44,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
             <div className="col-span-full">
               <label
                 htmlFor="current-password"
-                className="block text-sm font-medium leading-6 text"
+                className="text block text-sm font-medium leading-6"
               >
                 Current password
               </label>
@@ -63,7 +63,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
           <div className="col-span-full">
             <label
               htmlFor="new-password"
-              className="block text-sm font-medium leading-6 text"
+              className="text block text-sm font-medium leading-6"
             >
               New password
             </label>
@@ -81,7 +81,7 @@ export const UserChangePassword = ({ user }: { user: User }) => {
           <div className="col-span-full">
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium leading-6 text"
+              className="text block text-sm font-medium leading-6"
             >
               Confirm the new password
             </label>

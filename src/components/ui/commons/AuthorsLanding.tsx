@@ -84,10 +84,10 @@ const people = [
 
 export default function AuthorsLanding() {
   return (
-    <div className="bg-white  ">
+    <div className="bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h3 className="text-xl font-bold tracking-tight text-primary sm:text-2xl">
+          <h3 className="text-primary text-xl font-bold tracking-tight sm:text-2xl">
             Autores populares
           </h3>
         </div>
@@ -105,7 +105,7 @@ export default function AuthorsLanding() {
                   src={person.imageUrl}
                   alt=""
                 />
-                <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-primary">
+                <h3 className="text-primary mt-6 text-base font-semibold leading-7 tracking-tight">
                   {person.name}
                 </h3>
                 <p className="text-sm leading-6 text-gray-600">{person.role}</p>

@@ -34,9 +34,9 @@ const useDarkTheme = () => {
         {" "}
         <Button variant="outline" size="icon" onClick={handleDarkTheme}>
           {!isDarkTheme ? (
-            <MoonIcon className="h-4 w-4  " aria-hidden="true" />
+            <MoonIcon className="h-4 w-4" aria-hidden="true" />
           ) : (
-            <SunIcon className="h-4 w-4  " aria-hidden="true" />
+            <SunIcon className="h-4 w-4" aria-hidden="true" />
           )}
         </Button>
       </div>

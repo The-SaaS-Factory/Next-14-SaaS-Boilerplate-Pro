@@ -13,7 +13,7 @@ const AdminSettingsModuleGeneralPage = async ({
   return (
     <div className="mt-1">
       <div>
-        <div className="bg-white -mt-3 "></div>
+        <div className="-mt-3 bg-white"></div>
 
         <div>{children}</div>
       </div>

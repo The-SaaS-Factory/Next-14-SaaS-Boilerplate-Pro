@@ -14,9 +14,9 @@ const HeroLanding = () => {
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
-        className="h-[400px] w-full flex bg-gray-500 justify-center items-center  "
+        className="flex h-[400px] w-full items-center justify-center bg-gray-500"
       >
-        <SwiperSlide className="mx-auto h-full w-full justify-center items-center ">
+        <SwiperSlide className="mx-auto h-full w-full items-center justify-center">
           <Image
             alt=""
             src="/assets/img/slider1.png"
@@ -46,10 +46,10 @@ const HeroLanding = () => {
           />
         </SwiperSlide>
       </Swiper>
-      <div className=" bg-slate-50 pb-20 isolate pt-14">
-        <div className="  ">
-          <div className="mx-auto  max-w-7xl  px-6 lg:px-8">
-            <div className="  max-w-2xl text-left">
+      <div className="isolate bg-slate-50 pb-20 pt-14">
+        <div className=" ">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="max-w-2xl text-left">
               <h1 className="text-title">{constants.appName}</h1>
               <p className="mt-6 py-3 text-lg leading-8 text-gray-800">
                 {constants.appResume}

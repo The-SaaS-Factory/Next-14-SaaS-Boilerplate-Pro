@@ -3,12 +3,12 @@ export const dynamic = "force-dynamic";
 const NotFound = ({ message }: { message: string }) => {
   return (
     <div className="flex h-96">
-      <div className="flex mx-auto  text-center flex-col space-y-3">
+      <div className="mx-auto flex flex-col space-y-3 text-center">
         <Image
           width={777}
           height={777}
           src="/assets/img/not_found.png"
-          className="w-full mx-auto h-full object-cover"
+          className="mx-auto h-full w-full object-cover"
           alt="Not found"
         />
         <span className="text-subtitle mx-auto">{message}</span>

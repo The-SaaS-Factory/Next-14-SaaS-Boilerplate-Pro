@@ -1,15 +1,16 @@
 import { ReactNode, Suspense } from "react";
 import { getUserNotificationsUnreadCount } from "@/actions/global/notificationsModule/get-user-notifications";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
-import TenantAdminHeader from "../ui/TenantAdminHeader";
 import FullLoader from "../ui/loaders/FullLoader";
 import { HeroPattern } from "../ui/commons/HeroPattern";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { saasFeatures } from "@/lib/constants";
 import CompleteOnBoarding from "@/app/(admin)/home/(all)/settings/organization/settings/components/CompleteOnBoarding";
 import { UpdateClientCache } from "../core/UpdateClientCache";
-import OrganizationAdminSidebar from "../ui/TenantAdminSidebar";
 import { RedirectSuperAdmin } from "../core/RedirectSuperAdmin";
+import { OrganizationAdminSidebar } from "./TenantSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import TenantAdminHeader from "./TenantAdminHeader";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -20,22 +21,30 @@ export default async function OrganizationLayout({
 
   return (
     <Suspense fallback={<FullLoader />}>
-      <main className="relative bg-main  text-primary">
-        <HeroPattern />
-        <OrganizationAdminSidebar />{" "}
-        <div className="lg:pl-72 h-screen overflow-y-auto relative ">
-          <Suspense fallback={null}>
-            <TenantAdminHeader
-              userMembership={userMembership}
-              notificationsCount={notificationsCount ?? 0}
-              organization={organization}
-            />
-          </Suspense>
-          <div className="py-3 relative lg:pt-[5%]   ">
-            <div className="mx-auto  px-4 lg:px-8">{children}</div>
+      <SidebarProvider>
+        <main className="text-primary flex w-full">
+          <HeroPattern />
+          <OrganizationAdminSidebar
+            profile={organization}
+            agencyPermissions={[]}
+            membershipPermissions={userMembership.permissions}
+          />{" "}
+          <div className="bg-main relative w-full flex-col">
+            <Suspense fallback={null}>
+              <TenantAdminHeader
+                userMembership={userMembership}
+                notificationsCount={notificationsCount ?? 0}
+                organization={organization}
+              />
+            </Suspense>
+            <div className="relative z-20 w-full py-3">
+              <div className="mx-auto bg-transparent px-4 lg:px-8">
+                {children}
+              </div>
+            </div>
           </div>
-        </div>{" "}
-      </main>
+        </main>
+      </SidebarProvider>
 
       <UpdateClientCache
         organization={organization}

@@ -1,12 +1,13 @@
-import SuperAdminHeader from "../ui/SuperAdminHeader";
+import SuperAdminHeader from "./SuperAdminHeader";
 import { ReactNode, Suspense } from "react";
-import SuperAdminSidebar from "../ui/SuperAdminSidebar";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 import FullLoader from "../ui/loaders/FullLoader";
 import ForbiddenPage from "./errors/ForbiddenPage";
 import { HeroPattern } from "../ui/commons/HeroPattern";
 import { isSuperAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { getUserNotificationsUnreadCount } from "@/actions/global/notificationsModule/get-user-notifications";
+import { SuperAdminSidebar } from "./SuperAdminSidebar";
+import { SidebarProvider } from "../ui/sidebar";
 
 export default async function SuperAdminLayout({
   children,
@@ -22,19 +23,24 @@ export default async function SuperAdminLayout({
   const notificationsCount = await getUserNotificationsUnreadCount();
 
   return (
-    <main className="relative bg-main   text-primary">
-      <Suspense fallback={<FullLoader />}>
-        <HeroPattern />
-        <SuperAdminSidebar />
-        <div className="lg:pl-72 h-screen overflow-y-auto relative ">
-          <SuperAdminHeader
-            notificationsCount={notificationsCount} //Fix This
-          />
-          <div className="py-3 relative   lg:pt-[5%]   ">
-            <div className="mx-auto  px-4 lg:px-8">{children}</div>
+    <SidebarProvider>
+      <main className="text-primary flex w-full">
+        <Suspense fallback={<FullLoader />}>
+          <HeroPattern />
+          <SuperAdminSidebar />
+          <div className="bg-main relative w-full flex-col">
+            <SuperAdminHeader
+              userMembership={userMembership}
+              notificationsCount={notificationsCount} //Fix This
+            />
+            <div className="relative z-20 w-full py-3">
+              <div className="mx-auto bg-transparent px-4 lg:px-8">
+                {children}
+              </div>
+            </div>
           </div>
-        </div>{" "}
-      </Suspense>
-    </main>
+        </Suspense>
+      </main>
+    </SidebarProvider>
   );
 }

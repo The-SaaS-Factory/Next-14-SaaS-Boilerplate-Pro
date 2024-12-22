@@ -39,10 +39,10 @@ export default function UpgradeToAgencySection() {
         <div className="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2">
           <div>
             <div className="border-b border-gray-200 pb-10">
-              <h2 className="font-medium  text">
+              <h2 className="text font-medium">
                 Conoce nuestra membresía para agencias
               </h2>
-              <p className=" text-5xl font-bold tracking-tight text-primary sm:text-5xl  ">
+              <p className="text-primary text-5xl font-bold tracking-tight sm:text-5xl">
                 ¡Hazte agencia!
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function UpgradeToAgencySection() {
               {features.map((feature) => (
                 <div key={feature.name}>
                   <dt className="text-subtitle">{feature.name}</dt>
-                  <dd className="mt-3 text-primary">{feature.description}</dd>
+                  <dd className="text-primary mt-3">{feature.description}</dd>
                 </div>
               ))}
             </dl>
@@ -69,7 +69,7 @@ export default function UpgradeToAgencySection() {
             </div>
             <Link
               href="/home/settings/billing/buyPlan"
-              className="flex items-center mx-auto btn-icon animate-bounce"
+              className="btn-icon mx-auto flex animate-bounce items-center"
             >
               <span>¡Hazte agencia!</span>
               <ArrowRightCircleIcon className="h-6 w-6" aria-hidden="true" />

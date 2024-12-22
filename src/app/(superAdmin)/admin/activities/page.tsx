@@ -43,7 +43,7 @@ const ActivitiesPage = async ({
       >
         <ActivitiesList data={data}></ActivitiesList>
 
-        <div className="flex mt-7 justify-between">
+        <div className="mt-7 flex justify-between">
           <Pagination
             totalPages={totalPages}
             totalCount={totalCount}

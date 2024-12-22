@@ -2,8 +2,8 @@ import React from "react";
 
 const TemplateLoader = () => (
   <>
-    <div className="w-full h-full p-3 grid lg:grid-cols-12 animate-pulse">
-      <div className="relative text-primary"></div>
+    <div className="grid h-full w-full animate-pulse p-3 lg:grid-cols-12">
+      <div className="text-primary relative"></div>
     </div>
   </>
 );

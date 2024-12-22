@@ -23,7 +23,7 @@ const ViewSupportTicketDetailsPage = ({
   return (
     <div>
       <Card className="mr-3">
-        <div className="flex flex-col justify-between space-y-3 lg:space-y-0 lg:flex-row">
+        <div className="flex flex-col justify-between space-y-3 lg:flex-row lg:space-y-0">
           <div className="flex justify-between">
             <span className="subtitle">
               {"Subject"}: {ticket.subject}
@@ -32,7 +32,7 @@ const ViewSupportTicketDetailsPage = ({
               {"Ticket"} ID: {ticket.id}
             </span>
           </div>
-          <div className="flex justify-between items-center space-x-3">
+          <div className="flex items-center justify-between space-x-3">
             <span className="subtitle">
               Status: {showTicketStatus(ticket.status)}
             </span>

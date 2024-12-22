@@ -15,10 +15,10 @@ const UserCard = ({ user }: { user: any }) => (
         />
       </div>
       <div className="ml-4">
-        <div className="font-medium  ">
+        <div className="font-medium">
           ({user.id}) {user.name}
         </div>
-        <div className="mt-1  text">
+        <div className="text mt-1">
           {!isDemoMode ? user.email : "In demo mode, email is hidden, :)"}
         </div>
       </div>

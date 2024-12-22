@@ -26,10 +26,10 @@ export const CustomDialog = ({
       <button
         className={`${
           style === "link" ? "text-link" : "btn-main"
-        } flex  items-center text-center gap-2`}
+        } flex items-center gap-2 text-center`}
         onClick={() => setOpen(true)}
       >
-        <EyeIcon className="w-6 h-6" />
+        <EyeIcon className="h-6 w-6" />
         {label ?? "Open Dialog"}
       </button>
 
@@ -43,31 +43,23 @@ export const CustomDialog = ({
       >
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-gray-500
-           bg-opacity-25 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300
-            data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+          className="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
         />
 
         <div className="fixed inset-0 z-50 w-screen p-4 sm:p-6 md:p-14">
           <DialogPanel
             transition
-            className={`mx-auto ${size === "max" ? "max-w-3xl" : "max-w-fit"}
-            h-screen
-             mb-14
-             transform rounded-xl
-                 ring-1 ring-black ring-opacity-5
-               transition-all py-6 data-[closed]:scale-95 data-[closed]:opacity-0 
-               data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in`}
+            className={`mx-auto ${size === "max" ? "max-w-3xl" : "max-w-fit"} mb-14 h-screen transform rounded-xl py-6 ring-1 ring-black ring-opacity-5 transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in`}
           >
-            <div className="flex rounded-xl  h-[85%] flex-col overflow-y-auto bg-main   ">
-              <div className="relative  flex-1 px-4 sm:px-6">
-                <div className="flex p-3 border-gray-200 border-b-2 items-center justify-between">
-                  <h2 className="text-lg font-semibold text-primary">
+            <div className="bg-main flex h-[85%] flex-col overflow-y-auto rounded-xl">
+              <div className="relative flex-1 px-4 sm:px-6">
+                <div className="flex items-center justify-between border-b-2 border-gray-200 p-3">
+                  <h2 className="text-primary text-lg font-semibold">
                     {title}
                   </h2>
                   <button>
                     <XMarkIcon
-                      className="w-6 h-6"
+                      className="h-6 w-6"
                       onClick={() => setOpen(false)}
                     />
                   </button>

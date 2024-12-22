@@ -56,7 +56,7 @@ function NavLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={clsx(
-        "flex justify-between gap-2 py-1 pr-3 text-primary  transition",
+        "text-primary flex justify-between gap-2 py-1 pr-3 transition",
         isAnchorLink ? "pl-7" : "pl-4",
         active
           ? "text-zinc-900 dark:text-white"
@@ -110,7 +110,7 @@ function VisibleSectionHighlight({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
-      className="absolute inset-x-0 top-0 bg-zinc-800/2.5 will-change-transform dark:bg-white/2.5"
+      className="bg-zinc-800/2.5 dark:bg-white/2.5 absolute inset-x-0 top-0 will-change-transform"
       style={{ borderRadius: 8, height, top }}
     />
   );
@@ -134,7 +134,7 @@ function ActivePageMarker({
   return (
     <motion.div
       layout
-      className="absolute left-2 h-6 w-px bg-primary"
+      className="bg-primary absolute left-2 h-6 w-px"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -169,13 +169,13 @@ function NavigationGroup({
       <li className={clsx("relative mt-6", className)}>
         <Link
           href={group.href}
-          className="flex gap-2 items-center cursor-pointer"
+          className="flex cursor-pointer items-center gap-2"
         >
           <group.icon className="size-5"></group.icon>
 
           <motion.h2
             layout="position"
-            className="text-primary   font-semibold text-zinc-900 dark:text-white"
+            className="text-primary font-semibold text-zinc-900 dark:text-white"
           >
             {group.sectionName}
           </motion.h2>

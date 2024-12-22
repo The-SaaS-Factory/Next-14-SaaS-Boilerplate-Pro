@@ -11,7 +11,7 @@ async function BtnBuyService() {
       </Link>
       <Link
         href="/home"
-        className="text-sm font-semibold leading-6 text-primary"
+        className="text-primary text-sm font-semibold leading-6"
       >
         Acceder a mi cuenta <span aria-hidden="true">→</span>
       </Link>

@@ -29,10 +29,10 @@ export default async function ClientLayout({
   children: ReactNode;
 }) {
   return (
-    <main className="relative text-primary">
-      <div className="lg:pl-72 h-screen overflow-y-auto relative bg-main">
-        <div className="py-3  ">
-          <div className="mx-auto   px-4  ">{children}</div>
+    <main className="text-primary relative">
+      <div className="bg-main relative h-screen overflow-y-auto lg:pl-72">
+        <div className="py-3">
+          <div className="mx-auto px-4">{children}</div>
         </div>
       </div>{" "}
       <FloatingWhatsAppButton />

@@ -43,17 +43,17 @@ export default function Component() {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-pink-50 to-orange-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50">
       {showConfetti && <Confetti width={width} height={height} />}{" "}
       {/* Confetti */}
-      <div className="max-w-xl w-full p-8 bg-white rounded-3xl shadow-lg">
-        <div className="flex items-center mb-8">
-          <h1 className="text-2xl mx-auto font-semibold text-primary">
+      <div className="w-full max-w-xl rounded-3xl bg-white p-8 shadow-lg">
+        <div className="mb-8 flex items-center">
+          <h1 className="text-primary mx-auto text-2xl font-semibold">
             {constants.appName}
           </h1>
         </div>
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-primary mb-2">Welcome!</h2>
+        <div className="mb-8 text-center">
+          <h2 className="text-primary mb-2 text-3xl font-bold">Welcome!</h2>
           <p className="text-gray-600">
             For the best experience, we recommend setting at least an
             integration. This is necessary so that we can generate reports for
@@ -64,7 +64,7 @@ export default function Component() {
           <div>
             <label
               htmlFor="projectName"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
               {constants.tanantModelName} name
             </label>

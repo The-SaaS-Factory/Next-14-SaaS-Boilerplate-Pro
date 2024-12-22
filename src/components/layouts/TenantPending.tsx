@@ -28,17 +28,15 @@ export default function TenantPending() {
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
         <DialogPanel
           transition
-          className="mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter 
-          transition-all data-[closed]:scale-95 data-[closed]:opacity-0 
-          data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+          className="mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
         >
-          <div className="flex flex-col items-center align-middle py-32">
+          <div className="flex flex-col items-center py-32 align-middle">
             <span className="text-title">Cuenta pendiente de aprobación</span>
-            <p className="text-sm text-center mt-2 px-14">
+            <p className="mt-2 px-14 text-center text-sm">
               Tu cuenta está pendiente de aprobación por parte del
               administrador. Por favor, espera mientras revisamos tus datos.
             </p>
-            <button className="mt-7 btn-main" onClick={handleLogout}>
+            <button className="btn-main mt-7" onClick={handleLogout}>
               Cerrar sesión
             </button>
           </div>

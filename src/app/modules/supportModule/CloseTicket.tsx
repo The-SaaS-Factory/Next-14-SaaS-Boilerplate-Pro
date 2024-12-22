@@ -11,7 +11,7 @@ const CloseTicket = ({ ticketId }: { ticketId: number }) => {
   return (
     <div>
       <Button onClick={handleCloseTicket}>
-        <XMarkIcon className="w-5 h-5 text-red-500" />
+        <XMarkIcon className="h-5 w-5 text-red-500" />
         Close ticket
       </Button>
     </div>

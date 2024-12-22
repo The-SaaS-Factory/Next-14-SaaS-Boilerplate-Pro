@@ -12,7 +12,7 @@ type ChangesProps = {
 
 const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
   return (
-    <div className="w-full max-w-4xl mx-auto  bg-white shadow-md rounded-lg">
+    <div className="mx-auto w-full max-w-4xl rounded-lg bg-white shadow-md">
       {Object.keys(changes).length === 0 ? (
         <p className="text-center text-gray-600">No se realizaron cambios.</p>
       ) : (
@@ -20,7 +20,7 @@ const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
           {type === "CREATE" && (
             <>
               <div>
-                <p className="font-bold mb-2">Casting Creado</p>
+                <p className="mb-2 font-bold">Casting Creado</p>
 
                 <p className="text-sm text-neutral-700">
                   Nombre: {(changes.new as any).name}
@@ -55,15 +55,15 @@ const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
                   key={index}
                   className="flex flex-col gap-4 border-b border-gray-200 pb-4"
                 >
-                  <div className="font-semibold text-gray-700 capitalize">
+                  <div className="font-semibold capitalize text-gray-700">
                     {key}
                   </div>
                   <div className="col-span-2">
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col gap-4 sm:flex-row">
                       {/* Before Change */}
                       <div className="flex-1">
                         <h3 className="font-semibold text-red-500">Antes</h3>
-                        <p className="bg-red-50 border border-red-300 text-red-700 p-2 rounded-md">
+                        <p className="rounded-md border border-red-300 bg-red-50 p-2 text-red-700">
                           {change?.before !== null &&
                           change?.before !== undefined
                             ? JSON.stringify(change.before, null, 2)
@@ -75,7 +75,7 @@ const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
                         <h3 className="font-semibold text-green-500">
                           Después
                         </h3>
-                        <p className="bg-green-50 border border-green-300 text-green-700 p-2 rounded-md">
+                        <p className="rounded-md border border-green-300 bg-green-50 p-2 text-green-700">
                           {change?.after !== null && change?.after !== undefined
                             ? JSON.stringify(change?.after, null, 2)
                             : "No value"}
@@ -90,7 +90,7 @@ const ViewChanges: React.FC<ChangesProps> = ({ changes, type }) => {
 
           {type === "DELETE" && (
             <div>
-              <p className="font-bold mb-2">Casting Eliminado</p>
+              <p className="mb-2 font-bold">Casting Eliminado</p>
               <p className="text-sm text-neutral-700">
                 id: {(changes.before as any).id}
               </p>

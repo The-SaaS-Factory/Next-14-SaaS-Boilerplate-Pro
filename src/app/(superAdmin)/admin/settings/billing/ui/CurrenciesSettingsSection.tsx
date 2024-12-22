@@ -11,15 +11,15 @@ const CurrenciesSettingsSection = async () => {
     <div className="space-y-12">
       <div className="w-full">
         <div className="space-y-12">
-          <div className={`grid grid-cols-1 gap-x-8  md:grid-cols-3`}>
-            <div className="lg:col-span-1 p-7">
+          <div className={`grid grid-cols-1 gap-x-8 md:grid-cols-3`}>
+            <div className="p-7 lg:col-span-1">
               <h2 className="text-subtitle">Currencies </h2>
-              <p className="mt-3 text-sm leading-6 text-primary">
+              <p className="text-primary mt-3 text-sm leading-6">
                 Manage the currencies accepted on the platform.
               </p>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col w-full max-w-md pt-7">
+            <div className="flex w-full max-w-md flex-col pt-7 lg:col-span-2">
               <div className="flex justify-between">
                 <h2 className="text-subtitle">
                   Currencies
@@ -30,7 +30,7 @@ const CurrenciesSettingsSection = async () => {
                   href="/admin/settings/billing/addCurrency"
                 >
                   <Button variant="outline">
-                    <PlusCircleIcon className="w-6 h-6" />
+                    <PlusCircleIcon className="h-6 w-6" />
                     Add currency
                   </Button>
                 </Link>
@@ -39,10 +39,10 @@ const CurrenciesSettingsSection = async () => {
                 {currencies?.map((currency: any, index: number) => (
                   <div
                     key={`currency-${index}`}
-                    className="flex flex-row justify-between items-center bg-main rounded-md shadow-md p-4 mt-4"
+                    className="bg-main mt-4 flex flex-row items-center justify-between rounded-md p-4 shadow-md"
                   >
                     <div className="flex w-full justify-between">
-                      <span className="text-sm text-primary">
+                      <span className="text-primary text-sm">
                         {currency.name}
                       </span>
                       <div className="flex items-center space-x-3">
@@ -50,7 +50,7 @@ const CurrenciesSettingsSection = async () => {
                           href={`/admin/settings/billing/editCurrency/${currency.id}`}
                         >
                           <Button variant="outline">
-                            <PencilIcon className="w-6 h-6" />
+                            <PencilIcon className="h-6 w-6" />
                           </Button>
                         </Link>
 

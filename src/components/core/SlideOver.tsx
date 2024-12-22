@@ -26,7 +26,7 @@ export default function SlideOver({
 
   return (
     <>
-      <Button className={`  items-center space-x-1`} onClick={toggleSideOver}>
+      <Button className={`items-center space-x-1`} onClick={toggleSideOver}>
         {button.icon}
         <span>{button.name ?? "Open Slide Over"}</span>
       </Button>
@@ -45,9 +45,9 @@ export default function SlideOver({
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-hidden ">
+          <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
-              <div className="pointer-events-none fixed inset-y-0  right-0 flex max-w-full pl-10">
+              <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -57,7 +57,7 @@ export default function SlideOver({
                   leaveFrom="translate-x-0"
                   leaveTo="translate-x-full"
                 >
-                  <Dialog.Panel className="pointer-events-auto relative w-96  bg-main text">
+                  <Dialog.Panel className="bg-main text pointer-events-auto relative w-96">
                     <Transition.Child
                       as={Fragment}
                       enter="ease-in-out duration-500"
@@ -70,7 +70,7 @@ export default function SlideOver({
                       <div className="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
                         <button
                           type="button"
-                          className="relative rounded-md text-primary focus:outline-none focus:ring-2 "
+                          className="text-primary relative rounded-md focus:outline-none focus:ring-2"
                           onClick={toggleSideOver}
                         >
                           <span className="absolute -inset-2.5" />
@@ -79,7 +79,7 @@ export default function SlideOver({
                         </button>
                       </div>
                     </Transition.Child>
-                    <div className="h-full overflow-y-auto  p-8">
+                    <div className="h-full overflow-y-auto p-8">
                       <div className="space-y-6 pb-16">{children}</div>
                     </div>
                   </Dialog.Panel>

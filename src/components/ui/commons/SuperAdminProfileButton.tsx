@@ -14,8 +14,8 @@ export const SuperAdminProfileButton = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="pr-7 ">
-      <Menu as="div" className="  ">
+    <div className="pr-7">
+      <Menu as="div" className=" ">
         <MenuButton className="-m-1.5 flex items-center p-1.5">
           <span className="sr-only">Open user menu</span>
           <Image
@@ -27,7 +27,7 @@ export const SuperAdminProfileButton = () => {
           />
           <span className="hidden lg:flex lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text-primary"
+              className="text-primary ml-4 text-sm font-semibold leading-6"
               aria-hidden="true"
             >
               {session?.user?.name}
@@ -46,21 +46,21 @@ export const SuperAdminProfileButton = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <MenuItems className="absolute right-0 z-50 mt-2.5 w-48 origin-top-right rounded-md bg-main py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none space-y-3">
+          <MenuItems className="bg-main absolute right-0 z-50 mt-2.5 w-48 origin-top-right space-y-3 rounded-md py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
             <>
               <Link
                 href={"/home/settings/profile"}
                 className={classNames(
-                  "  bg-main-hover flex space-x-3 items-center  px-3 py-1 hover:bg-main text-sm leading-6 text",
+                  "bg-main-hover hover:bg-main text flex items-center space-x-3 px-3 py-1 text-sm leading-6",
                 )}
               >
-                <UserIcon className="w-5 h-5" />
+                <UserIcon className="h-5 w-5" />
                 <span> Settings del perfil</span>
               </Link>
 
               <button
                 className={classNames(
-                  " bg-main-hover flex space-x-3 items-center px-3 py-1 text-sm leading-6 text-primary text-left w-full",
+                  "bg-main-hover text-primary flex w-full items-center space-x-3 px-3 py-1 text-left text-sm leading-6",
                 )}
                 onClick={() =>
                   signOut({
@@ -68,7 +68,7 @@ export const SuperAdminProfileButton = () => {
                   })
                 }
               >
-                <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+                <ArrowRightStartOnRectangleIcon className="h-5 w-5" />
                 <span>Cerrar sessión</span>
               </button>
             </>

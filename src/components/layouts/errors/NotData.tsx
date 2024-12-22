@@ -7,7 +7,7 @@ export default function NotDataPage({
   children: React.ReactNode;
 }) {
   return (
-    <div className="text-center pt-[10%] flex flex-col align-middle justify-center">
+    <div className="flex flex-col justify-center pt-[10%] text-center align-middle">
       <svg
         className="mx-auto h-12 w-12 text-gray-400"
         fill="none"
@@ -23,16 +23,16 @@ export default function NotDataPage({
           d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
         />
       </svg>
-      <h3 className="mt-2 text-sm font-semibold  text-title">
+      <h3 className="text-title mt-2 text-sm font-semibold">
         Aún no hay registros
       </h3>
-      <p className="mt-1 text-sm text-primary">
+      <p className="text-primary mt-1 text-sm">
         {" "}
         Felizmente podemos empezar a agregar
       </p>
       <div className="mt-6 flex items-center justify-center">
         <CustomDialog style="button" label="Insertar">
-          <div className="flex h-full bg-slate-800 flex-col bg-main overflow-auto py-6">
+          <div className="bg-main flex h-full flex-col overflow-auto bg-slate-800 py-6">
             {children}
           </div>
         </CustomDialog>

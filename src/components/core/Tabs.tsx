@@ -28,12 +28,12 @@ const Tabs = ({
 
   return (
     <div>
-      <div className="flex overflow-auto border-b-2 w-[100%] py-1 border-gray-200 ">
+      <div className="flex w-[100%] overflow-auto border-b-2 border-gray-200 py-1">
         <div className="flex space-x-2">
           {tabs.map((tab) => (
             <div
               key={tab.path}
-              className={`flex items-center space-x-2 hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-xl ${
+              className={`flex items-center space-x-2 rounded-xl p-2 hover:bg-gray-200 dark:hover:bg-gray-800 ${
                 isActive(tab.path) ? "active-tab" : ""
               }`}
             >
@@ -45,7 +45,7 @@ const Tabs = ({
                   "aria-hidden": "true",
                 })}
               <Link
-               prefetch={true}
+                prefetch={true}
                 href={tab.path}
                 className={isActive(tab.path) ? "active-tab" : "text-primary"}
               >

@@ -102,7 +102,7 @@ export const CustomDialog = ({
             <DialogTitle>{dialogTitle}</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col max-h-96 overflow-y-auto">
+          <div className="flex max-h-96 flex-col overflow-y-auto">
             {children}
           </div>
 

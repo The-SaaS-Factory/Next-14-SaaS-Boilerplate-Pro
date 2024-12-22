@@ -25,10 +25,10 @@ const PlanNewPricing = async ({
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={4} />}>
         <PageName name={"New Plan Price"} isSubPage={true} />
-        <div className="flex items-center py-2 lg:px-7 ">
+        <div className="flex items-center py-2 lg:px-7">
           <Link href={`/admin/billing/plans/plans/edit/${plan?.id}`}>
             <Button variant="outline">
-              <ArrowLeftCircleIcon className="w-6 h-6" /> Back
+              <ArrowLeftCircleIcon className="h-6 w-6" /> Back
             </Button>
           </Link>
         </div>

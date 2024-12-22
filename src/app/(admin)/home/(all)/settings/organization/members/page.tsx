@@ -80,7 +80,7 @@ const AgentesPage = () => {
   return (
     <div>
       <PageName name={constants.tanantModelName + " members"} />
-      <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="col-span-1">
           <ul role="list" className="divide-y divide-gray-100">
             {members?.map((person, index) => (
@@ -94,16 +94,16 @@ const AgentesPage = () => {
                     height={100}
                     alt=""
                     src={person.user.avatar ?? "/assets/img/avatar.png"}
-                    className="h-12 w-12 flex-none rounded-full bg-main"
+                    className="bg-main h-12 w-12 flex-none rounded-full"
                   />
                   <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-primary">
+                    <p className="text-primary text-sm font-semibold leading-6">
                       <a href={person.href}>
-                        <span className="absolute inset-x-0 -top-px bottom-0 " />
+                        <span className="absolute inset-x-0 -top-px bottom-0" />
                         {person.user.name}
                       </a>
                     </p>
-                    <p className="mt-1 flex text-xs leading-5  text">
+                    <p className="text mt-1 flex text-xs leading-5">
                       <a
                         href={`mailto:${person.user.email}`}
                         className="relative truncate hover:underline"
@@ -113,13 +113,13 @@ const AgentesPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex z-0 shrink-0 items-center gap-x-4">
-                  <div className="  sm:flex sm:flex-col sm:items-end">
-                    <p className="text-sm leading-6 text-primary">
+                <div className="z-0 flex shrink-0 items-center gap-x-4">
+                  <div className="sm:flex sm:flex-col sm:items-end">
+                    <p className="text-primary text-sm leading-6">
                       {person.role}
                     </p>
                   </div>
-                  <div className="flex items-center   space-x-3 ">
+                  <div className="flex items-center space-x-3">
                     <div>
                       {!isTenantAdmin(person.permissions) && (
                         <DeleteModel
@@ -135,10 +135,10 @@ const AgentesPage = () => {
                       style="link"
                       label=""
                       icon={
-                        <EyeIcon aria-hidden="true" className="w-6 mb-2 h-6" />
+                        <EyeIcon aria-hidden="true" className="mb-2 h-6 w-6" />
                       }
                     >
-                      <div className="flex h-full   flex-col bg-main overflow-auto  ">
+                      <div className="bg-main flex h-full flex-col overflow-auto">
                         <ViewMember member={person} />
                       </div>
                     </CustomDialog>
@@ -149,11 +149,11 @@ const AgentesPage = () => {
           </ul>
         </div>
         <div className="col-span-1">
-          <div className="bg-main p-6 rounded-lg">
+          <div className="bg-main rounded-lg p-6">
             <h2 className="text-title">
               Add a member to the {constants.tanantModelName}
             </h2>
-            <div className="flex flex-col space-y-3 max-w-lg pt-7">
+            <div className="flex max-w-lg flex-col space-y-3 pt-7">
               <div className="flex flex-col">
                 <label htmlFor="">Name</label>
                 <input
@@ -207,7 +207,7 @@ const AgentesPage = () => {
                 />
               </div>
 
-              <div className="flex flex-col mt-2">
+              <div className="mt-2 flex flex-col">
                 <Button onClick={handleAddMember}>Agregar</Button>
               </div>
             </div>

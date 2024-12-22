@@ -213,7 +213,10 @@ const NewForm = ({
             }
           } else {
             if (fieldName === "medias" || fieldName === "images") {
-              setValue(fieldName, values[fieldName]);
+              setValue(
+                fieldName,
+                JSON.parse(values[fieldName]).map((i) => i.url),
+              );
             } else if (field.type === "toggle") {
               setValue(fieldName, values[fieldName] ? "true" : "false");
             } else {
@@ -283,9 +286,9 @@ const NewForm = ({
     <>
       <div>
         {Object.keys(errors).length > 0 && (
-          <div className="bg-red-300 rounded-md p-3">
+          <div className="rounded-md bg-red-300 p-3">
             <div className="flex flex-col">
-              <p className="text-red-700 text-lg  ">Errors:</p>
+              <p className="text-lg text-red-700">Errors:</p>
               <ul>
                 {Object.keys(errors).map((key, index) => (
                   <li key={index} className="text-red-500">
@@ -305,23 +308,23 @@ const NewForm = ({
       <form className="w-full" onSubmit={handleSubmit(action)}>
         <div className="space-y-12">
           <div
-            className={`grid grid-cols-1 lg:gap-x-8        ${
+            className={`grid grid-cols-1 lg:gap-x-8 ${
               info && "md:grid-cols-3"
             }`}
           >
             {info && (
-              <div className="lg:col-span-1 py-7 lg:p-7">
+              <div className="py-7 lg:col-span-1 lg:p-7">
                 <h2 className="text-base">{info.name}</h2>
-                <p className="mt-3 text-base leading-6  ">{info.description}</p>
+                <p className="mt-3 text-base leading-6">{info.description}</p>
               </div>
             )}
-            <div className="lg:col-span-2 grid grid-cols-1 gap-x-4    ">
+            <div className="grid grid-cols-1 gap-x-4 lg:col-span-2">
               {fields.map((field, index) => (
                 <div
-                  className={`  my-3 flex max-w-md  ${
+                  className={`my-3 flex max-w-md ${
                     field.type === "toggle"
-                      ? "flex-row justify-between "
-                      : "flex-col "
+                      ? "flex-row justify-between"
+                      : "flex-col"
                   } `}
                   key={index}
                 >
@@ -329,8 +332,8 @@ const NewForm = ({
                     {field.label}
                   </label>
                   {field.type === "text" && (
-                    <div className="mt-2  ">
-                      <div className="flex flex-col   ">
+                    <div className="mt-2">
+                      <div className="flex flex-col">
                         <TextInput
                           id={field.name}
                           placeholder=""
@@ -341,16 +344,16 @@ const NewForm = ({
                         />
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  ">{field.note}</p>
+                        <div className="italic">
+                          <p className="text-sm">{field.note}</p>
                         </div>
                       )}
                     </div>
                   )}
 
                   {field.type === "password" && (
-                    <div className="mt-2  ">
-                      <div className="flex flex-col rounded-md shadow-sm ">
+                    <div className="mt-2">
+                      <div className="flex flex-col rounded-md shadow-sm">
                         <TextInput
                           type="password"
                           placeholder=""
@@ -362,17 +365,15 @@ const NewForm = ({
                         />
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </div>
                   )}
                   {field.type === "number" && (
-                    <div className="mt-2  ">
-                      <div className="flex flex-col rounded-md shadow-sm  ">
+                    <div className="mt-2">
+                      <div className="flex flex-col rounded-md shadow-sm">
                         <NumberInput
                           placeholder=""
                           {...register(field.name, {
@@ -384,16 +385,14 @@ const NewForm = ({
                         />
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </div>
                   )}
                   {field.type === "date" && (
-                    <div className="mt-2  ">
+                    <div className="mt-2">
                       <div className="flex flex-col rounded-md shadow-sm">
                         <input
                           type="date"
@@ -406,10 +405,8 @@ const NewForm = ({
                         />
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </div>
@@ -429,7 +426,7 @@ const NewForm = ({
                     </div>
                   )}
                   {field.type === "textarea" && (
-                    <div className="mt-2  ">
+                    <div className="mt-2">
                       <div>
                         <Textarea
                           {...register(field.name, {
@@ -445,7 +442,7 @@ const NewForm = ({
                   )}
 
                   {field.type === "toggle" && (
-                    <Switch.Group as="div" className="flex   ">
+                    <Switch.Group as="div" className="flex">
                       <Switch
                         checked={watch(field.name) === "true"}
                         onChange={(isChecked) => {
@@ -455,7 +452,7 @@ const NewForm = ({
                           (watch(field.name) === "true" ? true : false)
                             ? "bg-indigo-600"
                             : "bg-gray-200",
-                          "relative inline-flex h-6 w-11   flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2",
+                          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2",
                         )}
                       >
                         <span
@@ -464,7 +461,7 @@ const NewForm = ({
                             (watch(field.name) === "true" ? true : false)
                               ? "translate-x-5"
                               : "translate-x-0",
-                            "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out text",
+                            "text pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
                           )}
                         />
                       </Switch>
@@ -472,7 +469,7 @@ const NewForm = ({
                   )}
                   {field.type === "select" && (
                     <div className="mt-2">
-                      <div className="flex shadow-none ">
+                      <div className="flex shadow-none">
                         <Select
                           id={field.name}
                           onValueChange={(value) => setValue(field.name, value)}
@@ -603,7 +600,7 @@ const NewForm = ({
                               <span>Loaded</span>
                               <button
                                 onClick={() => setValue(field.name, null)}
-                                className="icon "
+                                className="icon"
                               >
                                 <XMarkIcon className="h-5 w-5" />
                               </button>
@@ -613,10 +610,8 @@ const NewForm = ({
                       </div>
 
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -653,7 +648,7 @@ const NewForm = ({
                                         }}
                                         {...dragPropsAvatar}
                                         type="button"
-                                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                        className="text-primary rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                       >
                                         Change
                                       </button>
@@ -691,17 +686,15 @@ const NewForm = ({
                         )}
                       </ImageUploading>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </>
                   )}
                   {field.type === "mapSelector" && (
-                    <div className="mt-2  ">
-                      <div className="flex  rounded-md shadow-sm">
+                    <div className="mt-2">
+                      <div className="flex rounded-md shadow-sm">
                         <input
                           {...register(field.name, {
                             required: field.required,
@@ -723,10 +716,8 @@ const NewForm = ({
                         </button>
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
 
@@ -788,7 +779,7 @@ const NewForm = ({
                         }: any) => (
                           <div className="">
                             <div className="col-span-full">
-                              <div className="mt-2   items-center gap-x-3">
+                              <div className="mt-2 items-center gap-x-3">
                                 <div
                                   className="col-span-full"
                                   onClick={(e) => {
@@ -836,7 +827,7 @@ const NewForm = ({
                                         }}
                                         src={image.data_url ?? image}
                                         alt=""
-                                        className="rounded-lg shadow-lg m-2  w-16 h-16 object-cover"
+                                        className="m-2 h-16 w-16 rounded-lg object-cover shadow-lg"
                                       />
                                       <div className="image-item__btn-wrapper">
                                         <button
@@ -850,7 +841,7 @@ const NewForm = ({
                                             updatedImages.splice(index, 1); // Remove the image at the specified index
                                             setValue(field.name, updatedImages);
                                           }}
-                                          className="icon "
+                                          className="icon"
                                         >
                                           <ArchiveBoxArrowDownIcon className="h-5 w-5" />
                                         </button>
@@ -883,10 +874,8 @@ const NewForm = ({
                         )}
                       </ImageUploading>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -896,14 +885,14 @@ const NewForm = ({
                       <div className="col-span-full">
                         <div className="mt-2 w-full">
                           <CldUploadButton
-                            className="  flex space-x-3 items-center"
+                            className="flex items-center space-x-3"
                             onSuccess={(data) => {
                               handleUploadResource(data, field.name);
                             }}
                             uploadPreset={cloudinaryPreset}
                           >
                             <Button variant="outline">
-                              <ArrowUpCircleIcon className="w-5 h-5 mr-1 text-gray-500" />{" "}
+                              <ArrowUpCircleIcon className="mr-1 h-5 w-5 text-gray-500" />{" "}
                               <span>Media files</span>
                             </Button>
                           </CldUploadButton>
@@ -926,7 +915,7 @@ const NewForm = ({
                                       <Image
                                         width={80}
                                         height={80}
-                                        className="rounded-lg w-auto h-32 object-cover object-center"
+                                        className="h-32 w-auto rounded-lg object-cover object-center"
                                         alt=""
                                         src={"/assets/img/video.png"}
                                       />
@@ -936,7 +925,7 @@ const NewForm = ({
                                           <Image
                                             width={80}
                                             height={80}
-                                            className="rounded-lg w-auto h-32 object-cover object-center"
+                                            className="h-32 w-auto rounded-lg object-cover object-center"
                                             alt=""
                                             src={media.url}
                                           />
@@ -949,7 +938,7 @@ const NewForm = ({
                                         ? media.name
                                         : media.public_id}
                                     </span>
-                                    <div className="flex bg-white top-0  right-1 absolute shadow-lg p-1 rounded-full">
+                                    <div className="absolute right-1 top-0 flex rounded-full bg-white p-1 shadow-lg">
                                       <button
                                         onClick={(e) => {
                                           e.preventDefault();
@@ -959,7 +948,7 @@ const NewForm = ({
                                           );
                                         }}
                                       >
-                                        <TrashIcon className="w-5 h-5  " />
+                                        <TrashIcon className="h-5 w-5" />
                                       </button>
                                     </div>
                                   </div>
@@ -969,10 +958,8 @@ const NewForm = ({
                         </div>
                       </div>
                       {field.note && (
-                        <div className="italic ">
-                          <p className="text-sm  text-secondary ">
-                            {field.note}
-                          </p>
+                        <div className="italic">
+                          <p className="text-secondary text-sm">{field.note}</p>
                         </div>
                       )}
                     </>
@@ -982,9 +969,9 @@ const NewForm = ({
 
               {newFieldsFunction && (
                 <>
-                  <div className="mt-6 bg-gray-50 flex flex-col rounded-md shadow-sm">
+                  <div className="mt-6 flex flex-col rounded-md bg-gray-50 shadow-sm">
                     <h3 className="text-subtitle p-3">Add New Field</h3>
-                    <div className="flex px-3 space-x-3 items-center">
+                    <div className="flex items-center space-x-3 px-3">
                       <input
                         type="text"
                         name="name"
@@ -1019,7 +1006,7 @@ const NewForm = ({
                     </div>
                     <button
                       type="button"
-                      className="btn-secundary p-3 ml-auto"
+                      className="btn-secundary ml-auto p-3"
                       onClick={handleAddNewField}
                     >
                       <span>Add Field</span>
@@ -1031,7 +1018,7 @@ const NewForm = ({
           </div>
         </div>
         {!autoSave && (
-          <div className="mt-6 max-w-5xl flex items-center justify-end gap-x-6 pr-7">
+          <div className="mt-6 flex max-w-5xl items-center justify-end gap-x-6 pr-7">
             {isDemoMode ? (
               <Button type="submit" disabled>
                 Demo Mode Enabled
@@ -1123,7 +1110,7 @@ const ListFeatureField: React.FC<ListFeatureFieldProps> = ({
   };
 
   return (
-    <div className="ml-3 p-3 border-2 rounded-xl">
+    <div className="ml-3 rounded-xl border-2 p-3">
       {items.map((item, index) => (
         <div key={index}>
           {Object.entries(item).map(([field, valueField]) => (
@@ -1154,14 +1141,9 @@ const ListFeatureField: React.FC<ListFeatureFieldProps> = ({
         </button>
       )}
       {addMore ? (
-        <div
-          className="mt-6 bg-gray-50 flex flex-col 
-       rounded-md shadow-sm ring-1 ring-inset
-        ring-gray-300 focus-within:ring-2 
-        focus-within:ring-inset focus-within:ring-indigo-600  "
-        >
+        <div className="mt-6 flex flex-col rounded-md bg-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
           <h3 className="text-subtitle p-3">Add New Item </h3>
-          <div className="flex flex-col px-3 space-y-2  items-center">
+          <div className="flex flex-col items-center space-y-2 px-3">
             <input
               type="text"
               name="name"
@@ -1181,7 +1163,7 @@ const ListFeatureField: React.FC<ListFeatureFieldProps> = ({
           </div>
           <button
             type="button"
-            className="btn-secundary p-3 ml-auto"
+            className="btn-secundary ml-auto p-3"
             onClick={handleAddItem}
           >
             <span>Add Feature</span>
@@ -1359,12 +1341,12 @@ export function MapSelector({
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title
                       as="h3"
-                      className="text-base font-semibold leading-6 text"
+                      className="text text-base font-semibold leading-6"
                     >
                       Select Address
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm  text-secondary ">
+                      <p className="text-secondary text-sm">
                         {latLng && (
                           <input
                             type="text"
@@ -1401,9 +1383,9 @@ export function MapSelector({
                                     />
                                   </GoogleMap>
 
-                                  <div className="  absolute top-1 left-1 w-full  ">
-                                    <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                      <MapPinIcon className="h-5 w-5  text-secondary " />
+                                  <div className="absolute left-1 top-1 w-full">
+                                    <div className="absolute left-1 top-1 m-1 flex space-x-3 rounded bg-white p-3 shadow-md">
+                                      <MapPinIcon className="text-secondary h-5 w-5" />
                                       <p>{address}</p>
                                     </div>
                                   </div>
@@ -1425,9 +1407,9 @@ export function MapSelector({
                                 />
                               </GoogleMap>
 
-                              <div className="  absolute top-1 left-1 w-full  ">
-                                <div className="bg-white shadow-md p-3 space-x-3 flex rounded m-1 absolute top-1 left-1">
-                                  <MapPinIcon className="h-5 w-5  text-secondary " />
+                              <div className="absolute left-1 top-1 w-full">
+                                <div className="absolute left-1 top-1 m-1 flex space-x-3 rounded bg-white p-3 shadow-md">
+                                  <MapPinIcon className="text-secondary h-5 w-5" />
                                   <p>{address}</p>
                                 </div>
                               </div>

@@ -142,7 +142,7 @@ export default function LoginPage() {
   };
   return (
     <>
-      <div className=" flex flex-col space-y-3 items-center justify-center min-h-screen g-main px-4 lg:px-8">
+      <div className="g-main flex min-h-screen flex-col items-center justify-center space-y-3 px-4 lg:px-8">
         <Link href="/">
           <Image
             src={constants.logoUrl}
@@ -151,12 +151,12 @@ export default function LoginPage() {
             alt={constants.appName}
           />
         </Link>
-        <div className="w-full z-10 max-w-md px-3 lg:px-8 py-8 bg-white rounded-lg shadow-lg lg:w-1/3">
+        <div className="z-10 w-full max-w-md rounded-lg bg-white px-3 py-8 shadow-lg lg:w-1/3 lg:px-8">
           <div className="">
-            <div className="sm:block border-b border-gray-200">
+            <div className="border-b border-gray-200 sm:block">
               <nav
                 aria-label="Tabs"
-                className="flex space-x-8 mx-auto justify-center"
+                className="mx-auto flex justify-center space-x-8"
               >
                 {tabs.map((tab) => (
                   <button
@@ -165,8 +165,8 @@ export default function LoginPage() {
                     className={classNames(
                       tab.action === action
                         ? "border-indigo-500 text-indigo-600"
-                        : "border-transparent  text-primary hover:border-gray-300 hover:text-gray-700",
-                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm  font-medium",
+                        : "text-primary border-transparent hover:border-gray-300 hover:text-gray-700",
+                      "group inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium",
                     )}
                   >
                     <tab.icon
@@ -174,8 +174,8 @@ export default function LoginPage() {
                       className={classNames(
                         tab.action === action
                           ? "text-indigo-500"
-                          : "text-gray-400 group-hover: text",
-                        "h-5 w-5 mr-2 hidden lg:flex ",
+                          : "group-hover: text text-gray-400",
+                        "mr-2 hidden h-5 w-5 lg:flex",
                       )}
                     />
                     {tab.name}
@@ -185,10 +185,10 @@ export default function LoginPage() {
             </div>
 
             {waitingMessage && (
-              <div className="flex items-center justify-between bg-yellow-400 text-black px-4 py-2 rounded-md">
+              <div className="flex items-center justify-between rounded-md bg-yellow-400 px-4 py-2 text-black">
                 <p className="text-sm font-semibold">{waitingMessage}</p>
                 <button onClick={() => setWaitingMessage(null)}>
-                  <XMarkIcon className="w-5 h-5 text-white" />
+                  <XMarkIcon className="h-5 w-5 text-white" />
                 </button>
               </div>
             )}
@@ -196,11 +196,11 @@ export default function LoginPage() {
             <div>
               {action === "LOGIN" ? (
                 <>
-                  <h2 className="text-2xl font-bold text-primary mt-6 text-center">
+                  <h2 className="text-primary mt-6 text-center text-2xl font-bold">
                     Login to {constants.appName}
                   </h2>
                   {constants.demoMode && (
-                    <div className="flex mt-3 flex-col bg-gray-100 rounded-lg text-gray-600 p-3">
+                    <div className="mt-3 flex flex-col rounded-lg bg-gray-100 p-3 text-gray-600">
                       <span className="text-xs">Demo mode Enabled</span>
                       <div className="flex flex-col">
                         <span className="text-lg font-medium">
@@ -212,7 +212,7 @@ export default function LoginPage() {
                       </div>
                     </div>
                   )}
-                  <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+                  <form onSubmit={handleSubmit} className="mt-6 space-y-6">
                     <div>
                       <label
                         htmlFor="email"
@@ -248,20 +248,20 @@ export default function LoginPage() {
                     </div>
 
                     <div>
-                      <Button type="submit" className="w-full ">
+                      <Button type="submit" className="w-full">
                         {isLoading ? "Accessing..." : "Login"}
                       </Button>
                     </div>
                   </form>
 
                   <hr className="my-7" />
-                  <div className=" flex   justify-center my-3">
+                  <div className="my-3 flex justify-center">
                     <button
                       onClick={() => signIn("google")}
-                      className="flex gap-0.5 bg-neutral-100 text-neutral-800 text-sm font-bold rounded-xl px-4 py-3 hover:text-white hover:bg-[#4285F4] transition-all"
+                      className="flex gap-0.5 rounded-xl bg-neutral-100 px-4 py-3 text-sm font-bold text-neutral-800 transition-all hover:bg-[#4285F4] hover:text-white"
                     >
                       <svg
-                        className="w-5 h-5 mr-2 fill-current"
+                        className="mr-2 h-5 w-5 fill-current"
                         role="img"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -275,15 +275,15 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold text-primary mt-6">
+                  <h2 className="text-primary mt-6 text-2xl font-bold">
                     Create a new account
                   </h2>
 
-                  <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+                  <form onSubmit={handleSubmit} className="mt-6 space-y-6">
                     <div>
                       <label
                         htmlFor="name"
-                        className="block mt-1 text-sm font-medium text-gray-700"
+                        className="mt-1 block text-sm font-medium text-gray-700"
                       >
                         Name
                       </label>
@@ -299,7 +299,7 @@ export default function LoginPage() {
                     <div>
                       <label
                         htmlFor="name"
-                        className="block mt-1 text-sm font-medium text-gray-700"
+                        className="mt-1 block text-sm font-medium text-gray-700"
                       >
                         {constants.tanantModelName} name
                       </label>
@@ -315,7 +315,7 @@ export default function LoginPage() {
                     <div>
                       <label
                         htmlFor="email"
-                        className="block text-sm   font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Email
                       </label>
@@ -324,7 +324,7 @@ export default function LoginPage() {
                         name="email"
                         type="email"
                         required
-                        className="input-text  "
+                        className="input-text"
                         onChange={handleChange}
                       />
                     </div>
@@ -345,19 +345,19 @@ export default function LoginPage() {
                       />
                     </div>
                     <div>
-                      <Button type="submit" className="w-full ">
+                      <Button type="submit" className="w-full">
                         {isLoading ? "Sending..." : "Register"}
                       </Button>
                     </div>
                   </form>
                   <hr className="my-7" />
-                  <div className="flex  justify-center  my-3">
+                  <div className="my-3 flex justify-center">
                     <button
                       onClick={() => signIn("google")}
-                      className="flex gap-0.5 bg-neutral-100 text-neutral-800 text-sm font-bold rounded-xl px-4 py-3 hover:text-white hover:bg-[#4285F4] transition-all"
+                      className="flex gap-0.5 rounded-xl bg-neutral-100 px-4 py-3 text-sm font-bold text-neutral-800 transition-all hover:bg-[#4285F4] hover:text-white"
                     >
                       <svg
-                        className="w-5 h-5 mr-2 fill-current"
+                        className="mr-2 h-5 w-5 fill-current"
                         role="img"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"

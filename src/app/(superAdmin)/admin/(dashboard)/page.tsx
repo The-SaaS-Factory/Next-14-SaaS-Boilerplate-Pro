@@ -40,7 +40,7 @@ export default function SuperAdminDashboard() {
           <h1 className="text-3xl font-bold tracking-tight">
             SaaS Boilerplate
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-muted-foreground text-lg">
             Welcome back, {userMembership?.name}
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function SuperAdminDashboard() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
+              className="text-muted-foreground h-4 w-4"
             >
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
             </svg>
@@ -76,7 +76,7 @@ export default function SuperAdminDashboard() {
             <div className="text-2xl font-bold">
               ${stripeStats?.totalRevenue}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +20.1% from last month
             </p>
           </CardContent>
@@ -84,13 +84,13 @@ export default function SuperAdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               +{stripeStats?.activeUsers}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +180.1% from last month
             </p>
           </CardContent>
@@ -106,7 +106,7 @@ export default function SuperAdminDashboard() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
+              className="text-muted-foreground h-4 w-4"
             >
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
@@ -115,7 +115,7 @@ export default function SuperAdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stripeStats?.churnRate}%</div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               -1.2% from last month
             </p>
           </CardContent>
@@ -131,7 +131,7 @@ export default function SuperAdminDashboard() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
+              className="text-muted-foreground h-4 w-4"
             >
               <rect width="20" height="14" x="2" y="5" rx="2" />
               <path d="M2 10h20" />
@@ -139,7 +139,7 @@ export default function SuperAdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">${stripeStats?.MRR}</div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +19% from last month
             </p>
           </CardContent>

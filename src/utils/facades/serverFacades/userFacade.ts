@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import { createOrganization } from "./organizationFacade";
+import { logout } from "@/actions/auth";
 
 export const getMembership = cache(async () => {
   const session = await getServerSession(authOptions);
@@ -65,6 +66,12 @@ export const getMembership = cache(async () => {
     };
 
     membership = await createOrganization(newOrganizationPayload);
+  }
+  console.log(membership);
+
+  if (!membership) {
+    logout();
+    redirect("/login");
   }
 
   const authData = {

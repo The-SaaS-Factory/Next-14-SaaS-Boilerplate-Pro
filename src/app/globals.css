@@ -4,7 +4,7 @@
 /* SaaS Boilerplate styles */
 
 .container {
-  @apply max-w-7xl mx-auto;
+  @apply mx-auto max-w-7xl;
 }
 
 .g-main {
@@ -13,7 +13,7 @@
 
 /* End SaaS Boilerplate styles */
 .mega-title {
-  @apply text-4xl font-bold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r dark:from-gray-50 dark:via-indigo-200 dark:to-gray-200 from-black via-slate-800 to-black;
+  @apply bg-gradient-to-r from-black via-slate-800 to-black bg-clip-text text-4xl font-bold tracking-tight text-transparent dark:from-gray-50 dark:via-indigo-200 dark:to-gray-200 sm:text-6xl;
 }
 
 .text-title {
@@ -25,7 +25,7 @@
 }
 
 .text-secondary {
-  @apply text-base  text-gray-500 dark:text-gray-400;
+  @apply text-base text-gray-500 dark:text-gray-400;
 }
 
 .border-primary {
@@ -45,23 +45,23 @@
 }
 
 .btn-main {
-  @apply px-3 py-2 font-medium text-sm text-gray-200 rounded-md border shadow-sm shadow-indigo-300 border-indigo-50 bg-gradient-to-bl from-indigo-500 via-indigo-600 to-indigo-700 hover:via-indigo-800 active:from-indigo-900 dark:bg-gradient-to-bl dark:from-gray-900 dark:via-gray-900 dark:to-black dark:text-indigo-200 hover:dark:from-gray-700 hover:dark:via-gray-800 hover:dark:to-gray-700 disabled:cursor-not-allowed disabled:from-gray-400 disabled:to-gray-400 disabled:bg-gray-400 disabled:hover:bg-gray-500;
+  @apply rounded-md border border-indigo-50 bg-gradient-to-bl from-indigo-500 via-indigo-600 to-indigo-700 px-3 py-2 text-sm font-medium text-gray-200 shadow-sm shadow-indigo-300 hover:via-indigo-800 active:from-indigo-900 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:from-gray-400 disabled:to-gray-400 disabled:hover:bg-gray-500 dark:bg-gradient-to-bl dark:from-gray-900 dark:via-gray-900 dark:to-black dark:text-indigo-200 hover:dark:from-gray-700 hover:dark:via-gray-800 hover:dark:to-gray-700;
 }
 
 .btn-main-selected {
-  @apply px-3 py-2 font-medium text-sm text-gray-800 rounded-md border shadow-sm shadow-gray-600 border-gray-100 bg-gradient-to-bl from-slate-100 via-gray-200 to-gray-200 hover:via-gray-200 active:from-gray-800 dark:bg-gradient-to-bl dark:from-gray-600 dark:via-gray-600 dark:to-black dark:text-gray-200 hover:dark:from-gray-700 hover:dark:via-gray-600 hover:dark:to-gray-700;
+  @apply rounded-md border border-gray-100 bg-gradient-to-bl from-slate-100 via-gray-200 to-gray-200 px-3 py-2 text-sm font-medium text-gray-800 shadow-sm shadow-gray-600 hover:via-gray-200 active:from-gray-800 dark:bg-gradient-to-bl dark:from-gray-600 dark:via-gray-600 dark:to-black dark:text-gray-200 hover:dark:from-gray-700 hover:dark:via-gray-600 hover:dark:to-gray-700;
 }
 
 .btn-icon {
-  @apply flex space-x-2 btn-main;
+  @apply btn-main flex space-x-2;
 }
 
 .input-text {
-  @apply block bg-main text-primary w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm;
+  @apply bg-main text-primary block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm;
 }
 
 .magic-link li {
-  @apply text-sky-500 font-medium hover:text-sky-700 dark:text-gray-400;
+  @apply font-medium text-sky-500 hover:text-sky-700 dark:text-gray-400;
 }
 
 .magic-link li:before {
@@ -70,37 +70,37 @@
 }
 
 .badge-sky {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-sky-100 text-sky-800 shadow-sky-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-sky-100 px-2.5 py-0.5 text-sm font-medium text-sky-800 shadow-sm shadow-sky-800/50;
 }
 
 .badge-green {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 shadow-green-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 shadow-sm shadow-green-800/50;
 }
 
 .badge-red {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800 shadow-red-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-sm font-medium text-red-800 shadow-sm shadow-red-800/50;
 }
 
 .badge-orange {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-orange-200 text-orange-800 shadow-orange-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-orange-200 px-2.5 py-0.5 text-sm font-medium text-orange-800 shadow-sm shadow-orange-800/50;
 }
 
 .badge-yellow {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-700 shadow-yellow-700/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-sm font-medium text-yellow-700 shadow-sm shadow-yellow-700/50;
 }
 
 .badge-paid {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 shadow-green-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 shadow-sm shadow-green-800/50;
 }
 
 .badge-pending {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-orange-100 text-yellow-800 shadow-yellow-800/50 shadow-sm;
+  @apply inline-flex items-center rounded-full bg-orange-100 px-2.5 py-0.5 text-sm font-medium text-yellow-800 shadow-sm shadow-yellow-800/50;
 }
 
 /* Main Theme light - dark mode */
 /* dark:from-gray-900 dark:via-slate-950 dark:to-gray-950 */
 .bg-main {
-  @apply bg-gradient-to-bl bg-opacity-25 from-gray-50 via-slate-50 to-gray-100 dark:bg-gradient-to-bl dark:from-[#161616] dark:via-[#1b1b1b] dark:to-[#161616];
+  @apply bg-opacity-25 bg-gradient-to-bl from-gray-50 via-slate-50 to-gray-100 dark:bg-gradient-to-bl dark:from-[#161616] dark:via-[#1b1b1b] dark:to-[#161616];
 }
 
 .bg-main-hover {
@@ -108,7 +108,7 @@
 }
 
 .bg-main-background {
-  @apply flex justify-center items-center h-screen bg-gradient-to-r from-green-100 to-blue-200 via-pink-50 text-white;
+  @apply flex h-screen items-center justify-center bg-gradient-to-r from-green-100 via-pink-50 to-blue-200 text-white;
 }
 
 .bg-main-selected {
@@ -116,19 +116,19 @@
 }
 
 .text-primary {
-  @apply text-gray-700 text-sm font-medium leading-6 dark:text-gray-200;
+  @apply text-sm font-medium leading-6 text-gray-700 dark:text-gray-200;
 }
 
 .text-primary-hover {
-  @apply hover:text-gray-700 font-medium leading-6 dark:text-gray-200;
+  @apply font-medium leading-6 hover:text-gray-700 dark:text-gray-200;
 }
 
 .text-primary-selected {
-  @apply text-gray-700 text-sm font-bold leading-6 dark:text-gray-200;
+  @apply text-sm font-bold leading-6 text-gray-700 dark:text-gray-200;
 }
 
 .active-tab {
-  @apply text-sky-700 text-base font-bold leading-6 dark:text-gray-200;
+  @apply text-base font-bold leading-6 text-sky-700 dark:text-gray-200;
 }
 
 /* Carusel */
@@ -157,3 +157,26 @@
 }
 
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}

@@ -5,7 +5,7 @@ function UpgradeteButton() {
     <div>
       <Link
         href="/home/upgrade"
-        className=" text-white hover:scale-105  font-medium rounded-2xl px-2 py-1 bg-blue-500 shadow-lg shadow-blue-500/50"
+        className="rounded-2xl bg-blue-500 px-2 py-1 font-medium text-white shadow-lg shadow-blue-500/50 hover:scale-105"
       >
         <span>¡Plan Agencia!</span>
       </Link>

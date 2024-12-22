@@ -31,7 +31,7 @@ const AdminSupportPage = ({
           { name: "Support", href: "/home/support" },
         ]}
       />
-      <div className="flex justify-end -mt-14 mb-7">
+      <div className="-mt-14 mb-7 flex justify-end">
         <SlideOver
           button={{
             name: "New Ticket",

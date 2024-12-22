@@ -8,7 +8,7 @@ export const CategorySectionLandingPage = () => {
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2
             id="category-heading"
-            className="text-2xl font-bold tracking-tight text-primary"
+            className="text-primary text-2xl font-bold tracking-tight"
           >
             Principales categorías
           </h2>
@@ -22,7 +22,7 @@ export const CategorySectionLandingPage = () => {
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-          <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
+          <div className="aspect-h-1 aspect-w-2 sm:aspect-h-1 sm:aspect-w-1 group overflow-hidden rounded-lg sm:row-span-2">
             <Image
               width={350}
               height={350}
@@ -48,7 +48,7 @@ export const CategorySectionLandingPage = () => {
               </div>
             </div>
           </div>
-          <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
+          <div className="aspect-h-1 aspect-w-2 sm:aspect-none group overflow-hidden rounded-lg sm:relative sm:h-full">
             <Image
               width={350}
               height={350}
@@ -74,7 +74,7 @@ export const CategorySectionLandingPage = () => {
               </div>
             </div>
           </div>
-          <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
+          <div className="aspect-h-1 aspect-w-2 sm:aspect-none group overflow-hidden rounded-lg sm:relative sm:h-full">
             <Image
               width={350}
               height={350}

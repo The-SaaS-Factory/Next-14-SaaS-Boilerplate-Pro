@@ -25,7 +25,7 @@ export const HeaderLanding = () => {
     <>
       <Link
         href="/#"
-        className="hover:text-gray-700 text-gray-500 font-semibold"
+        className="font-semibold text-gray-500 hover:text-gray-700"
         onClick={closeMenu}
       >
         Link 1
@@ -33,7 +33,7 @@ export const HeaderLanding = () => {
       {saasFeatures.blogMdx && (
         <Link
           href="/blog"
-          className="hover:text-gray-700 text-gray-500 font-semibold"
+          className="font-semibold text-gray-500 hover:text-gray-700"
           onClick={closeMenu}
         >
           Blog
@@ -42,14 +42,14 @@ export const HeaderLanding = () => {
       <Link
         href="/#prices"
         onClick={closeMenu}
-        className="hover:text-gray-700 text-gray-500 font-semibold"
+        className="font-semibold text-gray-500 hover:text-gray-700"
       >
         Prices
       </Link>
       {session.status === "authenticated" ? (
         <Link
           href="/home"
-          className="hover:text-gray-300 rounded-full text-gray-50"
+          className="rounded-full text-gray-50 hover:text-gray-300"
         >
           <Image
             width={32}
@@ -77,12 +77,12 @@ export const HeaderLanding = () => {
   );
 
   return (
-    <header className="fixed   top-0 left-0 right-0 z-50 bg-blue-200/10  backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="fixed left-0 right-0 top-0 z-50 bg-blue-200/10 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
         <Link href="/" className="">
           <span className="font-bold">{constants.appName}</span>
         </Link>
-        <nav className=" hidden md:flex space-x-4 items-center">
+        <nav className="hidden items-center space-x-4 md:flex">
           <MenuItemsPC />
         </nav>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -94,15 +94,15 @@ export const HeaderLanding = () => {
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-[300px] sm:w-[400px] bg-black/50 backdrop-blur-md "
+            className="w-[300px] bg-black/50 backdrop-blur-md sm:w-[400px]"
           >
             <SheetClose>
-              <Button size="icon" className="absolute top-4 right-4 text-white">
+              <Button size="icon" className="absolute right-4 top-4 text-white">
                 <X className="h-6 w-6" />
                 <span className="sr-only">Cerrar menú</span>
               </Button>
             </SheetClose>
-            <nav className="flex flex-col space-y-4 mt-8">
+            <nav className="mt-8 flex flex-col space-y-4">
               <MenuItemsPC />
             </nav>
           </SheetContent>

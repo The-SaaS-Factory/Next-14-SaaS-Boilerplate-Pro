@@ -32,7 +32,7 @@ export default function SuccessPaymentPage() {
   }, []);
 
   return (
-    <div className=" flex flex-col items-center justify-center bg-gradient-to-b from-blue-100 to-white p-4">
+    <div className="flex flex-col items-center justify-center bg-gradient-to-b from-blue-100 to-white p-4">
       {showConfetti && (
         <Confetti
           width={windowSize.width}
@@ -41,10 +41,10 @@ export default function SuccessPaymentPage() {
           numberOfPieces={200}
         />
       )}
-      <h1 className="text-4xl pt-14 md:text-5xl font-bold text-center text-blue-600 mb-4">
+      <h1 className="mb-4 pt-14 text-center text-4xl font-bold text-blue-600 md:text-5xl">
         Payment Completed
       </h1>
-      <p className="text-xl md:text-2xl text-center text-gray-600 mb-8">
+      <p className="mb-8 text-center text-xl text-gray-600 md:text-2xl">
         Thank you for activating your plan on our platform!
       </p>
       <Button asChild>

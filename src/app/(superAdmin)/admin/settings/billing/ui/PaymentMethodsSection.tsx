@@ -12,15 +12,15 @@ const PaymentMethodsSection = async () => {
     <div className="space-y-12">
       <div className="w-full">
         <div className="space-y-12">
-          <div className={`grid grid-cols-1 gap-x-8  md:grid-cols-3`}>
-            <div className="lg:col-span-1 p-7">
+          <div className={`grid grid-cols-1 gap-x-8 md:grid-cols-3`}>
+            <div className="p-7 lg:col-span-1">
               <h2 className="text-subtitle">Payment Methods</h2>
-              <p className="mt-3 text-sm leading-6 text-primary">
+              <p className="text-primary mt-3 text-sm leading-6">
                 Manage payments gateways and methods.
               </p>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col w-full max-w-md pt-7">
+            <div className="flex w-full max-w-md flex-col pt-7 lg:col-span-2">
               <div className="flex justify-between">
                 <h2 className="text-subtitle">
                   Payment Methods Added
@@ -31,7 +31,7 @@ const PaymentMethodsSection = async () => {
                   href="/admin/settings/billing/addPaymentMethod"
                 >
                   <Button variant="outline">
-                    <PlusCircleIcon className="w-6 h-6" />
+                    <PlusCircleIcon className="h-6 w-6" />
                     Add Payment Method
                   </Button>
                 </Link>
@@ -41,14 +41,14 @@ const PaymentMethodsSection = async () => {
                   (payment: PaymentMethod, index: number) => (
                     <div
                       key={`currency-${index}`}
-                      className="flex flex-row justify-between items-center bg-main rounded-md shadow-md p-4 mt-4"
+                      className="bg-main mt-4 flex flex-row items-center justify-between rounded-md p-4 shadow-md"
                     >
                       <div className="flex w-full justify-between">
-                        <span className="text-sm text-primary">
+                        <span className="text-primary text-sm">
                           {payment.name}
                         </span>
 
-                        <span className="text-sm text-primary">
+                        <span className="text-primary text-sm">
                           Estado: {payment.status}
                         </span>
                         <div className="flex space-x-3">
@@ -56,7 +56,7 @@ const PaymentMethodsSection = async () => {
                             href={`/admin/settings/billing/editPaymentMethod/${payment.id}`}
                           >
                             <Button variant="outline">
-                              <PencilIcon className="w-6 h-6" />
+                              <PencilIcon className="h-6 w-6" />
                             </Button>
                           </Link>
 

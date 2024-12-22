@@ -34,10 +34,10 @@ const DeleteModel = ({
   return (
     <div>
       <button
-        className="flex space-x-1 items-center "
+        className="flex items-center space-x-1"
         onClick={handleDeleteModel}
       >
-        <TrashIcon className="w-6 h-6" />
+        <TrashIcon className="h-6 w-6" />
         <span>Delete</span>
       </button>
     </div>

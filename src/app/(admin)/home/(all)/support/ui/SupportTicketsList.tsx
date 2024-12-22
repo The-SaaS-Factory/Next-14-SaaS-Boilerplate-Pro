@@ -64,7 +64,7 @@ const SupportTicketsList = async ({
         }
       >
         {data.length === 0 ? (
-          <div className="flex justify-center items-center h-96">
+          <div className="flex h-96 items-center justify-center">
             <NotFound message={"No tickets found"} />
           </div>
         ) : (
@@ -90,19 +90,19 @@ const SupportTicketsList = async ({
               <TableBody>
                 {data?.map((item: any, index: number) => (
                   <TableRow key={`userInvoice-${index}`}>
-                    <TableCell className="text-left text-primary">
+                    <TableCell className="text-primary text-left">
                       {item.subject} - (ID-{item.id})
                     </TableCell>
-                    <TableCell className=" space-x-3  ">
+                    <TableCell className="space-x-3">
                       <span className="uppercase">{item.department}</span>
                     </TableCell>
-                    <TableCell className="text-center text-primary">
+                    <TableCell className="text-primary text-center">
                       {showTicketStatus(item.status)}
                     </TableCell>
-                    <TableCell className="text-center text-primary">
+                    <TableCell className="text-primary text-center">
                       {formatTimestampToDateString(item.createdAt)}
                     </TableCell>
-                    <TableCell className="text-center text-primary">
+                    <TableCell className="text-primary text-center">
                       <Link href={`/home/support/ticket/${item.id}`}>
                         <Button variant="secondary">View</Button>
                       </Link>
@@ -111,7 +111,7 @@ const SupportTicketsList = async ({
                 ))}
               </TableBody>
             </Table>
-            <div className="flex mt-7 justify-between">
+            <div className="mt-7 flex justify-between">
               <Pagination
                 totalPages={totalPages}
                 totalCount={totalCount}

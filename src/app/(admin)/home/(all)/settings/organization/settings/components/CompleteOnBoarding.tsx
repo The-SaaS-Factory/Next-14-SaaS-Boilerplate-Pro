@@ -18,9 +18,9 @@ export const CompleteOnBoarding = ({
 
   if (!isOnboardingCompleted && !isAgencyProfilePage) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-neutral-800/30 backdrop-blur-sm z-[999]">
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-          <h2 className="text-2xl font-semibold mb-4">
+      <div className="fixed inset-0 z-[999] flex items-center justify-center bg-neutral-800/30 backdrop-blur-sm">
+        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-2xl font-semibold">
             Complete your {constants.tanantModelName} configuration
           </h2>
           <p className="mb-4 text-gray-700">
@@ -29,7 +29,7 @@ export const CompleteOnBoarding = ({
           </p>
           <Link
             href="/home/onboarding"
-            className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+            className="inline-block rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700"
           >
             Complete onboarding
           </Link>

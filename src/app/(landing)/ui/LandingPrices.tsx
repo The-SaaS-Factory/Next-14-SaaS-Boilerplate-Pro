@@ -49,17 +49,17 @@ export default function Component() {
   ];
 
   return (
-    <div className="w-full px-4 py-8 " id="prices">
-      <div className="mx-auto max-w-md text-center mb-10">
-        <h2 className="text-2xl font-bold mb-2">Simple, transparent pricing</h2>
+    <div className="w-full px-4 py-8" id="prices">
+      <div className="mx-auto mb-10 max-w-md text-center">
+        <h2 className="mb-2 text-2xl font-bold">Simple, transparent pricing</h2>
         <p className="text-muted-foreground">
           Our straightforward and customizable plans ensure you get precisely
           what you need.
         </p>
       </div>
 
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex items-center bg-secondary rounded-full p-1">
+      <div className="mb-8 flex justify-center">
+        <div className="bg-secondary inline-flex items-center rounded-full p-1">
           <Button
             variant={isAnnual ? "default" : "ghost"}
             className="relative rounded-full px-4"
@@ -67,7 +67,7 @@ export default function Component() {
           >
             Annual
             {isAnnual && (
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
+              <span className="bg-primary text-primary-foreground absolute -right-2 -top-2 rounded-full px-2 py-0.5 text-xs">
                 Save 20%
               </span>
             )}
@@ -82,7 +82,7 @@ export default function Component() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
         {plans.map((plan, index) => (
           <Card
             key={plan.name}
@@ -96,7 +96,7 @@ export default function Component() {
                 ) : (
                   <>
                     ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                    <span className="ml-1 text-sm font-medium text-muted-foreground">
+                    <span className="text-muted-foreground ml-1 text-sm font-medium">
                       /{isAnnual ? "year" : "month"}
                     </span>
                   </>
@@ -105,7 +105,7 @@ export default function Component() {
             </CardHeader>
             <CardContent>
               <Button
-                className="w-full mb-6"
+                className="mb-6 w-full"
                 variant={index === 1 ? "secondary" : "outline"}
               >
                 {plan.name === "Enterprise" ? "Contact us" : "Choose this plan"}
@@ -114,7 +114,7 @@ export default function Component() {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex">
                     <Check
-                      className={`h-5 w-5 shrink-0 mr-2 ${index === 1 ? "text-primary-foreground" : "text-primary"}`}
+                      className={`mr-2 h-5 w-5 shrink-0 ${index === 1 ? "text-primary-foreground" : "text-primary"}`}
                     />
                     <span
                       className={`text-sm ${index === 1 ? "text-primary-foreground/90" : "text-muted-foreground"}`}

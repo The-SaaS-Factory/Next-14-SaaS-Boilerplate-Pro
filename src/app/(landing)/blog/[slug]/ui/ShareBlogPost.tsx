@@ -15,7 +15,7 @@ const ShareBlogPost: React.FC<ShareBlogPostProps> = ({ link }) => {
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`,
       icon: (
         <svg
-          className="w-8 h-8"
+          className="h-8 w-8"
           role="img"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ const ShareBlogPost: React.FC<ShareBlogPostProps> = ({ link }) => {
       url: `https://twitter.com/intent/tweet?url=${encodedLink}`,
       icon: (
         <svg
-          className="w-8 h-8"
+          className="h-8 w-8"
           role="img"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const ShareBlogPost: React.FC<ShareBlogPostProps> = ({ link }) => {
       url: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedLink}`,
       icon: (
         <svg
-          className="w-8 h-8"
+          className="h-8 w-8"
           role="img"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ const ShareBlogPost: React.FC<ShareBlogPostProps> = ({ link }) => {
       url: `https://api.whatsapp.com/send?text=${encodedLink}`,
       icon: (
         <svg
-          className="w-8 h-8"
+          className="h-8 w-8"
           role="img"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -89,21 +89,21 @@ const ShareBlogPost: React.FC<ShareBlogPostProps> = ({ link }) => {
   ];
 
   return (
-    <div className="flex space-x-4 justify-center my-2">
+    <div className="my-2 flex justify-center space-x-4">
       {shareData.map((network) => (
         <a
           key={network.name}
           href={network.url}
           target="_blank"
           rel="noopener noreferrer"
-          className={`p-4 bg-neutral-100  rounded-full  transition-colors duration-200 ${network.color}`}
+          className={`rounded-full bg-neutral-100 p-4 transition-colors duration-200 ${network.color}`}
           aria-label={`Share on ${network.name}`}
         >
           <span className="text-lg">{network.icon}</span>
         </a>
       ))}
       <button
-        className="p-4 bg-neutral-100  rounded-full  transition-colors duration-200 hover:bg-neutral-800 hover:text-white"
+        className="rounded-full bg-neutral-100 p-4 transition-colors duration-200 hover:bg-neutral-800 hover:text-white"
         onClick={() => navigator.clipboard.writeText(link)}
         aria-label="Copy link"
       >

@@ -45,7 +45,7 @@ export const CleanFilters: React.FC = () => {
             values.map((value) => (
               <div
                 key={`${key}:${value}`}
-                className="flex items-center bg-gray-200 text-gray-800 rounded-full px-3 py-1 text-sm"
+                className="flex items-center rounded-full bg-gray-200 px-3 py-1 text-sm text-gray-800"
               >
                 <span className="mr-2">{`${key}: ${value}`}</span>
                 <button
@@ -61,7 +61,7 @@ export const CleanFilters: React.FC = () => {
           <button
             type="button"
             onClick={handleClearAll}
-            className="bg-red-500 text-white rounded-full px-3 py-1 text-sm ml-4"
+            className="ml-4 rounded-full bg-red-500 px-3 py-1 text-sm text-white"
           >
             Eliminar todos los filtros
           </button>

@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function CTAClients() {
   return (
-    <div className="relative max-w-7xl mx-auto bg-gray-900">
-      <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0   md:w-1/3 lg:w-1/2">
+    <div className="relative mx-auto max-w-7xl bg-gray-900">
+      <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:w-1/3 lg:w-1/2">
         <Image
           width={1920}
           height={1080}

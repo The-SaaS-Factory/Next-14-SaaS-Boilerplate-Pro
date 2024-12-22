@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function TermsPage() {
   return (
-    <div className="container mx-auto px-4 py-8 mt-14">
-      <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
+    <div className="container mx-auto mt-14 px-4 py-8">
+      <h1 className="mb-6 text-3xl font-bold">Terms and Conditions</h1>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
+        <h2 className="mb-4 text-2xl font-semibold">1. Acceptance of Terms</h2>
         <p className="mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui
           mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor
@@ -15,7 +15,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="mb-4 text-2xl font-semibold">
           2. Description of Service
         </h2>
         <p className="mb-4">
@@ -27,7 +27,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">3. User Accounts</h2>
+        <h2 className="mb-4 text-2xl font-semibold">3. User Accounts</h2>
         <p className="mb-4">
           Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
           lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
@@ -37,7 +37,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">4. Privacy Policy</h2>
+        <h2 className="mb-4 text-2xl font-semibold">4. Privacy Policy</h2>
         <p className="mb-4">
           Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas
           sed diam eget risus varius blandit sit amet non magna. Integer posuere
@@ -46,7 +46,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="mb-4 text-2xl font-semibold">
           5. Intellectual Property Rights
         </h2>
         <p className="mb-4">
@@ -57,7 +57,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">6. Termination</h2>
+        <h2 className="mb-4 text-2xl font-semibold">6. Termination</h2>
         <p className="mb-4">
           Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
           dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
@@ -66,7 +66,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="mb-4 text-2xl font-semibold">
           7. Limitation of Liability
         </h2>
         <p className="mb-4">
@@ -77,7 +77,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">8. Governing Law</h2>
+        <h2 className="mb-4 text-2xl font-semibold">8. Governing Law</h2>
         <p className="mb-4">
           Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor
           id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et
@@ -86,7 +86,7 @@ export default function TermsPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">9. Changes to Terms</h2>
+        <h2 className="mb-4 text-2xl font-semibold">9. Changes to Terms</h2>
         <p className="mb-4">
           Vestibulum id ligula porta felis euismod semper. Maecenas faucibus
           mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.

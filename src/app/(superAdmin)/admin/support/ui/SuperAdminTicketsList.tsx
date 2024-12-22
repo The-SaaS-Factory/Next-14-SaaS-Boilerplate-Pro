@@ -54,7 +54,7 @@ const SuperAdminTicketsList = async ({
   return (
     <div>
       {data.length === 0 ? (
-        <div className="flex justify-center items-center h-96">
+        <div className="flex h-96 items-center justify-center">
           <NotFound message="No tickets found" />
         </div>
       ) : (
@@ -80,22 +80,22 @@ const SuperAdminTicketsList = async ({
             <TableBody>
               {data?.map((item: any, index: number) => (
                 <TableRow key={`userInvoice-${index}`}>
-                  <TableCell className="text-left text">
+                  <TableCell className="text text-left">
                     {item.profile && <UserCard user={item.profile} />}
                   </TableCell>
-                  <TableCell className="text-left space-x-3  ">
+                  <TableCell className="space-x-3 text-left">
                     <span>{item.subject}</span>
                   </TableCell>
-                  <TableCell className="text-left space-x-3  ">
+                  <TableCell className="space-x-3 text-left">
                     <span className="uppercase">{item.departament}</span>
                   </TableCell>
-                  <TableCell className="text-center text">
+                  <TableCell className="text text-center">
                     {showTicketStatus(item.status)}
                   </TableCell>
-                  <TableCell className="text-center text">
+                  <TableCell className="text text-center">
                     {formatTimestampToDateString(item.createdAt)}
                   </TableCell>
-                  <TableCell className="text-center text">
+                  <TableCell className="text text-center">
                     <Link
                       href={`/admin/support/ticket/${item.id}`}
                       className="btn-main"
@@ -107,7 +107,7 @@ const SuperAdminTicketsList = async ({
               ))}
             </TableBody>
           </Table>
-          <div className="flex mt-7 justify-between">
+          <div className="mt-7 flex justify-between">
             <div className="text-primary">
               Showing <span className="font-medium">{offset + 1}</span> to{" "}
               <span className="font-medium">{offset + data.length}</span> of{" "}

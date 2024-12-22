@@ -31,23 +31,23 @@ const ClientAdminHeader = ({
   return (
     <div>
       {" "}
-      <div className="sticky top-0 z-40 lg:mx-auto ">
-        <div className="flex h-16 items-center gap-x-4 border-b text-primary border-gray-200 bg-main px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
+      <div className="sticky top-0 z-40 lg:mx-auto">
+        <div className="text-primary bg-main flex h-16 items-center gap-x-4 border-b border-gray-200 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
           <button
             type="button"
-            className="-m-2.5 p-2.5   lg:hidden"
+            className="-m-2.5 p-2.5 lg:hidden"
             onClick={toggleSidebarMenu}
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3Icon className="h-6 w-6 " aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
 
           {/* Separator */}
-          <div className="h-6 w-px bg-main lg:hidden" aria-hidden="true" />
+          <div className="bg-main h-6 w-px lg:hidden" aria-hidden="true" />
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <div className="relative p-4   flex-1">
-              <div className=" hidden lg:flex space-x-3">
+            <div className="relative flex-1 p-4">
+              <div className="hidden space-x-3 lg:flex">
                 <div></div>
               </div>
             </div>
@@ -65,9 +65,9 @@ const ClientAdminHeader = ({
 
               {/* Notification button */}
               <Link className="relative" href="/home/notifications">
-                <BellIcon className="h-6 w-6 text" aria-hidden="true" />
+                <BellIcon className="text h-6 w-6" aria-hidden="true" />
                 {notificationsCount > 0 && (
-                  <span className="bg-red-500 h-5 w-5 top-0 -mt-1 text-center -pt-7 absolute right-0  text-white rounded-full">
+                  <span className="-pt-7 absolute right-0 top-0 -mt-1 h-5 w-5 rounded-full bg-red-500 text-center text-white">
                     <p className="-mt-1 p-1">{notificationsCount}</p>
                   </span>
                 )}
@@ -75,7 +75,7 @@ const ClientAdminHeader = ({
 
               {/* Separator */}
               <div
-                className="hidden mr-3 lg:block lg:h-6 lg:w-px lg:bg-main"
+                className="lg:bg-main mr-3 hidden lg:block lg:h-6 lg:w-px"
                 aria-hidden="true"
               />
 
@@ -133,8 +133,8 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
             leaveTo="opacity-0 scale-95"
           >
             <DialogPanel className="mx-auto min-h-48 max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
-              <div className=" divide-y pt-2 flex flex-col space-y-3 divide-gray-500 divide-opacity-10 px-3  ">
-                <span className="mt-3 ">
+              <div className="flex flex-col space-y-3 divide-y divide-gray-500 divide-opacity-10 px-3 pt-2">
+                <span className="mt-3">
                   <h3 className="text-subtitle">Nombre de la nueva agencia</h3>
                 </span>
                 <hr />

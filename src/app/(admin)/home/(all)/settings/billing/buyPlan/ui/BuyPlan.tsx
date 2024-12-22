@@ -120,9 +120,9 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
         currencySelected={currencySelected}
       />
       <div className="bg-transparent">
-        <div className="flex mx-auto w-14 justify-center py-7">
+        <div className="mx-auto flex w-14 justify-center py-7">
           <Select
-            className=" w-full mx-auto    "
+            className="mx-auto w-full"
             defaultValue={currencySelected?.code ?? "usd"}
             onValueChange={(value) => {
               setCurrencySelected(
@@ -142,29 +142,27 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
         </div>
 
         <section id="Membership">
-          <div className="mx-auto flex flex-col mt-3 max-w-7xl px-6   lg:px-8">
+          <div className="mx-auto mt-3 flex max-w-7xl flex-col px-6 lg:px-8">
             <div className="mx-auto max-w-4xl sm:text-center">
               <h2 className="text-base font-semibold leading-7 text-indigo-600">
                 Prices
               </h2>
-              <p className="mt-2 mega-title">
+              <p className="mega-title mt-2">
                 Membership plans in {constants.appName}
               </p>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center"></p>
 
-            <div className="flex max-lg my-14 px-7  justify-between">
+            <div className="max-lg my-14 flex justify-between px-7">
               <div></div>
-              <div className="flex w-full  mx-auto max-w-lg   ">
+              <div className="mx-auto flex w-full max-w-lg">
                 {pricing.frequencies.length > 1 && (
-                  <div className="  w-full mx-auto   items-center">
+                  <div className="mx-auto w-full items-center">
                     <div className=" ">
                       <RadioGroup
                         value={frequency}
                         onChange={setFrequency}
-                        className={`grid grid-cols-${pricing.frequencies.length} gap-x-1 rounded-full
-                         p-1 text-center text-xs font-semibold leading-5 ring-1
-                          ring-inset ring-gray-200`}
+                        className={`grid grid-cols-${pricing.frequencies.length} gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200`}
                       >
                         <RadioGroup.Label className="sr-only">
                           Frequency
@@ -177,7 +175,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                               classNames(
                                 frequency.value === option.value
                                   ? "bg-indigo-600 text-white"
-                                  : " text",
+                                  : "text",
                                 "cursor-pointer rounded-full px-2.5 py-1",
                               )
                             }
@@ -192,8 +190,8 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                 )}
               </div>
             </div>
-            <div className="flex w-full  ">
-              <div className="grid grid-cols-1 mx-auto p-3 mt-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="flex w-full">
+              <div className="mx-auto mt-3 grid grid-cols-1 gap-4 p-3 md:grid-cols-2 lg:grid-cols-3">
                 {plans?.map((plan: PlanType) => {
                   return plan.pricing
                     ?.filter(
@@ -205,22 +203,22 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                       <div key={plan.id} className="col-span-1">
                         <div
                           key={tier.id}
-                          className="border border-gray-200 rounded-2xl p-7"
+                          className="rounded-2xl border border-gray-200 p-7"
                         >
                           <h2
                             id={tier.id}
-                            className="text-lg font-semibold leading-8 title"
+                            className="title text-lg font-semibold leading-8"
                           >
                             {plan.name}
                           </h2>
                           <div
-                            className="mt-4 magic-link  text-sm max-w-sm leading-6 subtitle"
+                            className="magic-link subtitle mt-4 max-w-sm text-sm leading-6"
                             dangerouslySetInnerHTML={{
                               __html: plan.description ?? "",
                             }}
                           ></div>
                           <p className="mt-6 flex items-baseline gap-x-1">
-                            <span className="text-4xl font-bold tracking-tight mega-title">
+                            <span className="mega-title text-4xl font-bold tracking-tight">
                               {parsePriceInLocalCurrency(
                                 handleConvertCurrency(tier.price),
                                 currencySelected.code,
@@ -232,41 +230,41 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                           </p>
                           <ul
                             role="list"
-                            className="divide-y my-3 space-y-3 divide-gray-100"
+                            className="my-3 space-y-3 divide-y divide-gray-100"
                           >
                             {plan.PlanCapabilities?.map(
                               (capa: any, index: number) => {
                                 return (
                                   <li
                                     key={`capa-${index}`}
-                                    className="items-center flex space-x-3 p-1 text"
+                                    className="text flex items-center space-x-3 p-1"
                                   >
                                     {capa.capabilitie?.type === "PERMISSION" ? (
-                                      <div className="flex space-x-3 items-center">
+                                      <div className="flex items-center space-x-3">
                                         {capa.count === 1 ? (
-                                          <button className="  mr-2">
+                                          <button className="mr-2">
                                             {" "}
-                                            <CheckBadgeIcon className="text-green-500 h-5 w-5" />{" "}
+                                            <CheckBadgeIcon className="h-5 w-5 text-green-500" />{" "}
                                           </button>
                                         ) : (
-                                          <button className=" mr-2 ">
+                                          <button className="mr-2">
                                             {" "}
                                             <XMarkIcon
-                                              className="text-red-500 h-5 w-5"
+                                              className="h-5 w-5 text-red-500"
                                               aria-hidden="true"
                                             />
                                           </button>
                                         )}{" "}
                                         <div className="flex flex-col">
                                           <span>{capa.capabilitie.name}</span>
-                                          <p className="text-sm  text">
+                                          <p className="text text-sm">
                                             {capa.capabilitie.description}
                                           </p>
                                         </div>
                                       </div>
                                     ) : (
-                                      <li className="items-center flex space-x-3 p-1 text">
-                                        <CheckBadgeIcon className="text-green-500 h-5 w-5" />{" "}
+                                      <li className="text flex items-center space-x-3 p-1">
+                                        <CheckBadgeIcon className="h-5 w-5 text-green-500" />{" "}
                                         <span>
                                           {capa.count} {capa.capabilitie.name}{" "}
                                           {capa.capabilitie.type === "LIMIT" &&
@@ -290,7 +288,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                   tier.mostPopular
                                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+                                  "mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                                 )}
                               ></button>
                             )}
@@ -308,7 +306,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                 tier.mostPopular
                                   ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                                   : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+                                "mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                               )}
                             >
                               Buy Plan
@@ -399,7 +397,7 @@ export function SelectPaymentMethod({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel
-                className="relative transform   overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
                 style={{ width: "100%" }}
               >
                 {session ? (
@@ -408,23 +406,23 @@ export function SelectPaymentMethod({
                       <div className="mt-3 text-center sm:mt-5">
                         <Dialog.Title
                           as="h3"
-                          className="text-base font-semibold leading-6 text"
+                          className="text text-base font-semibold leading-6"
                         >
                           Select {currencySelected.name}
                         </Dialog.Title>
                       </div>
                     </div>
-                    <div className="flex flex-col mt-14 space-y-3">
-                      <div className="flex flex-col space-y-3 my-7">
+                    <div className="mt-14 flex flex-col space-y-3">
+                      <div className="my-7 flex flex-col space-y-3">
                         {paymentMethosAvailables.map((paymentMethod) => {
                           return (
                             <div
-                              className="flex space-x-3 items-center"
+                              className="flex items-center space-x-3"
                               key={paymentMethod.id}
                             >
                               <button
                                 type="button"
-                                className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  "
+                                className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() => {
                                   handleSelectPaymentMethod(paymentMethod);
                                 }}
@@ -435,7 +433,7 @@ export function SelectPaymentMethod({
                                     width={100}
                                     height={30}
                                     src={paymentMethod.image}
-                                    className=" ml-3 h-5  w-auto"
+                                    className="ml-3 h-5 w-auto"
                                     alt="Stripe"
                                   />
                                 )}
@@ -448,7 +446,7 @@ export function SelectPaymentMethod({
                       <br />
                       <button
                         type="button"
-                        className="mt-7 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-primary shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+                        className="text-primary mt-7 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
                         onClick={() => setOpen()}
                         ref={cancelButtonRef}
                       >
@@ -457,8 +455,8 @@ export function SelectPaymentMethod({
                     </div>
                   </>
                 ) : (
-                  <div className="flex flex-col  space-y-7">
-                    <h2 className="title text-center pt-7">Necesitas login</h2>
+                  <div className="flex flex-col space-y-7">
+                    <h2 className="title pt-7 text-center">Necesitas login</h2>
                     <Link href={"/home"} className="btn-main mx-auto">
                       Acceder
                     </Link>

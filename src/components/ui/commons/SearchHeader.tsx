@@ -77,7 +77,7 @@ export default function SearchHeader({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 backdrop-blur-sm bg-white/30 bg-opacity-25 transition-opacity" />
+          <div className="fixed inset-0 bg-white/30 bg-opacity-25 backdrop-blur-sm transition-opacity" />
         </TransitionChild>
 
         <div className="fixed inset-0 z-10 w-screen overflow-hidden p-4 sm:p-6 md:p-20">
@@ -89,17 +89,14 @@ export default function SearchHeader({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="mx-auto bg-main max-w-xl transform divide-y divide-gray-100 dark:divide-gray-700/40 overflow-hidden rounded-xl  shadow-2xl transition-all">
+            <DialogPanel className="bg-main mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl shadow-2xl transition-all dark:divide-gray-700/40">
               <div className="group relative flex h-12">
-                <SearchIcon
-                  className="pointer-events-none
-                 absolute left-3 top-0 h-full w-5 stroke-zinc-500"
-                />
+                <SearchIcon className="pointer-events-none absolute left-3 top-0 h-full w-5 stroke-zinc-500" />
                 <input
                   ref={inputRef}
                   data-autofocus
                   className={clsx(
-                    "flex-auto appearance-none bg-main pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
+                    "bg-main flex-auto appearance-none pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
                     "pr-4",
                   )}
                   value={query}
@@ -113,7 +110,7 @@ export default function SearchHeader({
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-2 h-fit overflow-y-auto">
+              <div className="flex h-fit flex-col gap-2 overflow-y-auto">
                 {query !== "" &&
                   allItems
                     .filter((item) =>
@@ -126,7 +123,7 @@ export default function SearchHeader({
                           setOpen(false);
                           setQuery("");
                         }}
-                        className="flex  bg-main flex-col gap-0.5 dark:text-white p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50/10 dark:bg-gray-100/10  "
+                        className="bg-main flex flex-col gap-0.5 border-b border-gray-200 p-4 hover:bg-gray-50/10 dark:border-gray-700 dark:bg-gray-100/10 dark:text-white"
                         key={`search-${item.href}`}
                         href={item.href}
                       >

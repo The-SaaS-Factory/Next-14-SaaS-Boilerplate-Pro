@@ -82,20 +82,20 @@ const ActivitiesList = ({ data }: { data: any }) => {
           </div>
         }
       >
-        <div className="flex flex-col text-primary">
+        <div className="text-primary flex flex-col">
           <div className="divide-gray-200">
-            <div className="pt-3 flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4 pt-3">
               <div className="flex items-center gap-2">
                 <span className="text-primary">Search</span>
-                <span className="ml-auto lg:block hidden text-2xs font-medium">
+                <span className="text-2xs ml-auto hidden font-medium lg:block">
                   Filters
                 </span>
               </div>
 
-              <div className="flex gap-2 items-center md:items-end md:flex-row flex-col justify-center md:justify-end py-4">
+              <div className="flex flex-col items-center justify-center gap-2 py-4 md:flex-row md:items-end md:justify-end">
                 {/* Date Range Filter */}
-                <div className="flex flex-col lg:flex-row gap-4 items-center">
-                  <div className="w-full lg:w-1/2 flex md:flex-row flex-col gap-2">
+                <div className="flex flex-col items-center gap-4 lg:flex-row">
+                  <div className="flex w-full flex-col gap-2 md:flex-row lg:w-1/2">
                     <label
                       htmlFor="start-date"
                       className="block text-sm font-medium text-gray-700"
@@ -105,7 +105,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                     <input
                       type="date"
                       id="start-date"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       onChange={(e) => {
                         setStartDate(e.target.value);
                         handleSearchParams("startDate", [
@@ -119,7 +119,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       }
                     />
                   </div>
-                  <div className="w-full lg:w-1/2 flex md:flex-row flex-col gap-2">
+                  <div className="flex w-full flex-col gap-2 md:flex-row lg:w-1/2">
                     <label
                       htmlFor="end-date"
                       className="block text-sm font-medium text-gray-700"
@@ -129,7 +129,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                     <input
                       type="date"
                       id="end-date"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       onChange={(e) => {
                         setEndDate(e.target.value);
                         handleSearchParams("endDate", [
@@ -167,10 +167,10 @@ const ActivitiesList = ({ data }: { data: any }) => {
                             handleSearchParams("profile", [item.id]);
                           }
                         }}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-primary dark:focus:text-gray-100 dark:text-white"
+                        className="focus:text-primary flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:text-white dark:focus:bg-gray-100/10 dark:focus:text-gray-100"
                       >
                         <div
-                          className={`py-1 px-0.5 h-4 w-1 bg-indigo-600 rounded-xl transition-all ${
+                          className={`h-4 w-1 rounded-xl bg-indigo-600 px-0.5 py-1 transition-all ${
                             getSelectedAgencies()?.includes(item.id)
                               ? "opacity-100"
                               : "opacity-0"
@@ -195,10 +195,10 @@ const ActivitiesList = ({ data }: { data: any }) => {
                       <button
                         type="button"
                         onClick={() => handleSearchParams("action", [key])}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:focus:bg-gray-100/10 focus:text-primary dark:focus:text-gray-100 dark:text-white"
+                        className="focus:text-primary flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 dark:text-white dark:focus:bg-gray-100/10 dark:focus:text-gray-100"
                       >
                         <div
-                          className={`py-1 px-0.5 h-4 w-1 bg-indigo-600 rounded-xl transition-all ${
+                          className={`h-4 w-1 rounded-xl bg-indigo-600 px-0.5 py-1 transition-all ${
                             searchParams.get("action") === key
                               ? "opacity-100"
                               : "opacity-0"
@@ -233,7 +233,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                 <TableBody>
                   {data?.map((log, index: number) => (
                     <TableRow key={`log-${log.id + index}`}>
-                      <TableCell className="text-start flex flex-col">
+                      <TableCell className="flex flex-col text-start">
                         <span>{log.profile?.name || "Desconocido"}</span>
                         <span className="text-sm text-neutral-400">
                           {log.profile?.email || "Desconocido"}
@@ -252,7 +252,7 @@ const ActivitiesList = ({ data }: { data: any }) => {
                         </span>
                       </TableCell>
 
-                      <TableCell className="text-center flex items-center justify-center">
+                      <TableCell className="flex items-center justify-center text-center">
                         <CustomDialog
                           dialogTitle="Changes registered"
                           icon={

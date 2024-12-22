@@ -10,10 +10,10 @@ export default async function Blog() {
   return (
     <div className="mt-14">
       <div className="min-h-screen bg-white">
-        <div className="relative bg-blue-600 text-white px-4 py-16 md:py-24">
+        <div className="relative bg-blue-600 px-4 py-16 text-white md:py-24">
           <div className="absolute inset-0 overflow-hidden">
             <svg
-              className="absolute right-0 top-0 translate-x-1/2 -translate-y-1/4 transform text-blue-500/20"
+              className="absolute right-0 top-0 -translate-y-1/4 translate-x-1/2 transform text-blue-500/20"
               width="800"
               height="800"
               fill="none"
@@ -22,7 +22,7 @@ export default async function Blog() {
               <circle cx="400" cy="400" r="400" fill="currentColor" />
             </svg>
             <svg
-              className="absolute left-0 bottom-0 -translate-x-1/2 translate-y-1/4 transform text-blue-500/20"
+              className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/4 transform text-blue-500/20"
               width="800"
               height="800"
               fill="none"
@@ -54,7 +54,7 @@ export default async function Blog() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-muted-foreground text-sm">
                       {post.date}
                     </div>
                     <h2 className="text-2xl font-bold">{post.title}</h2>

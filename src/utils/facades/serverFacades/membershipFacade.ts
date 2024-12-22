@@ -259,6 +259,10 @@ export const checkOrganizationCapabilityInServer = ({
   capabilityName,
   organizationCapabilities,
   subscription,
+}: {
+  capabilityName: string;
+  organizationCapabilities?: any; //Fix Type
+  subscription?: any; //Fix Type
 }) => {
   if (!subscription) return false;
   if (!organizationCapabilities) return false;

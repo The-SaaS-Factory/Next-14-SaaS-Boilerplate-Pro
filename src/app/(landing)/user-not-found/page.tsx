@@ -24,16 +24,11 @@ export default function Welcome() {
   }
 
   return (
-    <div className="bg-black  isolate pt-14">
-      <div className="py-24 sm:py-32  ">
+    <div className="isolate bg-black pt-14">
+      <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1
-              className="text-4xl font-bold tracking-tight
-                         sm:text-6xl bg-clip-text
-            text-transparent bg-gradient-to-r
-             from-pink-50 via-greeen-200 to-sky-300"
-            >
+            <h1 className="via-greeen-200 bg-gradient-to-r from-pink-50 to-sky-300 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl">
               Tenemos una nueva actualización!
             </h1>
             <br />

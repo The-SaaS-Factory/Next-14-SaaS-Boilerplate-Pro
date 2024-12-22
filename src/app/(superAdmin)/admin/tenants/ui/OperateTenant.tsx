@@ -11,7 +11,7 @@ function OperateTenant({ tenantId }: { tenantId: number }) {
     <div>
       {constants.demoMode ? (
         <Button disabled variant="secondary">
-          <Trash2 className="w-6 h-6" />
+          <Trash2 className="h-6 w-6" />
           <span>Delete</span>
         </Button>
       ) : (

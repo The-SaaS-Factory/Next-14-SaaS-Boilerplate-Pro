@@ -34,8 +34,8 @@ const AddMessageToSupportTicket = ({ ticket }: { ticket: ISupportTicket }) => {
 
   return (
     <div>
-      <Card className="mt-7 w-full  flex">
-        <div className="flex flex-col w-full lg:w-1/2 mx-auto">
+      <Card className="mt-7 flex w-full">
+        <div className="mx-auto flex w-full flex-col lg:w-1/2">
           <h2 className="text-subtitle">{"Add message"}</h2>
           <NewForm
             fields={fields}

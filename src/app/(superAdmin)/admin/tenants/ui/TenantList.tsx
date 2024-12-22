@@ -28,7 +28,7 @@ const TenantList = async ({
   return (
     <div>
       {data.length === 0 ? (
-        <div className="flex justify-center items-center h-96">
+        <div className="flex h-96 items-center justify-center">
           <NotFound message="No tenants found" />
         </div>
       ) : (
@@ -36,31 +36,31 @@ const TenantList = async ({
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <table className="min-w-full  divide-y divide-gray-300 text-primary">
+                <table className="text-primary min-w-full divide-y divide-gray-300">
                   <thead>
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold   sm:pl-0"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0"
                       >
                         Name
                       </th>
 
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold  "
+                        className="px-3 py-3.5 text-left text-sm font-semibold"
                       >
                         Subscription Plan
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold  "
+                        className="px-3 py-3.5 text-left text-sm font-semibold"
                       >
                         Registration Date
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold  "
+                        className="px-3 py-3.5 text-left text-sm font-semibold"
                       >
                         Members
                       </th>
@@ -72,13 +72,13 @@ const TenantList = async ({
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y    divide-gray-200 bg-main text-primary">
+                  <tbody className="bg-main text-primary divide-y divide-gray-200">
                     {data?.map((tenant: IOrganization) => (
                       <tr key={tenant.id}>
                         <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                           <UserCard user={tenant} />
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
+                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
                           {tenant.subscription ? (
                             <div className=" ">
                               {tenant.subscription.plan.name ?? "-"} / until{" "}
@@ -90,11 +90,11 @@ const TenantList = async ({
                             <div className=" ">No subscription</div>
                           )}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
+                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
                           {formatTimestampToDateString(tenant.createdAt)}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm  text">
-                          <div className="mt-1  text-primary flex flex-col">
+                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
+                          <div className="text-primary mt-1 flex flex-col">
                             {tenant.userMemberships?.length}
                           </div>
                         </td>
@@ -109,7 +109,7 @@ const TenantList = async ({
               </div>
             </div>
           </div>
-          <div className="flex mt-7 justify-between">
+          <div className="mt-7 flex justify-between">
             <div className="text-primary">
               Showing <span className="font-medium">{offset + 1}</span> to{" "}
               <span className="font-medium">{offset + data?.length}</span> of{" "}

@@ -37,22 +37,22 @@ const PageName = ({
 }: PageNameProps) => {
   return (
     <>
-      <div className="  z-50   pb-5 sm:flex sm:items-center sm:justify-between">
-        <div className="flex flex-col space-y-1 w-full">
-          <nav className="-ml-3  sm:flex" aria-label="Breadcrumb">
+      <div className="z-50 pb-5 sm:flex sm:items-center sm:justify-between">
+        <div className="flex w-full flex-col space-y-1">
+          <nav className="-ml-3 sm:flex" aria-label="Breadcrumb">
             <ol role="list" className="flex items-center space-x-3">
               {breadcrumbs?.map((item, index) => (
                 <li key={index}>
                   <div className="flex items-center">
                     {index > 0 && (
                       <ChevronRightIcon
-                        className="h-5 w-5 flex-shrink-0 text-primary"
+                        className="text-primary h-5 w-5 flex-shrink-0"
                         aria-hidden="true"
                       />
                     )}
                     <Link
                       href={item.href}
-                      className="ml-4 lg:hidden text-sm truncate text-primary"
+                      className="text-primary ml-4 truncate text-sm lg:hidden"
                     >
                       {item.name.length > 14
                         ? item.name.substring(0, 14) + "..."
@@ -60,7 +60,7 @@ const PageName = ({
                     </Link>
                     <Link
                       href={item.href}
-                      className="ml-4 hidden lg:flex text-sm truncate text-primary"
+                      className="text-primary ml-4 hidden truncate text-sm lg:flex"
                     >
                       {item.name}
                     </Link>
@@ -69,10 +69,10 @@ const PageName = ({
               ))}
             </ol>
           </nav>
-          <h3 className="text-subtitle  mt-8">{name}</h3>
+          <h3 className="text-subtitle mt-8">{name}</h3>
           <p>{description}</p>
         </div>
-        <div className="mt-3 space-x-3 flex sm:ml-4 w-full justify-end items-end sm:mt-0">
+        <div className="mt-3 flex w-full items-end justify-end space-x-3 sm:ml-4 sm:mt-0">
           {children ? (
             children
           ) : (

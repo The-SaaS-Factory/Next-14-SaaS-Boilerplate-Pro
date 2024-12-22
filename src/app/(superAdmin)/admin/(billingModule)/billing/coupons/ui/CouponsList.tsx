@@ -46,7 +46,7 @@ const CouponsList = async ({
     <div>
       <Suspense fallback={<PageLoader />}>
         {data.length === 0 ? (
-          <div className="flex justify-center items-center h-96">
+          <div className="flex h-96 items-center justify-center">
             <NotFound message="No coupons found" />
           </div>
         ) : (
@@ -87,7 +87,7 @@ const CouponsList = async ({
               <TableBody>
                 {data?.map((item: any, index: number) => (
                   <TableRow key={`userS-${item.id + index}`}>
-                    <TableCell className="text-center flex flex-col items-center">
+                    <TableCell className="flex flex-col items-center text-center">
                       <span className="font-bold">{item.name}</span>
                       <span className="text-primary">
                         Coupon Code for internal invoices: <b> {item.code}</b>
@@ -104,17 +104,17 @@ const CouponsList = async ({
                         </b>
                       </span>
                     </TableCell>
-                    <TableCell className="text-center items-center">
+                    <TableCell className="items-center text-center">
                       <span>
                         {item.user?.name || "Global use"} - ({item.user?.id})
                       </span>
                     </TableCell>
-                    <TableCell className="text-center items-center">
+                    <TableCell className="items-center text-center">
                       <span className={getBadgeClass(item.status)}>
                         {getStatusName(item.status)}
                       </span>
                     </TableCell>
-                    <TableCell className="text-center items-center">
+                    <TableCell className="items-center text-center">
                       <ConnectCouponWithStripe
                         coupon={item}
                         currencies={currencies}
@@ -122,18 +122,18 @@ const CouponsList = async ({
                         settings={item.settings}
                       />
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       <Badge color={"sky"}>{item.amountOff} off</Badge>
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       <Badge color={"sky"}>{item.percentOff} % off</Badge>
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       <Badge color={"blue"}>
                         {item.durationInMonths} / {item.maxRedemptions}{" "}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-center text">
+                    <TableCell className="text text-center">
                       <Badge color={"blue"}>
                         <div>
                           {item.invoices?.length} / {item.maxRedemptions}
@@ -147,21 +147,21 @@ const CouponsList = async ({
                             key={`invoice-${invoice.id}`}
                             href={`/admin/billing/invoices/${invoice.id}`}
                           >
-                            <li className="flex space-x-1 gap-1">
+                            <li className="flex gap-1 space-x-1">
                               {invoice.id}
-                              <EyeIcon className="w-5 h-5  " />
+                              <EyeIcon className="h-5 w-5" />
                             </li>
                           </Link>
                         ))}
                       </ul>
                     </TableCell>
 
-                    <TableCell className="w-14   ">
+                    <TableCell className="w-14">
                       <Link
                         href={`/admin/billing/coupons/edit/${item.id}`}
-                        className="btn-icon  "
+                        className="btn-icon"
                       >
-                        <PencilSquareIcon className="w-5 h-5  " />
+                        <PencilSquareIcon className="h-5 w-5" />
                         <span>Edit</span>
                       </Link>
                     </TableCell>
@@ -169,7 +169,7 @@ const CouponsList = async ({
                 ))}
               </TableBody>
             </Table>
-            <div className="flex mt-7 justify-between">
+            <div className="mt-7 flex justify-between">
               <Pagination
                 offset={offset}
                 dataLength={data.length}

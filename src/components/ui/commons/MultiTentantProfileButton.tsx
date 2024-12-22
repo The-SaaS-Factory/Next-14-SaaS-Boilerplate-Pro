@@ -12,7 +12,7 @@ import { updateUserProfileActive } from "@/actions/admin/userModule/update-profi
 import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
 import { ChevronDownIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
-import { NewProfileModal } from "../TenantAdminHeader";
+import { NewProfileModal } from "../../layouts/TenantAdminHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { constants } from "@/lib/constants";
@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut, SettingsIcon, User } from "lucide-react";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
-import { Badge } from "@/app/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 export const MultiTentantProfileButton = ({
   organization,
   userMembership,
@@ -58,9 +58,9 @@ export const MultiTentantProfileButton = ({
             src={organization?.avatar ?? "/assets/img/avatar.png"}
             alt=""
           />
-          <span className="hidden lg:flex space-x-1 relative lg:items-center">
+          <span className="relative hidden space-x-1 lg:flex lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text-primary "
+              className="text-primary ml-4 text-sm font-semibold leading-6"
               aria-hidden="true"
             >
               {organization?.name}
@@ -82,17 +82,17 @@ export const MultiTentantProfileButton = ({
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <MenuItems className="absolute  right-0 z-10 mt-2.5 w-64 origin-top-right rounded-md bg-main py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none ">
-            <div className="flex flex-col px-3 space-y-2">
+          <MenuItems className="bg-main absolute right-0 z-10 mt-2.5 w-64 origin-top-right rounded-md py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+            <div className="flex flex-col space-y-2 px-3">
               {isOrganizationAdmin(userMembership) && (
                 <>
                   <MenuItem>
                     {() => (
-                      <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                        <UsersIcon className="w-6 h-6  text" />
+                      <div className="bg-main-hover flex w-full justify-start px-2 py-2">
+                        <UsersIcon className="text h-6 w-6" />
                         <Link
                           href={"/home/settings/organization/members"}
-                          className={classNames("block px-3  leading-6 text")}
+                          className={classNames("text block px-3 leading-6")}
                         >
                           Members
                         </Link>
@@ -101,11 +101,11 @@ export const MultiTentantProfileButton = ({
                   </MenuItem>
                   <MenuItem>
                     {() => (
-                      <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                        <SettingsIcon className="w-6 h-6  text" />
+                      <div className="bg-main-hover flex w-full justify-start px-2 py-2">
+                        <SettingsIcon className="text h-6 w-6" />
                         <Link
                           href={"/home/settings/organization/settings"}
-                          className={classNames("block px-3  leading-6 text")}
+                          className={classNames("text block px-3 leading-6")}
                         >
                           {constants.tanantModelName} settings
                         </Link>
@@ -116,8 +116,8 @@ export const MultiTentantProfileButton = ({
                     <Button variant="secondary" className="w-full">
                       Upgrade
                       <span className="relative ml-3 flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                        <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
                       </span>
                     </Button>
                   </Link>
@@ -126,11 +126,11 @@ export const MultiTentantProfileButton = ({
               )}
               <MenuItem>
                 {() => (
-                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                    <User className="w-6 h-6  text" />
+                  <div className="bg-main-hover flex w-full justify-start px-2 py-2">
+                    <User className="text h-6 w-6" />
                     <Link
                       href={"/home/settings/profile"}
-                      className={classNames("block px-3  leading-6 text")}
+                      className={classNames("text block px-3 leading-6")}
                     >
                       Account settings
                     </Link>
@@ -139,11 +139,11 @@ export const MultiTentantProfileButton = ({
               </MenuItem>
               <MenuItem>
                 {() => (
-                  <div className="flex px-2  bg-main-hover  w-full py-2 justify-start">
-                    <LogOut className="w-6 h-6  text" />
+                  <div className="bg-main-hover flex w-full justify-start px-2 py-2">
+                    <LogOut className="text h-6 w-6" />
                     <button
                       className={classNames(
-                        " bg-main-hover px-3   leading-6 text-primary text-left w-full",
+                        "bg-main-hover text-primary w-full px-3 text-left leading-6",
                       )}
                       onClick={() => signOut()}
                     >
@@ -163,7 +163,7 @@ export const MultiTentantProfileButton = ({
                   <MenuItem key={org.id}>
                     <button
                       onClick={() => handleChangeProfile(org.id)}
-                      className="flex hover:bg-main-hover hover:scale-100 p-3 items-center space-x-3"
+                      className="hover:bg-main-hover flex items-center space-x-3 p-3 hover:scale-100"
                     >
                       <Image
                         width={32}
@@ -182,7 +182,7 @@ export const MultiTentantProfileButton = ({
               <div className="p-3">
                 <Button
                   onClick={() => setOpenNewProfile(true)}
-                  className=" w-full"
+                  className="w-full"
                 >
                   New {constants.tanantModelName}
                 </Button>

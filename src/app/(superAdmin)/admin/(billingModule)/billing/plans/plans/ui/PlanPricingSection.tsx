@@ -21,22 +21,22 @@ const PlanPricingSection = async ({
     <div className="space-y-12">
       <div className="w-full">
         <div className="space-y-12">
-          <div className={`grid grid-cols-1 gap-x-8  md:grid-cols-3`}>
-            <div className="lg:col-span-1 p-7">
+          <div className={`grid grid-cols-1 gap-x-8 md:grid-cols-3`}>
+            <div className="p-7 lg:col-span-1">
               <h2 className="text-subtitle">Plan pricings</h2>
-              <p className="mt-3 text-sm leading-6 text-primary">
+              <p className="text-primary mt-3 text-sm leading-6">
                 Manage pricings of this Plan
               </p>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col w-full max-w-md pt-7">
+            <div className="flex w-full max-w-md flex-col pt-7 lg:col-span-2">
               <div className="flex justify-between">
                 <Link
                   className="ml-4"
                   href={`/admin/billing/plans/plans/edit/${plan.id}/addPricing`}
                 >
                   <Button>
-                    <PlusCircleIcon className="w-6 h-6" />
+                    <PlusCircleIcon className="h-6 w-6" />
                     Add Pricing
                   </Button>
                 </Link>
@@ -45,17 +45,17 @@ const PlanPricingSection = async ({
                 {pricings?.map((pricing: IPricing, index: number) => (
                   <div
                     key={`currency-${index}`}
-                    className="flex flex-col space-y-3   bg-main rounded-md shadow-md p-4 mt-4"
+                    className="bg-main mt-4 flex flex-col space-y-3 rounded-md p-4 shadow-md"
                   >
                     <div className="flex w-full justify-between">
-                      <span className="text-lg text-primary">
+                      <span className="text-primary text-lg">
                         ${pricing.price.toFixed(2)} (ID: {pricing.id})
                       </span>
                       <div className="flex flex-col">
-                        <span className="text-sm text-primary">
+                        <span className="text-primary text-sm">
                           Frequency: {pricing.frequency}
                         </span>
-                        <span className="text-sm text-primary">
+                        <span className="text-primary text-sm">
                           Estado: {pricing.status}
                         </span>
                       </div>
@@ -64,7 +64,7 @@ const PlanPricingSection = async ({
                           href={`/admin/billing/plans/plans/edit/${plan.id}/editPricing/${pricing.id}`}
                         >
                           <button className="btn-icon">
-                            <PencilIcon className="w-6 h-6" />
+                            <PencilIcon className="h-6 w-6" />
                           </button>
                         </Link>
 
@@ -86,7 +86,7 @@ const PlanPricingSection = async ({
                         stripeProductId={plan.stripeProductId}
                       />
                     ) : (
-                      <div className="flex flex-col bg-main rounded-md items-center p-7">
+                      <div className="bg-main flex flex-col items-center rounded-md p-7">
                         <span className="text-primary">
                           Please connect the plan with stripe first
                         </span>

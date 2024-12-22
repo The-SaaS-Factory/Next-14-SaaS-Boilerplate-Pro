@@ -37,7 +37,7 @@ const MembershipActivateBanner = ({
             <p className="title">
               <span>
                 Congratulations
-                <strong className="font-semibold pr-1">
+                <strong className="pr-1 font-semibold">
                   {" "}
                   {membershipName}
                 </strong>

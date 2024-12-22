@@ -32,10 +32,10 @@ export default async function PostPage({ params }) {
 
   const article = data;
   return (
-    <article className="prose mt-14 mx-auto container px-4 py-8 max-w-3xl">
+    <article className="prose container mx-auto mt-14 max-w-3xl px-4 py-8">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-        <div className="flex items-center text-muted-foreground mb-4">
+        <h1 className="mb-4 text-4xl font-bold">{article.title}</h1>
+        <div className="text-muted-foreground mb-4 flex items-center">
           <CalendarIcon className="mr-2 h-4 w-4" />
           <time dateTime={new Date(article.date).toISOString()}>
             {article.date}

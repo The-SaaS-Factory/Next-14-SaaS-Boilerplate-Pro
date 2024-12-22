@@ -13,13 +13,16 @@ import {
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import React, { Suspense, useState } from "react";
-import SearchHeader, { SearchIcon } from "./commons/SearchHeader";
+import SearchHeader, { SearchIcon } from "../ui/commons/SearchHeader";
 import { constants } from "@/lib/constants";
-import { MultiTentantProfileButton } from "./commons/MultiTentantProfileButton";
+import { MultiTentantProfileButton } from "../ui/commons/MultiTentantProfileButton";
 import { IOrganization, IUserMembership } from "@/interfaces/saasTypes";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSidebar } from "../ui/sidebar";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Input } from "../ui/input";
 
 const TenantAdminHeader = ({
   notificationsCount,
@@ -30,14 +33,10 @@ const TenantAdminHeader = ({
   organization: IOrganization;
   userMembership: IUserMembership;
 }) => {
-  const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
-    toggleSidebarMenu,
-  }));
-
   const [open, setOpen] = useState(false);
   const { darkThemeSelector } = useDarkTheme();
   const [openNewPorfile, setOpenNewProfile] = useState(false);
-
+  const { toggleSidebar } = useSidebar();
   const isSuperAdmin =
     organization.permissions
       .map((p) => p.name)
@@ -48,33 +47,20 @@ const TenantAdminHeader = ({
 
   return (
     <>
-      <div className=" relative    w-full flex    z-50   ">
-        <div
-          className="lg:fixed mt-3 lg:mt-0 w-full lg:w-auto lg:left-[20%] 2xl:left-[14.4%] right-0 top-0  h-14     backdrop-blur-3xl  
-           bg-opacity-25 transition-opacity 
-         items-center gap-x-4 border-b text-primary
-          border-gray-300 bg-transparent  dark:border-gray-600 px-4 
-          shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
-        >
-          <Button
-            variant="outline"
-            className="  first-line:  lg:hidden"
-            onClick={toggleSidebarMenu}
-            size="icon"
-          >
-            <span className="sr-only">Open sidebar</span>
-            <Bars3Icon className="h-7 w-7 " aria-hidden="true" />
+      <div className="relative z-50 flex w-full">
+        <div className="text-primary flex h-14 w-full items-center gap-x-4 border-b border-gray-300 bg-red-500 bg-transparent bg-opacity-25 px-4 shadow-sm backdrop-blur-3xl transition-opacity dark:border-gray-600 sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
+          <Button variant="ghost" className="mx-1" onClick={toggleSidebar}>
+            <HamburgerMenuIcon className="text-primary h-6 w-6" />
           </Button>
-
-          <div className="flex pt-3 lg:pt-0 flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <div className="relative p-3 pl-7 flex-1">
-              <div className=" hidden lg:flex space-x-3">
+          <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+            <div className="relative flex-1 p-3 pl-7">
+              <div className="hidden space-x-3 lg:flex">
                 <div>
                   <div className="hidden lg:block lg:w-[450px] lg:flex-auto">
                     <button
                       onClick={() => setOpen(true)}
                       type="button"
-                      className="hidden h-8 w-full items-center  justify-between gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 ui-not-focus-visible:outline-none lg:flex dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
+                      className="hidden h-8 w-full items-center justify-between gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 ui-not-focus-visible:outline-none dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex"
                     >
                       <div className="flex items-center space-x-2">
                         <SearchIcon className="h-5 w-5 stroke-current" />
@@ -84,7 +70,7 @@ const TenantAdminHeader = ({
                           Search page or funcionality
                         </span>
                       </div>
-                      <kbd className="ml-32 justify-end text-2xs text-zinc-400 dark:text-zinc-500">
+                      <kbd className="text-2xs ml-32 justify-end text-zinc-400 dark:text-zinc-500">
                         <kbd className="font-sans">Ctrl </kbd>
                         <kbd className="font-sans">K</kbd>
                       </kbd>
@@ -96,7 +82,7 @@ const TenantAdminHeader = ({
                 </div>
               </div>
             </div>
-            <div className="flex -mt-[85px] lg:mt-0 items-center gap-x-4 lg:gap-x-6">
+            <div className="flex items-center gap-x-4 lg:mt-0 lg:gap-x-6">
               {isSuperAdmin && (
                 <Link href="/admin" className="btn-main">
                   Super Admin Access
@@ -104,7 +90,7 @@ const TenantAdminHeader = ({
               )}
               <Link
                 href="/home/help"
-                className="hidden lg:flex items-center gap-x-2 text-primary"
+                className="text-primary hidden items-center gap-x-2 lg:flex"
               >
                 Help
               </Link>
@@ -122,7 +108,7 @@ const TenantAdminHeader = ({
                   <Bell className="h-4 w-4" />
                 </Button>
                 {notificationsCount > 0 && (
-                  <span className=" h-5 w-5 top-0 -mt-1 text-center -pt-7 shadow-md shadow-red-500 absolute right-0 bg-red-500 text-white rounded-full">
+                  <span className="-pt-7 absolute right-0 top-0 -mt-1 h-5 w-5 rounded-full bg-red-500 text-center text-white shadow-md shadow-red-500">
                     <p className="-mt-1 p-1">{notificationsCount}</p>
                   </span>
                 )}
@@ -176,7 +162,7 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-neutral-800/30 backdrop-blur-sm   transition-opacity" />
+          <div className="fixed inset-0 bg-neutral-800/30 backdrop-blur-sm transition-opacity" />
         </TransitionChild>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
@@ -188,15 +174,15 @@ export const NewProfileModal = ({ open, setOpen }: any) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="mx-auto min-h-48 max-w-lg transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
-              <div className=" divide-y pt-2 flex flex-col space-y-3 divide-gray-500 divide-opacity-10 px-3  ">
-                <span className="mt-3 ">
+            <DialogPanel className="bg-main mx-auto min-h-48 max-w-lg transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
+              <div className="flex flex-col space-y-3 divide-y divide-gray-500 divide-opacity-10 px-3 pt-2">
+                <span className="mt-3">
                   <h3 className="text-subtitle">
                     New {constants.tanantModelName} name
                   </h3>
                 </span>
                 <hr />
-                <input
+                <Input
                   type="text"
                   onChange={(e) => setProfileName(e.target.value)}
                   className="input-text"

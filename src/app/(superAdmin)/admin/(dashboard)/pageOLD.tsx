@@ -63,8 +63,8 @@ const chartConfig = {
 
 export default function SuperAdminDashboard() {
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Dashboard Super Admin</h1>
+    <div className="min-h-screen bg-gray-100 p-8">
+      <h1 className="mb-6 text-3xl font-bold">Dashboard Super Admin</h1>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -72,11 +72,11 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Perfiles de agencias
             </CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
+            <Eye className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">13,429</div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +20.1% desde el mes pasado
             </p>
           </CardContent>
@@ -86,11 +86,11 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Perfiles de talentos
             </CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
+            <Eye className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">548,429</div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +230.1% desde el mes pasado
             </p>
           </CardContent>
@@ -100,11 +100,11 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Castings Publicados
             </CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <FileText className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">24</div>
-            <p className="text-xs text-muted-foreground">+2 este mes</p>
+            <p className="text-muted-foreground text-xs">+2 este mes</p>
           </CardContent>
         </Card>
 
@@ -113,16 +113,16 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Solicitudes enviadas
             </CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">343K</div>
-            <p className="text-xs text-muted-foreground">+586 desde ayer</p>
+            <p className="text-muted-foreground text-xs">+586 desde ayer</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 mt-4">
+      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>
@@ -177,7 +177,7 @@ export default function SuperAdminDashboard() {
                   Solicitudes Recibidas
                   <TrendingUp className="h-4 w-4" />
                 </div>
-                <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                <div className="text-muted-foreground flex items-center gap-2 leading-none">
                   Solicitudes Aceptadas
                 </div>
               </div>
@@ -255,13 +255,13 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Casting Más Popular
             </CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
+            <Star className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               Protagonista en Serie de TV
             </div>
-            <p className="text-xs text-muted-foreground">246 aplicaciones</p>
+            <p className="text-muted-foreground text-xs">246 aplicaciones</p>
           </CardContent>
         </Card>
         <Card>
@@ -269,11 +269,11 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Tasa de Selección
             </CardTitle>
-            <UserCheck className="h-4 w-4 text-muted-foreground" />
+            <UserCheck className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">8.3%</div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               +0.5% desde el último casting
             </p>
           </CardContent>
@@ -283,13 +283,13 @@ export default function SuperAdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Próximo Casting
             </CardTitle>
-            <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+            <ArrowUpRight className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               Modelo para Desfile de Moda
             </div>
-            <p className="text-xs text-muted-foreground">En 3 días</p>
+            <p className="text-muted-foreground text-xs">En 3 días</p>
           </CardContent>
         </Card>
       </div>

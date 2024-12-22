@@ -35,12 +35,12 @@ const UpsertPlanCapabilities = ({
     <div>
       {planOnEdit && (
         <div>
-          <div className="w-full ">
+          <div className="w-full">
             <div className="space-y-12">
               <div
-                className={`grid   grid-cols-3 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12`}
+                className={`grid grid-cols-3 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12`}
               >
-                <div className="lg:col-span-1 p-7">
+                <div className="p-7 lg:col-span-1">
                   <h2 className="text-subtitle">Capabilities</h2>
                   <p className="mt-1 text-sm leading-6 text-gray-600">
                     {" "}
@@ -55,14 +55,14 @@ const UpsertPlanCapabilities = ({
                       <div key={`capabilitie-${index}`} className="mt-2">
                         <label
                           htmlFor={capabilitie.name}
-                          className="block text-sm font-medium leading-6 text"
+                          className="text block text-sm font-medium leading-6"
                         >
                           {capabilitie.name}
-                          <span className="text-sky-500 ml-1 font-medium">
+                          <span className="ml-1 font-medium text-sky-500">
                             {" "}
                             Current
                           </span>
-                          <span className="text-sky-500 ml-1 font-medium">
+                          <span className="ml-1 font-medium text-sky-500">
                             {" "}
                             {capabilitie.type === "LIMIT" ||
                             capabilitie.type === "AMOUNT"
@@ -72,7 +72,7 @@ const UpsertPlanCapabilities = ({
                                 )?.count ?? "Not set")
                               : ""}
                           </span>
-                          <span className="text-sky-500 ml-1 font-medium">
+                          <span className="ml-1 font-medium text-sky-500">
                             {" "}
                             {capabilitie.type === "PERMISSION"
                               ? (planOnEdit.PlanCapabilities?.find(
@@ -84,7 +84,7 @@ const UpsertPlanCapabilities = ({
                               : ""}
                           </span>
                         </label>
-                        <div className="flex space-x-3 rounded-md   my-3   sm:max-w-md">
+                        <div className="my-3 flex space-x-3 rounded-md sm:max-w-md">
                           {capabilitie.type === "LIMIT" ||
                           capabilitie.type === "AMOUNT" ? (
                             <TextInput

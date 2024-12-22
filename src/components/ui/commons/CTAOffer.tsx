@@ -1,9 +1,9 @@
 export default function CTAOffer() {
   return (
-    <div className="bg-white  py-14">
-      <div className="px-6  pb-20 sm:px-6   lg:px-8">
+    <div className="bg-white py-14">
+      <div className="px-6 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+          <h2 className="text-primary text-3xl font-bold tracking-tight sm:text-4xl">
             Great title offer
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">

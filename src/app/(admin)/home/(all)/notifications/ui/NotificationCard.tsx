@@ -7,10 +7,10 @@ function NotificationCard({ notification }: { notification: Notification }) {
     <div className="flex items-center gap-x-4 py-5">
       <BellAlertIcon className="h-6 w-6 text-red-500" aria-hidden="true" />
       <div className="min-w-0">
-        <p className="text-sm font-semibold leading-6 text-primary">
+        <p className="text-primary text-sm font-semibold leading-6">
           {notification.content}
         </p>
-        <p className="mt-1 truncate text-xs leading-5  text">
+        <p className="text mt-1 truncate text-xs leading-5">
           {formatTimestampToDateString(notification.createdAt)}
         </p>
       </div>

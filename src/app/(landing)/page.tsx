@@ -4,7 +4,7 @@ import LandingPrices from "./ui/LandingPrices";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <HeroLanding />
       <FeaturesLanding />
       <LandingPrices />

@@ -10,11 +10,11 @@ export const ViewMember: React.FC<Props> = ({ member }) => {
   const [activeTab, setActiveTab] = useState("information");
 
   return (
-    <div className="flex bg-main flex-col w-full px-4">
-      <div className="flex border-b border-gray-300  ">
+    <div className="bg-main flex w-full flex-col px-4">
+      <div className="flex border-b border-gray-300">
         <button
           onClick={() => setActiveTab("information")}
-          className={`py-2 px-4 text-sm font-medium ${
+          className={`px-4 py-2 text-sm font-medium ${
             activeTab === "information"
               ? "border-b-2 border-indigo-500 text-indigo-600"
               : "text-gray-600"
@@ -40,7 +40,7 @@ export const ViewMember: React.FC<Props> = ({ member }) => {
       )}
 
       {activeTab === "roles" && (
-        <div className="  flex space-x-3 items-center">Roles</div>
+        <div className="flex items-center space-x-3">Roles</div>
       )}
     </div>
   );
