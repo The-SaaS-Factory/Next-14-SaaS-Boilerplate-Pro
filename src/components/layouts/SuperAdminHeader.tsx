@@ -66,7 +66,7 @@ const SuperAdminHeader = ({
 
               {darkThemeSelector}
 
-              <Link className="relative" href="/home/notifications">
+              <Link className="relative" href="/admin/notifications">
                 <Button variant="outline" size="icon">
                   <Bell className="h-4 w-4" />
                 </Button>

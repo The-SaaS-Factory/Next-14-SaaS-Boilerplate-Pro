@@ -10,5 +10,5 @@ export default async function OnboardingRoot({
 }: {
   children: React.ReactNode;
 }) {
-  return <main>{children}</main>;
+  return <main className="relative z-50">{children}</main>;
 }

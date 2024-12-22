@@ -22,23 +22,23 @@ export default async function OrganizationLayout({
   return (
     <Suspense fallback={<FullLoader />}>
       <SidebarProvider>
-        <main className="text-primary flex w-full">
-          <HeroPattern />
-          <OrganizationAdminSidebar
-            profile={organization}
-            agencyPermissions={[]}
-            membershipPermissions={userMembership.permissions}
-          />{" "}
-          <div className="bg-main relative w-full flex-col">
-            <Suspense fallback={null}>
-              <TenantAdminHeader
-                userMembership={userMembership}
-                notificationsCount={notificationsCount ?? 0}
-                organization={organization}
-              />
-            </Suspense>
-            <div className="relative z-20 w-full py-3">
-              <div className="mx-auto bg-transparent px-4 lg:px-8">
+        <main className="text-primary relative w-full">
+          <div className="flex w-full">
+            <HeroPattern />
+            <OrganizationAdminSidebar
+              profile={organization}
+              agencyPermissions={[]}
+              membershipPermissions={userMembership.permissions}
+            />{" "}
+            <div className="bg-main w-full flex-col">
+              <Suspense fallback={null}>
+                <TenantAdminHeader
+                  userMembership={userMembership}
+                  notificationsCount={notificationsCount ?? 0}
+                  organization={organization}
+                />
+              </Suspense>
+              <div className="relative z-10 mx-auto w-full bg-transparent px-4 py-3 lg:px-8">
                 {children}
               </div>
             </div>

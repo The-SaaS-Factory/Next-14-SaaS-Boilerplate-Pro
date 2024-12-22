@@ -67,7 +67,6 @@ export const getMembership = cache(async () => {
 
     membership = await createOrganization(newOrganizationPayload);
   }
-  console.log(membership);
 
   if (!membership) {
     logout();

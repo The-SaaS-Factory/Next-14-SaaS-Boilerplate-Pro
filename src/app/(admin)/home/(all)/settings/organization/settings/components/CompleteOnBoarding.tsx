@@ -28,7 +28,7 @@ export const CompleteOnBoarding = ({
             to continue. Please fill out all required fields. Go toSettings
           </p>
           <Link
-            href="/home/onboarding"
+            href="/onboarding"
             className="inline-block rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700"
           >
             Complete onboarding

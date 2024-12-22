@@ -82,7 +82,8 @@ export const createOrganization = async (
     },
   });
 
-  checkMarketingActionsOnRegister(newProfileMembership.organization.id);
+  !constants.demoMode && checkMarketingActionsOnRegister(newProfileMembership.organization.id);
+  
   notifyToSuperAdmin(`New ${constants.tanantModelName} created`);
 
   return newProfileMembership;

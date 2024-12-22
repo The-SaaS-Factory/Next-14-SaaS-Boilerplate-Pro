@@ -326,34 +326,34 @@ model Plan {
 }
 
 model Capability {
-  id               Int                        @id @default(autoincrement())
-  name             String
-  title            String?
-  description      String?                    @db.Text
-  type             String                     @default("LIMIT")
-  PlanCapabilities PlanCapabilities[]
+  id                       Int                        @id @default(autoincrement())
+  name                     String
+  title                    String?
+  description              String?                    @db.Text
+  type                     String                     @default("LIMIT")
+  PlanCapabilities         PlanCapabilities[]
   OrganizationCapabilities OrganizationCapabilities[]
 }
 
 model PlanCapabilities {
-  id            Int         @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   capabilityId Int
-  planId        Int
-  count         Int
-  name          String?
-  plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
-  capabilitie   Capability @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
+  planId       Int
+  count        Int
+  name         String?
+  plan         Plan       @relation(fields: [planId], references: [id], onDelete: Cascade)
+  capabilitie  Capability @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
 
   @@index([planId, capabilityId])
 }
 
 model OrganizationCapabilities {
   id             Int          @id @default(autoincrement())
-  capabilityId  Int
+  capabilityId   Int
   organizationId Int
   count          Int
   user           Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  capability    Capability  @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
+  capability     Capability   @relation(fields: [capabilityId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, capabilityId])
 }
@@ -456,7 +456,7 @@ model AdminCurrencies {
 model SupportTicket {
   id             Int                     @id @default(autoincrement())
   subject        String
-  department     SupportDepartmentType  @default(SALES)
+  department     SupportDepartmentType   @default(SALES)
   status         SupportTicketStatusType @default(OPEN)
   organizationId Int?
   organization   Organization?           @relation(fields: [organizationId], references: [id], onDelete: Cascade)

@@ -12,7 +12,7 @@ import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
 
-export default function Component() {
+export default function OnboardingPage() {
   const [projectName, setProjectName] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -20,7 +20,6 @@ export default function Component() {
   const { width, height } = useWindowSize();
 
   const handleSubmit = async (event: any) => {
-    //#fix type here
     event.preventDefault();
     await updateProfileFields([
       {
@@ -43,9 +42,8 @@ export default function Component() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50">
+    <div className="g-main fixed inset-0 z-50 flex items-center justify-center">
       {showConfetti && <Confetti width={width} height={height} />}{" "}
-      {/* Confetti */}
       <div className="w-full max-w-xl rounded-3xl bg-white p-8 shadow-lg">
         <div className="mb-8 flex items-center">
           <h1 className="text-primary mx-auto text-2xl font-semibold">
