@@ -62,7 +62,6 @@ const TenantAdminHeader = ({
                     >
                       <div className="flex items-center space-x-2">
                         <SearchIcon className="h-5 w-5 stroke-current" />
-
                         <span className="font-normal">
                           {" "}
                           Search page or funcionality

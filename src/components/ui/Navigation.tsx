@@ -154,15 +154,12 @@ function NavigationGroup({
   // state, so that the state does not change during the close animation.
   // The state will still update when we re-open (re-render) the navigation.
   let isInsideMobileNavigation = useIsInsideMobileNavigation();
-  let [pathname, sections] = useInitialValue(
-    [usePathname(), useSectionStore((s) => s.sections)],
-    isInsideMobileNavigation,
-  );
 
-  const pathName = usePathname();
+  const sections = [];
+  const pathname = usePathname();
 
   let isActiveGroup =
-    group.items.findIndex((link) => link.href === pathName) !== -1;
+    group.items.findIndex((link) => link.href === pathname) !== -1;
 
   return (
     <>
