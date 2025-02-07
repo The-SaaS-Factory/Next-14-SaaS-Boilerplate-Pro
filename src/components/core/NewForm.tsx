@@ -392,18 +392,14 @@ const NewForm = ({
                     </div>
                   )}
                   {field.type === "date" && (
-                    <div className="mt-2">
-                      <div className="flex flex-col rounded-md shadow-sm">
-                        <input
-                          type="date"
-                          //  value={formatDate(watch(field.name))}
-                          {...register(field.name, {
-                            required: field.required,
-                          })}
-                          id={field.name}
-                          className="input-text"
-                        />
-                      </div>
+                    <div>
+                      <DatePicker
+                        startYear={1900}
+                        endYear={2026}
+                        date={watch(field.name) ?? new Date()}
+                        setDate={(date) => setValue(field.name, date)}
+                      />
+
                       {field.note && (
                         <div className="italic">
                           <p className="text-secondary text-sm">{field.note}</p>
@@ -1208,6 +1204,7 @@ import {
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
 import { Button } from "../ui/button";
 import { ArrowUpCircleIcon, TrashIcon } from "lucide-react";
+import { DatePicker } from "./DatePicker";
 export function MapSelector({
   openModal,
   address,
