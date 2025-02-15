@@ -15,14 +15,18 @@ import {
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import React from "react";
 
 export function OrganizationAdminSidebar({ profile }: any) {
   const { tenantNavigation } = useNavigation();
   const { userMembership } = useMembership();
 
-  const canAccessToSupportModule = checkOrganizationCapabilityInServer({
-    capabilityName: "Support via ticket",
-  });
+  
+  const canAccessToSupportModule = React.useMemo(() => {
+    return checkOrganizationCapabilityInServer({
+      capabilityName: "Support via ticket",
+    });
+  }, []);  
 
   return (
     <Sidebar className="bg-main flex h-full flex-col">

@@ -7,7 +7,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { classNames } from "@/utils/facades/frontendFacades/strFacade";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
 import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
 import { ChevronDownIcon, UsersIcon } from "@heroicons/react/24/outline";
@@ -31,14 +31,14 @@ export const MultiTentantProfileButton = ({
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [openNewProfile, setOpenNewProfile] = useState(false);
 
-  const getAllUserOrganizations = useCallback(async () => {
-    const profiles = await getUserAllOrganizations();
-    setOrganizations(profiles);
-  }, []);
-
   useEffect(() => {
+    const getAllUserOrganizations = async () => {
+      const profiles = await getUserAllOrganizations();
+      setOrganizations(profiles);
+    };
+
     getAllUserOrganizations();
-  }, [getAllUserOrganizations, setOrganizations, userMembership, organization]);
+  }, []);
 
   const handleChangeProfile = async (organizationId: number) => {
     await updateUserProfileActive(organizationId).then(() => {
