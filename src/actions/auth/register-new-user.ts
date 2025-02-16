@@ -32,7 +32,7 @@ export const registerNewUser = async (payload) => {
 
   const newOrganizationPayload = {
     ...user,
-    profileName: payload.name,
+    profileName: businessName ?? payload.name,
     address: payload.businessAddress,
     phone: payload.businessPhone,
   };
