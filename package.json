@@ -42,7 +42,7 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.3.19",
     "gray-matter": "^4.0.3",
     "imagekit": "^4.1.4",

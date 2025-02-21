@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
+import useEffect from 'react';
 
 export default function OnboardingPage() {
   const [projectName, setProjectName] = useState("");
@@ -40,6 +41,14 @@ export default function OnboardingPage() {
       })
       .catch((e) => console.log(e.message));
   };
+
+  useEffect(() => {
+    if (organization?.onboardingCompleted) {
+      navigation.push("/home");
+    }
+
+    setProjectName(organization?.name || "");
+  }, [organization]);
 
   return (
     <div className="g-main fixed inset-0 z-50 flex items-center justify-center">

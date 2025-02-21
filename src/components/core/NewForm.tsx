@@ -364,6 +364,15 @@ const NewForm = ({
                           error={errors[`${field.name}`] && true}
                         />
                       </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setValue(field.name, Math.random().toString(36).slice(-8))
+                        }
+                        className="btn-secondary mt-2"
+                      >
+                        Gerar senha aleatória
+                      </button>
                       {field.note && (
                         <div className="italic">
                           <p className="text-secondary text-sm">{field.note}</p>

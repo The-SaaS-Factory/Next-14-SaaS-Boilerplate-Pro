@@ -11,7 +11,6 @@ import { LifebuoyIcon } from "@heroicons/react/24/outline";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar";
@@ -21,16 +20,15 @@ export function OrganizationAdminSidebar({ profile }: any) {
   const { tenantNavigation } = useNavigation();
   const { userMembership } = useMembership();
 
-  
   const canAccessToSupportModule = React.useMemo(() => {
     return checkOrganizationCapabilityInServer({
       capabilityName: "Support via ticket",
     });
-  }, []);  
+  }, []);
 
   return (
-    <Sidebar className="bg-main flex h-full flex-col">
-      <SidebarContent>
+    <Sidebar className="flex h-full flex-col">
+      <SidebarContent className="bg-main">
         <SidebarHeader>
           <div className="my-2 flex shrink-0 items-center">
             <Link href="/" className=" ">
@@ -61,7 +59,6 @@ export function OrganizationAdminSidebar({ profile }: any) {
         </ul>
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
     </Sidebar>
   );
 }

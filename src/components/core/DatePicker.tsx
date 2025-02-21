@@ -46,6 +46,9 @@ export function DatePicker({
     "November",
     "December",
   ];
+
+ 
+
   const years = Array.from(
     { length: endYear - startYear + 1 },
     (_, i) => startYear + i,
@@ -62,13 +65,20 @@ export function DatePicker({
   };
 
   const handleSelect = (selectedData: Date | undefined) => {
+    console.log(selectedData);
+
     if (selectedData) {
       setDate(selectedData);
     }
   };
 
+  React.useEffect(() => {
+    setDate(new Date());
+  }, []);
+
+
   return (
-    <Popover>
+    <Popover modal={true}>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
