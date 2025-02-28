@@ -1,13 +1,16 @@
 import PageName from "@/components/ui/commons/PageName";
-import React from "react";
+import React, { Suspense } from "react";
 import { Metadata } from "next";
 import BillingPlansList from "./ui/BillingPlansList";
+import { getAllPlans } from "@/actions/superAdmin/superAdminBillingModule/get-all-plans";
+import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 
 export const metadata: Metadata = {
   title: "Plans",
 };
 
-const SuperAdminBillingPlansModulePage = () => {
+const SuperAdminBillingPlansModulePage = async () => {
+  const { data } = await getAllPlans();
   return (
     <div>
       <PageName
@@ -18,7 +21,9 @@ const SuperAdminBillingPlansModulePage = () => {
           href: "plans/add",
         }}
       />
-      <BillingPlansList />
+      <Suspense fallback={<TableLoaderSkeleton count={10} />}>
+        <BillingPlansList data={data} />
+      </Suspense>
     </div>
   );
 };

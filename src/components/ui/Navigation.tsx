@@ -8,7 +8,7 @@ import React, {
   useRef,
 } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { Tag } from "./commons/Tag";
@@ -56,11 +56,9 @@ function NavLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={clsx(
-        "text-primary flex justify-between gap-2 py-1 pr-3 transition",
+        "flex justify-between gap-2 py-1 pr-3 transition",
         isAnchorLink ? "pl-7" : "pl-4",
-        active
-          ? "text-zinc-900 dark:text-white"
-          : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white",
+        active ? "text-selected" : "text-primary-2",
       )}
     >
       <span className="truncate">{children}</span>
@@ -116,25 +114,25 @@ function VisibleSectionHighlight({
   );
 }
 
-function ActivePageMarker({
-  group,
-  pathname,
-}: {
-  group: NavGroup;
-  pathname: string;
-}) {
+function ActivePageMarker({ group }: { group: NavGroup }) {
+  const pathname = usePathname();
+  const pathNoSearch = pathname.split("?")[0];
+
   let itemHeight = remToPx(2);
-  let offset = remToPx(0.25);
-  const searchParams = useSearchParams();
-  const paramsInSearch = searchParams.toString();
-  const fullPath = pathname + (paramsInSearch && "?") + paramsInSearch;
-  let activePageIndex = group.items.findIndex((link) => link.href === fullPath);
-  let top = offset + activePageIndex * itemHeight;
+  //let offset = remToPx(0.25);
+
+  // Ignoramos search params en la comparación
+  let activePageIndex = group.items.findIndex((link) => {
+    const linkNoSearch = link.href.split("?")[0];
+    return linkNoSearch === pathNoSearch;
+  });
+
+  let top = 8 + activePageIndex * itemHeight;
 
   return (
     <motion.div
       layout
-      className="bg-primary absolute left-2 h-6 w-px"
+      className="bg-selected absolute left-2 h-6 w-px"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -157,9 +155,13 @@ function NavigationGroup({
 
   const sections = [];
   const pathname = usePathname();
+  const pathNoSearch = pathname.split("?")[0];
 
   let isActiveGroup =
-    group.items.findIndex((link) => link.href === pathname) !== -1;
+    group.items.findIndex((link) => {
+      const linkNoSearch = link.href.split("?")[0];
+      return linkNoSearch === pathNoSearch;
+    }) !== -1;
 
   return (
     <>
@@ -170,10 +172,7 @@ function NavigationGroup({
         >
           <group.icon className="size-5"></group.icon>
 
-          <motion.h2
-            layout="position"
-            className="text-primary font-semibold text-zinc-900 dark:text-white"
-          >
+          <motion.h2 layout="position" className="text-primary-2 font-semibold">
             {group.sectionName}
           </motion.h2>
         </Link>
@@ -198,11 +197,11 @@ function NavigationGroup({
                 </AnimatePresence>
                 <motion.div
                   layout
-                  className="absolute inset-y-0 left-2 w-px bg-zinc-900/10 dark:bg-white/5"
+                  className="absolute inset-y-0 left-2 w-px bg-white"
                 />
                 <AnimatePresence initial={false}>
                   {isActiveGroup && (
-                    <ActivePageMarker group={group} pathname={pathname} />
+                    <ActivePageMarker group={group} />
                   )}
                 </AnimatePresence>
                 <ul role="list" className="border-l border-transparent">

@@ -18,6 +18,7 @@ import { UserMembershipRole } from "@prisma/client";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { isServerActionError } from "../../../../../../../utils/misc/is-server-action-error";
 
 const AgentesPage = () => {
   const [members, setMembers] = useState([]);
@@ -53,17 +54,19 @@ const AgentesPage = () => {
       return;
     }
 
-    await tenantSendInvitation(payload)
-      .then(() => {
-        getMembers();
-        toast.success("Member successfully added");
-        setValue("name", "");
-        setValue("email", "");
-        setValue("password", "");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    const result =
+      await tenantSendInvitation(payload).then(captureServerErrors);
+
+    if (isServerActionError(result)) {
+      toast.error(result.error);
+      return;
+    }
+
+    getMembers();
+    toast.success("Member successfully added");
+    setValue("name", "");
+    setValue("email", "");
+    setValue("password", "");
   };
 
   const generateRandomPassword = () => {

@@ -56,6 +56,11 @@ export const getAllTenantBySearch = async ({
     take: limit,
     include: {
       userMemberships: true,
+      organizationCapabilities: {
+        include: {
+          capability: true,
+        },
+      },
       subscription: {
         include: {
           plan: true,

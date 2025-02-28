@@ -18,7 +18,14 @@ const ViewTicket = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
-        <PageName name={"View details"} />
+        <PageName
+          name={"View details"}
+          breadcrumbs={[
+            { name: "Dashboard", href: "/home" },
+            { name: "Support", href: "/home/support" },
+            { name: "View ticket", href: `/home/support/ticket/${ticketId}` },
+          ]}
+        />
         <ViewSupportTicketDetailsPage user={userDB} ticket={ticket} />
       </Suspense>
     </div>

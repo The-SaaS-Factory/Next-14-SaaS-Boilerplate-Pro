@@ -11,6 +11,7 @@ import { RedirectSuperAdmin } from "../core/RedirectSuperAdmin";
 import { OrganizationAdminSidebar } from "./TenantSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import TenantAdminHeader from "./TenantAdminHeader";
+import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
 export default async function OrganizationLayout({
   children,
 }: {
@@ -18,7 +19,7 @@ export default async function OrganizationLayout({
 }) {
   const notificationsCount = await getUserNotificationsUnreadCount();
   const { organization, userMembership } = await getMembership();
-
+  const profiles = await getUserAllOrganizations();
   return (
     <Suspense fallback={<FullLoader />}>
       <SidebarProvider>
@@ -33,6 +34,7 @@ export default async function OrganizationLayout({
             <div className="bg-main w-full flex-col">
               <Suspense fallback={null}>
                 <TenantAdminHeader
+                 organizations={profiles}
                   userMembership={userMembership}
                   notificationsCount={notificationsCount ?? 0}
                   organization={organization}

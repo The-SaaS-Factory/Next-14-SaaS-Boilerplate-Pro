@@ -26,10 +26,13 @@ const TenantAdminHeader = ({
   notificationsCount,
   organization,
   userMembership,
+  organizations
 }: {
   notificationsCount: number;
   organization: IOrganization;
-  userMembership: IUserMembership;
+  userMembership: IUserMembership;  
+  organizations: IOrganization[];
+
 }) => {
   const [open, setOpen] = useState(false);
   const { darkThemeSelector } = useDarkTheme();
@@ -112,12 +115,13 @@ const TenantAdminHeader = ({
               </Link>
 
               {/* Profile dropdown */}
-              {constants.multiTenant ? (
+            
                 <MultiTentantProfileButton
                   userMembership={userMembership}
                   organization={organization}
+                  organizations={organizations}
                 />
-              ) : null}
+              
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { hash } from "bcrypt";
 import prisma from "@/lib/db";
 import { createOrganization } from "@/utils/facades/serverFacades/organizationFacade";
 export const registerNewUser = async (payload) => {
-  const { password, email, businessName } = payload;
+  const { password, email, businessName, avatar } = payload;
 
   const existedUser = await prisma.user.findUnique({
     where: {
@@ -24,7 +24,7 @@ export const registerNewUser = async (payload) => {
       password: hashedPassword,
       name: payload.name,
       email: payload.email,
-      avatar: payload.image,
+      avatar: payload.image ?? avatar,
       provider: payload.provider ?? "credentials",
       providerId: payload.providerId,
     },

@@ -7,9 +7,8 @@ import {
   Transition,
 } from "@headlessui/react";
 import { classNames } from "@/utils/facades/frontendFacades/strFacade";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateUserProfileActive } from "@/actions/admin/userModule/update-profile-active";
-import { getUserAllOrganizations } from "@/actions/admin/userModule/get-user-all-profiles";
 import { ChevronDownIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { NewProfileModal } from "../../layouts/TenantAdminHeader";
@@ -24,21 +23,13 @@ import { Badge } from "@/components/ui/badge";
 export const MultiTentantProfileButton = ({
   organization,
   userMembership,
+  organizations,
 }: {
   userMembership: IUserMembership;
   organization: IOrganization;
+  organizations: IOrganization[];
 }) => {
-  const [organizations, setOrganizations] = useState<any[]>([]);
   const [openNewProfile, setOpenNewProfile] = useState(false);
-
-  useEffect(() => {
-    const getAllUserOrganizations = async () => {
-      const profiles = await getUserAllOrganizations();
-      setOrganizations(profiles);
-    };
-
-    getAllUserOrganizations();
-  }, []);
 
   const handleChangeProfile = async (organizationId: number) => {
     await updateUserProfileActive(organizationId).then(() => {
@@ -112,15 +103,17 @@ export const MultiTentantProfileButton = ({
                       </div>
                     )}
                   </MenuItem>
-                  <Link href={"/home/settings/billing/buyPlan"}>
-                    <Button variant="secondary" className="w-full">
-                      Upgrade
-                      <span className="relative ml-3 flex h-3 w-3">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                        <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
-                      </span>
-                    </Button>
-                  </Link>
+                  {constants.multiTenant && (
+                    <Link href={"/home/settings/billing/buyPlan"}>
+                      <Button variant="secondary" className="w-full">
+                        Upgrade
+                        <span className="relative ml-3 flex h-3 w-3">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                          <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
+                        </span>
+                      </Button>
+                    </Link>
+                  )}
                   <hr />
                 </>
               )}
@@ -154,39 +147,42 @@ export const MultiTentantProfileButton = ({
               </MenuItem>
 
               <hr />
+              {constants.multiTenant && (
+                <div>
+                  <div className="p-3">
+                    <span>Change {constants.tanantModelName}</span>
+                  </div>
+                  <div className="px-3">
+                    {organizations?.map((org) => (
+                      <MenuItem key={org.id}>
+                        <button
+                          onClick={() => handleChangeProfile(org.id)}
+                          className="hover:bg-main-hover flex items-center space-x-3 p-3 hover:scale-100"
+                        >
+                          <Image
+                            width={32}
+                            height={32}
+                            className="h-8 w-8 rounded-full bg-gray-50"
+                            src={org?.avatar ?? "/assets/img/avatar.png"}
+                            alt=""
+                          />
 
-              <div className="p-3">
-                <span>Change {constants.tanantModelName}</span>
-              </div>
-              <div className="px-3">
-                {organizations.map((org) => (
-                  <MenuItem key={org.id}>
-                    <button
-                      onClick={() => handleChangeProfile(org.id)}
-                      className="hover:bg-main-hover flex items-center space-x-3 p-3 hover:scale-100"
+                          <span className="truncate">{org?.name}</span>
+                        </button>
+                      </MenuItem>
+                    ))}
+                  </div>
+                  <hr />
+                  <div className="p-3">
+                    <Button
+                      onClick={() => setOpenNewProfile(true)}
+                      className="w-full"
                     >
-                      <Image
-                        width={32}
-                        height={32}
-                        className="h-8 w-8 rounded-full bg-gray-50"
-                        src={org?.avatar ?? "/assets/img/avatar.png"}
-                        alt=""
-                      />
-
-                      <span className="truncate">{org?.name}</span>
-                    </button>
-                  </MenuItem>
-                ))}
-              </div>
-              <hr />
-              <div className="p-3">
-                <Button
-                  onClick={() => setOpenNewProfile(true)}
-                  className="w-full"
-                >
-                  New {constants.tanantModelName}
-                </Button>
-              </div>
+                      New {constants.tanantModelName}
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           </MenuItems>
         </Transition>

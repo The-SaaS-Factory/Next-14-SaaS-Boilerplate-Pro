@@ -1,10 +1,11 @@
 "use server";
 import prisma from "@/lib/db";
-import { checkMarketingActionsOnRegister } from "./marketingFacade";
+
 import { UserMembershipRole } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { notifyToSuperAdmin } from "./notificationFacade";
 import { constants } from "@/lib/constants";
+import { checkMarketingActionsOnRegister } from "./marketingFacade";
 
 export const createOrganization = async (
   user: {
@@ -14,6 +15,7 @@ export const createOrganization = async (
     profileName?: string;
     address?: string;
     phone?: string;
+    avatar?: string;
   },
   isMainTenant?: boolean,
 ) => {
@@ -55,6 +57,7 @@ export const createOrganization = async (
       isMainTenant: isMainTenant,
       address: user.address,
       phone: user.phone,
+      avatar: user.avatar,
       status: "ACTIVE",
     },
   });
@@ -82,8 +85,8 @@ export const createOrganization = async (
     },
   });
 
-  !constants.demoMode && checkMarketingActionsOnRegister(newProfileMembership.organization.id);
-  
+  await checkMarketingActionsOnRegister(org.id);
+
   notifyToSuperAdmin(`New ${constants.tanantModelName} created`);
 
   return newProfileMembership;

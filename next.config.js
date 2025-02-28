@@ -12,6 +12,7 @@ const nextConfig = withMDX({
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "tailwindui.com" },
+      { protocol: "https", hostname: "*.googleusercontent.com" },
       { protocol: "https", hostname: "images.clerk.dev" },
       { protocol: "https", hostname: "img.clerk.com" },
       { protocol: "https", hostname: "images.unsplash.com" },

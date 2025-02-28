@@ -2,9 +2,15 @@ import NotFound from "@/components/layouts/errors/NotFound";
 import Pagination from "@/components/ui/commons/Pagination";
 import UserCard from "@/components/ui/commons/UserCard";
 import { getAllTenantBySearch } from "@/actions/global/tenantSystem/get-all-tenants";
-import { IOrganization } from "@/interfaces/saasTypes";
 import OperateTenant from "./OperateTenant";
 import { formatTimestampToDateString } from "@/utils/facades/frontendFacades/strFacade";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const TenantList = async ({
   query,
@@ -24,6 +30,19 @@ const TenantList = async ({
       offset,
     },
   });
+
+  // Función auxiliar para agrupar capacidades por tipo
+  const groupCapabilitiesByType = (capabilities) => {
+    const permissionCapabilities = capabilities.filter(
+      cap => cap.capability.type === "PERMISSION"
+    );
+    
+    const limitCapabilities = capabilities.filter(
+      cap => cap.capability.type === "LIMIT"
+    );
+    
+    return { permissionCapabilities, limitCapabilities };
+  };
 
   return (
     <div>
@@ -64,6 +83,13 @@ const TenantList = async ({
                       >
                         Members
                       </th>
+                      {/* Nueva columna para capacidades */}
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold"
+                      >
+                        Capabilities
+                      </th>
                       <th
                         scope="col"
                         className="relative py-3.5 pl-3 pr-4 sm:pr-0"
@@ -73,37 +99,95 @@ const TenantList = async ({
                     </tr>
                   </thead>
                   <tbody className="bg-main text-primary divide-y divide-gray-200">
-                    {data?.map((tenant: IOrganization) => (
-                      <tr key={tenant.id}>
-                        <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                          <UserCard user={tenant} />
-                        </td>
-                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
-                          {tenant.subscription ? (
-                            <div className=" ">
-                              {tenant.subscription.plan.name ?? "-"} / until{" "}
-                              {formatTimestampToDateString(
-                                tenant.subscription.endDate,
-                              )}
+                    {data?.map((tenant: any) => {
+                      const { permissionCapabilities, limitCapabilities } = 
+                        groupCapabilitiesByType(tenant.organizationCapabilities || []);
+                        
+                      return (
+                        <tr key={tenant.id}>
+                          <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                            <UserCard user={tenant} />
+                          </td>
+                          <td className="text whitespace-nowrap px-3 py-5 text-sm">
+                            {tenant.subscription ? (
+                              <div className=" ">
+                                {tenant.subscription.plan.name ?? "-"} / until{" "}
+                                {formatTimestampToDateString(
+                                  tenant.subscription.endDate,
+                                )}
+                              </div>
+                            ) : (
+                              <div className=" ">No subscription</div>
+                            )}
+                          </td>
+                          <td className="text whitespace-nowrap px-3 py-5 text-sm">
+                            {formatTimestampToDateString(tenant.createdAt)}
+                          </td>
+                          <td className="text whitespace-nowrap px-3 py-5 text-sm">
+                            <div className="text-primary mt-1 flex flex-col">
+                              {tenant.userMemberships?.length}
                             </div>
-                          ) : (
-                            <div className=" ">No subscription</div>
-                          )}
-                        </td>
-                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
-                          {formatTimestampToDateString(tenant.createdAt)}
-                        </td>
-                        <td className="text whitespace-nowrap px-3 py-5 text-sm">
-                          <div className="text-primary mt-1 flex flex-col">
-                            {tenant.userMemberships?.length}
-                          </div>
-                        </td>
+                          </td>
+                          {/* Celda de capacidades */}
+                          <td className="px-3 py-5 text-sm">
+                            <div className="flex flex-wrap gap-1">
+                              <TooltipProvider>
+                                {limitCapabilities.length > 0 && (
+                                  <div className="mb-2">
+                                    <div className="mb-1 text-xs font-medium text-gray-500">Limits</div>
+                                    <div className="flex flex-wrap gap-1">
+                                      {limitCapabilities.map((cap) => (
+                                        <Tooltip key={cap.id}>
+                                          <TooltipTrigger asChild>
+                                            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                                              {cap.capability.name.split(" ")[0]} <span className="ml-1 font-semibold">{cap.count}</span>
+                                            </Badge>
+                                          </TooltipTrigger>
+                                          <TooltipContent>
+                                            <p>{cap.capability.name}</p>
+                                            <p className="text-xs text-gray-500">
+                                              Value: {cap.count}
+                                            </p>
+                                          </TooltipContent>
+                                        </Tooltip>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                                
+                                {permissionCapabilities.length > 0 && (
+                                  <div>
+                                    <div className="mb-1 text-xs font-medium text-gray-500">Permissions</div>
+                                    <div className="flex flex-wrap gap-1">
+                                      {permissionCapabilities.map((cap) => (
+                                        <Tooltip key={cap.id}>
+                                          <TooltipTrigger asChild>
+                                            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                                              {cap.capability.name.split(" ")[0]}
+                                            </Badge>
+                                          </TooltipTrigger>
+                                          <TooltipContent>
+                                            <p>{cap.capability.name}</p>
+                                          </TooltipContent>
+                                        </Tooltip>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                                
+                                {limitCapabilities.length === 0 && permissionCapabilities.length === 0 && (
+                                  <span className="text-gray-400 text-xs">No additional capabilities</span>
+                                )}
+                              </TooltipProvider>
+                            </div>
+                          </td>
 
-                        <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                          <OperateTenant tenantId={tenant.id} />
-                        </td>
-                      </tr>
-                    ))}
+                          <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <OperateTenant tenantId={tenant.id} />
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

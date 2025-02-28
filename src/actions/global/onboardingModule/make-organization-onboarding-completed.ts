@@ -1,6 +1,8 @@
 "use server";
 
+import { constants } from "@/lib/constants";
 import prisma from "@/lib/db";
+import { checkMarketingActionsOnRegister } from "@/utils/facades/serverFacades/marketingFacade";
 import { refreshOrganizationData } from "@/utils/facades/serverFacades/organizationFacade";
 import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 
@@ -15,6 +17,8 @@ export const makeOrganizationOnboardingCompleted = async () => {
       isOnboardingCompleted: true,
     },
   });
+
+  !constants.demoMode && checkMarketingActionsOnRegister(organization.id);
 
   refreshOrganizationData();
 

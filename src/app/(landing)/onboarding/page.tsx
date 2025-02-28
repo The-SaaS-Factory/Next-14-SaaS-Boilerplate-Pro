@@ -1,26 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { constants } from "@/lib/constants";
 import { updateProfileFields } from "@/actions/admin/userModule/update-profile-fields";
-import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { makeOrganizationOnboardingCompleted } from "@/actions/global/onboardingModule/make-organization-onboarding-completed";
-import useEffect from 'react';
+import { useEffect, useState } from "react";
+import { useMembership } from "@/utils/hooks/useMembership";
 
 export default function OnboardingPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { organization } = useMembership();
+
   const [projectName, setProjectName] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const navigation = useRouter();
   const { width, height } = useWindowSize();
 
   const handleSubmit = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     await updateProfileFields([
       {
@@ -36,18 +38,20 @@ export default function OnboardingPage() {
         setShowConfetti(true);
         await makeOrganizationOnboardingCompleted();
         setTimeout(() => {
-          navigation.push("/home");
-        }, 3000);
+          setIsLoading(false);
+          window.location.href = "/home";
+        }, 4000);
       })
       .catch((e) => console.log(e.message));
+
+    setIsLoading(false);
   };
-
+ 
   useEffect(() => {
-    if (organization?.onboardingCompleted) {
-      navigation.push("/home");
+    //set name
+    if (organization) {
+      setProjectName(organization.name);
     }
-
-    setProjectName(organization?.name || "");
   }, [organization]);
 
   return (
@@ -102,7 +106,7 @@ export default function OnboardingPage() {
             className="w-full bg-black text-white hover:bg-gray-800"
             disabled={!agreed || !projectName}
           >
-            Complete Onboarding
+            {isLoading ? "Loading..." : "Complete Onboarding"}
           </Button>
         </form>
       </div>

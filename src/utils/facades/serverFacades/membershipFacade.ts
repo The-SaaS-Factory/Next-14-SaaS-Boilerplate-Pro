@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/db";
 import { cache } from "react";
+import { getMembership } from "./userFacade";
 
 const getCurrentMembership = async (organizationId: number) => {
   return await prisma.subscription.findFirst({
@@ -255,34 +256,36 @@ export const registerCapabilityUsage = async (
   return true;
 };
 
-export const checkOrganizationCapabilityInServer = ({
+export const checkOrganizationCapabilityInServer = cache(async ({
   capabilityName,
-  organizationCapabilities,
-  subscription,
 }: {
   capabilityName: string;
-  organizationCapabilities?: any; //Fix Type
-  subscription?: any; //Fix Type
 }) => {
+  const { organization } = await getMembership();
+  const organizationCapabilities = organization.capabilities;
+  const subscription: any = organization.subscription;
+
   if (!subscription) return false;
   if (!organizationCapabilities) return false;
 
-  const organizationCapability = organizationCapabilities.find(
-    (o) => o.name === capabilityName,
+  const organizationCapability: any = organizationCapabilities.find(
+    (o: any) => o.capability.name === capabilityName,
   );
 
   if (!organizationCapability) return false;
 
   if (organizationCapability.capability.type === "PERMISSION") {
-    return organizationCapability.count === 1;
+    return organizationCapability.count !== 0;
   } else if (organizationCapability.capability.type === "LIMIT") {
-    // Usamos `await` para resolver la promesa devuelta por `find`
-    const planCapability = subscription.plan.planCapabilities.find((p) => {
+    const planCapability = subscription.plan?.PlanCapabilities.find((p) => {
       return (
         p.planId === subscription.planId &&
         p.capabilityId === organizationCapability.capability.id
       );
     });
+
+    console.log(planCapability);
+
 
     if (!planCapability) return false;
 
@@ -290,4 +293,5 @@ export const checkOrganizationCapabilityInServer = ({
   }
 
   return false;
-};
+});
+

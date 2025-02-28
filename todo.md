@@ -1,0 +1,2 @@
+- Refactoring BillingPlanList - Error in the deployment of the application
+- Error at include new user of the organizations if the user is already in DB, make error, fix this,

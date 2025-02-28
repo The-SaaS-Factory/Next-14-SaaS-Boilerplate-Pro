@@ -4,7 +4,6 @@ import { Navigation } from "../ui/Navigation";
 
 import { useNavigation } from "../layouts/useNavigation";
 import Link from "next/link";
-import { checkOrganizationCapabilityInServer } from "@/utils/facades/serverFacades/membershipFacade";
 import { isOrganizationAdmin } from "@/utils/facades/serverFacades/securityFacade";
 import { useMembership } from "@/utils/hooks/useMembership";
 import { LifebuoyIcon } from "@heroicons/react/24/outline";
@@ -15,16 +14,15 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import React from "react";
+import { useCapability } from "@/utils/hooks/useCapabilities";
 
 export function OrganizationAdminSidebar({ profile }: any) {
   const { tenantNavigation } = useNavigation();
   const { userMembership } = useMembership();
 
-  const canAccessToSupportModule = React.useMemo(() => {
-    return checkOrganizationCapabilityInServer({
-      capabilityName: "Support via ticket",
-    });
-  }, []);
+  const { hasCapability: canAccessToSupportModule, loading: loadingSupport } =
+    useCapability("Support via ticket");
+
 
   return (
     <Sidebar className="flex h-full flex-col">
@@ -45,7 +43,7 @@ export function OrganizationAdminSidebar({ profile }: any) {
               <Navigation navigation={tenantNavigation} />
             </ul>
           </li>
-          {isOrganizationAdmin(userMembership) && canAccessToSupportModule && (
+          {isOrganizationAdmin(userMembership) && canAccessToSupportModule && !loadingSupport && (
             <li className="text-primary mt-auto">
               <Link
                 href="/home/support"

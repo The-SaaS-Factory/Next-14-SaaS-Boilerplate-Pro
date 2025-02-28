@@ -37,12 +37,16 @@ const tabs = [
     icon: ArrowRightEndOnRectangleIcon,
     current: true,
   },
-  {
-    name: "Create account",
-    action: "REGISTER",
-    icon: UserPlusIcon,
-    current: false,
-  },
+  ...(constants.multiTenant
+    ? [
+        {
+          name: "Criar conta",
+          action: "REGISTER",
+          icon: UserPlusIcon,
+          current: false,
+        },
+      ]
+    : []),
 ];
 
 export default function LoginPage() {

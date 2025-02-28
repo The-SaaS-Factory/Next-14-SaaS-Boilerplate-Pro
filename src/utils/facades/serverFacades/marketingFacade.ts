@@ -1,3 +1,4 @@
+"use server";
 import { updateMembership } from "./membershipFacade";
 import { calculateMonthsFromDays } from "../frontendFacades/strFacade";
 import { getSuperAdminSetting } from "./superAdminFacade";
@@ -10,9 +11,15 @@ import {
 export const checkMarketingActionsOnRegister = async (
   organizationId: number,
 ) => {
-  activateFreeTrial(organizationId);
-  sendWelcomeEmail(organizationId);
-  storeContactInEmailProvider(organizationId);
+  try {
+    await activateFreeTrial(organizationId);
+    await storeContactInEmailProvider(organizationId);
+    await sendWelcomeEmail(organizationId);
+  }
+  catch (e) {
+    console.log(e.message);
+
+  }
 };
 
 const storeContactInEmailProvider = async (id: number) => {
@@ -34,9 +41,13 @@ const activateFreeTrial = async (organizationId: number) => {
     "MARKETING_FREE_TRIAL",
   );
 
+
+
   if (freeTrial && freeTrial == "true") {
     const planTrial = await getSuperAdminSetting("MARKETING_FREE_TRIAL_PLAN");
     const days = await getSuperAdminSetting("MARKETING_FREE_DAYS");
+
+
 
     if (planTrial) {
       const plan = await prisma.plan.findUnique({
@@ -47,14 +58,19 @@ const activateFreeTrial = async (organizationId: number) => {
 
       if (plan) {
         const months = calculateMonthsFromDays(days ? parseInt(days) : 14);
-        updateMembership({
+
+        await updateMembership({
           organizationId,
           months,
           pricingId: null,
           currencyId: null,
           planId: plan.id,
         });
+
+
       } else {
+
+
         //send log
         //#Fix add module of logs/actions for super admin,
       }
