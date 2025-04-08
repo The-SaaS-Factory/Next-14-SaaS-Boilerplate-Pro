@@ -1,17 +1,11 @@
 "use server";
 
-import { authOptions } from "@/actions/nextauth";
 import prisma from "@/lib/db";
-import { getServerSession } from "next-auth";
-
+import { refreshOrganizationData } from "@/utils/facades/serverFacades/organizationFacade";
+import { getMembership } from "@/utils/facades/serverFacades/userFacade";
 export const updateUserProfileActive = async (organizationId: number) => {
-  const session = await getServerSession(authOptions);
+  const { user } = await getMembership();
 
-  const user = await prisma.user.findFirst({
-    where: {
-      email: session.user.email,
-    },
-  });
 
   await prisma.userMembership.updateMany({
     where: {
@@ -29,7 +23,8 @@ export const updateUserProfileActive = async (organizationId: number) => {
     },
   });
 
-  return await prisma.userMembership.update({
+
+  const newUserMembership = await prisma.userMembership.update({
     where: {
       id: userMembership.id,
     },
@@ -37,4 +32,8 @@ export const updateUserProfileActive = async (organizationId: number) => {
       isActive: true,
     },
   });
+
+  refreshOrganizationData();
+
+  return newUserMembership;
 };

@@ -2,10 +2,11 @@
 import prisma from "@/lib/db";
 
 import { UserMembershipRole } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { notifyToSuperAdmin } from "./notificationFacade";
 import { constants } from "@/lib/constants";
 import { checkMarketingActionsOnRegister } from "./marketingFacade";
+import { getMembership } from "./userFacade";
 
 export const createOrganization = async (
   user: {
@@ -92,6 +93,9 @@ export const createOrganization = async (
   return newProfileMembership;
 };
 
-export const refreshOrganizationData = () => {
+
+export const refreshOrganizationData = async () => {
+  const { user } = await getMembership();
+  revalidateTag(`user-membership-${user.email}`);
   revalidatePath("/home", "layout");
 };

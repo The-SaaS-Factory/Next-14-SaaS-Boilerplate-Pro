@@ -8,6 +8,7 @@ interface BtnParams {
   btn: {
     name: string;
     type?: string;
+    variant: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost";
     icon: any;
     fn: () => void;
   };
@@ -17,7 +18,7 @@ const ButtonFunction = ({ btn }: BtnParams) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="button" onClick={() => btn.fn()}>
+    <Button type="button" variant={btn.variant} onClick={() => btn.fn()}>
       {" "}
       {btn.icon &&
         React.createElement(btn.icon, {

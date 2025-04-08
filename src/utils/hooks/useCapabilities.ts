@@ -2,38 +2,51 @@
 
 import { useState, useEffect } from "react";
 
-const capabilityCache = new Map();
-
 export function useCapability(capabilityName: string) {
   const [hasCapability, setHasCapability] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (capabilityCache.has(capabilityName)) {
-      setHasCapability(capabilityCache.get(capabilityName));
-      setLoading(false);
-      return;
-    }
-
-    async function checkCapability() {
-      try {
-        const { checkOrganizationCapabilityInServer } = await import("@/utils/facades/serverFacades/membershipFacade");
-        const result = await checkOrganizationCapabilityInServer({
-          capabilityName
-        });
-
-        capabilityCache.set(capabilityName, result);
-
-        setHasCapability(result);
-      } catch (error) {
-        console.error("Error checking capability:", error);
+    try {
+      const organizationStr = localStorage.getItem("organization");
+      if (!organizationStr) {
         setHasCapability(false);
-      } finally {
         setLoading(false);
+        return;
       }
-    }
 
-    checkCapability();
+      const organization = JSON.parse(organizationStr);
+      const capability = organization.capabilities.find(
+        (cap: any) => cap.capability.name === capabilityName,
+      );
+
+      if (!capability) {
+        setHasCapability(false);
+        setLoading(false);
+        return;
+      }
+
+      // Si es de tipo PERMISSION, solo verificamos que exista
+      if (capability.capability.type === "PERMISSION") {
+        setHasCapability(capability.count !== 0);
+      }
+      // Si es de tipo LIMIT, verificamos contra el plan
+      else if (capability.capability.type === "LIMIT") {
+        const planCapability =
+          organization.subscription.plan.PlanCapabilities.find(
+            (pc: any) => pc.capabilityId === capability.capabilityId,
+          );
+
+        setHasCapability(
+          planCapability ? capability.count < planCapability.count : false,
+        );
+      }
+    } catch (error) {
+      console.error("Error checking capability:", error);
+      setHasCapability(false);
+    } finally {
+      setLoading(false);
+    }
   }, [capabilityName]);
 
   return { hasCapability, loading };
