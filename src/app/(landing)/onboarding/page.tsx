@@ -39,8 +39,8 @@ export default function OnboardingPage() {
         await makeOrganizationOnboardingCompleted();
         setTimeout(() => {
           setIsLoading(false);
-          window.location.href = "/home";
-        }, 4000);
+          window.location.href = "/redirecting";
+        }, 1000);
       })
       .catch((e) => console.log(e.message));
 
