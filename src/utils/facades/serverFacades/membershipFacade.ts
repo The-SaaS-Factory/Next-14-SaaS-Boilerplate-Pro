@@ -44,6 +44,7 @@ export const updateMembership = async ({
   return membership;
 };
 
+
 const createMembership = async ({
   organizationId,
   planId,
@@ -68,26 +69,47 @@ const createMembership = async ({
     endDate: new Date(),
   };
 
-  const endDate = currentMemberShip
-    ? new Date(currentMemberShip.endDate)
-    : new Date();
+  const now = new Date();
+  
+  // Verificar si hay una membresía previa y si no está vencida
+  const startDate = currentMemberShip && new Date(currentMemberShip.endDate) > now
+    ? new Date(currentMemberShip.endDate) // Usar fecha de fin anterior si aún es válida
+    : now; // Usar fecha actual si no hay membresía previa o está vencida
+  
+  const endDate = new Date(startDate);
+  
+  // Calculando correctamente la fecha final para soportar fracciones de mes
+  if (Number.isInteger(months)) {
+    // Si es un número entero de meses, usar setMonth
+    endDate.setMonth(endDate.getMonth() + months);
+  } else {
+    // Si es una fracción, convertir a días (aproximadamente 30 días por mes)
+    const days = Math.round(months * 30);
+    endDate.setDate(endDate.getDate() + days);
+  }
 
   return await prisma.subscription.upsert({
     where: {
       id: currentMemberShip ? currentMemberShip.id : 0,
     },
-    create: createPayload,
+    create: {
+      ...createPayload,
+      startDate: now,
+      endDate: endDate, // Usar la fecha final calculada
+    },
     update: {
       planId: planId,
       pricingId: pricingId,
       currencyId: currencyId,
-      endDate: new Date(endDate.setMonth(endDate.getMonth() + months)),
+      startDate: now, // Actualizar también la fecha de inicio
+      endDate: endDate,
     },
     include: {
       plan: true,
     },
   });
 };
+
 
 export const propagateCapabilitiesOnAssociateWithPlanNewCapability = async (
   planId = 0,
